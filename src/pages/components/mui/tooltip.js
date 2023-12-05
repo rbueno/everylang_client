@@ -40,7 +40,7 @@ export default function MUITooltipPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Tooltip | Okahub UI</title>
+        <title> MUI Components: Tooltip | Everylang UI</title>
       </Head>
 
       <Box

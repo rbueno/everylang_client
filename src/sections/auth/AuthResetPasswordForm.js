@@ -22,7 +22,7 @@ export default function AuthResetPasswordForm() {
 
   const methods = useForm({
     resolver: yupResolver(ResetPasswordSchema),
-    defaultValues: { email: 'demo@okahub.cc' },
+    defaultValues: { email: 'demo@everylang.co' },
   });
 
   const {

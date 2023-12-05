@@ -27,7 +27,7 @@ export default function DemoNavigationBarPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Navigation Bar | Okahub UI</title>
+        <title> Extra Components: Navigation Bar | Everylang UI</title>
       </Head>
 
       <Box

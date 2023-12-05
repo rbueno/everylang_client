@@ -65,7 +65,7 @@ export const _notifications = [...Array(5)].map((_, index) => ({
   ][index],
   description: [
     'waiting for shipping',
-    'answered to your comment on the Okahub',
+    'answered to your comment on the Everylang',
     '5 unread messages',
     'sent from Guido Padberg',
     'Your order is being shipped',

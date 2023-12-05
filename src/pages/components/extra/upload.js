@@ -88,7 +88,7 @@ export default function DemoUploadPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Upload | Okahub UI</title>
+        <title> Extra Components: Upload | Everylang UI</title>
       </Head>
 
       <Box

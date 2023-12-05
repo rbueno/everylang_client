@@ -41,7 +41,7 @@ export default function DemoCarouselsPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Carousels | Okahub UI</title>
+        <title> Extra Components: Carousels | Everylang UI</title>
       </Head>
 
       <Box

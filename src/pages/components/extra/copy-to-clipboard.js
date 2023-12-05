@@ -65,7 +65,7 @@ export default function DemoCopyToClipboardPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Copy To Clipboard | Okahub UI</title>
+        <title> Extra Components: Copy To Clipboard | Everylang UI</title>
       </Head>
 
       <Box

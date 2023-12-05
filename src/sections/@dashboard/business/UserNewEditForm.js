@@ -187,7 +187,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
                         label="Nome"
                         value={displayName}
                         color="primary"
-                        placeholder="Ex.: Okahub"
+                        placeholder="Ex.: Everylang"
                         // error={newBusinessNameError !== null}
                         onChange={(e) => handleBusinessDisplayName(e.target.value)}
                       />
@@ -200,7 +200,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
 
                     {/* <Typography sx={{ mr: 1 }}>Link demonstração:</Typography> */}
                     {/* <Box display='flex' flexDirection='row' m={2}> */}
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.okahub.com</p>
+                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.everylang.co</p>
 
                     {/* </Box> */}
                     {/* <Typography variant="body2" component="p">
@@ -210,7 +210,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
                         {newBusinessName || 'meu-negocio'}
                       </Typography>
                     <Typography variant="body2" component="p">
-                        .okahub.com
+                        .everylang.co
                       </Typography> */}
                     </Box>
                       <TextField
@@ -218,7 +218,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
                         label="Seu link"
                         value={newBusinessName}
                         color="primary"
-                        placeholder="Ex.: okahub"
+                        placeholder="Ex.: everylang"
                         error={newBusinessNameError !== null}
                         helperText={newBusinessNameError || 'Este é o link que você irá compartilhar em redes sociais e outros canais.'}
                         onChange={(e) => HandleSlugField(e.target.value)}

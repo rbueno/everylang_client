@@ -52,7 +52,7 @@ export default function MUICheckboxPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Checkbox | Okahub UI</title>
+        <title> MUI Components: Checkbox | Everylang UI</title>
       </Head>
 
       <Box

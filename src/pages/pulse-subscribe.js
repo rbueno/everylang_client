@@ -111,7 +111,7 @@ const pricingContent = {
     headline: ` O poder do ChatGPT, e outras IAs, diretamente em seu WhatsApp`,
     description: `Utilize o ChatGPT plus, entre outras IAs, diretamente em seu WhatsApp com acesso ilimitado.`,
     paidSuccessCongratulations: `Parabéns!`,
-    paidSuccess: `Parabéns! Estamos processando o seu pagamento e você já pode voltar a utilizar o Okahub Pulse com ChatGPT Plus no WhatsApp.`,
+    paidSuccess: `Parabéns! Estamos processando o seu pagamento e você já pode voltar a utilizar o Everylang Pulse com ChatGPT Plus no WhatsApp.`,
     buttonBackToWhatsApp: 'Voltar para o WhatsApp'
   }
 },
@@ -138,7 +138,7 @@ text: {
   headline: ` The power of ChatGPT, and other AIs, directly on your WhatsApp.`,
   description: `Use ChatGPT plus, among other AIs, directly on your WhatsApp with unlimited access.`,
   paidSuccessCongratulations: `Congratulations!`,
-  paidSuccess: `We are processing your payment and you can now return to using Okahub Pulse with ChatGPT Plus on WhatsApp.`,
+  paidSuccess: `We are processing your payment and you can now return to using Everylang Pulse with ChatGPT Plus on WhatsApp.`,
   buttonBackToWhatsApp: 'Back to WhatsApp'
 }
 }
@@ -288,7 +288,7 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title> Success | Okahub Pulse</title>
+        <title> Success | Everylang Pulse</title>
       </Head>
       <Container
         sx={{

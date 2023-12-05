@@ -34,7 +34,7 @@ export default function UserEditPage() {
   return (
     <>
       <Head>
-        <title> User: Edit user | Okahub</title>
+        <title> User: Edit user | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -45,7 +45,7 @@ export default function MUITreesViewPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Tree View | Okahub UI</title>
+        <title> MUI Components: Tree View | Everylang UI</title>
       </Head>
 
       <Box

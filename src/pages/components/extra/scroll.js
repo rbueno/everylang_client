@@ -20,7 +20,7 @@ export default function DemoScrollbarPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Scrollbar | Okahub UI</title>
+        <title> Extra Components: Scrollbar | Everylang UI</title>
       </Head>
 
       <Box

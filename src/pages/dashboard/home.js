@@ -274,12 +274,12 @@ export default function GeneralAnalyticsPage() {
   return (
     <>
       <Head>
-        <title> Dashboard | Okahub</title>
+        <title> Dashboard | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Okahub
+          Everylang
         </Typography>
 
         {/* <FetchController /> */}

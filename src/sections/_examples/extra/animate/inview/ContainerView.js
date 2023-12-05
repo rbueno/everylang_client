@@ -11,7 +11,7 @@ import getVariant from '../getVariant';
 
 // ----------------------------------------------------------------------
 
-const TEXT = 'Okahub';
+const TEXT = 'Everylang';
 
 const IMG = [
   _mock.image.cover(2),

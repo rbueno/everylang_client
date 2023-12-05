@@ -162,7 +162,7 @@ export default function BusinessEdit({ editingWorkspace }) {
                         label="Rótulo do anúncio"
                         value={data.adLabel}
                         color="primary"
-                        placeholder="Ex.: Okahub"
+                        placeholder="Ex.: Everylang"
                         // error={newBusinessNameError !== null}
                         helperText="Este é um nome interno apenas para você encontrar este conteúdo no histórico de criações. Caso você não informe nenhum nome, iremos escolher um código aleatório."
                         InputLabelProps={{

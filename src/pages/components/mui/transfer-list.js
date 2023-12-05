@@ -32,7 +32,7 @@ export default function MUITransferListPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Transfer List | Okahub UI</title>
+        <title> MUI Components: Transfer List | Everylang UI</title>
       </Head>
 
       <Box

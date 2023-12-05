@@ -18,14 +18,14 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title>Termos de uso | Okahub</title>
+        <title>Termos de uso | Everylang</title>
       </Head>
 
       <Container>
 	
 
 <main>
-<h1>Termos de uso - Okahub Pulse chatbot</h1>
+<h1>Termos de uso - Everylang Pulse chatbot</h1>
 <p>Este termo de uso tem como objetivo estabelecer as condições de uso do Pulse chatbot e as responsabilidades da empresa desenvolvedora em relação à proteção dos dados pessoais dos usuários, em conformidade com a Lei Geral de Proteção de Dados (LGPD).</p>
 
 <h2>1. Definições</h2>
@@ -118,7 +118,7 @@ export default function AboutPage() {
 
 <h2>7. Contato</h2>
 
-<p>Em caso de dúvidas, sugestões ou reclamações sobre o Pulse chatbot ou sobre este termo de uso, o usuário poderá entrar em contato com a empresa desenvolvedora pelo e-mail contact@okahub.com.</p>
+<p>Em caso de dúvidas, sugestões ou reclamações sobre o Pulse chatbot ou sobre este termo de uso, o usuário poderá entrar em contato com a empresa desenvolvedora pelo e-mail contact@everylang.co.</p>
 
 <h2>Conclusão</h2>
 

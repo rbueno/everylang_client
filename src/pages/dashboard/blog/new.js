@@ -24,7 +24,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Blog: New Post | Okahub</title>
+        <title> Blog: New Post | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

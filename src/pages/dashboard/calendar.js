@@ -248,7 +248,7 @@ export default function CalendarPage() {
   return (
     <>
       <Head>
-        <title> Calendar | Okahub</title>
+        <title> Calendar | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

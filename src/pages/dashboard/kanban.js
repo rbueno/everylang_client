@@ -107,7 +107,7 @@ export default function KanbanPage() {
   return (
     <>
       <Head>
-        <title> Kanban | Okahub</title>
+        <title> Kanban | Everylang</title>
       </Head>
 
       <Container maxWidth={false} sx={{ height: 1 }}>

@@ -32,13 +32,13 @@ const pricingContent = {
   pt: {
     plan: {
       // subscription: 'Premium',
-      price: '29.90',
-      caption: 'Uma super IA com a particidade de um chat',
+      price: '29.99',
+      caption: 'Everylang premium | sem limites',
       lists: [
-        { text: 'ChatGPT Plus', isAvailable: true },
-        { text: 'Integração com WhatsApp', isAvailable: true },
-        { text: 'Mensagens Ilimitadas', isAvailable: true },
-        { text: 'Crie posts, anúncios, redações, resumos de textos e relatórios... tire dúvidas sobre assuntos gerais e muitos mais!', isAvailable: true },
+        { text: 'Speaking', isAvailable: true },
+        { text: 'Listening', isAvailable: true },
+        { text: 'Writing', isAvailable: true },
+        { text: 'Reading', isAvailable: true },
       ],
       labelAction: 'Avançar',
       simbol: 'R$',
@@ -49,20 +49,20 @@ const pricingContent = {
     sessionErrorHelper: (n) => `Número do WhatsApp não localizado. Utilize o número completo como: ${n}`
     },
   text: {
-    headline: ` O poder do ChatGPT, e outras IAs, diretamente em seu WhatsApp`,
-    description: `Utilize o ChatGPT plus, entre outras IAs, diretamente em seu WhatsApp com acesso ilimitado.`,
+    headline: ` Everylang | Domine o inglês com WhatsApp Chathub Premium.`,
+    description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo a fluência em inglês.`,
   }
 },
 en: {
   plan: {
     // subscription: 'Premium',
-    price: '4.99',
-    caption: 'A super AI with the practicality of a chat',
+    price: '6.99',
+    caption: 'Everylang premium | no limits',
     lists: [
-      { text: 'ChatGPT Plus', isAvailable: true },
-      { text: 'WhatsApp Integration', isAvailable: true },
-      { text: 'Unlimited Messages', isAvailable: true },
-      { text: 'Create posts, ads, essays, summaries of texts and reports... ask questions about general topics and much more!', isAvailable: true },
+      { text: 'Speaking', isAvailable: true },
+      { text: 'Listening', isAvailable: true },
+      { text: 'Writing', isAvailable: true },
+      { text: 'Reading', isAvailable: true },
       
     ],
     labelAction: 'Next',
@@ -74,8 +74,8 @@ en: {
     sessionErrorHelper: (n) => ` WhatsApp number not found. Use the complete number like: ${n}`
   },
 text: {
-  headline: ` The power of ChatGPT, and other AIs, directly on your WhatsApp.`,
-  description: `Use ChatGPT plus, among other AIs, directly on your WhatsApp with unlimited access.`
+  headline: `Everylang | Master English with WhatsApp Chathub Premium.`,
+  description: `Continue to harness the full potential of Everylang and move towards fluency in English.`
 }
 }
 }
@@ -221,7 +221,7 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title> Pricing | Okahub Pulse</title>
+        <title> Pricing | Everylang</title>
       </Head>
       <Container
         sx={{

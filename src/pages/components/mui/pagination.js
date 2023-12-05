@@ -58,7 +58,7 @@ export default function MUIPaginationPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Pagination | Okahub UI</title>
+        <title> MUI Components: Pagination | Everylang UI</title>
       </Head>
 
       <Box

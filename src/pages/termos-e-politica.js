@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title> Termos de uso e Política de Privacidade | Okahub</title>
+        <title> Termos de uso e Política de Privacidade | Everylang</title>
       </Head>
 
       <Container>
@@ -27,7 +27,7 @@ export default function AboutPage() {
               </Typography>
             
 
-<Typography>Bem-vindo(a) ao Pulse, inteligência artificial do Okahub. Leia atentamente estes termos de uso e política de privacidade antes de usar o Pulse da Okahub.</Typography>
+<Typography>Bem-vindo(a) ao Pulse, inteligência artificial do Everylang. Leia atentamente estes termos de uso e política de privacidade antes de usar o Pulse da Everylang.</Typography>
             
               <h2>1. Aceitação dos Termos de Uso e Política de Privacidade</h2>
 <Typography>Ao usar o Pulse, você concorda em cumprir e estar sujeito a estes termos de uso e política de privacidade, bem como às leis e regulamentos aplicáveis. Se você não concorda com estes termos, não use o Pulse.</Typography>
@@ -48,7 +48,7 @@ export default function AboutPage() {
 <Typography>A empresa proprietária do Pulse pode atualizar estes termos de uso e política de privacidade periodicamente para refletir mudanças em nossas práticas de coleta, uso e compartilhamento de informações. Ao continuar a usar o Pulse após a publicação das alterações, você concorda em cumprir os termos atualizados.</Typography>
 
 <h2>7. Contato</h2>
-<Typography>Se você tiver alguma dúvida sobre estes termos de uso e política de privacidade, entre em contato conosco pelo e-mail contato@okahub.com.</Typography>
+<Typography>Se você tiver alguma dúvida sobre estes termos de uso e política de privacidade, entre em contato conosco pelo e-mail contato@everylang.co.</Typography>
 
 <h2>8. Lei Aplicável</h2>
 <Typography>Estes termos de uso e política de privacidade serão regidos e interpretados de acordo com as leis brasileiras.</Typography>

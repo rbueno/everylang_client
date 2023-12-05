@@ -49,7 +49,7 @@ export default function MUIAutocompletePage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Autocomplete | Okahub UI</title>
+        <title> MUI Components: Autocomplete | Everylang UI</title>
       </Head>
 
       <Box

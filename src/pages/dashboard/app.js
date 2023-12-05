@@ -49,7 +49,7 @@ export default function GeneralAppPage() {
   return (
     <>
       <Head>
-        <title> General: App | Okahub</title>
+        <title> General: App | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

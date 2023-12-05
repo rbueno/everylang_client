@@ -19,7 +19,7 @@ export default function ContactPage() {
   return (
     <>
       <Head>
-        <title> Contact us | Okahub UI</title>
+        <title> Contact us | Everylang UI</title>
       </Head>
 
       <ContactHero />

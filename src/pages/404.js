@@ -21,7 +21,7 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title> 404 Page Not Found | Okahub UI</title>
+        <title> 404 Page Not Found | Everylang UI</title>
       </Head>
 
       <MotionContainer>

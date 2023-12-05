@@ -17,7 +17,7 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title> About us | Okahub UI</title>
+        <title> About us | Everylang UI</title>
       </Head>
 
       <AboutHero />

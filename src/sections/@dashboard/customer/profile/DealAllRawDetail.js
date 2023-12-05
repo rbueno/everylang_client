@@ -99,7 +99,7 @@ export default function DealAllRawDetail({ customerDetail}) {
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
             Formatados
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>Dados reestruturados pelo Okahub</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>Dados reestruturados pelo Everylang</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <Box sx={{ m: 4 }}>
@@ -118,7 +118,7 @@ export default function DealAllRawDetail({ customerDetail}) {
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
             Originais
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>Dados originais da forma como foram enviados ao Okahub</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>Dados originais da forma como foram enviados ao Everylang</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <Box sx={{ m: 4 }}>

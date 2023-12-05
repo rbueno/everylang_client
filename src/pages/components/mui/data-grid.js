@@ -40,7 +40,7 @@ export default function MUIDataGridPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: DataGrid | Okahub UI</title>
+        <title> MUI Components: DataGrid | Everylang UI</title>
       </Head>
 
       <Box

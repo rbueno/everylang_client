@@ -24,7 +24,7 @@ export default function MUITablePage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Table | Okahub UI</title>
+        <title> MUI Components: Table | Everylang UI</title>
       </Head>
 
       <Box

@@ -70,18 +70,42 @@ function Description() {
     >
       <m.div variants={varFade().inDown}>
       <Typography variant="h2" sx={{ my: 3 }}>
-          Todo o seu conteúdo em um simples link
+      Simular conversas reais
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
       <Typography
           sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+          Imersão é chave para fluência. Com Everylang, você se envolve em diálogos simulados que espelham situações cotidianas. Exemplos:
+        </Typography>
+      <Typography
+          sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+<strong>- Pedir comida:</strong> Interaja como se estivesse pedindo um prato em um restaurante movimentado.
+        </Typography>
+      <Typography
+          sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+<strong>- Pedir direção:</strong> Peça direções com confiança e receba orientações claras como se estivesse na rua.
+        </Typography>
+      <Typography
+          sx={{
             mb: 5,
             color: 'text.secondary',
           }}
         >
-          Crie um mini site inteligente, fácil de utilizar e onde sua audiência irá encontrar todo o seu conteúdo de forma clara e objetiva.
+<strong>- Realizar compras:</strong> Experimente comprar em um supermercado ou outros tipos de lojas em um idioma estrangeiro.
         </Typography>
       </m.div>
 

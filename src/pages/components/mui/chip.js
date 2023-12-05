@@ -21,7 +21,7 @@ export default function MUIChipPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Chip | Okahub UI</title>
+        <title> MUI Components: Chip | Everylang UI</title>
       </Head>
 
       <Box

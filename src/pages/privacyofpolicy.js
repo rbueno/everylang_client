@@ -18,14 +18,14 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title>Política de Privacidade | Okahub</title>
+        <title>Política de Privacidade | Everylang</title>
       </Head>
 
       <Container>
 	
 
 <main>
-	<h1>Política de Privacidade - Okahub Pulse chatbot</h1>
+	<h1>Política de Privacidade - Everylang Pulse chatbot</h1>
 <p>A presente política de privacidade tem como objetivo informar sobre a coleta, armazenamento, uso e compartilhamento de informações pessoais pelos usuários do Pulse chatbot. Essa política está em conformidade com as exigências da Lei Geral de Proteção de Dados (LGPD), a fim de garantir a proteção da privacidade dos usuários e o tratamento seguro e responsável de seus dados pessoais.</p>
 
 <h2>Coleta de Informações Pessoais</h2>
@@ -89,7 +89,7 @@ export default function AboutPage() {
 
 <p>Caso o usuário tenha dúvidas ou preocupações relacionadas à privacidade e à proteção de dados pessoais, ou queira exercer seus direitos como usuário, ele pode entrar em contato com o Pulse chatbot pelos seguintes meios:</p>
 <ul>
-	<li>Endereço de e-mail: contact@okahub.com</li>
+	<li>Endereço de e-mail: contact@everylang.co</li>
 </ul>
 
 <p>O Pulse chatbot se compromete a responder às solicitações dos usuários em relação à privacidade e à proteção de dados pessoais no prazo máximo de 15 dias úteis.</p>

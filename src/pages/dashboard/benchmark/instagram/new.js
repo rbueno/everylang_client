@@ -132,7 +132,7 @@ export default function UserCardsPage() {
   return (
     <>
       <Head>
-        <title> Benchmark | Okahub</title>
+        <title> Benchmark | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

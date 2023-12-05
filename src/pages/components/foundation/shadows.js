@@ -52,7 +52,7 @@ export default function FoundationShadowsPage() {
   return (
     <>
       <Head>
-        <title> Foundations: Shadows | Okahub UI</title>
+        <title> Foundations: Shadows | Everylang UI</title>
       </Head>
 
       <Box

@@ -94,7 +94,7 @@ export default function MUIListPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: List | Okahub UI</title>
+        <title> MUI Components: List | Everylang UI</title>
       </Head>
 
       <Box

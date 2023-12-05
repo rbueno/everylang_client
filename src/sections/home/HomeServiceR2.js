@@ -70,7 +70,7 @@ function Description() {
     >
       <m.div variants={varFade().inDown}>
       <Typography variant="h2" sx={{ my: 3 }}>
-          Métricas e análises
+      Acesso a Qualquer Hora
         </Typography>
       </m.div>
 
@@ -81,7 +81,7 @@ function Description() {
             color: 'text.secondary',
           }}
         >
-          Acompanhe métricas como cliques e visualizações, para análises e insights sobre o desempenho completo de sua página.
+          O aprendizado não espera e nem o Everylang. Quer seja na pausa do almoço ou na calada da noite, nosso sistema está à disposição 24 horas por dia. Inicie uma conversa quando lhe for mais conveniente e mergulhe no inglês sem limitações de horário.
         </Typography>
       </m.div>
 

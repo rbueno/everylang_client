@@ -12,7 +12,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title> Login | Okahub UI</title>
+        <title> Login | Everylang UI</title>
       </Head>
 
       <GuestGuard>

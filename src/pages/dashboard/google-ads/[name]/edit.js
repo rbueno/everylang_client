@@ -34,7 +34,7 @@ export default function UserEditPage() {
   return (
     <>
       <Head>
-        <title> User: Edit user | Okahub</title>
+        <title> User: Edit user | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -53,7 +53,7 @@ export default function UserEditPage() {
           ]}
         /> */}
       <Typography variant="h4" sx={{ mb: 5}}>Editar usuário</Typography>
-      <Typography variant="p" sx={{ mb: 5}}>Por motivos de segurança, para editar um usuário por favor solicite via email contato@okahub.com</Typography>
+      <Typography variant="p" sx={{ mb: 5}}>Por motivos de segurança, para editar um usuário por favor solicite via email contato@everylang.co</Typography>
         {/* <UserNewEditForm isEdit currentUser={currentUser} /> */}
       </Container>
     </>

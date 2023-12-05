@@ -29,7 +29,7 @@ export default function DemoMegaMenuPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Mega Menu | Okahub UI</title>
+        <title> Extra Components: Mega Menu | Everylang UI</title>
       </Head>
 
       <Box

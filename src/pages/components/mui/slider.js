@@ -80,7 +80,7 @@ export default function MUISliderPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Slider | Okahub UI</title>
+        <title> MUI Components: Slider | Everylang UI</title>
       </Head>
 
       <Box

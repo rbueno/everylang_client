@@ -11,3 +11,4 @@ export { default as HomeHugePackElements } from './HomeHugePackElements';
 export { default as HomeService01 } from './HomeService01'
 export { default as HomeServiceL02 } from './HomeServiceL02'
 export { default as HomeServiceR2 } from './HomeServiceR2'
+export { default as StartHero } from './StartHero'

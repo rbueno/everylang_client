@@ -24,7 +24,7 @@ export default function VerifyCodePage() {
   return (
     <>
       <Head>
-        <title> Verify Code | Okahub UI</title>
+        <title> Verify Code | Everylang UI</title>
       </Head>
 
       <EmailInboxIcon sx={{ mb: 5, height: 96 }} />

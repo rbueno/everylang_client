@@ -22,7 +22,7 @@ export default function MUIBreadcrumbsPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Breadcrumbs | Okahub UI</title>
+        <title> MUI Components: Breadcrumbs | Everylang UI</title>
       </Head>
 
       <Box

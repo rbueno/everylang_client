@@ -26,7 +26,7 @@ export default function UserCreatePage() {
   return (
     <>
       <Head>
-        <title> Google Ads | Okahub</title>
+        <title> Google Ads | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

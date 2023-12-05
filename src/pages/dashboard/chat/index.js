@@ -15,7 +15,7 @@ export default function ChatPage() {
   return (
     <>
       <Head>
-        <title> Chat | Okahub</title>
+        <title> Chat | Everylang</title>
       </Head>
 
       <Chat />

@@ -21,7 +21,7 @@ export default function DemoTextMaxLinePage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Text Max Line | Okahub UI</title>
+        <title> Extra Components: Text Max Line | Everylang UI</title>
       </Head>
 
       <Box

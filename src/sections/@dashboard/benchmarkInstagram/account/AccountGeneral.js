@@ -191,7 +191,7 @@ export default function AccountGeneral() {
       </Grid>
     </FormProvider>
           <Box mt={4}>
-            <LoadingButton variant='outlined' color='error' onClick={() => handleLogout()}>Sair do Okahub</LoadingButton>
+            <LoadingButton variant='outlined' color='error' onClick={() => handleLogout()}>Sair do Everylang</LoadingButton>
 
           </Box>
     </>

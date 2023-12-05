@@ -99,7 +99,7 @@ export default function MUIMenuPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Menu | Okahub UI</title>
+        <title> MUI Components: Menu | Everylang UI</title>
       </Head>
 
       <Box

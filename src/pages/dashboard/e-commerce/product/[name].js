@@ -95,7 +95,7 @@ export default function EcommerceProductDetailsPage() {
   return (
     <>
       <Head>
-        <title>{`Ecommerce: ${product?.name || ''} | Okahub`}</title>
+        <title>{`Ecommerce: ${product?.name || ''} | Everylang`}</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

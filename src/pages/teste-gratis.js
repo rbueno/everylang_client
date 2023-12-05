@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title> Teste Grátis | Pulse Okahub</title>
+        <title> Teste Grátis | Pulse Everylang</title>
       </Head>
 
       <Container>

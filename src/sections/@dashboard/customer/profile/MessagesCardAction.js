@@ -16,7 +16,7 @@ export default function MessagesCardAction() {
         <Box sx={{ ml: 4 }}>
           <Typography variant='h6'>Benefícios de Integração com WhatsApp</Typography>
           <Typography>- Envie mensagens com base em status, por exemplo: Lembrete de pagamento</Typography>
-          <Typography>- Gerencie o atendimento via WhatsApp entre seus clientes via Okahub</Typography>
+          <Typography>- Gerencie o atendimento via WhatsApp entre seus clientes via Everylang</Typography>
           </Box>
         <Box
           sx={{

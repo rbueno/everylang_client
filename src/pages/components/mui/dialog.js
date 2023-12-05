@@ -37,7 +37,7 @@ export default function MUIDialogPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Dialog | Okahub UI</title>
+        <title> MUI Components: Dialog | Everylang UI</title>
       </Head>
 
       <Box

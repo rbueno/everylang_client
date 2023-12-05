@@ -64,7 +64,7 @@ export default function Textfields({ variant }) {
           required
           fullWidth
           label="Activated"
-          defaultValue="Hello Okahub"
+          defaultValue="Hello Everylang"
         />
 
         <TextField
@@ -80,7 +80,7 @@ export default function Textfields({ variant }) {
           disabled
           fullWidth
           label="Disabled"
-          defaultValue="Hello Okahub"
+          defaultValue="Hello Everylang"
         />
       </Block>
 
@@ -103,7 +103,7 @@ export default function Textfields({ variant }) {
           disabled
           fullWidth
           label="Disabled"
-          defaultValue="Hello Okahub"
+          defaultValue="Hello Everylang"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -170,7 +170,7 @@ export default function Textfields({ variant }) {
           variant={variant}
           fullWidth
           label="Error"
-          defaultValue="Hello Okahub"
+          defaultValue="Hello Everylang"
           helperText="Incorrect entry."
         />
 
@@ -179,7 +179,7 @@ export default function Textfields({ variant }) {
           error
           fullWidth
           label="Error"
-          defaultValue="Hello Okahub"
+          defaultValue="Hello Everylang"
           helperText="Incorrect entry."
         />
       </Block>

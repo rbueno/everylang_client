@@ -121,14 +121,14 @@ export function LandingPage() {
   return (
     <>
       <Head>
-        <title> Liberte o seu negócio das amarras dos algoritmos | Okahub</title>
-        <meta name="description" content="Não deixe o seu negócio ficar refém dos algoritmos das redes sociais que vez ou outra podem derrubar o seu alcance. Utilize nosso recurso de captura e gestão de leads para construir a sua base própria com contatos de seus seguidores." />
-        <link href="https://www.okahub.com" rel="canonical" />
+        <title> Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp | Everylang</title>
+        <meta name="description" content="Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp" />
+        <link href="https://www.everylang.co" rel="canonical" />
 
-        <meta property="og:title" content="Liberte o seu negócio das amarras dos algoritmos." />
-        <meta property="og:url" content="https://www.okahub.com" />
-        <meta property="og:description" content="Não deixe o seu negócio ficar refém dos algoritmos das redes sociais que vez ou outra podem derrubar o seu alcance. Utilize nosso recurso de captura e gestão de leads para construir a sua base própria com contatos de seus seguidores." />
-        <meta property="og:image" content="https://www.okahub.com/assets/images/home/linkhaus_okahub_01_captura_gestao_leads.jpg" />
+        <meta property="og:title" content="Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp." />
+        <meta property="og:url" content="https://www.everylang.co" />
+        <meta property="og:description" content="Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp" />
+        <meta property="og:image" content="https://www.everylang.co/assets/images/home/linkhaus_okahub_01_captura_gestao_leads.jpg" />
       </Head>
 
       
@@ -159,11 +159,11 @@ export function LandingPage() {
 
         {/* <HomeCleanInterfaces /> */}
 
-        {/* <HomePricingPlans /> */}
+        {/* <HomePricingPlans />
 
         
 
-        <HomeAdvertisement />
+        <HomeAdvertisement /> */}
       </Box>
     </>
   );

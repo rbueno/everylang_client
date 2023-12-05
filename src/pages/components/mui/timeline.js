@@ -97,7 +97,7 @@ export default function MUITimelinePage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Timeline | Okahub UI</title>
+        <title> MUI Components: Timeline | Everylang UI</title>
       </Head>
 
       <Box

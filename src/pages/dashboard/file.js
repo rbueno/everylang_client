@@ -135,7 +135,7 @@ export default function GeneralFilePage() {
   return (
     <>
       <Head>
-        <title> General: File | Okahub</title>
+        <title> General: File | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

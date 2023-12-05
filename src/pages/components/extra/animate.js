@@ -40,7 +40,7 @@ export default function DemoAnimatePage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Animate | Okahub UI</title>
+        <title> Extra Components: Animate | Everylang UI</title>
       </Head>
 
       <Box

@@ -82,18 +82,50 @@ function Description() {
     >
       <m.div variants={varFade().inDown}>
       <Typography variant="h2" sx={{ my: 3 }}>
-      Captura e gestão de leads
+      Prática Completa
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
       <Typography
           sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+          O Everylang transforma seu WhatsApp em um ambiente de aprendizado de inglês completo. Ao iniciar uma conversa, você pratica habilidades essenciais:
+        </Typography>
+      <Typography
+          sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+<strong>- Fala:</strong> conversa via mensagem de áudio.
+        </Typography>
+      <Typography
+          sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+<strong>- Escuta:</strong> você recebe feedback e mensagens no geral também em áudio.
+        </Typography>
+      <Typography
+          sx={{
+            mb: 1,
+            color: 'text.secondary',
+          }}
+        >
+<strong>- Escrita:</strong> refine sua escrita com sugestões de melhorias de gramatica e contexto.
+        </Typography>
+      <Typography
+          sx={{
             mb: 5,
             color: 'text.secondary',
           }}
         >
-          Não deixe o seu negócio ficar refém dos algoritmos das redes sociais que vez ou outra podem derrubar o seu alcance. Utilize nosso recurso de captura e gestão de leads para construir a sua base própria com contatos de seus seguidores.
+<strong>- Leitura:</strong> expanda seu vocabulário e melhore a leitura com diálogos interativos
         </Typography>
       </m.div>
 

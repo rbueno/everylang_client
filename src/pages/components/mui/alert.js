@@ -36,7 +36,7 @@ export default function MUIAlertPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Alert | Okahub UI</title>
+        <title> MUI Components: Alert | Everylang UI</title>
       </Head>
 
       <Box

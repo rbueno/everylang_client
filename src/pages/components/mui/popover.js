@@ -73,7 +73,7 @@ export default function MUIPopoverPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Popover | Okahub UI</title>
+        <title> MUI Components: Popover | Everylang UI</title>
       </Head>
 
       <Box

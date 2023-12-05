@@ -159,7 +159,7 @@ const EditLinkButton = ({ currentItemState, saveItemEdition, isOpen, businessSlu
         fullWidth
         value={link}
         onChange={(e) => setLink(e.target.value)}
-        label="Exemplo: www.instagram.com/okahub.com"
+        label="Exemplo: www.instagram.com/everylang.co"
         />
 
       </Box>
@@ -909,7 +909,7 @@ const EditParagraph = ({ currentItemState, saveItemEdition, isOpen, businessSlug
         fullWidth
         value={link}
         onChange={(e) => setLink(e.target.value)}
-        label="Exemplo: www.instagram.com/okahub.com"
+        label="Exemplo: www.instagram.com/everylang.co"
         />
 
       </Box> */}
@@ -1280,14 +1280,14 @@ const EditSlug = ({ currentWorkspace, updateWorkspaces, isOpen }) => {
                     <Box display='flex' flexDirection='column'>
 
                     <Typography sx={{ mr: 1 }}>Link:</Typography>
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{slug || 'meu-negocio'}</span></strong>.okahub.com</p>
+                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{slug || 'meu-negocio'}</span></strong>.everylang.co</p>
                     </Box>
                       <TextField
                       fullWidth
                         label="Link de compartilhamento"
                         value={slug}
                         color="primary"
-                        placeholder="Ex.: okahub"
+                        placeholder="Ex.: everylang"
                         error={slugError !== null}
                         helperText={slugError && slugError}
                         onChange={(e) => HandleSlugField(e.target.value)}
@@ -1362,7 +1362,7 @@ const EditBusinessName = ({ currentWorkspace, updateWorkspaces, isOpen }) => {
                         label="Nome"
                         value={businessName}
                         color="primary"
-                        placeholder="Ex.: Okahub"
+                        placeholder="Ex.: Everylang"
                         // error={newBusinessNameError !== null}
                         onChange={(e) => handleBusinessDisplayName(e.target.value)}
                       />
@@ -1891,7 +1891,7 @@ export default function MyPage() {
   }
 
   const handleCopyLink = () => {
-    const hasCopied = copy(`https://${currentWorkspace.myPage.pageSlug}.okahub.com`)
+    const hasCopied = copy(`https://${currentWorkspace.myPage.pageSlug}.everylang.co`)
     if (hasCopied) {
       enqueueSnackbar('Link copiado')
     }
@@ -1904,9 +1904,9 @@ export default function MyPage() {
     if (navigator.share) {
       navigator
         .share({
-          title: `${currentWorkspace?.myPage?.pageSlug} | Okahub`,
-          text: `${currentWorkspace?.businessId?.name} | Okahub`,
-          url: `https://${currentWorkspace?.myPage?.pageSlug}.okahub.com`,
+          title: `${currentWorkspace?.myPage?.pageSlug} | Everylang`,
+          text: `${currentWorkspace?.businessId?.name} | Everylang`,
+          url: `https://${currentWorkspace?.myPage?.pageSlug}.everylang.co`,
         })
         .then(() => {
           console.log('Successfully shared');
@@ -2033,7 +2033,7 @@ export default function MyPage() {
     return (
     <>
       <Head>
-        <title> User: Account Settings | Okahub</title>
+        <title> User: Account Settings | Everylang</title>
         {/* <Script defer src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places&callback=Function.prototype`} /> */}
         {/* <Script
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places&callback=Function.prototype`}
@@ -2063,7 +2063,7 @@ export default function MyPage() {
                       //  startIcon={<IosShareIcon />}
                       // target="_blank"
                       // rel="noopener"
-                      // href={`https://${currentWorkspace?.businessId?.slug}.okahub.com?ohlhv`}
+                      // href={`https://${currentWorkspace?.businessId?.slug}.everylang.co?ohlhv`}
                        variant='contained'
                        onClick={handleOpenShareOptions}
                       >
@@ -2124,7 +2124,7 @@ export default function MyPage() {
                         // sx={{ minHeight: 0, minWidth: 0, padding: 0 }}
                         target="_blank"
                         rel="noopener"
-                        href={`https://${currentWorkspace?.businessId?.slug}.okahub.com?ohlhv`}
+                        href={`https://${currentWorkspace?.businessId?.slug}.everylang.co?ohlhv`}
                         size="small"
                       >
                         Visualizar
@@ -2176,7 +2176,7 @@ export default function MyPage() {
           <Card>
               <Box m={2} >
                 <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography>{`https://${currentWorkspace?.businessId?.slug}.okahub.com`}</Typography>
+                  <Typography>{`https://${currentWorkspace?.businessId?.slug}.everylang.co`}</Typography>
                         
                 <Stack direction='row'>
                       <Button variant='outlined' sx={{ m: 1 }} onClick={() => handleDisplayEditLink()} startIcon={<SettingsIcon />}> Editar link</Button>

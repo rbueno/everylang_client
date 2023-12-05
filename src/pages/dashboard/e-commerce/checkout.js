@@ -117,7 +117,7 @@ export default function EcommerceCheckoutPage() {
   return (
     <>
       <Head>
-        <title> Ecommerce: Checkout | Okahub</title>
+        <title> Ecommerce: Checkout | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

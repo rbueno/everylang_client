@@ -425,7 +425,7 @@ console.log('isValidBrowser ================>', isValidBrowser)
   return (
     <>
       <Head>
-        <title> Métricas | Okahub </title>
+        <title> Métricas | Everylang </title>
       </Head>
       {/* <Script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@juggle/resize-observer" /> */}
 

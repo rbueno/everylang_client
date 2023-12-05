@@ -36,7 +36,7 @@ export default function DemoFormValidationPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Form Validation | Okahub UI</title>
+        <title> Extra Components: Form Validation | Everylang UI</title>
       </Head>
 
       <Box

@@ -19,7 +19,7 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title> Pricing | Okahub UI</title>
+        <title> Pricing | Everylang UI</title>
       </Head>
 
       <Container

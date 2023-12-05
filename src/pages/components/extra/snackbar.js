@@ -59,7 +59,7 @@ export default function DemoSnackbarPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Snackbar | Okahub UI</title>
+        <title> Extra Components: Snackbar | Everylang UI</title>
       </Head>
 
       <Box

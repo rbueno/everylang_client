@@ -24,7 +24,7 @@ export default function UserCreatePage() {
   return (
     <>
       <Head>
-        <title> User: Create a new user | Okahub</title>
+        <title> User: Create a new user | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -23,7 +23,7 @@ export default function MUIBadgePage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Badge | Okahub UI</title>
+        <title> MUI Components: Badge | Everylang UI</title>
       </Head>
 
       <Box

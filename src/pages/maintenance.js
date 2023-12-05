@@ -18,7 +18,7 @@ export default function MaintenancePage() {
   return (
     <>
       <Head>
-        <title> Maintenance | Okahub UI</title>
+        <title> Maintenance | Everylang UI</title>
       </Head>
 
       <Stack sx={{ alignItems: 'center' }}>

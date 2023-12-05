@@ -24,7 +24,7 @@ export default function UserCreatePage() {
   return (
     <>
       <Head>
-        <title> Criar Link | Okahub</title>
+        <title> Criar Link | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -27,7 +27,7 @@ export default function DemoLabelPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Label | Okahub UI</title>
+        <title> Extra Components: Label | Everylang UI</title>
       </Head>
 
       <Box

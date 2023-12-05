@@ -137,8 +137,8 @@ export const PATH_DASHBOARD = {
 };
 
 export const PATH_DOCS = {
-  root: 'https://docs.okahub.cc',
-  changelog: 'https://docs.okahub.cc/changelog',
+  root: 'https://docs.everylang.co',
+  changelog: 'https://docs.everylang.co/changelog',
 };
 
 export const PATH_ZONE_ON_STORE = 'https://mui.com/store/items/zone-landing-page/';
@@ -148,4 +148,4 @@ export const PATH_MINIMAL_ON_STORE = 'https://mui.com/store/items/minimal-dashbo
 export const PATH_FREE_VERSION = 'https://mui.com/store/items/minimal-dashboard-free/';
 
 export const PATH_FIGMA_PREVIEW =
-  'https://www.figma.com/file/rWMDOkMZYw2VpTdNuBBCvN/%5BPreview%5D-Okahub-Web.26.11.22?node-id=0%3A1&t=ya2mDFiuhTXXLLF1-1';
+  'https://www.figma.com/file/rWMDOkMZYw2VpTdNuBBCvN/%5BPreview%5D-Everylang-Web.26.11.22?node-id=0%3A1&t=ya2mDFiuhTXXLLF1-1';

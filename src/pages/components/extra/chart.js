@@ -34,7 +34,7 @@ export default function DemoChartsPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Charts | Okahub UI</title>
+        <title> Extra Components: Charts | Everylang UI</title>
       </Head>
 
       <Box

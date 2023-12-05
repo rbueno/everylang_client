@@ -71,7 +71,7 @@ export default function DemoLightboxPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Lightbox | Okahub UI</title>
+        <title> Extra Components: Lightbox | Everylang UI</title>
       </Head>
 
       <Box

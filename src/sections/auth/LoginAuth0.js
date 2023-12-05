@@ -25,7 +25,7 @@ export default function LoginAuth0() {
   return (
     <LoginLayout>
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-        <Typography variant="h4">Sign in to Okahub</Typography>
+        <Typography variant="h4">Sign in to Everylang</Typography>
 
         <Tooltip title={method} placement="left">
           <Box
@@ -38,7 +38,7 @@ export default function LoginAuth0() {
       </Stack>
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@okahub.cc</strong> / password :<strong> demo1234</strong>
+        Use email : <strong>demo@everylang.co</strong> / password :<strong> demo1234</strong>
       </Alert>
 
       <Button

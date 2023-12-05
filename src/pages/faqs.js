@@ -17,7 +17,7 @@ export default function FaqsPage() {
   return (
     <>
       <Head>
-        <title> Faqs | Okahub UI</title>
+        <title> Faqs | Everylang UI</title>
       </Head>
 
       <FaqsHero />

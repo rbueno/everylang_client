@@ -15,7 +15,7 @@ export default function MailPage() {
   return (
     <>
       <Head>
-        <title> Mail | Okahub</title>
+        <title> Mail | Everylang</title>
       </Head>
 
       <Mail />

@@ -59,7 +59,7 @@ export default function FoundationGridPage() {
   return (
     <>
       <Head>
-        <title> Foundations: Grid | Okahub UI</title>
+        <title> Foundations: Grid | Everylang UI</title>
       </Head>
 
       <Box

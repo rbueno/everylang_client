@@ -26,7 +26,7 @@ export default function UserCreatePage() {
   return (
     <>
       <Head>
-        <title> Facebook Ads | Okahub</title>
+        <title> Facebook Ads | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

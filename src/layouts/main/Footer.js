@@ -16,7 +16,7 @@ import Iconify from '../../components/iconify';
 
 const LINKS = [
   {
-    headline: 'Okahub',
+    headline: 'Everylang',
     children: [
       { name: 'About us', href: PATH_PAGE.about },
       { name: 'Contact us', href: PATH_PAGE.contact },
@@ -33,7 +33,7 @@ const LINKS = [
   {
     headline: 'Contact',
     children: [
-      { name: 'support@okahub.cc', href: '#' },
+      { name: 'support@everylang.co', href: '#' },
       { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
     ],
   },
@@ -72,11 +72,11 @@ export default function Footer(props) {
         >
           © All rights reserved
           <br /> made by &nbsp;
-          <Link href="https://www.okahub.com/"
+          <Link href="https://www.everylang.co/"
           sx={{
             color: loadedTheme?.text?.paragraph?.color || '#191919'
           }}
-          > Okahub </Link>
+          > Everylang </Link>
         </Typography>
       </Container>
     </Box>
@@ -112,7 +112,7 @@ export default function Footer(props) {
 
           <Grid item xs={8} md={3}>
             <Typography variant="body2" sx={{ pr: { md: 5 } }}>
-              The starting point for your next project with Okahub UI Kit, built on the newest
+              The starting point for your next project with Everylang UI Kit, built on the newest
               version of Material-UI ©, ready to be customized to your style.
             </Typography>
 

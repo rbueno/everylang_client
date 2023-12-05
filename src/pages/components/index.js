@@ -20,7 +20,7 @@ export default function ComponentsOverviewPage() {
   return (
     <>
       <Head>
-        <title> Components Overview | Okahub UI</title>
+        <title> Components Overview | Everylang UI</title>
       </Head>
 
       <ComponentHero />

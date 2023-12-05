@@ -97,7 +97,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
     <Grid container spacing={3}>
       <Grid item xs={12} md={8}>
-          <Typography m={2} variant="body2">O usuário precisar ter um cadastro no Okahub.</Typography>
+          <Typography m={2} variant="body2">O usuário precisar ter um cadastro no Everylang.</Typography>
         <Card sx={{ p: 3 }}>
           <Box
             sx={{

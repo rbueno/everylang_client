@@ -193,7 +193,7 @@ export default function UserListPage() {
   return (
     <>
       <Head>
-        <title> User: List | Okahub</title>
+        <title> User: List | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

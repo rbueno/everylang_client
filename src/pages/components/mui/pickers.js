@@ -36,7 +36,7 @@ export default function MUIPickersPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Pickers | Okahub UI</title>
+        <title> MUI Components: Pickers | Everylang UI</title>
       </Head>
 
       <Box

@@ -40,7 +40,7 @@ export default function MUIAvatarPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Avatar | Okahub UI</title>
+        <title> MUI Components: Avatar | Everylang UI</title>
       </Head>
 
       <Box

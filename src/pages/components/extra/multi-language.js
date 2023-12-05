@@ -59,7 +59,7 @@ export default function DemoMultiLanguagePage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Multi Language | Okahub UI</title>
+        <title> Extra Components: Multi Language | Everylang UI</title>
       </Head>
 
       <Box

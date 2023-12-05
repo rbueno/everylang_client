@@ -70,7 +70,7 @@ export default function MUIProgressPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Progress | Okahub UI</title>
+        <title> MUI Components: Progress | Everylang UI</title>
       </Head>
 
       <Box

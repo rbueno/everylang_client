@@ -21,7 +21,7 @@ export default function PaymentPage() {
   return (
     <>
       <Head>
-        <title> Payment | Okahub UI</title>
+        <title> Payment | Everylang UI</title>
       </Head>
 
       <Container

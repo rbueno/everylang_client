@@ -81,7 +81,7 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> User: Profile | Okahub</title>
+        <title> User: Profile | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

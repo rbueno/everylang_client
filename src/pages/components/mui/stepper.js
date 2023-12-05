@@ -25,7 +25,7 @@ export default function MUIStepperPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Stepper | Okahub UI</title>
+        <title> MUI Components: Stepper | Everylang UI</title>
       </Head>
 
       <Box

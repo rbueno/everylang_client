@@ -44,7 +44,7 @@ export default function EcommerceProductEditPage() {
   return (
     <>
       <Head>
-        <title> Ecommerce: Edit product | Okahub</title>
+        <title> Ecommerce: Edit product | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

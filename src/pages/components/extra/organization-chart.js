@@ -27,7 +27,7 @@ export default function DemoOrganizationalChartPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Organizational Chart | Okahub UI</title>
+        <title> Extra Components: Organizational Chart | Everylang UI</title>
       </Head>
 
       <Box

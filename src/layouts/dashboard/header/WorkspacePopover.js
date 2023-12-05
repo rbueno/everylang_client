@@ -50,7 +50,7 @@ export default function WorkspacePopover() {
               // sx={{ minHeight: 0, minWidth: 0, padding: 0 }}
               target="_blank"
               rel="noopener"
-              href={`https://${currentWorkspace?.businessId?.slug}.okahub.com?ohlhv`}
+              href={`https://${currentWorkspace?.businessId?.slug}.everylang.co?ohlhv`}
               sx={{ mr: '15px'}}
             >
               Visualizar

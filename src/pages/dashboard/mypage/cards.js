@@ -26,7 +26,7 @@ export default function UserCardsPage() {
   return (
     <>
       <Head>
-        <title> User: Cards | Okahub</title>
+        <title> User: Cards | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

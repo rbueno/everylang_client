@@ -33,7 +33,7 @@ export default function FoundationIconsPage() {
   return (
     <>
       <Head>
-        <title> Foundations: Icons | Okahub UI</title>
+        <title> Foundations: Icons | Everylang UI</title>
       </Head>
 
       <Box

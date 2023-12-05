@@ -129,7 +129,7 @@ export default function DemoMarkdownPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Markdown | Okahub UI</title>
+        <title> Extra Components: Markdown | Everylang UI</title>
       </Head>
 
       <Box

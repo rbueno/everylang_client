@@ -193,7 +193,7 @@ export default function EcommerceProductListPage() {
   return (
     <>
       <Head>
-        <title> Ecommerce: Product List | Okahub</title>
+        <title> Ecommerce: Product List | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

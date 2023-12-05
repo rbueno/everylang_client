@@ -21,7 +21,7 @@ export default function Page500() {
   return (
     <>
       <Head>
-        <title> 500 Internal Server Error | Okahub UI</title>
+        <title> 500 Internal Server Error | Everylang UI</title>
       </Head>
 
       <MotionContainer>

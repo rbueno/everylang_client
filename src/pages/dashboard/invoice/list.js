@@ -232,7 +232,7 @@ export default function InvoiceListPage() {
   return (
     <>
       <Head>
-        <title> Invoice: List | Okahub</title>
+        <title> Invoice: List | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

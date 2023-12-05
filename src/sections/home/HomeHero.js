@@ -21,6 +21,9 @@ import SvgColor from '../../components/svg-color';
 import Iconify from '../../components/iconify';
 import Image from '../../components/image';
 import { MotionContainer, varFade } from '../../components/animate';
+import AndroidIcon from '@mui/icons-material/Android';
+import AppleIcon from '@mui/icons-material/Apple';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 // ----------------------------------------------------------------------
 
@@ -50,23 +53,26 @@ const StyledDescription = styled('div')(({ theme }) => ({
   height: '100%',
 }));
 
-const StyledGradientText = styled(m.h1)(({ theme }) => ({
-  ...textGradient(
-    `300deg, ${theme.palette.primary.main} 0%, ${theme.palette.warning.main} 25%, ${theme.palette.primary.main} 50%, ${theme.palette.warning.main} 75%, ${theme.palette.primary.main} 100%`
-  ),
-  backgroundSize: '400%',
-  fontFamily: secondaryFont.style.fontFamily,
-  fontSize: `${64 / 16}rem`,
-  textAlign: 'center',
-  lineHeight: 1,
-  padding: 0,
-  marginTop: 8,
-  marginBottom: 24,
-  letterSpacing: 8,
-  [theme.breakpoints.up('md')]: {
-    fontSize: `${96 / 16}rem`,
-  },
-}));
+const StyledGradientText = styled(m.h1)(({ theme }) => {
+console.log('theme.palette.primary.main', theme.palette.primary.main)
+  return {
+    ...textGradient(
+      `300deg, #8600b3 0%, #0073e6 25%, #8600b3 50%, #0073e6 75%, #8600b3 100%`
+    ),
+    backgroundSize: '400%',
+    fontFamily: secondaryFont.style.fontFamily,
+    fontSize: `${64 / 16}rem`,
+    textAlign: 'center',
+    lineHeight: 1,
+    padding: 0,
+    marginTop: 8,
+    marginBottom: 24,
+    letterSpacing: 8,
+    [theme.breakpoints.up('md')]: {
+      fontSize: `${96 / 16}rem`,
+    },
+  }
+});
 
 const StyledEllipseTop = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -139,6 +145,7 @@ export default function HomeHero() {
 function Description() {
   return (
     <StyledDescription>
+      <Image disabledEffect alt="logo" src="/logo/logo_everylang.png" sx={{ maxWidth: 120 }} />
       <m.div variants={varFade().in}>
         <StyledGradientText
           animate={{ backgroundPosition: '200% center' }}
@@ -149,62 +156,51 @@ function Description() {
             repeat: Infinity,
           }}
         >
-          <Image disabledEffect alt="logo" src="/logo/okahub_logo.png" sx={{ maxWidth: 120 }} />
+          Everylang
         </StyledGradientText>
       </m.div>
+
+
       <m.div variants={varFade().in}>
         <Typography variant="h3" sx={{ textAlign: 'center' }}>
-          Liberte o seu negócio das amarras dos algoritmos!
+        Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp.
           
         </Typography>
       </m.div>
 
-      <m.div variants={varFade().in}>
-        <StyledGradientText
-          animate={{ backgroundPosition: '200% center' }}
-          transition={{
-            repeatType: 'reverse',
-            ease: 'linear',
-            duration: 20,
-            repeat: Infinity,
-          }}
-        >
-          Okahub
-        </StyledGradientText>
-      </m.div>
-
-      {/* <m.div variants={varFade().in}>
-        <Typography variant="body2" sx={{ textAlign: 'center' }}>
-          Não fique refém das contantes alterações de regras das redes sociais. Matenha atualizado os contatos de seus seguidores e enriqueça a sua base de dados.
-        </Typography>
-      </m.div> */}
-
-    
-
-      {/* <Stack
-        spacing={3}
-        sx={{
-          textAlign: 'center',
-          // opacity: 0.7
-          }}
-        >
-      <Stack
-        // component={m.div}
-        // variants={varFade().in}
-        // sx={{ width: 220, position: 'relative', ml: -2 }}
-      >
-        <Box
-          component={m.img}
-          // animate={{ y: ['100%', '0%'] }}
-          alt='hero_light_2'
-          src='/assets/images/home/linkhaus_okahub_banner_01.png'
-          // sx={{ position: 'absolute' }}
-        />
       
-      </Stack>
 
-       
-      </Stack> */}
+      <m.div variants={varFade().in}>
+        <Stack spacing={1.5} direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ my: 5 }}>
+          <Stack alignItems="center" spacing={2}>
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            startIcon={<WhatsAppIcon/>}
+            target="_blank"
+            rel="noopener"
+            href='https://wa.me/5511932490312?text=oi'
+            sx={{ borderColor: 'text.primary', width:"190px" }}
+          >
+            Conversar agora
+          </Button>
+          </Stack>
+
+          {/* <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            startIcon={<AndroidIcon />}
+            target="_blank"
+            rel="noopener"
+            href='https://play.google.com/store/apps/details?id=br.com.biosom.app&pli=1'
+            sx={{ borderColor: 'text.primary', width:"180px"  }}
+          >
+            Google Play
+          </Button> */}
+        </Stack>
+      </m.div>
     </StyledDescription>
   );
 }

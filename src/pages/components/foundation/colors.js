@@ -54,7 +54,7 @@ export default function FoundationColorsPage() {
   return (
     <>
       <Head>
-        <title> Foundations: Colors | Okahub UI</title>
+        <title> Foundations: Colors | Everylang UI</title>
       </Head>
 
       <Box

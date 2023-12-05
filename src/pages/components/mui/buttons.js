@@ -49,7 +49,7 @@ export default function MUIButtonsPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Buttons | Okahub UI</title>
+        <title> MUI Components: Buttons | Everylang UI</title>
       </Head>
 
       <Box

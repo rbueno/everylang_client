@@ -21,7 +21,7 @@ export default function Page403() {
   return (
     <>
       <Head>
-        <title> 403 Forbidden | Okahub UI</title>
+        <title> 403 Forbidden | Everylang UI</title>
       </Head>
 
       <MotionContainer>

@@ -217,7 +217,7 @@ export default function BusinessEdit({ editingWorkspace }) {
                         label="Nome"
                         value={data.name}
                         color="primary"
-                        placeholder="Ex.: Okahub"
+                        placeholder="Ex.: Everylang"
                         // error={newBusinessNameError !== null}
                         onChange={(e) => handleBusinessDisplayName(e.target.value)}
                       />
@@ -253,14 +253,14 @@ export default function BusinessEdit({ editingWorkspace }) {
                     <Box display='flex' flexDirection='column'>
 
                     <Typography sx={{ mr: 1 }}>Link:</Typography>
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.okahub.com</p>
+                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.everylang.co</p>
                     </Box>
                       <TextField
                       fullWidth
                         label="Link de compartilhamento"
                         value={data.slug}
                         color="primary"
-                        placeholder="Ex.: okahub"
+                        placeholder="Ex.: everylang"
                         error={dataError.slug !== null}
                         helperText={dataError.slug && dataError.slug}
                         onChange={(e) => HandleSlugField(e.target.value)}

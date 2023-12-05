@@ -9,7 +9,7 @@ export default function RegisterUnprotectedPage() {
   return (
     <>
       <Head>
-        <title> Register Unprotected | Okahub UI</title>
+        <title> Register Unprotected | Everylang UI</title>
       </Head>
 
       <Register />

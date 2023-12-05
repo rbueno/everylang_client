@@ -69,7 +69,7 @@ export const setSession = (accessToken, workspaceId) => {
     axios.defaults.headers.common['x-workspaceid'] = workspaceId;
 
     // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~5 days by okahub server
+    const { exp } = jwtDecode(accessToken); // ~5 days by everylang server
     exp && tokenExpired(exp);
   } else {
     localStorage.removeItem('accessToken');

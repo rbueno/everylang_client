@@ -49,7 +49,7 @@ export default function MUIAccordionPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Accordion | Okahub UI</title>
+        <title> MUI Components: Accordion | Everylang UI</title>
       </Head>
 
       <Box

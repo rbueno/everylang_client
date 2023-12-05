@@ -31,7 +31,7 @@ export default function DemoImagePage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Image | Okahub UI</title>
+        <title> Extra Components: Image | Everylang UI</title>
       </Head>
 
       <Box

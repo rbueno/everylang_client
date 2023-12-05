@@ -85,7 +85,7 @@ export default function BlogPostPage() {
   return (
     <>
       <Head>
-        <title>{`Blog: ${post?.title || ''} | Okahub`}</title>
+        <title>{`Blog: ${post?.title || ''} | Everylang`}</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -21,7 +21,7 @@ export default function RegisterPage() {
   return (
     <>
       <Head>
-        <title> Register | Okahub UI</title>
+        <title> Register | Everylang UI</title>
       </Head>
 
       <GuestGuard>

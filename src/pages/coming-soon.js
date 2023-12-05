@@ -28,7 +28,7 @@ export default function ComingSoonPage() {
   return (
     <>
       <Head>
-        <title> Coming Soon | Okahub UI</title>
+        <title> Coming Soon | Everylang UI</title>
       </Head>
 
       <Typography variant="h3" paragraph>

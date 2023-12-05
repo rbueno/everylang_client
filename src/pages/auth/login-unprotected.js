@@ -9,7 +9,7 @@ export default function LoginUnprotectedPage() {
   return (
     <>
       <Head>
-        <title> Login Unprotected | Okahub UI</title>
+        <title> Login Unprotected | Everylang UI</title>
       </Head>
 
       <Login />

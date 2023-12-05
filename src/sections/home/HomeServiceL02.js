@@ -85,7 +85,7 @@ function Description() {
     >
       <m.div variants={varFade().inDown}>
       <Typography variant="h2" sx={{ my: 3 }}>
-        Gerencie múltiplas contas
+      Análise Gramatical Personalizada
         </Typography>
       </m.div>
 
@@ -96,7 +96,7 @@ function Description() {
             color: 'text.secondary',
           }}
         >
-          Crie diversas contas para você ou para um cliente, adicione usuários e tenha controle de cada página e recursos.
+          Conforme você dialoga, o Everylang não apenas entende, mas também analisa sua gramática. Você receberá correções construtivas para aprimorar sua estrutura sentencial e uso adequado de tempos verbais em inglês, ajustadas para o seu nível de aprendizagem.
         </Typography>
       </m.div>
 

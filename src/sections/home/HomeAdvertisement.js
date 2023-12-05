@@ -56,7 +56,7 @@ function Description() {
         sx={{ color: 'common.white', mb: 5, typography: 'h2' }}
       >
         Crie grátis o seu
-        <br /> Okahub!
+        <br /> Everylang!
       </Box>
 
       <Stack

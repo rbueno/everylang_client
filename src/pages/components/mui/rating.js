@@ -83,7 +83,7 @@ export default function MUIRatingPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Rating | Okahub UI</title>
+        <title> MUI Components: Rating | Everylang UI</title>
       </Head>
 
       <Box

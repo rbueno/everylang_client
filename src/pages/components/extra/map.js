@@ -74,7 +74,7 @@ export default function DemoMapPage() {
   return (
     <>
       <Head>
-        <title> Extra Components: Map | Okahub UI</title>
+        <title> Extra Components: Map | Everylang UI</title>
       </Head>
 
       <Box

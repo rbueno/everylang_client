@@ -32,7 +32,7 @@ export default function MUITextFieldPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Textfield | Okahub UI</title>
+        <title> MUI Components: Textfield | Everylang UI</title>
       </Head>
 
       <Box

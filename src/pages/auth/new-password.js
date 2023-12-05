@@ -24,7 +24,7 @@ export default function NewPasswordPage() {
   return (
     <>
       <Head>
-        <title> New Password | Okahub UI</title>
+        <title> New Password | Everylang UI</title>
       </Head>
 
       <SentIcon sx={{ mb: 5, height: 96 }} />

@@ -55,7 +55,7 @@ export default function FoundationTypographyPage() {
   return (
     <>
       <Head>
-        <title> Foundations: Typography | Okahub UI</title>
+        <title> Foundations: Typography | Everylang UI</title>
       </Head>
 
       <Box

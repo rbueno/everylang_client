@@ -33,7 +33,7 @@ export default function InvoiceDetailsPage() {
   return (
     <>
       <Head>
-        <title> Invoice: View | Okahub</title>
+        <title> Invoice: View | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

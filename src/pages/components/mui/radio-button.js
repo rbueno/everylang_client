@@ -43,7 +43,7 @@ export default function MUIRadioButtonsPage() {
   return (
     <>
       <Head>
-        <title> MUI Components: Radio Buttons | Okahub UI</title>
+        <title> MUI Components: Radio Buttons | Everylang UI</title>
       </Head>
 
       <Box
