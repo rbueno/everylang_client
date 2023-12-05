@@ -40,7 +40,7 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
       }}
       {...other}
     >
-      <Image disabledEffect width='100%' height='100%' alt="rocket" src='/logo/okahub_logo.png' />
+      <Image disabledEffect width='100%' height='100%' alt="rocket" src='/logo/everylang_website_logo.png' />
       {/* <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 512 512">
         <defs>
           <linearGradient id="BG1" x1="100%" x2="50%" y1="9.946%" y2="50%">

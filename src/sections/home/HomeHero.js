@@ -145,7 +145,7 @@ export default function HomeHero() {
 function Description() {
   return (
     <StyledDescription>
-      <Image disabledEffect alt="logo" src="/logo/logo_everylang.png" sx={{ maxWidth: 120 }} />
+      <Image disabledEffect alt="logo" src="/logo/everylang_website_logo.png" sx={{ maxWidth: 120 }} />
       <m.div variants={varFade().in}>
         <StyledGradientText
           animate={{ backgroundPosition: '200% center' }}
