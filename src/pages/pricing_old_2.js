@@ -35,16 +35,10 @@ const pricingContent = {
       price: '29.99',
       caption: 'Everylang premium | sem limites',
       lists: [
-        { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
-        { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá acostumar com o idioma'  },
-        { text: 'Writing', isAvailable: true, description: 'Uma ótima manteira para praticar gramática, não se preocupe, o Everylang corrigirá e explicará qualquer erro.' },
-        { text: 'Reading', isAvailable: true, description: 'Confirá as respostas em texto além dos áudio, assim irá fixar o idioma ainda mais'  },
-        { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma. Assim, melhorando o seu engajamento e evolução'  },
-      ],
-      cancellationMethods: [
-        { text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para cancelamento automático.'},
-        { text: 'Para solicitar o cancelar a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
-        { text: 'Ou por fim, nos envie um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
+        { text: 'Speaking', isAvailable: true },
+        { text: 'Listening', isAvailable: true },
+        { text: 'Writing', isAvailable: true },
+        { text: 'Reading', isAvailable: true },
       ],
       labelAction: 'Avançar',
       simbol: 'R$',
@@ -65,17 +59,11 @@ en: {
     price: '6.99',
     caption: 'Everylang premium | no limits',
     lists: [
-      { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
-      { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá acostumar com o idioma'  },
-      { text: 'Writing', isAvailable: true, description: 'Uma ótima manteira para praticar gramática, não se preocupe, o Everylang corrigirá e explicará qualquer erro.' },
-      { text: 'Reading', isAvailable: true, description: 'Confirá as respostas em texto além dos áudio, assim irá fixar o idioma ainda mais'  },
-      { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma. Assim, melhorando o seu engajamento e evolução'  },
+      { text: 'Speaking', isAvailable: true },
+      { text: 'Listening', isAvailable: true },
+      { text: 'Writing', isAvailable: true },
+      { text: 'Reading', isAvailable: true },
       
-    ],
-    cancellationMethods: [
-      { text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para cancelamento automático.'},
-      { text: 'Para solicitar o cancelar a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
-      { text: 'Ou por fim, nos envie um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
     ],
     labelAction: 'Next',
     simbol: '$',
@@ -103,7 +91,7 @@ PricingPlanCard.propTypes = {
 };
 
 function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
-  const { subscription, price, caption, lists, cancellationMethods, labelAction, simbol = '$', period = 'mo', whatsappNumber,
+  const { subscription, price, caption, lists, labelAction, simbol = '$', period = 'mo', whatsappNumber,
   whatsappNumberExample,
   whatsappNumberHelper, sessionErrorHelper } = card;
   const [phone, setPhone] = useState(phoneNumber)
@@ -151,9 +139,9 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
           PREMIUM
         </Label>
 
-      {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+      <Typography variant="overline" sx={{ color: 'text.secondary' }}>
         {subscription}
-      </Typography> */}
+      </Typography>
 
       <Stack spacing={1} direction="row" sx={{ my: 2 }}>
       <Typography variant="h5">{simbol}</Typography>
@@ -174,9 +162,8 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
       >
         {caption}
       </Typography>
-      <Box marginTop={4} marginBottom={2}><Typography variant="h6">Benefícios</Typography></Box>
 
-      <Stack component="ul" spacing={2} sx={{ p: 0, my: 0 }}>
+      <Stack component="ul" spacing={2} sx={{ p: 0, my: 5 }}>
         {lists.map((item) => (
           <Stack
             key={item.text}
@@ -196,57 +183,12 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
                 color: item.isAvailable ? 'primary.main' : 'inherit',
               }}
             />
-            <Box>
-            <Typography variant="subtitle2">{item.text}</Typography>
-            <Typography variant="p">{item.description}</Typography>
-            </Box>
+            <Typography variant="body2">{item.text}</Typography>
           </Stack>
         ))}
       </Stack>
-      <Box marginTop={4} marginBottom={2}>
-        <Typography variant="h6">Suporte</Typography>
-        <Stack
-            sx={{
-              typography: 'body2',
-            }}
-          >
-          <Typography variant="p">Precisa falar com um humano? Adicione nosso suporte no WhatsApp e entre em contato a qualquer horário que precisar. 55 11 97596-6675</Typography>
-            </Stack>
-        </Box>
-      <Box marginTop={4} marginBottom={2}>
-        <Typography variant="h6">Cancelamento</Typography>
 
-        <Stack
-            sx={{
-              typography: 'body2',
-            }}
-          >
-        <Typography variant="p">Você pode cancelar a sua assinatura a qualquer momento e facilmente. Poderá cancelar através de qualquer uma dessas opções:</Typography>
-            </Stack>
-        
-        <Stack component="ul" spacing={2} sx={{ p: 0, my: 2 }}>
-        {cancellationMethods.map((method, idx) => (
-          <Stack
-            key={method.text}
-            component="li"
-            direction="row"
-            alignItems="center"
-            spacing={1}
-            sx={{
-              typography: 'body2',
-              color: 'text.primary'
-            }}
-          >
-            <Typography variant="p">{idx + 1}</Typography>
-            <Box>
-            <Typography variant="p">{method.text}</Typography>
-            </Box>
-          </Stack>
-        ))}
-      </Stack>
-        </Box>
-
-      {/* <Box m={2}>
+      <Box m={2}>
            <TextField
               fullWidth
               value={phone}
@@ -256,23 +198,7 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
               error={sessionError}
               helperText={sessionError ? sessionErrorHelper(phoneNumber) : whatsappNumberHelper}
               />
-      </Box> */}
-      <Box display='flex' flexDirection='column' m={2}>
-      <Typography
-        variant="caption"
-        sx={{
-          color: 'primary.main',
-          textTransform: 'capitalize',
-        }}
-      >
-        {whatsappNumber}
-      </Typography>
-      
-      <Label color="info" sx={{ top: 16, right: 16 }}>
-             {phone}
-        </Label>
       </Box>
-      
       <LoadingButton loading={loading} fullWidth size="large" variant="contained" disabled={!phone} onClick={() => createCheckOutSession()}>
       {labelAction}
       </LoadingButton>
@@ -304,24 +230,21 @@ export default function PricingPage() {
           minHeight: 1,
         }}
       >
-         <Box display='flex' flexDirection='column' alignItems='center' alignContent='center' justifyContent='center'>
+         <Box display='flex' alignItems='center' alignContent='center' justifyContent='center'>
             <Box maxWidth={550}>
 
-                <Typography variant="h3" align="center" paragraph>
-                {pricingContent[locale].text.headline}
-                </Typography>
+        <Typography variant="h3" align="center" paragraph>
+         {pricingContent[locale].text.headline}
+        </Typography>
             </Box>
-        
-
+        </Box>
 
         <Typography align="center" sx={{ color: 'text.secondary' }}>
-                {pricingContent[locale].text.description}
+        {pricingContent[locale].text.description}
         </Typography>
 
-
-        <Box maxWidth={550} mt={4} display='flex' alignItems='center' alignContent='center' justifyContent='center'>          
+        <Box mt={4} display='flex' alignItems='center' alignContent='center' justifyContent='center'>          
             <PricingPlanCard key={pricingContent[locale].plan.subscription} phoneNumber={phoneNumber} card={pricingContent[locale].plan} index={1} />
-        </Box>
         </Box>
       </Container>
     </>
