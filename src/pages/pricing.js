@@ -10,6 +10,11 @@ import { useState, useEffect } from 'react'
 // @mui
 import { Card, Button, Box, Container, Typography, Stack, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import EmailIcon from '@mui/icons-material/Email';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 // layouts
 import SimpleLayout from '../layouts/simple';
@@ -35,16 +40,16 @@ const pricingContent = {
       price: '29.99',
       caption: 'Everylang premium | sem limites',
       lists: [
+        { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução'  },
         { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
-        { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá acostumar com o idioma'  },
-        { text: 'Writing', isAvailable: true, description: 'Uma ótima manteira para praticar gramática, não se preocupe, o Everylang corrigirá e explicará qualquer erro.' },
-        { text: 'Reading', isAvailable: true, description: 'Confirá as respostas em texto além dos áudio, assim irá fixar o idioma ainda mais'  },
-        { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma. Assim, melhorando o seu engajamento e evolução'  },
+        { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
+        { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
+        { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
       ],
       cancellationMethods: [
-        { text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para cancelamento automático.'},
-        { text: 'Para solicitar o cancelar a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
-        { text: 'Ou por fim, nos envie um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
+        { icon:  <ChatBubbleOutlineIcon fontSize='small'/>, text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para o cancelamento automático.'},
+        { icon: <WhatsAppIcon fontSize='small'/>, text: 'Para solicitar o cancelamento a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
+        { icon: <EmailOutlinedIcon fontSize='small' />, text: 'Está sem WhatsApp? Não se preocupe, pode enviar um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
       ],
       labelAction: 'Avançar',
       simbol: 'R$',
@@ -56,7 +61,7 @@ const pricingContent = {
     },
   text: {
     headline: ` Everylang | Domine o inglês com WhatsApp Chathub Premium.`,
-    description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo a fluência em inglês.`,
+    description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo à fluência em inglês.`,
   }
 },
 en: {
@@ -65,17 +70,17 @@ en: {
     price: '6.99',
     caption: 'Everylang premium | no limits',
     lists: [
+      { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução.'  },
       { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
-      { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá acostumar com o idioma'  },
-      { text: 'Writing', isAvailable: true, description: 'Uma ótima manteira para praticar gramática, não se preocupe, o Everylang corrigirá e explicará qualquer erro.' },
-      { text: 'Reading', isAvailable: true, description: 'Confirá as respostas em texto além dos áudio, assim irá fixar o idioma ainda mais'  },
-      { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma. Assim, melhorando o seu engajamento e evolução'  },
+      { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
+      { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
+      { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
       
     ],
     cancellationMethods: [
-      { text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para cancelamento automático.'},
-      { text: 'Para solicitar o cancelar a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
-      { text: 'Ou por fim, nos envie um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
+      { icon:  <ChatBubbleOutlineIcon fontSize='small'/>, text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para o cancelamento automático.'},
+      { icon: <WhatsAppIcon fontSize='small'/>, text: 'Para solicitar o cancelamento a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
+      { icon: <EmailOutlinedIcon fontSize='small'/>, text: 'Está sem WhatsApp? Não se preocupe, pode enviar um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
     ],
     labelAction: 'Next',
     simbol: '$',
@@ -87,7 +92,7 @@ en: {
   },
 text: {
   headline: `Everylang | Master English with WhatsApp Chathub Premium.`,
-  description: `Continue to harness the full potential of Everylang and move towards fluency in English.`
+  description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo à fluência em inglês.`
 }
 }
 }
@@ -210,7 +215,7 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
               typography: 'body2',
             }}
           >
-          <Typography variant="p">Precisa falar com um humano? Adicione nosso suporte no WhatsApp e entre em contato a qualquer horário que precisar. 55 11 97596-6675</Typography>
+          <Typography variant="p">Precisa falar com um humano? Adicione nosso suporte no WhatsApp e entre em contato a qualquer horário que precisar: 55 11 97596-6675</Typography>
             </Stack>
         </Box>
       <Box marginTop={4} marginBottom={2}>
@@ -221,7 +226,7 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
               typography: 'body2',
             }}
           >
-        <Typography variant="p">Você pode cancelar a sua assinatura a qualquer momento e facilmente. Poderá cancelar através de qualquer uma dessas opções:</Typography>
+        <Typography variant="p">Você pode cancelar a sua assinatura a qualquer momento usando qualquer uma dessas opções:</Typography>
             </Stack>
         
         <Stack component="ul" spacing={2} sx={{ p: 0, my: 2 }}>
@@ -237,7 +242,10 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
               color: 'text.primary'
             }}
           >
-            <Typography variant="p">{idx + 1}</Typography>
+            <Box>
+
+            {method.icon}
+            </Box>
             <Box>
             <Typography variant="p">{method.text}</Typography>
             </Box>

@@ -65,7 +65,7 @@ en: {
       { text: 'Reading', isAvailable: true },
       
     ],
-    labelAction: 'Next',
+    labelAction: 'Avançar para próxima',
     simbol: '$',
     period: 'mo',
     whatsappNumber: 'WhatsApp Number',
