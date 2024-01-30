@@ -38,7 +38,7 @@ const pricingContent = {
     plan: {
       // subscription: 'Premium',
       price: '394.99',
-      caption: 'Equivalente a 32,92 por mês',
+      caption: 'Equivalente a R$32,92 por mês',
       lists: [
         { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução'  },
         { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
