@@ -37,8 +37,8 @@ const pricingContent = {
   pt: {
     plan: {
       // subscription: 'Premium',
-      price: '74.99',
-      caption: 'Everylang | sem limites',
+      price: '394.99',
+      caption: 'Equivalente a 32,92 por mês',
       lists: [
         { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução'  },
         { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
@@ -55,7 +55,7 @@ const pricingContent = {
       ],
       labelAction: 'Avançar',
       simbol: 'R$',
-      period: 'mês',
+      period: 'anual',
       whatsappNumber: 'Número do WhatsApp',
     whatsappNumberExample: 'Example: 5511918486569',
     whatsappNumberHelper: 'Insira o seu número de WhatsApp completo com código de país',
@@ -69,8 +69,8 @@ const pricingContent = {
 en: {
   plan: {
     // subscription: 'Premium',
-    price: '14.99',
-    caption: 'Everylang | no limits',
+    price: '79.99',
+    caption: 'Equivalent to $6,67 per month',
     lists: [
       { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução.'  },
       { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
@@ -87,7 +87,7 @@ en: {
     ],
     labelAction: 'Next',
     simbol: '$',
-    period: 'mo',
+    period: 'Annual',
     whatsappNumber: 'WhatsApp Number',
     whatsappNumberExample: 'Example: 5511918486569',
     whatsappNumberHelper: 'Inform your complete WhatsApp number with country code.',
@@ -125,7 +125,7 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
       const stripe = await stripePromise;
       const checkoutSessionPayload = {
         phoneNumber: phone,
-        stripeProductType: 'monthlyEV',
+        stripeProductType: 'annualEV',
         successUrl: `https://www.everylang.ai/pulse-subscribe?n=${phone}`,
         cancelUrl: `https://www.everylang.ai/pricing?n=${phone}`
       }
