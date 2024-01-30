@@ -37,14 +37,16 @@ const pricingContent = {
   pt: {
     plan: {
       // subscription: 'Premium',
-      price: '29.99',
-      caption: 'Everylang premium | sem limites',
+      price: '74.99',
+      caption: 'Everylang | sem limites',
       lists: [
         { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução'  },
         { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
         { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
         { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
         { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
+        { text: 'Exercícios de pronúncia', isAvailable: true, description: 'Exercícios de pronúncias customizados para o seu nível e contexto.'  },
+        { text: 'Simulações dinâmicos', isAvailable: true, description: 'Simule situações reais do dia a dia como fazer check-in em hotel, pedir comida e etc.'  },
       ],
       cancellationMethods: [
         { icon:  <ChatBubbleOutlineIcon fontSize='small'/>, text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para o cancelamento automático.'},
@@ -67,15 +69,16 @@ const pricingContent = {
 en: {
   plan: {
     // subscription: 'Premium',
-    price: '6.99',
-    caption: 'Everylang premium | no limits',
+    price: '14.99',
+    caption: 'Everylang | no limits',
     lists: [
       { text: 'Customização', isAvailable: true, description: 'As conversas são adaptadas ao seu nível do idioma, facilitando o seu engajamento e acelerando sua evolução.'  },
       { text: 'Speaking', isAvailable: true, description: 'Pratique sua fala sem medo de errar ou ser julgado. Envie mensagens de áudio naturalmente, como se estivesse falando com um amigo' },
       { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
       { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
       { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
-      
+      { "text": "Pronunciation Exercises", "isAvailable": true, "description": "Customized pronunciation exercises for your level and context." },
+      { "text": "Dynamic Simulations", "isAvailable": true, "description": "Simulate real-life situations such as checking in at a hotel, ordering food, etc." }
     ],
     cancellationMethods: [
       { icon:  <ChatBubbleOutlineIcon fontSize='small'/>, text: 'Para cancelar durante sua conversa, simplesmente envie a palavra "cancelar" no WhatsApp. Você iniciará o passo a passo para o cancelamento automático.'},
@@ -120,7 +123,13 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
     setSessionError(false)
     try {
       const stripe = await stripePromise;
-    const checkoutSession = await api.post("v1/stripe/session", { phoneNumber: phone });
+      const checkoutSessionPayload = {
+        phoneNumber: phone,
+        stripeProductType: 'monthlyEV',
+        successUrl: `https://www.everylang.ai/pulse-subscribe?n=${phone}`,
+        cancelUrl: `https://www.everylang.ai/pricing?n=${phone}`
+      }
+    const checkoutSession = await api.post("v1/stripe/session", checkoutSessionPayload);
 
     if (checkoutSession.status !== 200) {
       console.log('erro', checkoutSession)
