@@ -126,10 +126,18 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
   whatsappNumberHelper, sessionErrorHelper } = card;
   const [phone, setPhone] = useState(phoneNumber)
   const [sessionError, setSessionError] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState({
+  monthlyEV: false,
+  quarterlyEV: false,
+  annualEV: false,
+  monthlyVL: false
+})
 
     const createCheckOutSession = async (productType) => {
-    setLoading(true);
+    setLoading({
+      ...loading,
+      [productType]: true
+    });
     setSessionError(false)
     try {
       const stripe = await stripePromise;
@@ -144,7 +152,10 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
     if (checkoutSession.status !== 200) {
       console.log('erro', checkoutSession)
       setSessionError(true)
-      setLoading(false);
+      setLoading({
+        ...loading,
+        [productType]: false
+      });
       return
     }
     console.log('checkoutSession', checkoutSession)
@@ -159,9 +170,15 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
     } catch (error) {
       console.log('erro', error)
       setSessionError(true)
-      setLoading(false);
+      setLoading({
+        ...loading,
+        [productType]: false
+      });
     }
-    setLoading(false);
+    setLoading({
+      ...loading,
+      [productType]: false
+    });
   };
 
   return (
@@ -312,7 +329,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
-             <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('monthlyEV')}>
+             <LoadingButton loading={loading.monthlyEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('monthlyEV')}>
       {labelAction}
       </LoadingButton>
             </Box>
@@ -382,7 +399,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
-            <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('annualEV')}>
+            <LoadingButton loading={loading.annualEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('annualEV')}>
       {labelAction}
       </LoadingButton>
       </Box>
@@ -450,7 +467,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
-            <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('quarterlyEV')}>
+            <LoadingButton loading={loading.quarterlyEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('quarterlyEV')}>
       {labelAction}
       </LoadingButton>
       </Box>
