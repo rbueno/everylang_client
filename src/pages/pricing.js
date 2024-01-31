@@ -36,6 +36,31 @@ PricingPage.getLayout = (page) => <SimpleLayout>{page}</SimpleLayout>;
 const pricingContent = {
   pt: {
     plan: {
+      pricing: {
+        monthly: {
+          monthly: '74,99',
+          totalPeriod: '74,99',
+          totalPayment: 'Total a pagar por mês',
+          label: 'Mensal',
+        },
+        quarterly: {
+          monthly: '47,99',
+          totalPeriod: '143,99',
+          percentDiscount: '36',
+          save: '80,99',
+          totalPayment: 'Total a pagar por trimestre',
+          label: 'Trimestral',
+        },
+        annual: {
+          monthly: '32,92',
+          totalPeriod: '394,99',
+          percentDiscount: '56',
+          mostPopular: 'Mais popular',
+          save: '503,99',
+          totalPayment: 'Total a pagar por ano',
+          label: 'Anual',
+        },
+      },
       // subscription: 'Premium',
       price: '394.99',
       caption: 'Equivalente a R$32,92 por mês',
@@ -65,11 +90,37 @@ const pricingContent = {
     headline: `Everylang Sem Limites`,
     subtitle: `Prática de idiomas através de conversação via WhatsApp.`,
     description: `Escolha um plano para continuar a utilizar todo o potencial do Everylang sem limites.`,
-    choosePlan: 'Escolha um plano'
+    choosePlan: 'Escolha um plano',
+    save: 'Economize',
   }
 },
 en: {
   plan: {
+    pricing: {
+      monthly: {
+        monthly: '14,99',
+        totalPeriod: '14,99',
+        totalPayment: 'Total to pay per month',
+        label: 'monthly',
+      },
+      quarterly: {
+        monthly: '9,67',
+        totalPeriod: '28,99',
+        percentDiscount: '36',
+        save: '15,98',
+        totalPayment: 'Total to pay per quarter',
+        label: 'Quarterly',
+      },
+      annual: {
+        monthly: '6,67',
+        totalPeriod: '79,99',
+        percentDiscount: '56',
+        mostPopular: 'Most popular',
+        save: '99,89',
+        totalPayment: 'Total to pay per year',
+        label: 'Annual',
+      },
+    },
     // subscription: 'Premium',
     price: '79.99',
     caption: 'Equivalent to $6,67 per month',
@@ -99,7 +150,8 @@ text: {
   headline: `Everylang Unlimited`,
   subtitle: 'Language practice through conversation via WhatsApp',
   description: `Choose a plan to continue using the full potential of Everylang without limits.`,
-  choosePlan: 'Choose a plan'
+  choosePlan: 'Choose a plan',
+  save: 'Save',
 }
 }
 }
@@ -123,7 +175,7 @@ PricingPlanCard.propTypes = {
 function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
   const { subscription, price, caption, subtitle, lists, cancellationMethods, labelAction, simbol = '$', period = 'mo', whatsappNumber,
   whatsappNumberExample,
-  whatsappNumberHelper, sessionErrorHelper } = card;
+  whatsappNumberHelper, sessionErrorHelper, pricing } = card;
   const [phone, setPhone] = useState(phoneNumber)
   const [sessionError, setSessionError] = useState(false)
   const [loading, setLoading] = useState({
@@ -298,7 +350,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             
               </Label> */}
             <Label color="info" sx={{ top: 22, right: 2, position: 'absolute' }}>
-            Mensal
+            {pricing.monthly.label}
               </Label>
 
             {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
@@ -312,10 +364,10 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             {simbol}
                 </Typography>
 
-              <Typography variant="h4">74,99</Typography>
+              <Typography variant="h4">{pricing.monthly.monthly}</Typography>
 
               <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
-                  /mensal
+              / {pricing.monthly.label.toLowerCase()}
                 </Typography>
             </Stack>
 
@@ -325,7 +377,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
                 color: 'primary.main',
               }}
             >
-              Total a pagar por mês R$ 74,99
+              {pricing.monthly.totalPayment}: {simbol}{pricing.monthly.totalPeriod}
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
@@ -359,16 +411,16 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             <Box maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center' sx={{ backgroundColor: 'primary.main'}}> 
             {/* <Label color="info" > */}
 
-            <Typography variant='caption' sx={{ color: 'white'}}>⭐️ Mais popular</Typography>
+            <Typography variant='caption' sx={{ color: 'white'}}>⭐️ {pricing.annual.mostPopular}</Typography>
             {/* </Label> */}
             </Box>
             <Stack>
             <Label color="info" >
-            56% off - Economize R$ 503,99
+            {pricing.annual.percentDiscount}% off - {text.save} {simbol} {pricing.annual.save}
               </Label>
             </Stack>
             <Label color="info" sx={{ top: 64, right: 2, position: 'absolute' }}>
-            anual
+            {pricing.annual.label}
               </Label>
 
             {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
@@ -382,10 +434,10 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             {simbol}
                 </Typography>
 
-              <Typography variant="h4">32,92</Typography>
+              <Typography variant="h4">{pricing.annual.monthly}</Typography>
 
               <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
-                  /mensal
+                  / {pricing.monthly.label.toLowerCase()}
                 </Typography>
             </Stack>
 
@@ -395,7 +447,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
                 color: 'primary.main',
               }}
             >
-              Total a pagar por ano R$ 394,99
+              {pricing.annual.totalPayment}: {simbol} {pricing.annual.totalPeriod}
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
@@ -429,14 +481,14 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
               */}
             <Stack>
             <Label color="info" >
-            36% off - Economize R$ 80,99
+            {pricing.quarterly.percentDiscount}$ Off - {text.save} {simbol} {pricing.quarterly.save}
               </Label>
             </Stack>
             {/* <Label color="info" sx={{ top: 16, right: 16 }}>
             
               </Label> */}
             <Label color="info" sx={{ top: 44, right: 2, position: 'absolute' }}>
-            trimestral
+            {pricing.quarterly.label}
               </Label>
 
             {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
@@ -450,10 +502,10 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             {simbol}
                 </Typography>
 
-              <Typography variant="h4">47,99</Typography>
+              <Typography variant="h4">{pricing.quarterly.monthly}</Typography>
 
               <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
-                  /mensal
+                  / {pricing.monthly.label.toLowerCase()}
                 </Typography>
             </Stack>
 
@@ -463,7 +515,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
                 color: 'primary.main',
               }}
             >
-              Total a pagar por trimestre R$ 143,99
+              {pricing.quarterly.totalPayment}: {simbol} {pricing.quarterly.totalPeriod}
             </Typography>
             </Box>
             <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
