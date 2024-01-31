@@ -53,7 +53,7 @@ const pricingContent = {
         { icon: <WhatsAppIcon fontSize='small'/>, text: 'Para solicitar o cancelamento a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
         { icon: <EmailOutlinedIcon fontSize='small' />, text: 'Está sem WhatsApp? Não se preocupe, pode enviar um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
       ],
-      labelAction: 'Avançar',
+      labelAction: 'Escolher plano',
       simbol: 'R$',
       period: 'anual',
       whatsappNumber: 'Número do WhatsApp',
@@ -62,8 +62,10 @@ const pricingContent = {
     sessionErrorHelper: (n) => `Número do WhatsApp não localizado. Utilize o número completo como: ${n}`
     },
   text: {
-    headline: ` Everylang | Domine o inglês com WhatsApp Chathub Premium.`,
-    description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo à fluência em inglês.`,
+    headline: `Everylang Sem Limites`,
+    subtitle: `Prática de idiomas através de conversação via WhatsApp.`,
+    description: `Escolha um plano para continuar a utilizar todo o potencial do Everylang sem limites.`,
+    choosePlan: 'Escolha um plano'
   }
 },
 en: {
@@ -85,7 +87,7 @@ en: {
       { icon: <WhatsAppIcon fontSize='small'/>, text: 'Para solicitar o cancelamento a um humano, envie uma mensagem para nosso suporte no WhatsApp.'},
       { icon: <EmailOutlinedIcon fontSize='small'/>, text: 'Está sem WhatsApp? Não se preocupe, pode enviar um email para ai@everlang.ai informando que deseja cancelar a sua assinatura.'},  
     ],
-    labelAction: 'Next',
+    labelAction: 'Choose plan',
     simbol: '$',
     period: 'Annual',
     whatsappNumber: 'WhatsApp Number',
@@ -94,14 +96,22 @@ en: {
     sessionErrorHelper: (n) => ` WhatsApp number not found. Use the complete number like: ${n}`
   },
 text: {
-  headline: `Everylang | Master English with WhatsApp Chathub Premium.`,
-  description: `Continue a utilizar todo o potencial do Everylang e caminhe rumo à fluência em inglês.`
+  headline: `Everylang Unlimited`,
+  subtitle: 'Language practice through conversation via WhatsApp',
+  description: `Choose a plan to continue using the full potential of Everylang without limits.`,
+  choosePlan: 'Choose a plan'
 }
 }
 }
 
 
-
+function PlanCard() {
+  return(
+    <Card>
+      <p>teste</p>
+    </Card>
+  )
+}
 // ----------------------------------------------------------------------
 
 PricingPlanCard.propTypes = {
@@ -110,22 +120,22 @@ PricingPlanCard.propTypes = {
   phoneNumber: PropTypes.string
 };
 
-function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
-  const { subscription, price, caption, lists, cancellationMethods, labelAction, simbol = '$', period = 'mo', whatsappNumber,
+function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
+  const { subscription, price, caption, subtitle, lists, cancellationMethods, labelAction, simbol = '$', period = 'mo', whatsappNumber,
   whatsappNumberExample,
   whatsappNumberHelper, sessionErrorHelper } = card;
   const [phone, setPhone] = useState(phoneNumber)
   const [sessionError, setSessionError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-    const createCheckOutSession = async () => {
+    const createCheckOutSession = async (productType) => {
     setLoading(true);
     setSessionError(false)
     try {
       const stripe = await stripePromise;
       const checkoutSessionPayload = {
         phoneNumber: phone,
-        stripeProductType: 'annualEV',
+        stripeProductType: productType || 'annualEV',
         successUrl: `https://www.everylang.ai/pulse-subscribe?n=${phone}`,
         cancelUrl: `https://www.everylang.ai/pricing?n=${phone}`
       }
@@ -157,38 +167,11 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
   return (
     <Card
       sx={{
-        p: 5,
+        p: 4,
         boxShadow: (theme) => theme.customShadows.z24,
       }}
     >
-      <Label color="info" sx={{ top: 16, right: 16, position: 'absolute' }}>
-          PREMIUM
-        </Label>
-
-      {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
-        {subscription}
-      </Typography> */}
-
-      <Stack spacing={1} direction="row" sx={{ my: 2 }}>
-      <Typography variant="h5">{simbol}</Typography>
-
-        <Typography variant="h2">{price === 0 ? 'Free' : price}</Typography>
-
-        <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
-            /{period}
-          </Typography>
-      </Stack>
-
-      <Typography
-        variant="caption"
-        sx={{
-          color: 'primary.main',
-          textTransform: 'capitalize',
-        }}
-      >
-        {caption}
-      </Typography>
-      <Box marginTop={4} marginBottom={2}><Typography variant="h6">Benefícios</Typography></Box>
+      <Box marginBottom={2}><Typography variant="h6">Benefícios</Typography></Box>
 
       <Stack component="ul" spacing={2} sx={{ p: 0, my: 0 }}>
         {lists.map((item) => (
@@ -263,18 +246,12 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
       </Stack>
         </Box>
 
-      {/* <Box m={2}>
-           <TextField
-              fullWidth
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              label={whatsappNumber}
-              placeholder={whatsappNumberExample}
-              error={sessionError}
-              helperText={sessionError ? sessionErrorHelper(phoneNumber) : whatsappNumberHelper}
-              />
-      </Box> */}
-      <Box display='flex' flexDirection='column' m={2}>
+<Box marginTop={4} marginBottom={2}>
+  <Typography variant="h6">{text.choosePlan}:</Typography>
+  <Typography variant="caption">{text.description}</Typography>
+</Box>
+
+{/* <Box display='flex' flexDirection='column' m={2}>
       <Typography
         variant="caption"
         sx={{
@@ -288,11 +265,201 @@ function PricingPlanCard({ card, phoneNumber, sx, ...other }) {
       <Label color="info" sx={{ top: 16, right: 16 }}>
              {phone}
         </Label>
-      </Box>
-      
-      <LoadingButton loading={loading} fullWidth size="large" variant="contained" disabled={!phone} onClick={() => createCheckOutSession()}>
+      </Box> */}
+
+<Box marginTop={2}>
+<Card>
+              {/* 
+              desconto porcentagem
+              economia em dinheiro
+              equivalente por mês
+              frequência de pagamento
+              total a pagar
+              */}
+        
+            {/* <Label color="info" sx={{ top: 16, right: 16 }}>
+            
+              </Label> */}
+            <Label color="info" sx={{ top: 22, right: 2, position: 'absolute' }}>
+            Mensal
+              </Label>
+
+            {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+              {subscription}
+            </Typography> */}
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            {/* <Typography variant="h3">{simbol}</Typography> */}
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">74,99</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  /mensal
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              Total a pagar por mês R$ 74,99
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+             <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('monthlyEV')}>
       {labelAction}
       </LoadingButton>
+            </Box>
+      </Card>
+</Box>
+      <Box marginTop={2}>
+        {/* <Box m={2}>
+           <TextField
+              fullWidth
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              label={whatsappNumber}
+              placeholder={whatsappNumberExample}
+              error={sessionError}
+              helperText={sessionError ? sessionErrorHelper(phoneNumber) : whatsappNumberHelper}
+              />
+      </Box> */}
+
+      <Card>
+              {/* 
+              desconto porcentagem
+              economia em dinheiro
+              equivalente por mês
+              frequência de pagamento
+              total a pagar
+              */}
+            <Box maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center' sx={{ backgroundColor: 'primary.main'}}> 
+            {/* <Label color="info" > */}
+
+            <Typography variant='caption' sx={{ color: 'white'}}>⭐️ Mais popular</Typography>
+            {/* </Label> */}
+            </Box>
+            <Stack>
+            <Label color="info" >
+            56% off - Economize R$ 503,99
+              </Label>
+            </Stack>
+            <Label color="info" sx={{ top: 64, right: 2, position: 'absolute' }}>
+            anual
+              </Label>
+
+            {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+              {subscription}
+            </Typography> */}
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            {/* <Typography variant="h4">{simbol}</Typography> */}
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">32,92</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  /mensal
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              Total a pagar por ano R$ 394,99
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+            <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('annualEV')}>
+      {labelAction}
+      </LoadingButton>
+      </Box>
+      </Card>
+      </Box>
+
+      <Box marginTop={2}>
+        {/* <Box m={2}>
+           <TextField
+              fullWidth
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              label={whatsappNumber}
+              placeholder={whatsappNumberExample}
+              error={sessionError}
+              helperText={sessionError ? sessionErrorHelper(phoneNumber) : whatsappNumberHelper}
+              />
+      </Box> */}
+
+      <Card>
+              {/* 
+              desconto porcentagem
+              economia em dinheiro
+              equivalente por mês
+              frequência de pagamento
+              total a pagar
+              */}
+            <Stack>
+            <Label color="info" >
+            36% off - Economize R$ 80,99
+              </Label>
+            </Stack>
+            {/* <Label color="info" sx={{ top: 16, right: 16 }}>
+            
+              </Label> */}
+            <Label color="info" sx={{ top: 44, right: 2, position: 'absolute' }}>
+            trimestral
+              </Label>
+
+            {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+              {subscription}
+            </Typography> */}
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            {/* <Typography variant="h4">{simbol}</Typography> */}
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">47,99</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  /mensal
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              Total a pagar por trimestre R$ 143,99
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+            <LoadingButton loading={loading} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('quarterlyEV')}>
+      {labelAction}
+      </LoadingButton>
+      </Box>
+      </Card>
+      </Box>
+     
+      
+      
+     
     </Card>
   );
 }
@@ -332,12 +499,13 @@ export default function PricingPage() {
 
 
         <Typography align="center" sx={{ color: 'text.secondary' }}>
-                {pricingContent[locale].text.description}
+                {pricingContent[locale].text.subtitle}
         </Typography>
 
 
-        <Box maxWidth={550} mt={4} display='flex' alignItems='center' alignContent='center' justifyContent='center'>          
-            <PricingPlanCard key={pricingContent[locale].plan.subscription} phoneNumber={phoneNumber} card={pricingContent[locale].plan} index={1} />
+        <Box maxWidth={550} minWidth={350} mt={4} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+                 
+            <PricingPlanCard key={pricingContent[locale].plan.subscription} phoneNumber={phoneNumber} card={pricingContent[locale].plan} text={pricingContent[locale].text} index={1} />
         </Box>
         </Box>
       </Container>
