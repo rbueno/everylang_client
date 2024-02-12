@@ -399,6 +399,127 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             </Box>
       </Card>
 </Box>
+      <Box marginTop={2}>
+   
+
+      <Card>
+       
+            <Box maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center' sx={{ backgroundColor: 'primary.main'}}> 
+
+
+            <Typography variant='caption' sx={{ color: 'white'}}>⭐️ {pricing.annual.mostPopular}</Typography>
+
+            </Box>
+            <Stack>
+            <Label color="info" >
+            {pricing.annual.percentDiscount}% off - {text.save} {simbol} {pricing.annual.save}
+              </Label>
+            </Stack>
+            <Label color="info" sx={{ top: 64, right: 2, position: 'absolute' }}>
+            {pricing.annual.label}
+              </Label>
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">{pricing.annual.monthly}</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  / {pricing.monthly.label.toLowerCase()}
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              {pricing.annual.totalPayment}: {simbol} {pricing.annual.totalPeriod}
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+            <LoadingButton loading={loading.annualEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('annualEV')}>
+      {labelAction}
+      </LoadingButton>
+      </Box>
+      </Card>
+      </Box>
+
+      <Box marginTop={2}>
+        {/* <Box m={2}>
+           <TextField
+              fullWidth
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              label={whatsappNumber}
+              placeholder={whatsappNumberExample}
+              error={sessionError}
+              helperText={sessionError ? sessionErrorHelper(phoneNumber) : whatsappNumberHelper}
+              />
+      </Box> */}
+
+      <Card>
+              {/* 
+              desconto porcentagem
+              economia em dinheiro
+              equivalente por mês
+              frequência de pagamento
+              total a pagar
+              */}
+            <Stack>
+            <Label color="info" >
+            {pricing.quarterly.percentDiscount}$ Off - {text.save} {simbol} {pricing.quarterly.save}
+              </Label>
+            </Stack>
+            {/* <Label color="info" sx={{ top: 16, right: 16 }}>
+            
+              </Label> */}
+            <Label color="info" sx={{ top: 44, right: 2, position: 'absolute' }}>
+            {pricing.quarterly.label}
+              </Label>
+
+            {/* <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+              {subscription}
+            </Typography> */}
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            {/* <Typography variant="h4">{simbol}</Typography> */}
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">{pricing.quarterly.monthly}</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  / {pricing.monthly.label.toLowerCase()}
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              {pricing.quarterly.totalPayment}: {simbol} {pricing.quarterly.totalPeriod}
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+            <LoadingButton loading={loading.quarterlyEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('quarterlyEV')}>
+      {labelAction}
+      </LoadingButton>
+      </Box>
+      </Card>
+      </Box>
+     
+      
+      
+     
     </Card>
   );
 }
