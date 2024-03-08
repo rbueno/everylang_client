@@ -58,11 +58,11 @@ const pricingContent = {
           label: 'Trimestral',
         },
         annual: {
-          monthly: '32,92',
-          totalPeriod: '394,99',
-          percentDiscount: '56',
+          monthly: '14,99',
+          totalPeriod: '179,94',
+          percentDiscount: '50',
           mostPopular: 'Mais popular',
-          save: '503,99',
+          save: '179,94',
           totalPayment: 'Total a pagar por ano',
           label: 'Anual',
         },
@@ -76,7 +76,7 @@ const pricingContent = {
         { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
         { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
         { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
-        { text: 'Exercícios de pronúncia', isAvailable: true, description: 'Exercícios de pronúncias customizados para o seu nível e contexto.'  },
+        { text: 'Exercícios de pronúncia e gramática', isAvailable: true, description: 'Exercícios de pronúncias e gramática personalizados para o seu nível e contexto.'  },
         { text: 'Simulações dinâmicos', isAvailable: true, description: 'Simule situações reais do dia a dia como fazer check-in em hotel, pedir comida e etc.'  },
       ],
       cancellationMethods: [
@@ -124,11 +124,11 @@ en: {
         label: 'Quarterly',
       },
       annual: {
-        monthly: '6,67',
-        totalPeriod: '79,99',
-        percentDiscount: '56',
+         monthly: '14,99',
+          totalPeriod: '179,94',
+          percentDiscount: '50',
         mostPopular: 'Most popular',
-        save: '99,89',
+         save: '179,94',
         totalPayment: 'Total to pay per year',
         label: 'Annual',
       },
@@ -142,7 +142,7 @@ en: {
       { text: 'Listening', isAvailable: true, description: 'Ouça, pause, repita quantas vezes quiser. Quanto mais ouvir as respostas mais irá se acostumar com o idioma.'  },
       { text: 'Writing', isAvailable: true, description: 'Uma ótima maneira para praticar gramática: o Everylang corrigirá e explicará qualquer erro.' },
       { text: 'Reading', isAvailable: true, description: 'Confira as respostas em texto além dos áudios para fixar ainda mais o idioma.'  },
-      { "text": "Pronunciation Exercises", "isAvailable": true, "description": "Customized pronunciation exercises for your level and context." },
+      { "text": "Pronunciation and Grammar Exercises", "isAvailable": true, "description": "Customized pronunciation and grammar exercises for your level and context." },
       { "text": "Dynamic Simulations", "isAvailable": true, "description": "Simulate real-life situations such as checking in at a hotel, ordering food, etc." }
     ],
     cancellationMethods: [
@@ -399,7 +399,60 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
             </Box>
       </Card>
 </Box>
+
+<Box marginTop={2}>
+   
+
+      <Card>
+       
+            <Box maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center' sx={{ backgroundColor: 'primary.main'}}> 
+
+
+            <Typography variant='caption' sx={{ color: 'white'}}>⭐️ {pricing.annual.mostPopular}</Typography>
+
+            </Box>
+            <Stack>
+            <Label color="info" >
+            {pricing.annual.percentDiscount}% off - {text.save} {simbol} {pricing.annual.save}
+              </Label>
+            </Stack>
+            <Label color="info" sx={{ top: 64, right: 2, position: 'absolute' }}>
+            {pricing.annual.label}
+              </Label>
+
+            <Box m={2}>
+            <Stack spacing={1} direction="row">
+            <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+            {simbol}
+                </Typography>
+
+              <Typography variant="h4">{pricing.annual.monthly}</Typography>
+
+              <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
+                  / equivalente por {pricing.monthly.label.toLowerCase()}
+                </Typography>
+            </Stack>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+              }}
+            >
+              {pricing.annual.totalPayment}: {simbol} {pricing.annual.totalPeriod}
+            </Typography>
+            </Box>
+            <Box m={2} marginLeft={8} marginRight={8} maxWidth={550} display='flex' alignItems='center' alignContent='center' justifyContent='center'> 
+            <LoadingButton loading={loading.annualEV} fullWidth size="large" variant="outlined" disabled={!phone} onClick={() => createCheckOutSession('annualEV')}>
+      {labelAction}
+      </LoadingButton>
+      </Box>
+      </Card>
+      </Box>
+      
     </Card>
+
+    
   );
 }
 

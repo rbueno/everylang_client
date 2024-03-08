@@ -428,7 +428,7 @@ function PricingPlanCard({ card, text, phoneNumber, sx, ...other }) {
               <Typography variant="h4">{pricing.annual.monthly}</Typography>
 
               <Typography component="span" sx={{ alignSelf: 'center', color: 'text.secondary' }}>
-                  / {pricing.monthly.label.toLowerCase()}
+                  / equivalente por {pricing.monthly.label.toLowerCase()}
                 </Typography>
             </Stack>
 
