@@ -139,7 +139,6 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
 
       console.log('payload', payload)
       const { data } = await api.post('v1/everylang/lesson', payload)
-      console.log('responseProccesCreated', responseProccesCreated)
       
 
       // eslint-disable-next-line consistent-return

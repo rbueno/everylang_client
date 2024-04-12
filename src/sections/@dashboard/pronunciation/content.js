@@ -205,6 +205,7 @@ export function UploadAudioFileDialog({
   title = 'Carregar áudio',
   open,
   onClose,
+  updateLessonExercises,
   //
   onCreate,
   onUpdate,
@@ -216,6 +217,7 @@ export function UploadAudioFileDialog({
 }) {
   const [files, setFiles] = useState([]);
   const [file, setFile] = useState(null);
+  const [isSubmittingAudio, setIsSubmittingAudio] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -235,6 +237,7 @@ export function UploadAudioFileDialog({
       if (file) {
         console.log('newFile', newFile)
         setFile(newFile)
+        setFiles([newFile])
       }
     },
     [setFile]
@@ -250,10 +253,12 @@ export function UploadAudioFileDialog({
   };
 
   const handleRemoveAllFiles = () => {
-    setFile();
+    setFiles([]);
+    setFile(null);
   };
 
   const submitFileAudio = async () => {
+    setIsSubmittingAudio(true)
     // setUpdatingAvatarFile(true)
     // const imageFile = avatarFile
     // console.log('imageFile', imageFile)
@@ -267,13 +272,17 @@ export function UploadAudioFileDialog({
       const { data } = await api.post(`v1/everylang/lesson-exercises/pronunciation/upload/${lessonExerciseId}`, audioData)
       // console.log('avatar update', data)
       // updateWorkspaces(data.workspaceSession)
-console.log('audioData', audioData)
+      console.log('audioData', data)
+      updateLessonExercises({ lessonExerciseUpdate: data.lessonExercise })
       enqueueSnackbar('Update success!');
     } catch (error) {
       console.error(error);
     }
 
     setFile(null)
+    setFiles([])
+    setIsSubmittingAudio(false)
+    onClose();
     // setUpdatingAvatarFile(false)
 
   };
@@ -281,7 +290,8 @@ console.log('audioData', audioData)
   return (
     <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose} {...other}>
       <DialogTitle sx={{ p: (theme) => theme.spacing(3, 3, 2, 3) }}> {title} </DialogTitle>
-
+      {!files.length && (
+      <Box marginBottom={2}>
       <DialogContent dividers sx={{ pt: 1, pb: 0, border: 'none' }}>
         {(onCreate || onUpdate) && (
           <TextField
@@ -306,30 +316,38 @@ console.log('audioData', audioData)
             'audio/opus': []
             }} />
       </DialogContent>
+      </Box>)}
+      {!!files.length && (
+        <Box>
+          <Box marginLeft={4} marginRight={4}>
+          <Card>
+            <Box m={2}>
 
+            <Typography>{file.path}</Typography>
+            </Box>
+          </Card>
+
+          </Box>
+        
       <DialogActions>
-        <Button
+
+     
+      <LoadingButton
+          loading={isSubmittingAudio}
           variant="contained"
           startIcon={<Iconify icon="eva:cloud-upload-fill" />}
           onClick={submitFileAudio}
         >
-          Upload
-        </Button>
-
-        {!!files.length && (
+          Enviar áudio
+        </LoadingButton>
           <Button variant="outlined" color="inherit" onClick={handleRemoveAllFiles}>
-            Remove all
+            Remover áudio
           </Button>
-        )}
-
-        {(onCreate || onUpdate) && (
-          <Stack direction="row" justifyContent="flex-end" flexGrow={1}>
-            <Button variant="soft" onClick={onCreate || onUpdate}>
-              {onUpdate ? 'Save' : 'Create'}
-            </Button>
-          </Stack>
-        )}
+          
+   
       </DialogActions>
+      </Box>
+         )}
     </Dialog>
   );
 }
@@ -438,6 +456,21 @@ export default function BusinessEdit({ adId }) {
   const handleCloseUploadFile = () => {
     setOpenUploadFile(false);
   };
+
+  const updateLessonExercises = ({ lessonExerciseUpdate }) => {
+   
+    const lessonExercisesUpdated = newAdsGenerated.lessonExercises.map((item, idx) => {
+      if (lessonExerciseUpdate._id === item._id) {
+        return {
+          ...lessonExercisesUpdate
+        }
+      }
+      return item
+    })
+    newAdsGenerated.lessonExercises = lessonExercisesUpdated
+    setNewAdsGenerated(newAdsGenerated) 
+
+  }
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -737,7 +770,7 @@ const editLesson = (lessonId) => {
 
           </Box>
           <Box m={2} display='flex' flexDirection='column'>
-                      <LoadingButton loading={submitting} variant='contained' disabled={sentence.length === 0} onClick={() => addSentence()}>Cria frase</LoadingButton>
+                      <LoadingButton loading={submitting} variant='contained' disabled={sentence.length === 0} onClick={() => addSentence()}>Criar frase</LoadingButton>
             <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
 
           </Box>
@@ -856,7 +889,7 @@ const editLesson = (lessonId) => {
               </Box>
               </Box>
               <Box m={2} display='flex' flexDirection='column'>
-                      <LoadingButton loading={submitting} variant='contained' onClick={() => generateSentence()}>Cria frase</LoadingButton>
+                      <LoadingButton loading={submitting} variant='contained' onClick={() => generateSentence()}>Criar frases</LoadingButton>
             <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
 
           </Box>
@@ -1057,7 +1090,7 @@ const editLesson = (lessonId) => {
           accept={{
               'audio/*': [],
             }}
-          open={openUploadFile} onClose={handleCloseUploadFile} lessonExerciseId={currentLessonExerciseId} />
+          open={openUploadFile} onClose={handleCloseUploadFile} updateLessonExercises={updateLessonExercises} lessonExerciseId={currentLessonExerciseId} />
         <DeleteSentenceDialog open={openDialog} onClose={handleCloseDialog} lessonExerciseId={currentLessonExerciseId} deleteExercise={deleteExercise} />
         <UpdateSentenceTextDialog dialogContent={<EditTextField content={currentSentence} updateSentenceText={updateSentenceText} updatingSentence={updatingSentence} closeDialog={closeUpdateSentenceTextDialog} />} open={openUpdateSentenceTextDialog} onClose={closeUpdateSentenceTextDialog} />
       </Container>
