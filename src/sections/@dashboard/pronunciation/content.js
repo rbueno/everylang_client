@@ -462,7 +462,7 @@ export default function BusinessEdit({ adId }) {
     const lessonExercisesUpdated = newAdsGenerated.lessonExercises.map((item, idx) => {
       if (lessonExerciseUpdate._id === item._id) {
         return {
-          ...lessonExercisesUpdate
+          ...lessonExerciseUpdate
         }
       }
       return item
