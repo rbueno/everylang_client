@@ -18,11 +18,10 @@ import Label from '../../../../components/label';
 import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
-import { fDate } from '../../../../utils/formatTime';
 
 // ----------------------------------------------------------------------
 
-UserTableRow.propTypes = {
+UserTableRowSubscribers.propTypes = {
   row: PropTypes.object,
   selected: PropTypes.bool,
   onEditRow: PropTypes.func,
@@ -30,8 +29,8 @@ UserTableRow.propTypes = {
   onSelectRow: PropTypes.func,
 };
 
-export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
-  const { adName, adContent, createdAt } = row;
+export default function UserTableRowSubscribers({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
+  const { data, createdAt, active } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -55,32 +54,27 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
 
   return (
     <>
-      <TableRow hover selected={selected} onClick={() => {
-            onEditRow()
-          }}>
-        <TableCell>
+      <TableRow hover selected={selected}>
+        {/* <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography variant="subtitle2" noWrap>
-            {adName}
+            {userId.firstName} {userId.lastName}
             </Typography>
           </Stack>
-        </TableCell>
+        </TableCell> */}
+
+        <TableCell align="left">{data || `---`}</TableCell>
+        {/* <TableCell align="left">{createdAt || `---`}</TableCell> */}
+        <TableCell>{ createdAt ? format(new Date(createdAt), 'dd/MM/yyyy') : '---'}</TableCell>
+        <TableCell align="left">{active ? 'ativo' : 'cancelado'}</TableCell>
+
+        {/* <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
+          {roles.join(', ')}
+        </TableCell> */}
 
         
-        <TableCell align="left">
-          <Label
-            variant="soft"
-            color='success'
-          >
-            {adContent.length}
-          </Label></TableCell>
 
-        <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-        {format(new Date(createdAt), 'dd/MM/yy')}
-        {/* {fDate(createdAt)} */}
         
-        </TableCell>
-        {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
         {/* <TableCell align="right">
           <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
@@ -102,7 +96,7 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           }}
         >
           <Iconify icon="eva:edit-fill" />
-          Abrir
+          Edit
         </MenuItem>
       </MenuPopover> */}
     </>

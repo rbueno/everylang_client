@@ -11,7 +11,7 @@ import DashboardLayout from '../../../../layouts/dashboard';
 import { useSettingsContext } from '../../../../components/settings';
 import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
 // sections
-import UserNewEditForm from '../../../../sections/@dashboard/facebookads/content';
+import UserNewEditForm from '../../../../sections/@dashboard/pronunciation/content';
 
 // ----------------------------------------------------------------------
 
@@ -26,11 +26,11 @@ export default function UserCreatePage() {
   return (
     <>
       <Head>
-        <title> Facebook Ads | Everylang</title>
+        <title> Pronunciation | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
-      <Typography variant="h4" sx={{ mb: 5}}>Anúncios gerados para o Facebook</Typography>
+      <Typography variant="h4" sx={{ mb: 5}}>Lição de pronúncia</Typography>
         <UserNewEditForm adId={adId} />
       </Container>
     </>

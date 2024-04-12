@@ -44,16 +44,16 @@ import {
   TablePaginationCustom,
 } from '../../../components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../../sections/@dashboard/facebookads/list';
+import { UserTableToolbar, UserTableRow } from '../../../sections/@dashboard/pronunciation/list';
 import { useAuthContext } from '../../../auth/useAuthContext'
 import api from '../../../utils/axios'
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Nome', align: 'left' },
-  { id: 'adTotal', label: 'Total', align: 'left' },
-  { id: 'email', label: 'Criado em', align: 'left' },
+  { id: 'name', label: 'Título interno', align: 'left' },
+  { id: 'total', label: 'Exercícios', align: 'left' },
+  { id: 'createdAt', label: 'Criado em', align: 'left' },
   // { id: 'role', label: 'Permissão', align: 'left' },
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
@@ -105,9 +105,9 @@ export default function UserListPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`v1/adgenerator/facebook`)
-        console.log('response ads', response.data.ads)
-        setTableData(response.data.ads)
+        const response = await api.get(`v1/everylang/lesson?lessonType=grammar`)
+        console.log('response lessons', response.data.lessons)
+        setTableData(response.data.lessons)
       } catch (error) {
         console.log(error)
       }
@@ -121,13 +121,13 @@ export default function UserListPage() {
 
 
   const handleEditRow = (adId) => {
-    push(PATH_DASHBOARD.facebookAds.content(adId));
+    push(PATH_DASHBOARD.lessonGrammar.content(adId));
   };
 
   return (
     <>
       <Head>
-        <title> User: List | Everylang</title>
+        <title> Grammar | Everylang</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -135,21 +135,21 @@ export default function UserListPage() {
           <Stack direction="row" alignItems="center">
             <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h4" gutterBottom>
-                  Facebook Ads
+                  Lições de gramática
                 </Typography>
-            <Typography variant="body1" gutterBottom>
+            {/* <Typography variant="body1" gutterBottom>
                   histórico
-                </Typography>
+                </Typography> */}
             </Box>
 
             <Box sx={{ flexShrink: 0 }}> 
             <Button
                   component={NextLink}
-                  href={PATH_DASHBOARD.facebookAds.new}
+                  href={PATH_DASHBOARD.lessonGrammar.new}
                   variant="contained"
                   startIcon={<Iconify icon="eva:plus-fill" />}
                 >
-                  Criar anúncio
+                  Criar lição
                 </Button>
             </Box>
           </Stack>

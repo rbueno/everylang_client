@@ -10,8 +10,8 @@ export default function Index() {
   const { pathname, push } = useRouter();
 
   useEffect(() => {
-    if (pathname === PATH_DASHBOARD.facebookAds.root) {
-      push(PATH_DASHBOARD.facebookAds.new);
+    if (pathname === PATH_DASHBOARD.lessonPronunciation.root) {
+      push(PATH_DASHBOARD.lessonPronunciation.list);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);

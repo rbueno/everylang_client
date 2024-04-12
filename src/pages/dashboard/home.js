@@ -1,5 +1,7 @@
 // next
 import FacebookIcon from '@mui/icons-material/Facebook';
+import VoiceChatIcon from '@mui/icons-material/VoiceChat';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import GoogleIcon from '@mui/icons-material/Google';
 import WebIcon from '@mui/icons-material/Web';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
@@ -8,12 +10,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Box, TextField, Stack, MenuItem } from '@mui/material';
+import { Grid, Container, Typography, Box, TextField, Stack, MenuItem, Card, CardHeader, CardContent } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 import { add } from 'date-fns'
 // layouts
+import { Text } from '@visx/text';
+import { scaleLog } from '@visx/scale';
+import Wordcloud from '@visx/wordcloud/lib/Wordcloud';
+
 import DashboardLayout from '../../layouts/dashboard';
 // _mock_
 import { _analyticPost, _analyticOrderTimeline, _analyticTraffic } from '../../_mock/arrays';
@@ -37,6 +43,188 @@ import {
 import api from '../../utils/axios'
 // import { PATH_DASHBOARD } from '../../routes/paths'
 
+// ----------------------------------------------------------------------
+
+
+
+
+const totoAfricaLyrics = `Hoje cedo
+Quando eu acordei e não te vi
+Eu pensei em tanta coisa
+Tive medo
+Ah, como eu chorei
+Eu sofri em segredo
+Tudo isso hoje cedo
+Holofotes fortes, purpurina
+E o sorriso dessas mina só me lembra cocaína
+Em cinco abrem-se cortinas
+Estáticas retinas brilham, garoa fina
+Que fita, meus poema me trouxe onde eles não habita
+A fama irrita, a grana dita, 'cê desacredita?
+Fantoches, pique Celso Pitta mentem
+Mortos tipo meu pai, nem eu me sinto presente
+Aí, é rima que cês quer, toma, duas, três
+Farta pra infartar cada um de vocês
+Num abismo sem volta, de festa, ladainha
+Minha alma afunda igual minha família em casa, sozinha
+Entre putas como um cafetão, coisas que afetam
+Sintonia, como eu sonhei em tá aqui um dia?
+Crise, trampo, ideologia, pause
+E é aqui onde nóis entende a Amy Winehouse
+Hoje cedo
+Quando eu acordei e não te vi
+Eu pensei em tanta coisa
+Tive medo
+Ah, como eu chorei
+Eu sofri em segredo
+Tudo isso hoje cedo
+Vagabundo, a trilha
+É um precipício, penso o melhor
+Quero salvar o mundo, pois desisti da minha família
+E numa luta mais difícil a frustração vai ser menor
+Digno de dó, só o pó, vazio, comum
+Que já é moda no século XXI
+Blacks com voz sagaz gravada
+Contra vilões que sangram a quebrada
+Só que raps por nóiz, por paz, mais nada
+Me pôs nas Gerais, numa cela trancada
+Eu lembrei do Racionais, reflexão
+Aí, "os próprio preto num 'tá nem aí com isso, não"
+É um clichê romântico, triste
+Vai perceber, vai ver, se matou e o paraíso não existe
+Eu ainda sou o Emicida da Rinha
+Lotei casas do Sul ao Norte,
+Mas esvaziei a minha
+E vou por aí, Taliban
+Vendo os boy beber dois mês de salário da minha irmã
+Hennessys, avelãs, camarins, fãs, globais
+Mano, onde eles tavam há dez anos atrás?
+Showbiz como a regra diz, lek
+A sociedade vende Jesus, por que não ia vender rap?
+O mundo vai se ocupar com seu cifrão
+Dizendo que a miséria é quem carecia de atenção
+Hoje cedo
+Quando eu acordei e não te vi
+Eu pensei em tanta coisa
+Tive medo
+Ah, como eu chorei
+Eu sofri em segredo
+Tudo isso hoje cedo`
+
+
+const colors = ['#143059', '#2F6B9A', '#82a6c2'];
+
+function wordFreq(text) {
+  const words = text.replace(/\./g, '').split(/\s/);
+  const freqMap = {};
+
+  for (const w of words) {
+    if (!freqMap[w]) freqMap[w] = 0;
+    freqMap[w] += 1;
+  }
+  return Object.keys(freqMap).map((word) => ({ text: word, value: freqMap[word] }));
+}
+
+function getRotationDegree() {
+  const rand = Math.random();
+  const degree = rand > 0.5 ? 60 : -60;
+  return rand * degree;
+}
+
+const words = wordFreq(totoAfricaLyrics);
+console.log('words', words)
+const fontScale = scaleLog({
+  domain: [Math.min(...words.map((w) => w.value)), Math.max(...words.map((w) => w.value))],
+  range: [10, 100],
+});
+const fontSizeSetter = (datum) => fontScale(datum.value);
+
+const fixedValueGenerator = () => 0.5;
+
+
+export function WordcloudPronunciation({ width, height, showControls }) {
+  const [spiralType, setSpiralType] = useState('archimedean');
+  const [withRotation, setWithRotation] = useState(false);
+
+  return (
+    <div className="wordcloud">
+      <Wordcloud
+        words={words}
+        width={width}
+        height={height}
+        fontSize={fontSizeSetter}
+        font={'Impact'}
+        padding={2}
+        spiral={spiralType}
+        rotate={withRotation ? getRotationDegree : 0}
+        random={fixedValueGenerator}
+      >
+        {(cloudWords) =>
+          cloudWords.map((w, i) => (
+            <Text
+              key={w.text}
+              fill={colors[i % colors.length]}
+              textAnchor={'middle'}
+              transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
+              fontSize={w.size}
+              fontFamily={w.font}
+            >
+              {w.text}
+            </Text>
+          ))
+        }
+      </Wordcloud>
+      {showControls && (
+        <div>
+          <label>
+            Spiral type &nbsp;
+            <select
+              onChange={(e) => setSpiralType(e.target.value)}
+              value={spiralType}
+            >
+              <option key={'archimedean'} value={'archimedean'}>
+                archimedean
+              </option>
+              <option key={'rectangular'} value={'rectangular'}>
+                rectangular
+              </option>
+            </select>
+          </label>
+          <label>
+            With rotation &nbsp;
+            <input
+              type="checkbox"
+              checked={withRotation}
+              onChange={() => setWithRotation(!withRotation)}
+            />
+          </label>
+          <br />
+        </div>
+      )}
+      <style jsx>{`
+        .wordcloud {
+          display: flex;
+          flex-direction: column;
+          user-select: none;
+        }
+        .wordcloud svg {
+          margin: 1rem 0;
+          cursor: pointer;
+        }
+
+        .wordcloud label {
+          display: inline-flex;
+          align-items: center;
+          font-size: 14px;
+          margin-right: 8px;
+        }
+        .wordcloud textarea {
+          min-height: 100px;
+        }
+      `}</style>
+    </div>
+  );
+}
 // ----------------------------------------------------------------------
 
 
@@ -282,20 +470,79 @@ export default function GeneralAnalyticsPage() {
           Everylang
         </Typography>
 
+        <Grid container spacing={3}>
+          
+
+
+        <Grid item xs={12} md={6} lg={6}>
+            <AnalyticsConversionRates
+              title="Palavras com maior dificuldade de pronúncia"
+              // subheader="Dados Everylang"
+              chart={{
+                series: [
+                  { label: 'World', value: 1380 },
+                  { label: 'Money', value: 1200 },
+                  { label: 'Mouth', value: 1100 },
+                  { label: 'That', value: 690 },
+                  { label: 'It', value: 580 },
+                  { label: 'Manegement', value: 540 },
+                  { label: 'Travel', value: 470 },
+                  { label: 'Go', value: 448 },
+                  { label: 'Want', value: 430 },
+                  { label: 'Eat', value: 400 },
+                ],
+              }}
+            />
+          </Grid>
+
+
+            <Grid item xs={12} md={6} lg={6}>
+            <AnalyticsCurrentVisits
+              title="Erros mais comuns de gramática"
+              chart={{
+                // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+                series: [
+                  { label: 'Verb tense', value: 4344 },
+                  { label: 'Present perfect', value: 5435 },
+                  { label: 'Spelling', value: 1443 },
+                  { label: 'Feature', value: 4443 },
+                ],
+                colors: [
+                  theme.palette.primary.main,
+                  theme.palette.info.main,
+                  theme.palette.error.main,
+                  theme.palette.warning.main,
+                ],
+              }}
+            />
+          </Grid>
+
+          
+        </Grid>
+
+{/* <Box>
+  <Card>
+    <CardHeader title='Palavras com maior dificuldade' />
+    <CardContent>
+
+  <WordcloudPronunciation width={600} height={300} showControls={true} />
+    </CardContent>
+  </Card>
+</Box> */}
         {/* <FetchController /> */}
 
         <Box mb={4}>
-        <Typography variant='h5' sx={{ mb: 2 }}>Gere anúncios com inteligência artifical</Typography>
+        <Typography variant='h5' sx={{ mb: 2 }}>Gerencie lições com inteligência artificial</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <Box
-            onClick={() => push(PATH_DASHBOARD.facebookAds.new)}
+            onClick={() => push(PATH_DASHBOARD.lessonPronunciation.list)}
             >
             <HomeOptions
-              title="Facebook / Anúncios"
+              title="Pronúncia"
               // total={2}
               color="info"
-              icon={<FacebookIcon />}
+              icon={<VoiceChatIcon />}
             />
             </Box>
           </Grid>
@@ -305,10 +552,10 @@ export default function GeneralAnalyticsPage() {
             onClick={() => push(PATH_DASHBOARD.googleAds.new)}
             >
             <HomeOptions
-              title="Google / Anúncios"
+              title="Gramática"
               // total={2}
               color="warning"
-              icon={<GoogleIcon />}
+              icon={<TextSnippetIcon />}
             />
           </Box>
           </Grid>
@@ -335,7 +582,7 @@ export default function GeneralAnalyticsPage() {
         </Box>
 
        <Box mb={4}>
-       <Typography variant='h5' sx={{ mb: 2 }}>Página pública do negócio</Typography>
+       <Typography variant='h5' sx={{ mb: 2 }}>Sua página web</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
           <Box

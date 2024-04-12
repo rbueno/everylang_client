@@ -76,6 +76,20 @@ export const PATH_DASHBOARD = {
     edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
     demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
+  lessonPronunciation: {
+    root: path(ROOTS_DASHBOARD, '/pronunciation'),
+    new: path(ROOTS_DASHBOARD, '/pronunciation/new'),
+    list: path(ROOTS_DASHBOARD, '/pronunciation/list'),
+    content: (lessonId) => path(ROOTS_DASHBOARD, `/pronunciation/gen/${lessonId}`),
+    edit: (lessonId) => path(ROOTS_DASHBOARD, `/pronunciation/${lessonId}/edit`),
+  },
+  lessonGrammar: {
+    root: path(ROOTS_DASHBOARD, '/grammar'),
+    new: path(ROOTS_DASHBOARD, '/grammar/new'),
+    list: path(ROOTS_DASHBOARD, '/grammar/list'),
+    content: (lessonId) => path(ROOTS_DASHBOARD, `/grammar/gen/${lessonId}`),
+    edit: (lessonId) => path(ROOTS_DASHBOARD, `/grammar/${lessonId}/edit`),
+  },
   facebookAds: {
     root: path(ROOTS_DASHBOARD, '/facebook-ads'),
     new: path(ROOTS_DASHBOARD, '/facebook-ads/new'),

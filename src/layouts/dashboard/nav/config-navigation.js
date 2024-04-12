@@ -1,4 +1,6 @@
 import FacebookIcon from '@mui/icons-material/Facebook';
+import VoiceChatIcon from '@mui/icons-material/VoiceChat';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import GoogleIcon from '@mui/icons-material/Google';
 import WebIcon from '@mui/icons-material/Web';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
@@ -45,45 +47,19 @@ const navConfig = [
       { title: 'Dashboard', path: PATH_DASHBOARD.root, icon: ICONS.dashboard },
     ],
   },
-  {
-    subheader: 'Página do Negócio',
-    items: [
-      { title: 'Métricas', path: PATH_DASHBOARD.general.analytics, icon: <LeaderboardIcon /> },
-      { title: 'Editar', path: PATH_DASHBOARD.mypage.main, icon: <WebIcon /> },
-      // {
-      //   title: 'Página do Negócio',
-      //   path: PATH_DASHBOARD.business.contextEdit,
-      //   icon: ICONS.banking,
-      //   children: [
-      //     { title: 'Métricas', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
-      //     { title: 'Editar', path: PATH_DASHBOARD.mypage.main, icon: ICONS.dashboard },
-      //   ],
-      // },
-      // {
-      //   title: 'usuários',
-      //   path: PATH_DASHBOARD.user.root,
-      //   icon: ICONS.user,
-      //   children: [
-      //     { title: 'todos', path: PATH_DASHBOARD.user.list },
-      //     { title: 'adicionar', path: PATH_DASHBOARD.user.new },
-      //     { title: 'minha conta', path: PATH_DASHBOARD.user.account },
-      //   ],
-      // },
-    ],
-  },
-  {
-    subheader: 'Benchmark',
-    items: [
-      {
-        title: 'Instagram',
-        path: PATH_DASHBOARD.benchmark.instagram.rank,
-        icon: <FacebookIcon />,
-        children: [
-          // { title: 'todos', path: PATH_DASHBOARD.business.list },
-          { title: 'Rank', path: PATH_DASHBOARD.benchmark.instagram.rank },
-          { title: 'Adicionar conta', path: PATH_DASHBOARD.benchmark.instagram.new },
-        ],
-      },
+  // {
+  //   subheader: 'Benchmark',
+  //   items: [
+  //     {
+  //       title: 'Instagram',
+  //       path: PATH_DASHBOARD.benchmark.instagram.rank,
+  //       icon: <FacebookIcon />,
+  //       children: [
+  //         // { title: 'todos', path: PATH_DASHBOARD.business.list },
+  //         { title: 'Rank', path: PATH_DASHBOARD.benchmark.instagram.rank },
+  //         { title: 'Adicionar conta', path: PATH_DASHBOARD.benchmark.instagram.new },
+  //       ],
+  //     },
       // {
       //   title: 'Google / anúncios',
       //   path: PATH_DASHBOARD.googleAds.root,
@@ -154,29 +130,29 @@ const navConfig = [
       //     { title: 'minha conta', path: PATH_DASHBOARD.user.account },
       //   ],
       // },
-    ],
-  },
+    // ],
+  // },
   {
-    subheader: 'Gerar anúncio com GPT',
+    subheader: 'Gerenciar lições',
     items: [
       {
-        title: 'Facebook / anúncios',
-        path: PATH_DASHBOARD.facebookAds.root,
-        icon: <FacebookIcon />,
+        title: 'Pronúncia',
+        path: PATH_DASHBOARD.lessonPronunciation.root,
+        icon: <VoiceChatIcon />,
         children: [
           // { title: 'todos', path: PATH_DASHBOARD.business.list },
-          { title: 'Gerar Anúncio', path: PATH_DASHBOARD.facebookAds.new },
-          { title: 'Histórico de anúncios', path: PATH_DASHBOARD.facebookAds.list },
+          { title: 'Lições', path: PATH_DASHBOARD.lessonPronunciation.list },
+          { title: 'Criar lição', path: PATH_DASHBOARD.lessonPronunciation.new },
         ],
       },
       {
-        title: 'Google / anúncios',
-        path: PATH_DASHBOARD.googleAds.root,
-        icon: <GoogleIcon />,
+        title: 'Gramática',
+        path: PATH_DASHBOARD.lessonGrammar.root,
+        icon: <TextSnippetIcon />,
         children: [
           // { title: 'todos', path: PATH_DASHBOARD.business.list },
-          { title: 'Gerar Anúncio', path: PATH_DASHBOARD.googleAds.new },
-          { title: 'Histórico de anúncios', path: PATH_DASHBOARD.googleAds.list },
+          { title: 'Lições', path: PATH_DASHBOARD.lessonGrammar.list },
+          { title: 'Criar lição', path: PATH_DASHBOARD.lessonGrammar.new },
         ],
       },
       // {
@@ -241,22 +217,47 @@ const navConfig = [
       // },
     ],
   },
-  
   {
-    subheader: 'Gerenciar acesso',
+    subheader: 'Sua página Web',
     items: [
-      {
-        title: 'usuários',
-        path: PATH_DASHBOARD.user.root,
-        icon: ICONS.user,
-        children: [
-          { title: 'todos', path: PATH_DASHBOARD.user.list },
-          { title: 'adicionar', path: PATH_DASHBOARD.user.new },
-          { title: 'minha conta', path: PATH_DASHBOARD.user.account },
-        ],
-      },
+      { title: 'Métricas de acesso', path: PATH_DASHBOARD.general.analytics, icon: <LeaderboardIcon /> },
+      { title: 'Editar página', path: PATH_DASHBOARD.mypage.main, icon: <WebIcon /> },
+      // {
+      //   title: 'Página do Negócio',
+      //   path: PATH_DASHBOARD.business.contextEdit,
+      //   icon: ICONS.banking,
+      //   children: [
+      //     { title: 'Métricas', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
+      //     { title: 'Editar', path: PATH_DASHBOARD.mypage.main, icon: ICONS.dashboard },
+      //   ],
+      // },
+      // {
+      //   title: 'usuários',
+      //   path: PATH_DASHBOARD.user.root,
+      //   icon: ICONS.user,
+      //   children: [
+      //     { title: 'todos', path: PATH_DASHBOARD.user.list },
+      //     { title: 'adicionar', path: PATH_DASHBOARD.user.new },
+      //     { title: 'minha conta', path: PATH_DASHBOARD.user.account },
+      //   ],
+      // },
     ],
   },
+  // {
+  //   subheader: 'Gerenciar acesso',
+  //   items: [
+  //     {
+  //       title: 'usuários',
+  //       path: PATH_DASHBOARD.user.root,
+  //       icon: ICONS.user,
+  //       children: [
+  //         { title: 'todos', path: PATH_DASHBOARD.user.list },
+  //         { title: 'adicionar', path: PATH_DASHBOARD.user.new },
+  //         { title: 'minha conta', path: PATH_DASHBOARD.user.account },
+  //       ],
+  //     },
+  //   ],
+  // },
 
   
 ];
