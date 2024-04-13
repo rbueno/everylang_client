@@ -253,7 +253,7 @@ export default function BusinessEdit({ editingWorkspace }) {
                     <Box display='flex' flexDirection='column'>
 
                     <Typography sx={{ mr: 1 }}>Link:</Typography>
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.everylang.co</p>
+                    <p style={{ fontSize: '12px'}}>https://www.everylang.ai/<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong></p>
                     </Box>
                       <TextField
                       fullWidth

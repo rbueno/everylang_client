@@ -159,7 +159,7 @@ const EditLinkButton = ({ currentItemState, saveItemEdition, isOpen, businessSlu
         fullWidth
         value={link}
         onChange={(e) => setLink(e.target.value)}
-        label="Exemplo: www.instagram.com/everylang.co"
+        label="Exemplo: www.instagram.com/everylang.ai"
         />
 
       </Box>
@@ -1280,7 +1280,7 @@ const EditSlug = ({ currentWorkspace, updateWorkspaces, isOpen }) => {
                     <Box display='flex' flexDirection='column'>
 
                     <Typography sx={{ mr: 1 }}>Link:</Typography>
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{slug || 'meu-negocio'}</span></strong>.everylang.co</p>
+                    <p style={{ fontSize: '12px'}}>https://www.everylang.ai/<strong><span style={{ fontSize: '16px'}}>{slug || 'meu-negocio'}</span></strong></p>
                     </Box>
                       <TextField
                       fullWidth
@@ -1891,7 +1891,7 @@ export default function MyPage() {
   }
 
   const handleCopyLink = () => {
-    const hasCopied = copy(`https://${currentWorkspace.myPage.pageSlug}.everylang.co`)
+    const hasCopied = copy(`https://www.everylang.ai/${currentWorkspace.myPage.pageSlug}`)
     if (hasCopied) {
       enqueueSnackbar('Link copiado')
     }
@@ -1906,7 +1906,7 @@ export default function MyPage() {
         .share({
           title: `${currentWorkspace?.myPage?.pageSlug} | Everylang`,
           text: `${currentWorkspace?.businessId?.name} | Everylang`,
-          url: `https://${currentWorkspace?.myPage?.pageSlug}.everylang.co`,
+          url: `https://www.everylang.ai/${currentWorkspace?.myPage?.pageSlug}`,
         })
         .then(() => {
           console.log('Successfully shared');
@@ -2176,7 +2176,7 @@ export default function MyPage() {
           <Card>
               <Box m={2} >
                 <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography>{`https://${currentWorkspace?.businessId?.slug}.everylang.co`}</Typography>
+                  <Typography>{`https://www.everylang.ai/${currentWorkspace?.businessId?.slug}`}</Typography>
                         
                 <Stack direction='row'>
                       <Button variant='outlined' sx={{ m: 1 }} onClick={() => handleDisplayEditLink()} startIcon={<SettingsIcon />}> Editar link</Button>
