@@ -200,7 +200,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
 
                     {/* <Typography sx={{ mr: 1 }}>Link demonstração:</Typography> */}
                     {/* <Box display='flex' flexDirection='row' m={2}> */}
-                    <p style={{ fontSize: '12px'}}>https://<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong>.everylang.co</p>
+                    <p style={{ fontSize: '12px'}}>https://www.everylang.ai/<strong><span style={{ fontSize: '16px'}}>{newBusinessName || 'meu-negocio'}</span></strong></p>
 
                     {/* </Box> */}
                     {/* <Typography variant="body2" component="p">
