@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }) {
     if (isNavHorizontal) {
       return (
         <>
-          <Header onOpenNav={handleOpen} />
+          {/* <Header onOpenNav={handleOpen} /> */}
 
           {isDesktop ? <NavHorizontal /> : renderNavVertical}
 
@@ -61,7 +61,7 @@ export default function DashboardLayout({ children }) {
     if (isNavMini) {
       return (
         <>
-          <Header onOpenNav={handleOpen} />
+          {/* <Header onOpenNav={handleOpen} /> */}
 
           <Box
             sx={{
@@ -79,7 +79,7 @@ export default function DashboardLayout({ children }) {
 
     return (
       <>
-        <Header onOpenNav={handleOpen} />
+        {/* <Header onOpenNav={handleOpen} /> */}
 
         <Box
           sx={{
