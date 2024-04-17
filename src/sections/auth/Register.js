@@ -20,20 +20,12 @@ Register.propTypes = {
 }
 export default function Register({ phoneNumberFromQuery }) {
   return (
-      <LoginLayout title="Converta seguidores em leads">
+      <LoginLayout title="Everylang">
         {
           phoneNumberFromQuery && <Box width={40} height={40} mb={4} >
           <Image disabledEffect width='100px' height='100px' alt="rocket" src='/logo/okahub_logo.png' />
         </Box>
         }
-    
-        <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-
-        {
-          !phoneNumberFromQuery && <Image disabledEffect width='100px' height='100px' alt="rocket" src='/assets/benchmark/1.png' />
-        }
-
-        </Stack>
 
         <Box mb={2}>
         <Typography variant="h4">Crie uma conta grátis.</Typography>

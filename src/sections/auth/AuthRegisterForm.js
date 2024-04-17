@@ -30,7 +30,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
     lastName: Yup.string().required('Sobrenome é obrigatório'),
     email: Yup.string().email('Email must be a valid email address').required('Email é obrigatório'),
     emailConfirm: Yup.string().oneOf([Yup.ref('email')], 'Email precisa ser igual').required('Confirmação de email é obrigatório'),
-    phoneNumber: phoneNumberFromQuery ? Yup.string() : Yup.string().required('Telefone é obrigatório').min(8),
+    // phoneNumber: phoneNumberFromQuery ? Yup.string() : Yup.string().required('Telefone é obrigatório').min(8),
     password: Yup.string().required('Senha é obrigatória'),
     passwordConfirm: Yup.string().oneOf([Yup.ref('password')], 'Senha precisa ser igual').required('Confirmação de senha é obrigatório')
   });
@@ -40,7 +40,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
     lastName: '',
     email: '',
     emailConfirm: '',
-    phoneNumber: phoneNumberFromQuery || '',
+    // phoneNumber: phoneNumberFromQuery || '',
     password: '',
     passwordConfirm: '',
   };
@@ -61,8 +61,8 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
     const phone = data.phoneNumber || phoneNumberFromQuery
     try {
       if (register) {
-        await register(data.email, data.password, data.firstName, data.lastName, phone, phoneNumberFromQuery);
-        fbq.event('CompleteRegistration')
+        await register(data.email, data.password, data.firstName, data.lastName);
+        // fbq.event('CompleteRegistration')
       }
     } catch (error) {
       console.error(error);
@@ -88,7 +88,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
 
         <RHFTextField name="email" label="Email" />
         <RHFTextField name="emailConfirm" label="Repetir email" />
-        {
+        {/* {
           phoneNumberFromQuery ? <TextField
           disabled
           value={phoneNumberFromQuery}
@@ -98,7 +98,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
             placeholder="Ex.: 11943128360"
             type="number"
             />
-        }
+        } */}
 
         <RHFTextField
           name="password"
