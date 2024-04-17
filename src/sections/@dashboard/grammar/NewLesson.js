@@ -10,7 +10,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Select, FormControl, MenuItem, InputLabel, Box, Card, Grid, Container, Stack, Switch, Typography, FormControlLabel, TextField, FormGroup, IconButton, Button } from '@mui/material';
+import { Divider, Select, FormControl, MenuItem, InputLabel, Box, Card, Grid, Container, Stack, Switch, Typography, FormControlLabel, TextField, FormGroup, IconButton, Button } from '@mui/material';
 // utils
 
 
@@ -28,6 +28,85 @@ import FormProvider, { RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 import { useAuthContext } from '../../../auth/useAuthContext'
 import Markdown from '../../../components/markdown'
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
+
+// ----------------------------------------------------------------------
+
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
+
+function getSteps() {
+  return ['Informações internas', 'Informações públicas', 'Criar exercícios'];
+}
+
+// function getStepContent(stepIndex) {
+//   switch (stepIndex) {
+//     case 0:
+//       return 'Select campaign settings...';
+//     case 1:
+//       return 'What is an ad group anyways?';
+//     case 2:
+//       return 'This is the bit I really care about!';
+//     default:
+//       return 'Unknown stepIndex';
+//   }
+// }
+
+export function HorizontalLabelPositionBelowStepper({ getStepContent }) {
+  // const classes = useStyles();
+  const [activeStep, setActiveStep] = useState(0);
+  const steps = ['Informações internas', 'Informações públicas', 'Criar exercícios']
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  return (
+    <div>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <div>
+        {activeStep === steps.length ? (
+          <div>
+            <Typography >All steps completed</Typography>
+            <Button onClick={handleReset}>Reset</Button>
+          </div>
+        ) : (
+          <div>
+            {getStepContent(activeStep)}
+            <div>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+              >
+                Back
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 // ----------------------------------------------------------------------
 
@@ -52,11 +131,12 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
   // const [description, setDescription] = useState('');
   // const [descriptionError, setDescriptionError] = useState(null);
 
-  const [data, setData] = useState({ internalLessonName: '', lessonName: '', lessonDescription: '', lessonCreator: '', languageLevel: '0', learningLanguage: '0', lessonType: 'grammar' });
+  const [data, setData] = useState({ internalLessonName: '', lessonName: '', lessonDescription: '', lessonCreator: '', languageLevel: '0', learningLanguage: '0', lessonType: 'pronunciation' });
   const [dataError, setDataError] = useState({ name: null, slug: null, description: null });
   const [submitting, setSubmitting] = useState(false);
   const [newAdsGenerated, setNewAdsGenerated] = useState(null)
   const [generatingTimer, setGeneratingTimer] = useState(0)
+  const [activeStep, setActiveStep] = useState(0);
 
   const [seconds, setSeconds] = useState(0);
   const [secRunning, setSecRunning] = useState(false);
@@ -64,6 +144,20 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
   const [level, setLevel] = useState('0');
   const [language, setLanguage] = useState('0');
 
+  const steps = ['Informações internas', 'Informações públicas', 'Revisar']
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+  
   const handleChangeLevel = (event) => {
     setLevel(event.target.value);
   };
@@ -200,27 +294,40 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
     }
   }
 
-
   return (
 
       <Container
       disableGutters
       maxWidth='sm'
       >
-        <Box mb={2}>
-          <Card sx={{ p: 3 }}>
+        {/* <HorizontalLabelPositionBelowStepper getStepContent={step}/> */}
+        <Box>
+                <Stepper activeStep={activeStep} alternativeLabel>
+                  {steps.map((label) => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+        </Box>
+
+        {
+          activeStep === 0 && <>
+          <Box >
+          <Card>
           <Box>
-            <Box mb={2}>
-            <Typography variant='subtitle1'>Informação interna</Typography>
+            <Box marginBottom={4}>
+            <Typography >Informações internas ficam visíveis apenas para você. O aluno não terá acesso à essas informações.</Typography>
+            {/* <Typography variant='caption'>Informações internas ficam visíveis apenas para você. O aluno não terá acesso à essas informações.</Typography> */}
             </Box>
                   <TextField
                   fullWidth
-                        label="Título da lição"
+                        label="Título da lição (opcional)"
                         value={data.internalLessonName}
                         color="primary"
                         placeholder="Ex.: Verbos no passado"
                         // error={newBusinessNameError !== null}
-                        helperText="O Aluno não visualizará este título, ficará visível apenas internamente para a sua organziação. Caso você não informe nenhum título, iremos escolher um código aleatório."
+                        helperText="Caso você não informe nenhum título, iremos escolher um código aleatório."
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -248,13 +355,13 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                     </Box>
                   <Box marginTop={2}>
                       <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Escolha o idioma</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Idioma (obrigatório)</InputLabel>
                         <Select
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           value={language}
                           error={language === '0'}
-                          label="Escolha o idioma"
+                          label="Idioma (obrigatório)"
                           onChange={handleChangeLanguage}
                         >
                           <MenuItem value='english'>Inglês</MenuItem>
@@ -269,18 +376,22 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                     </Box>
           </Card>
           </Box>
+          </>
+        }
 
-          <Box mb={2}>
-          <Card sx={{ p: 3 }}>
-          <Box mb={2}>
-            <Typography variant='subtitle1'>Informação pública</Typography>
-            <Typography variant='caption'>Estas informações ficarão visíveis para o aluno que tiver acesso a esta lição</Typography>
+        {
+          activeStep === 1 && <>
+            <Box>
+          <Card >
+          <Box marginBottom={4}>
+            <Typography >Informações públicas ficam visíveis para o aluno que tiver acesso a esta lição</Typography>
+            <Typography variant='p'>Estas são apenas informações de capa, você irá criar os exercícios no próximo passo</Typography>
             </Box>
           <Box mb={2}>
                   <TextField
                   fullWidth
                   required
-                        label="Título da lição"
+                        label="Título da lição (obrigatório)"
                         value={data.lessonName}
                         color="primary"
                         placeholder="Ex.: Verbos no passado"
@@ -296,11 +407,11 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                   <TextField
                   fullWidth
                   required
-                        label="Criado por"
+                        label="Criado por (obrigatório)"
                         value={data.lessonCreator}
                         color="primary"
                         placeholder="Ex.: Professor Alexandre, Escola Smart Learning"
-                        helperText="O nome do autor dessa lição."
+                        // helperText="O nome do autor dessa lição."
                         // error={newBusinessNameError !== null}
                         InputLabelProps={{
                           shrink: true,
@@ -315,7 +426,7 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                       required
                       multiline
                       rows={6}
-                        label="Descrição da lição"
+                        label="Descrição da lição (obrigatório)"
                         value={data.lessonDescription}
                         color="primary"
                         placeholder="Ex.: Vamos praticar casos comuns de conjugação de verbos no passado."
@@ -327,12 +438,120 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                   </Box>
           </Card>
           </Box>
+          </>
+        }
 
-          <Stack alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton onClick={() => isEdit ? handleUpdateLesson() : handleAdGenerator()} variant="contained" loading={submitting}>
-              {isEdit ? 'Atualizar lição' : 'Criar lição'}
-              </LoadingButton>
+        {
+          activeStep === 2 && <>
+          <Box marginBottom={2}>
+                      <Typography variant="h6">Informação interna</Typography>
+
+          </Box>
+          <Box display='flex' flexDirection='column'>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título interno:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{data.internalLessonName}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Idioma:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{language}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Proficiência:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{level}</Typography>
+                    </Box>
+                    <Divider sx={{ margin: 2 }} />
+
+                    <Box marginBottom={2}>
+                      <Typography variant="h6">Informação pública</Typography>
+
+                   </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título público:</Typography>
+
+                      
+
+
+
+
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{data.lessonName}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Criado por:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{data.lessonCreator}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Descrição:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{data.lessonDescription}</Typography>
+                    </Box>
+                   
+                 
+                    <Box marginTop={2}>
+                      <Typography variant='caption'>* Não se preocupe, você poderá editar essas informações depois!</Typography>
+
+                   </Box>
+             
+                  </Box>
+
+         
+          </>
+        }
+        
+        {
+          activeStep === steps.length &&
+            
+              <Stack alignItems="center" sx={{ margin: 6 }}>
+                
+                <Box marginBottom={2}>
+              <CheckCircleOutlineIcon fontSize='large' sx={{ color: 'green'}}/>
+
+                </Box>
+              <Typography variant='h4'>Tudo certo</Typography>
+              <Typography>Na próxima etapa você iniciará a criação de exercícios</Typography>
+              </Stack>
+              
+            
+        }
+      
+        <Box m={2}>
+        <Stack  alignItems="flex-end" sx={{ mt: 3 }}>
+          
+
+                    <Box display='flex' flexDirection='row'>
+
+                    
+                          <Button
+                            variant='outlined'
+                            disabled={activeStep === 0}
+                            onClick={handleBack}
+                          >
+                            Voltar
+                          </Button>
+
+                            <Box marginLeft={2}>
+                                    {
+                                    activeStep === steps.length ? (
+                                    <LoadingButton onClick={() => handleAdGenerator()} variant="contained" loading={submitting}>
+                                    Avançar para exercícios
+                                    </LoadingButton>
+                                    ) : (
+                                    <Button
+                                      disabled={(activeStep === 0 && (level === '0' || language === '0')) || (activeStep === 1 && (data.lessonName === '' || data.lessonCreator === '' || data.lessonDescription === '')) }
+                                     variant="contained" color="primary" onClick={handleNext}>
+                                      Avançar
+                                    </Button>
+                                    )
+                                  }
+                              </Box>
+                        
+                    </Box>
+
             </Stack>
+      </Box>
+
+     
+
+          
         
       </Container>
   );
