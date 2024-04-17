@@ -29,7 +29,7 @@ export default function UserCreatePage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
       <Typography variant="h4">Criar nova lição de pronúncia</Typography>
-      {/* <Typography variant="subtitle1" sx={{ mb: 5}}>Você criará os exercícios após criar o título e detalhes da lição</Typography> */}
+      <Typography variant="subtitle1" sx={{ mb: 5}}>Você criará os exercícios após criar as informações internas e públicas da lição</Typography>
         <UserNewEditForm />
       </Container>
     </>

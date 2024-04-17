@@ -65,6 +65,24 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+
+
+import Drawer from '@mui/material/Drawer';
+
+import List from '@mui/material/List';
+
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
+import ExerciseCopilotForm from './ExerciseCopilotForm'
+import ExerciseManuallyForm from './ExerciseManuallyForm'
+
+
+
 const SCREENS = [
   {
     value: 'copilotCreator',
@@ -78,6 +96,27 @@ const SCREENS = [
     icon: <CreateIcon fontSize='small'/>,
     component: <Box>Crie um texto livre com descrições e detalhes que enriqueçam seu conteúdo.</Box>,
   }
+];
+
+const SECTIONS = [
+  {
+    value: 'lessonSection',
+    label: 'Lição',
+    icon: <Iconify icon="ic:round-receipt" />,
+    component: <Box>Crie um texto livre com descrições e detalhes que enriqueçam seu conteúdo.</Box>,
+  },
+  {
+    value: 'exerciseSection',
+    label: 'Exercícios',
+    icon: <Iconify icon="eva:share-fill" />,
+    component: <Box>Crie botões com links externos de, por exemplo, uma site de vendas ou redes sociais</Box>,
+  },
+  {
+    value: 'shareSection',
+    label: 'Compartilhar',
+    icon: <Iconify icon="ic:round-account-box" />,
+    component: <Box>Capture contatos e tenha uma lista de leads qualificados.</Box>,
+  },
 ];
 
 // ----------------------------------------------------------------------
@@ -112,6 +151,7 @@ const EditTextField = ({ content, closeDialog, sentence, lessonExerciseId, updat
     </Box>
   )
 }
+
 
 // ----------------------------------------------------------------------
 
@@ -427,23 +467,23 @@ export default function BusinessEdit({ adId }) {
   const [currentSentence, setCurrentSentence] = useState({})
   const [updatingSentence, setUpdatingSentence] = useState(false)
   const [openUpdateSentenceTextDialog, setOpenUpdateSentenceTextDialog] = useState(false)
-  const [currentTab, setCurrentTab] = useState('copilotCreator')
-  const [sentenceQuantity, setSentenceQuantity] = useState(5)
-  const [attributes, setAttributes] = useState('')
-  const [contextType, setContextType] = useState('noContext')
-  const [comprehensiveContext, setComprehensiveContext] = useState('')
-  const [targetedContext, setTargetedContext] = useState('')
+  const [currentTab, setCurrentTab] = useState('exerciseSection')
+ 
+  const [openDrawer, setOpenDrawer] = useState(false)
+  const [drawerContent, setDrawerContent] = useState(null)
 
-  const onChangeContextType = (event) => {
-    setContextType(event.target.value)
-  }
-  const onChangeAttributes = (event) => {
-    setAttributes(event.target.value)
+const toggleDrawer = (open) => (event) => {
+  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    return;
   }
 
-  const onChangeSentenceQuantity = (event) => {
-    setSentenceQuantity(event.target.value)
-  }
+  setOpenDrawer(open)
+};
+
+  
+ 
+
+ 
   const handleOpenUploadFile = ({ lessonExerciseId }) => {
     setCurrentLessonExerciseId(lessonExerciseId)
     setOpenUploadFile(true);
@@ -512,80 +552,21 @@ export default function BusinessEdit({ adId }) {
       enqueueSnackbar('Erro ao copiar link', { variant: 'error'})
     }
   }
-  const addSentence = async () => {
-    setSubmitting(true)
+  const addSentence = async (payload) => {
 
-    const payload = { sentence, lessonId: newAdsGenerated.lesson._id }
-    try {
-
-
-      console.log('payload', payload)
-      const responseProccesCreated = await api.post('v1/everylang/lesson-exercises', payload)
-      console.log('responseProccesCreated', responseProccesCreated)
-      
-      setNewAdsGenerated(responseProccesCreated.data) 
-      setSentence('')
-      // eslint-disable-next-line consistent-return
-      enqueueSnackbar(`Frase adicionada`);
-      setSubmitting(false)
-      // redirect
-
-    
-    } catch (error) {
-      enqueueSnackbar(error.message && error.message, { variant: 'error' });
-      console.error(error);
-    }
-    // clearInterval(timer)
+    payload.lessonId = newAdsGenerated.lesson._id
+    const { data } = await api.post('v1/everylang/lesson-exercises', payload)
+    setNewAdsGenerated(data) 
   
-    setSubmitting(false)
-  };
-  const generateSentence = async () => {
-    setSubmitting(true)
-
-    let context = ''
-
-    if(contextType === 'comprehensiveContext') {
-      context = comprehensiveContext
-    }
-    if(contextType === 'targetedContext') {
-      context = targetedContext
-    }
-    const payload = {
-      lessonId: newAdsGenerated.lesson._id,
-      sentenceQuantity,
-      attributes,
-      contextType,
-      context: contextType !== 'noContext' ? context : ''
-    }
-
-    try {
-
-
-      console.log('payload', payload)
-      const responseProccesCreated = await api.post('v1/everylang/lesson-exercises/generate-pronunciation', payload)
-      console.log('responseProccesCreated', responseProccesCreated)
-      
-      setNewAdsGenerated(responseProccesCreated.data) 
-      // setSentence('')
-      // eslint-disable-next-line consistent-return
-      enqueueSnackbar(`Frases geradas`);
-      setSubmitting(false)
-      // redirect
-
-    
-    } catch (error) {
-      enqueueSnackbar(error.message && error.message, { variant: 'error' });
-      console.error(error);
-    }
-    // clearInterval(timer)
-  
-    setSubmitting(false)
   };
 
-  const onChangeSentence = ({ value }) => {
-    // if (adLabel.length > 60) return;
-    setSentence(value)
+  const generateSentence = async (payload) => {
+   
+    payload.lessonId = newAdsGenerated.lesson._id
+    const { data } = await api.post('v1/everylang/lesson-exercises/generate-pronunciation', payload)
+    setNewAdsGenerated(data) 
   };
+
 
   const generateAudio = async ({ lessonExerciseId, positionIdx }) => {
     setIsGeneratingAudioIdx(positionIdx)
@@ -718,6 +699,29 @@ const handleEditCurrentSentense = (content) => {
 const editLesson = (lessonId) => {
   push(PATH_DASHBOARD.lessonPronunciation.edit(lessonId));
 }
+
+const handleOpenDrawer = (drawerForm) => {
+
+  
+  if (drawerForm === 'exerciseCopilot') {
+    setDrawerContent(<ExerciseCopilotForm
+      mainAction={generateSentence}
+      toggleDrawer={setOpenDrawer}
+      />)
+  }
+
+  if (drawerForm === 'exerciseManually') {
+    setDrawerContent(<ExerciseManuallyForm
+      mainAction={addSentence}
+      toggleDrawer={setOpenDrawer}
+      />
+    )
+  }
+
+  
+  
+  setOpenDrawer(true)
+}
   return (
       <Container
       disableGutters
@@ -730,177 +734,90 @@ const editLesson = (lessonId) => {
           }
 
            </> : <>
-           <Grid container spacing={3}>
-      
+           <Box>
+        <Tabs variant="fullWidth" value={currentTab} onChange={(event, newValue) => setCurrentTab(newValue)}>
+            {SECTIONS.map((tab) => (
+              <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
+            ))}
+          </Tabs>
+    </Box>
 
-      <Grid item xs={12} md={8}>
-        <Stack spacing={3}>
+
+    {
+      currentTab === 'lessonSection' && <>
+      <Box>
         <Card>
-        <CardHeader title="Criar exercícios" />
+          <CardHeader title='Detalhes da Lição' subheader="Informações sobre está lição"/>
 
-            <Box>
-            <Tabs variant="fullWidth" value={currentTab} onChange={(event, newValue) => setCurrentTab(newValue)}>
-                {SCREENS.map((tab) => (
-                  <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
-                ))}
-              </Tabs>
-            </Box>
-
-            {
-            currentTab === 'createDefault' && <>
-            <Box m={2}>
-            <Typography variant="caption">Adicionar frase à lição</Typography>
-            <Box m={2}>
-                      <TextField
-                      fullWidth
-                      required
-                      multiline
-                      rows={2}
-                        label="Digite a frase aqui"
-                        value={sentence}
-                        color="primary"
-                        placeholder="Ex.: Who Let the Dogs Out"
-                        helperText="Esta é a frase que o aluno irá ler para assim praticar a pronúncia"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(e) => onChangeSentence({ value: e.target.value })}
-                      />
-                  </Box>
-
-          </Box>
-          <Box m={2} display='flex' flexDirection='column'>
-                      <LoadingButton loading={submitting} variant='contained' disabled={sentence.length === 0} onClick={() => addSentence()}>Criar frase</LoadingButton>
-            <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
-
-          </Box>
-            </>              
-            }
-
-            {
-              currentTab === 'copilotCreator' && <>
-              <Box m={2}>
-              <Box m={2}>
-              <Typography variant='subtitle1'>Gere frases automaticamente com ajuda do Everylang Copilot criado com ChatGPT.</Typography>
-              <Box marginTop={2}>
-                      <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Quantidade de frases</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={sentenceQuantity}
-                          label="Quantidade de frases"
-                          // error={level === '0'}
-                          onChange={onChangeSentenceQuantity}
-                        >
-                          <MenuItem value={5}>5</MenuItem>
-                          <MenuItem value={10}>10</MenuItem>
-                          <MenuItem value={11}>11</MenuItem>
-                          <MenuItem value={12}>12</MenuItem>
-                          <MenuItem value={13}>13</MenuItem>
-                          <MenuItem value={14}>14</MenuItem>
-                          <MenuItem value={15}>15</MenuItem>
-                          
-                        </Select>
-                      </FormControl>
+          <CardContent>
+          <Box display='flex' flexDirection='column'>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título interno:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
                     </Box>
-                    <Box marginTop={2}>
-                  <TextField
-                  fullWidth
-                  // required
-                        label="Atributos (separe por vírgula)"
-                        value={attributes}
-                        color="primary"
-                        placeholder="Ex.: palavras com TH; consoantes silenciosas; trava-línguas..."
-                        // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
-                        // error={newBusinessNameError !== null}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(e) => onChangeAttributes(e)}
-                      />
-                  </Box>
-                  <Box marginTop={2}>
-        <Box marginTop={2}>
-        <Typography variant='subtitle1'>Escolha um contexto para as frases</Typography>
-        <Box marginTop={2}>
-                      <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Tipo de contexto</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={contextType}
-                          label="Tipo de contexto"
-                          // error={level === '0'}
-                          onChange={onChangeContextType}
-                        >
-                          <MenuItem value='noContext'>Sem contexto</MenuItem>
-                          <MenuItem value='comprehensiveContext'>Contexto abrangente</MenuItem>
-                          <MenuItem value='targetedContext'>Contexto direcionado</MenuItem>
-                          
-                          
-                        </Select>
-                      </FormControl>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Idioma:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
                     </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Proficiência:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
+                    </Box>
+                    <Divider sx={{ margin: 2 }} />
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título público:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.title}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Criado por:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.creator}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Descrição:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.description}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Total de exercícios:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.totalExercises}</Typography>
+                    </Box>
+                 
+                 <Stack m={2}>
+
+                    <Button variant='outlined' onClick={() => editLesson(newAdsGenerated?.lesson?._id)}>Editar</Button>
+                 </Stack>
+                  </Box>
+          </CardContent>
+        </Card>
+      </Box>
+      </>
+    }
+
+
+
+
+
+
+
+
+
+
+
+    {
+      currentTab === 'exerciseSection' && <>
+      <Box textAlign='center'>
+
+      <Card>
+        <CardHeader title="Criar exercícios" subheader='Crie e gerencie os exercícios dessa lição' />
+
+        <Box textAlign='center' m={4}>
+          <Button variant='outlined' onClick={() => handleOpenDrawer('exerciseCopilot')} startIcon={<AssistantIcon fontSize='small' />}>Criar com IA</Button>
+          <Button variant='outlined' sx={{ marginLeft: 2 }} onClick={() => handleOpenDrawer('exerciseManually')} startIcon={<CreateIcon fontSize='small' />}>Criar manualmente</Button>
         </Box>
-    {console.log('contextType', contextType)}
-    {contextType === 'comprehensiveContext' && <>
-    <Box marginTop={2}>
-    <Typography>Contextualize as frases de forma simples e abrangente.</Typography>
-                      <Box marginTop={2}>
-                      <TextField
-                      fullWidth
-                      required
-                        label="Contexto simples"
-                        value={comprehensiveContext}
-                        color="primary"
-                        placeholder="Ex.: football; viagem; comida; games; frases de Alice no país das maravilhas..."
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(e) => setComprehensiveContext(e.target.value)}
-                      />
-                      </Box>
-                  </Box>
-    </>}
-    {contextType === 'targetedContext' && <>
-    <Box marginTop={2}>
-    <Typography>Copie um texto completo como um artigo ou unidade de uma lição. As frases serão geradas com base no conteúdo informado.</Typography>
-    <Box marginTop={2}>
-                      <TextField
-                      fullWidth
-                      required
-                      multiline
-                      rows={6}
-                        label="Contexto direcionado"
-                        value={targetedContext}
-                        color="primary"
-                        placeholder="Copie um texto aqui"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(e) => setTargetedContext(e.target.value)}
-                      />
-                      </Box>
-                  </Box>
-    </>}
-                  </Box>
-                  
-              </Box>
-              </Box>
-              <Box m={2} display='flex' flexDirection='column'>
-                      <LoadingButton loading={submitting} variant='contained' onClick={() => generateSentence()}>Criar frases</LoadingButton>
-            <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
-
-          </Box>
-              </>
-            }
-          
-         
             </Card>
+      </Box>
           
-          <Box>
-            {newAdsGenerated?.lessonExercises?.length > 0 && <Typography variant='h4'>Exercícios</Typography>}
+          <Box marginTop={4}>
+            {newAdsGenerated?.lessonExercises?.length > 0 && <Typography variant='h4'>Exercícios dessa lição</Typography>}
           </Box>
             {
           newAdsGenerated?.lessonExercises?.map((content, idx) => <Box key={content._id} mb={2}>
@@ -990,72 +907,36 @@ const editLesson = (lessonId) => {
             </Card>
           </Box>)
         }
+      </>
+    }
 
-        </Stack>
-      </Grid>
 
-      <Grid item xs={12} md={4}>
-        <Stack spacing={3}>
 
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Typography variant='subtitle1'>Sobre a lição</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Box display='flex' flexDirection='column'>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Título interno:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Idioma:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Proficiência:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
-                    </Box>
-                    <Divider sx={{ margin: 2 }} />
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Título público:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.title}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Criado por:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.creator}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Descrição:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.description}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Total de exercícios:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.totalExercises}</Typography>
-                    </Box>
-                 
-                 <Stack m={2}>
 
-                    <Button variant='outlined' onClick={() => editLesson(newAdsGenerated?.lesson?._id)}>Editar</Button>
-                 </Stack>
-                  </Box>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-        >
-          <Typography variant='subtitle1'>Como compartilhar esta lição com um estudante</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Typography variant="body2">Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução na mensagem para receber esta lição.</Typography>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                {
+                  currentTab === 'shareSection' && <>
+           
+     
+        
                     <Box m={2}>
                       <Card>
+                        <CardHeader 
+                        title='Como compartilhar esta lição com um estudante'
+                        subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução na mensagem para receber esta lição.'
+                        />
                       <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
                         <Markdown
                           children={messageShare}
@@ -1075,8 +956,41 @@ const editLesson = (lessonId) => {
                       </Stack>
                       </Card>
                     </Box>
-        </AccordionDetails>
-      </Accordion>
+
+                  </>
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <Grid container spacing={3}>
+      
+
+      <Grid item xs={12} md={8}>
+        <Stack spacing={3}>
+        
+
+        </Stack>
+      </Grid>
+
+      <Grid item xs={12} md={4}>
+        <Stack spacing={3}>
+
+        
+      
 
 
           
@@ -1093,6 +1007,13 @@ const editLesson = (lessonId) => {
           open={openUploadFile} onClose={handleCloseUploadFile} updateLessonExercises={updateLessonExercises} lessonExerciseId={currentLessonExerciseId} />
         <DeleteSentenceDialog open={openDialog} onClose={handleCloseDialog} lessonExerciseId={currentLessonExerciseId} deleteExercise={deleteExercise} />
         <UpdateSentenceTextDialog dialogContent={<EditTextField content={currentSentence} updateSentenceText={updateSentenceText} updatingSentence={updatingSentence} closeDialog={closeUpdateSentenceTextDialog} />} open={openUpdateSentenceTextDialog} onClose={closeUpdateSentenceTextDialog} />
+        <Drawer
+            anchor='right'
+            open={openDrawer}
+            onClose={toggleDrawer(false)}
+          >
+            {drawerContent}
+          </Drawer>
       </Container>
   );
 }
