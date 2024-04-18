@@ -38,23 +38,6 @@ import StepLabel from '@material-ui/core/StepLabel';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 
-function getSteps() {
-  return ['Informações internas', 'Informações públicas', 'Criar exercícios'];
-}
-
-// function getStepContent(stepIndex) {
-//   switch (stepIndex) {
-//     case 0:
-//       return 'Select campaign settings...';
-//     case 1:
-//       return 'What is an ad group anyways?';
-//     case 2:
-//       return 'This is the bit I really care about!';
-//     default:
-//       return 'Unknown stepIndex';
-//   }
-// }
-
 export function HorizontalLabelPositionBelowStepper({ getStepContent }) {
   // const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
@@ -387,27 +370,10 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
             <Typography >Informações públicas ficam visíveis para o aluno que tiver acesso a esta lição</Typography>
             <Typography variant='p'>Estas são apenas informações de capa, você irá criar os exercícios no próximo passo</Typography>
             </Box>
-          <Box mb={2}>
+            <Box mb={2}>
                   <TextField
                   fullWidth
-                  required
-                        label="Título da lição (obrigatório)"
-                        value={data.lessonName}
-                        color="primary"
-                        placeholder="Ex.: Verbos no passado"
-                        // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
-                        // error={newBusinessNameError !== null}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(e) => onChangeAdLabel({ field: 'lessonName', value: e.target.value })}
-                      />
-                  </Box>
-          <Box mb={2}>
-                  <TextField
-                  fullWidth
-                  required
-                        label="Criado por (obrigatório)"
+                        label="Criado por (opcional)"
                         value={data.lessonCreator}
                         color="primary"
                         placeholder="Ex.: Professor Alexandre, Escola Smart Learning"
@@ -419,14 +385,29 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                         onChange={(e) => onChangeAdLabel({ field: 'lessonCreator', value: e.target.value })}
                       />
                   </Box>
+          <Box mb={2}>
+                  <TextField
+                  fullWidth
+                        label="Título da lição (opcional)"
+                        value={data.lessonName}
+                        color="primary"
+                        placeholder="Ex.: Verbos no passado"
+                        // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
+                        // error={newBusinessNameError !== null}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(e) => onChangeAdLabel({ field: 'lessonName', value: e.target.value })}
+                      />
+                  </Box>
+         
 
             <Box mb={2}>
                       <TextField
                       fullWidth
-                      required
                       multiline
-                      rows={6}
-                        label="Descrição da lição (obrigatório)"
+                      rows={3}
+                        label="Descrição da lição (opcional)"
                         value={data.lessonDescription}
                         color="primary"
                         placeholder="Ex.: Vamos praticar casos comuns de conjugação de verbos no passado."
@@ -536,7 +517,7 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                                     </LoadingButton>
                                     ) : (
                                     <Button
-                                      disabled={(activeStep === 0 && (level === '0' || language === '0')) || (activeStep === 1 && (data.lessonName === '' || data.lessonCreator === '' || data.lessonDescription === '')) }
+                                      disabled={level === '0' || language === '0'}
                                      variant="contained" color="primary" onClick={handleNext}>
                                       Avançar
                                     </Button>

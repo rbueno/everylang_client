@@ -10,7 +10,7 @@ import DashboardLayout from '../../../layouts/dashboard';
 import { useSettingsContext } from '../../../components/settings';
 import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
 // sections
-import UserNewEditForm from '../../../sections/@dashboard/grammar/NewLesson';
+import UserNewEditForm from '../../../sections/@dashboard/grammar/NewLessonSimpleForm';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export default function UserCreatePage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
       <Typography variant="h4">Criar nova lição de gramática</Typography>
-      <Typography variant="subtitle1" sx={{ mb: 5}}>Você criará os exercícios após criar as informações internas e públicas da lição</Typography>
+      <Typography variant="subtitle1" sx={{ mb: 5}}>Você criará os exercícios após definir idioma e nível da lição</Typography>
         <UserNewEditForm />
       </Container>
     </>

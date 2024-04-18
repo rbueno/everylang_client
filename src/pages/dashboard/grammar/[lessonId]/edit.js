@@ -33,11 +33,11 @@ export default function UserEditPage() {
   return (
     <>
     <Head>
-      <title> Pronúncia | Everylang</title>
+      <title> Grammar | Everylang</title>
     </Head>
 
     <Container maxWidth={themeStretch ? false : 'lg'}>
-    <Typography variant="h4">Editar lição de Pronúncia</Typography>
+    <Typography variant="h4">Editar lição de gramática</Typography>
     {/* <Typography variant="subtitle1" sx={{ mb: 5}}>Você criará os exercícios após criar o título e detalhes da lição</Typography> */}
     <UserNewEditForm isEdit lessonId={lessonId} />
     </Container>

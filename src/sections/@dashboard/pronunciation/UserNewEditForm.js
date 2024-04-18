@@ -240,9 +240,9 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
                           onChange={handleChangeLevel}
                         >
                           <MenuItem value='beginner'>Iniciante</MenuItem>
-                          <MenuItem value='elementary'>Básico 'A1 - A2'</MenuItem>
-                          <MenuItem value='intermediate'>Intermediário 'B1 - B2'</MenuItem>
-                          <MenuItem value='advanced'>Avançado 'C1 - C2'</MenuItem>
+                          <MenuItem value='elementary'>Básico</MenuItem>
+                          <MenuItem value='intermediate'>Intermediário</MenuItem>
+                          <MenuItem value='advanced'>Avançado</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>
