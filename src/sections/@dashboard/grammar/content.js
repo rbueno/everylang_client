@@ -1360,7 +1360,7 @@ const handleOpenDrawer = (drawerForm) => {
 
 
         <Card>
-          <CardHeader title='Preview' subheader="Informações que o aluno visualizará antes de iniciar os exerícios"/>
+          {/* <CardHeader title='Preview' subheader="Informações que o aluno visualizará antes de iniciar os exerícios"/> */}
             
             
                         
@@ -1378,7 +1378,7 @@ const handleOpenDrawer = (drawerForm) => {
 
           <Grid item xs={12} md={6}>
           <Card>
-            <CardHeader title='Preview' subheader="Como o estudante visualizará as informações públicas desta lição"/>
+            <CardHeader title='Preview' subheader="Como o estudante visualizará as informações de capa dessa lição antes de iniciar os exerícios"/>
                       <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
                         <Markdown
                           children={messagePreview}
