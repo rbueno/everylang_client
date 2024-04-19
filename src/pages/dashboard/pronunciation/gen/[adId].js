@@ -30,7 +30,7 @@ export default function UserCreatePage() {
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
-      <Typography variant="h4" sx={{ mb: 5}}>Lição de pronúncia</Typography>
+      <Typography variant="h4">Lição de pronúncia</Typography>
         <UserNewEditForm adId={adId} />
       </Container>
     </>

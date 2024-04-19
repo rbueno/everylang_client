@@ -135,16 +135,16 @@ const navConfig = [
   {
     subheader: 'Gerenciar lições',
     items: [
-      // {
-      //   title: 'Pronúncia',
-      //   path: PATH_DASHBOARD.lessonPronunciation.root,
-      //   icon: <VoiceChatIcon />,
-      //   children: [
-      //     // { title: 'todos', path: PATH_DASHBOARD.business.list },
-      //     { title: 'Lições', path: PATH_DASHBOARD.lessonPronunciation.list },
-      //     { title: 'Criar lição', path: PATH_DASHBOARD.lessonPronunciation.new },
-      //   ],
-      // },
+      {
+        title: 'Pronúncia',
+        path: PATH_DASHBOARD.lessonPronunciation.root,
+        icon: <VoiceChatIcon />,
+        children: [
+          // { title: 'todos', path: PATH_DASHBOARD.business.list },
+          { title: 'Lições', path: PATH_DASHBOARD.lessonPronunciation.list },
+          { title: 'Criar lição', path: PATH_DASHBOARD.lessonPronunciation.new },
+        ],
+      },
       {
         title: 'Gramática',
         path: PATH_DASHBOARD.lessonGrammar.root,

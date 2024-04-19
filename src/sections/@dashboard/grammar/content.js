@@ -74,6 +74,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import ExerciseCopilotForm from './ExerciseCopilotForm'
 import ExerciseManuallyForm from './ExerciseManuallyForm'
+import EditLesson from '../simpleForms/editLesson'
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { fontWeight } from '@mui/system';
@@ -1104,6 +1105,16 @@ const editLesson = (lessonId) => {
   push(PATH_DASHBOARD.lessonGrammar.edit(lessonId));
 }
 
+const handleUpdateLesson = async (payload) => {
+
+  const { data } = await api.put(`v1/everylang/lesson`, payload)
+  
+
+  newAdsGenerated.lesson = data.lesson
+    setNewAdsGenerated(newAdsGenerated) 
+
+};
+
 const handleOpenDrawer = (drawerForm) => {
 
   
@@ -1122,6 +1133,27 @@ const handleOpenDrawer = (drawerForm) => {
       />
     )
   }
+ 
+  if (drawerForm === 'lessonInternalForm') {
+    setDrawerContent(<EditLesson
+      initialDataValue={newAdsGenerated?.lesson}
+      lessonType={newAdsGenerated?.lesson?.type}
+      lessonForm='internal'
+      toggleDrawer={setOpenDrawer}
+      mainAction={handleUpdateLesson}
+      />
+    )
+  }
+  if (drawerForm === 'lessonPublicForm') {
+    setDrawerContent(<EditLesson
+      initialDataValue={newAdsGenerated?.lesson}
+      lessonType={newAdsGenerated?.lesson?.type}
+      lessonForm='public'
+      toggleDrawer={setOpenDrawer}
+      mainAction={handleUpdateLesson}
+      />
+    )
+  }
 
   
   
@@ -1133,6 +1165,41 @@ const handleOpenDrawer = (drawerForm) => {
       disableGutters
       maxWidth='lg'
       >
+        {/* <Card> */}
+          {/* <CardHeader title='Lição de gramática' subheader='Dados internos da lição' /> */}
+          {/* <CardContent> */}
+          <Box maxWidth='200px'>
+                      <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Título interno:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Idioma:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Proficiência:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='column'>
+                    
+
+                 
+                    <Stack >
+   
+                       <Button variant='text' onClick={() => handleOpenDrawer('lessonInternalForm')}>Editar</Button>
+                    </Stack>
+                     </Box>
+
+
+            </Box>
+
+          {/* </CardContent> */}
+        {/* </Card> */}
+         
         {
           !newAdsGenerated ? <>
           {
@@ -1293,25 +1360,9 @@ const handleOpenDrawer = (drawerForm) => {
 
 
         <Card>
-          <CardHeader title='Detalhes da Lição' subheader="Informações sobre está lição"/>
+          <CardHeader title='Preview' subheader="Informações que o aluno visualizará antes de iniciar os exerícios"/>
             
-            <Box marginLeft={4}>
-                      <Box display='flex' flexDirection='row' alignItems='center'>
-                          <Typography variant="subtitle2">- Título interno:</Typography>
-                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
-                        </Box>
-
-                        <Box display='flex' flexDirection='row' alignItems='center'>
-                          <Typography variant="subtitle2">- Idioma:</Typography>
-                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
-                        </Box>
-
-                        <Box display='flex' flexDirection='row' alignItems='center'>
-                          <Typography variant="subtitle2">- Proficiência:</Typography>
-                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
-                        </Box>
-
-            </Box>
+            
                         
           <CardContent>
 
@@ -1319,42 +1370,8 @@ const handleOpenDrawer = (drawerForm) => {
 
 
 
-            <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-          <Card>
-              <CardHeader title='Informações públicas' subheader="Dados que o aluno irá visualizar"/>
-              <CardContent>
-                <Typography variant='caption'>*O aluno não irá visualizar informações não preenchidas</Typography>
-                <Box display='flex' flexDirection='column'>
-
-                <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Criado por:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.creator || user?.firstName + ' ' + user?.lastName}</Typography>
-                    </Box>
-
-
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Título da lição:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.title || 'Não será exibido'}</Typography>
-                    </Box>
-
-
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Descrição:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.description || 'Não será exibido' }</Typography>
-                    </Box>
-
-
-                    {/* <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Total de exercícios:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.totalExercises}</Typography>
-                    </Box> */}
-
-
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Grid container spacing={3}>
+          
 
 
 
@@ -1370,9 +1387,45 @@ const handleOpenDrawer = (drawerForm) => {
                           // }}
                         />
                       </Box>        
+                      <Box display='flex' flexDirection='column'>
+                    
+
+                 
+                    <Stack m={2}>
+   
+                       <Button variant='outlined' onClick={() => handleOpenDrawer('lessonPublicForm')}>Editar</Button>
+                    </Stack>
+                     </Box>
                        
                       </Card>
           </Grid>
+
+          <Grid item xs={12} md={6}>
+          <Card>
+                        <CardHeader 
+                        title='Como compartilhar esta lição com um estudante'
+                        subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução da mensagem para iniciar esta lição.'
+                        />
+                      <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
+                        <Markdown
+                          children={messageShare}
+                          // sx={{
+                             // px: { md: 5 },
+                          // }}
+                        />
+                      </Box>        
+                        <Stack m={2}>
+                          <Button
+                            onClick={() => handleCopyLink(messageShare)}
+                            variant='contained'
+                            startIcon={<ContentCopyIcon />}
+                          >
+                            Copiar mensagem
+                          </Button>
+                      </Stack>
+                      </Card>
+          </Grid>
+
           </Grid>
 
          
@@ -1403,45 +1456,13 @@ const handleOpenDrawer = (drawerForm) => {
 
             
 
-          <Box display='flex' flexDirection='column'>
-                    
-
-                 
-                 <Stack m={2}>
-
-                    <Button variant='outlined' onClick={() => editLesson(newAdsGenerated?.lesson?._id)}>Editar</Button>
-                 </Stack>
-                  </Box>
+       
           </CardContent>
         </Card>
       </Box>
      
         
-                    <Box m={2}>
-                      <Card>
-                        <CardHeader 
-                        title='Como compartilhar esta lição com um estudante'
-                        subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução da mensagem para iniciar esta lição.'
-                        />
-                      <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
-                        <Markdown
-                          children={messageShare}
-                          // sx={{
-                             // px: { md: 5 },
-                          // }}
-                        />
-                      </Box>        
-                        <Stack m={2}>
-                          <Button
-                            onClick={() => handleCopyLink(messageShare)}
-                            variant='contained'
-                            startIcon={<ContentCopyIcon />}
-                          >
-                            Copiar mensagem
-                          </Button>
-                      </Stack>
-                      </Card>
-                    </Box>
+                    
 
                   </>
                 }

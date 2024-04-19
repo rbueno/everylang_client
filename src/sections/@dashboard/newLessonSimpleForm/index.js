@@ -18,7 +18,7 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 // ----------------------------------------------------------------------
 
 
-export default function NewLessonSimplesForm(props) {
+function NewLessonSimpleForm(props) {
   const { lessonType } = props
 
   const { push } = useRouter();
@@ -129,3 +129,5 @@ export default function NewLessonSimplesForm(props) {
       </Container>
   );
 }
+
+export { NewLessonSimpleForm }

@@ -80,6 +80,7 @@ import MailIcon from '@mui/icons-material/Mail';
 
 import ExerciseCopilotForm from './ExerciseCopilotForm'
 import ExerciseManuallyForm from './ExerciseManuallyForm'
+import EditLesson from '../simpleForms/editLesson'
 
 
 
@@ -99,22 +100,22 @@ const SCREENS = [
 ];
 
 const SECTIONS = [
-  {
-    value: 'lessonSection',
-    label: 'Lição',
-    icon: <Iconify icon="ic:round-receipt" />,
-    component: <Box>Crie um texto livre com descrições e detalhes que enriqueçam seu conteúdo.</Box>,
-  },
+  // {
+  //   value: 'lessonSection',
+  //   label: 'Lição',
+  //   icon: <Iconify icon="ic:round-receipt" />,
+  //   component: <Box>Crie um texto livre com descrições e detalhes que enriqueçam seu conteúdo.</Box>,
+  // },
   {
     value: 'exerciseSection',
     label: 'Exercícios',
-    icon: <Iconify icon="eva:share-fill" />,
+    icon:  <Iconify icon="ic:round-receipt" />,
     component: <Box>Crie botões com links externos de, por exemplo, uma site de vendas ou redes sociais</Box>,
   },
   {
     value: 'shareSection',
     label: 'Compartilhar',
-    icon: <Iconify icon="ic:round-account-box" />,
+    icon: <Iconify icon="eva:share-fill" />,
     component: <Box>Capture contatos e tenha uma lista de leads qualificados.</Box>,
   },
 ];
@@ -441,7 +442,7 @@ BusinessEdit.propTypes = {
 
 export default function BusinessEdit({ adId }) {
   const { push } = useRouter();
-  const { updateWorkspaces, switchWorkspace } = useAuthContext()
+  const { updateWorkspaces, switchWorkspace, user } = useAuthContext()
   const { enqueueSnackbar } = useSnackbar();
   const { copy } = useCopyToClipboard();
 
@@ -689,7 +690,7 @@ const toggleDrawer = (open) => (event) => {
 
   }
 
-  const messageShare = `EVERYLANG - Exercícios de pronúncia\n\nCriado por: ${newAdsGenerated?.lesson?.creator}\n\nLição: ${newAdsGenerated?.lesson?.title}\n\nDetalhes: ${newAdsGenerated?.lesson?.description}\n\nAcesse esta lição enviando o código "refl${newAdsGenerated?.lesson?.sharingId}" na conta de WhatsApp do Everylang.\n\nPara facilitar, clique no link para ser direcionado para a conta do Everylang já com o código na mensagem:\n\nhttps://wa.me/5511999284097?text=refl${newAdsGenerated?.lesson?.sharingId}`
+  
 
 const handleEditCurrentSentense = (content) => {
   setCurrentSentence(content)
@@ -699,6 +700,23 @@ const handleEditCurrentSentense = (content) => {
 const editLesson = (lessonId) => {
   push(PATH_DASHBOARD.lessonPronunciation.edit(lessonId));
 }
+
+const userFullName = `${user?.firstName} ${user?.lastName}`
+  const lessonTitle = newAdsGenerated?.lesson?.title ? `\n\nLição: ${newAdsGenerated?.lesson?.title}` : ''
+  const lessonDetails = newAdsGenerated?.lesson?.description ? `\n\nDetalhes: ${newAdsGenerated?.lesson?.description}` : ''
+
+  const messagePreview = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}`
+  const messageShare = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}\n\nAcesse esta lição enviando o código "refl${newAdsGenerated?.lesson?.sharingId}" na conta de WhatsApp do Everylang.\n\nPara facilitar, clique no link para ser direcionado para a conta do Everylang já com o código na mensagem:\n\nhttps://wa.me/5511999284097?text=refl${newAdsGenerated?.lesson?.sharingId}`
+
+  const handleUpdateLesson = async (payload) => {
+
+    const { data } = await api.put(`v1/everylang/lesson`, payload)
+    
+  
+    newAdsGenerated.lesson = data.lesson
+      setNewAdsGenerated(newAdsGenerated) 
+  
+  };
 
 const handleOpenDrawer = (drawerForm) => {
 
@@ -718,7 +736,26 @@ const handleOpenDrawer = (drawerForm) => {
     )
   }
 
-  
+  if (drawerForm === 'lessonInternalForm') {
+    setDrawerContent(<EditLesson
+      initialDataValue={newAdsGenerated?.lesson}
+      lessonType={newAdsGenerated?.lesson?.type}
+      lessonForm='internal'
+      toggleDrawer={setOpenDrawer}
+      mainAction={handleUpdateLesson}
+      />
+    )
+  }
+  if (drawerForm === 'lessonPublicForm') {
+    setDrawerContent(<EditLesson
+      initialDataValue={newAdsGenerated?.lesson}
+      lessonType={newAdsGenerated?.lesson?.type}
+      lessonForm='public'
+      toggleDrawer={setOpenDrawer}
+      mainAction={handleUpdateLesson}
+      />
+    )
+  }
   
   setOpenDrawer(true)
 }
@@ -727,6 +764,39 @@ const handleOpenDrawer = (drawerForm) => {
       disableGutters
       maxWidth='lg'
       >
+        <Box maxWidth='200px'>
+                      <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Título interno:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Idioma:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='row' alignItems='center'>
+                          <Typography variant="subtitle2">- Proficiência:</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
+                        </Box>
+
+                        <Box display='flex' flexDirection='column'>
+                    
+
+                 
+                    <Stack >
+   
+                       <Button variant='text' onClick={() => handleOpenDrawer('lessonInternalForm')}>Editar</Button>
+                    </Stack>
+                     </Box>
+
+
+            </Box>
+
+
+
+
+
         {
           !newAdsGenerated ? <>
           {
@@ -743,62 +813,7 @@ const handleOpenDrawer = (drawerForm) => {
     </Box>
 
 
-    {
-      currentTab === 'lessonSection' && <>
-      <Box>
-        <Card>
-          <CardHeader title='Detalhes da Lição' subheader="Informações sobre está lição"/>
-
-          <CardContent>
-          <Box display='flex' flexDirection='column'>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Título interno:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Idioma:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Proficiência:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
-                    </Box>
-                    <Divider sx={{ margin: 2 }} />
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Título público:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.title}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Criado por:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.creator}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Descrição:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.description}</Typography>
-                    </Box>
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Total de exercícios:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.totalExercises}</Typography>
-                    </Box>
-                 
-                 <Stack m={2}>
-
-                    <Button variant='outlined' onClick={() => editLesson(newAdsGenerated?.lesson?._id)}>Editar</Button>
-                 </Stack>
-                  </Box>
-          </CardContent>
-        </Card>
-      </Box>
-      </>
-    }
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -931,31 +946,113 @@ const handleOpenDrawer = (drawerForm) => {
            
      
         
-                    <Box m={2}>
-                      <Card>
-                        <CardHeader 
-                        title='Como compartilhar esta lição com um estudante'
-                        subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução na mensagem para receber esta lição.'
-                        />
-                      <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
-                        <Markdown
-                          children={messageShare}
-                          // sx={{
-                             // px: { md: 5 },
-                          // }}
-                        />
-                      </Box>        
-                        <Stack m={2}>
-                          <Button
-                            onClick={() => handleCopyLink(messageShare)}
-                            variant='contained'
-                            startIcon={<ContentCopyIcon />}
-                          >
-                            Copiar mensagem
-                          </Button>
-                      </Stack>
-                      </Card>
-                    </Box>
+           <Box>
+
+
+           
+
+
+<Card>
+  <CardHeader title='Preview' subheader="Informações que o aluno visualizará antes de iniciar os exerícios"/>
+    
+    
+                
+  <CardContent>
+
+
+
+
+
+  <Grid container spacing={3}>
+  
+
+
+
+
+  <Grid item xs={12} md={6}>
+  <Card>
+    <CardHeader title='Preview' subheader="Como o estudante visualizará as informações públicas desta lição"/>
+              <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
+                <Markdown
+                  children={messagePreview}
+                  // sx={{
+                     // px: { md: 5 },
+                  // }}
+                />
+              </Box>        
+              <Box display='flex' flexDirection='column'>
+            
+
+         
+            <Stack m={2}>
+
+               <Button variant='outlined' onClick={() => handleOpenDrawer('lessonPublicForm')}>Editar</Button>
+            </Stack>
+             </Box>
+               
+              </Card>
+  </Grid>
+
+  <Grid item xs={12} md={6}>
+  <Card>
+                <CardHeader 
+                title='Como compartilhar esta lição com um estudante'
+                subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução da mensagem para iniciar esta lição.'
+                />
+              <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
+                <Markdown
+                  children={messageShare}
+                  // sx={{
+                     // px: { md: 5 },
+                  // }}
+                />
+              </Box>        
+                <Stack m={2}>
+                  <Button
+                    onClick={() => handleCopyLink(messageShare)}
+                    variant='contained'
+                    startIcon={<ContentCopyIcon />}
+                  >
+                    Copiar mensagem
+                  </Button>
+              </Stack>
+              </Card>
+  </Grid>
+
+  </Grid>
+
+ 
+
+
+
+    
+
+
+    
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+  </CardContent>
+</Card>
+</Box>
 
                   </>
                 }
