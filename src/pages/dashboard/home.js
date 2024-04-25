@@ -22,11 +22,15 @@ import Wordcloud from '@visx/wordcloud/lib/Wordcloud';
 
 import DashboardLayout from '../../layouts/dashboard';
 // _mock_
-import { _analyticPost, _analyticOrderTimeline, _analyticTraffic } from '../../_mock/arrays';
+import { _bookings, _analyticPost, _analyticOrderTimeline, _analyticTraffic } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 // import { useAuthContext } from '../../auth/useAuthContext';
 import { PATH_DASHBOARD } from '../../routes/paths'
+
+import { BookingDetails } from '../../sections/@dashboard/general/booking'
+import { AppWidgetSummary } from '../../sections/@dashboard/general/app'
+
 // sections
 import {
   AnalyticsTasks,
@@ -45,186 +49,6 @@ import api from '../../utils/axios'
 
 // ----------------------------------------------------------------------
 
-
-
-
-const totoAfricaLyrics = `Hoje cedo
-Quando eu acordei e não te vi
-Eu pensei em tanta coisa
-Tive medo
-Ah, como eu chorei
-Eu sofri em segredo
-Tudo isso hoje cedo
-Holofotes fortes, purpurina
-E o sorriso dessas mina só me lembra cocaína
-Em cinco abrem-se cortinas
-Estáticas retinas brilham, garoa fina
-Que fita, meus poema me trouxe onde eles não habita
-A fama irrita, a grana dita, 'cê desacredita?
-Fantoches, pique Celso Pitta mentem
-Mortos tipo meu pai, nem eu me sinto presente
-Aí, é rima que cês quer, toma, duas, três
-Farta pra infartar cada um de vocês
-Num abismo sem volta, de festa, ladainha
-Minha alma afunda igual minha família em casa, sozinha
-Entre putas como um cafetão, coisas que afetam
-Sintonia, como eu sonhei em tá aqui um dia?
-Crise, trampo, ideologia, pause
-E é aqui onde nóis entende a Amy Winehouse
-Hoje cedo
-Quando eu acordei e não te vi
-Eu pensei em tanta coisa
-Tive medo
-Ah, como eu chorei
-Eu sofri em segredo
-Tudo isso hoje cedo
-Vagabundo, a trilha
-É um precipício, penso o melhor
-Quero salvar o mundo, pois desisti da minha família
-E numa luta mais difícil a frustração vai ser menor
-Digno de dó, só o pó, vazio, comum
-Que já é moda no século XXI
-Blacks com voz sagaz gravada
-Contra vilões que sangram a quebrada
-Só que raps por nóiz, por paz, mais nada
-Me pôs nas Gerais, numa cela trancada
-Eu lembrei do Racionais, reflexão
-Aí, "os próprio preto num 'tá nem aí com isso, não"
-É um clichê romântico, triste
-Vai perceber, vai ver, se matou e o paraíso não existe
-Eu ainda sou o Emicida da Rinha
-Lotei casas do Sul ao Norte,
-Mas esvaziei a minha
-E vou por aí, Taliban
-Vendo os boy beber dois mês de salário da minha irmã
-Hennessys, avelãs, camarins, fãs, globais
-Mano, onde eles tavam há dez anos atrás?
-Showbiz como a regra diz, lek
-A sociedade vende Jesus, por que não ia vender rap?
-O mundo vai se ocupar com seu cifrão
-Dizendo que a miséria é quem carecia de atenção
-Hoje cedo
-Quando eu acordei e não te vi
-Eu pensei em tanta coisa
-Tive medo
-Ah, como eu chorei
-Eu sofri em segredo
-Tudo isso hoje cedo`
-
-
-const colors = ['#143059', '#2F6B9A', '#82a6c2'];
-
-function wordFreq(text) {
-  const words = text.replace(/\./g, '').split(/\s/);
-  const freqMap = {};
-
-  for (const w of words) {
-    if (!freqMap[w]) freqMap[w] = 0;
-    freqMap[w] += 1;
-  }
-  return Object.keys(freqMap).map((word) => ({ text: word, value: freqMap[word] }));
-}
-
-function getRotationDegree() {
-  const rand = Math.random();
-  const degree = rand > 0.5 ? 60 : -60;
-  return rand * degree;
-}
-
-const words = wordFreq(totoAfricaLyrics);
-console.log('words', words)
-const fontScale = scaleLog({
-  domain: [Math.min(...words.map((w) => w.value)), Math.max(...words.map((w) => w.value))],
-  range: [10, 100],
-});
-const fontSizeSetter = (datum) => fontScale(datum.value);
-
-const fixedValueGenerator = () => 0.5;
-
-
-export function WordcloudPronunciation({ width, height, showControls }) {
-  const [spiralType, setSpiralType] = useState('archimedean');
-  const [withRotation, setWithRotation] = useState(false);
-
-  return (
-    <div className="wordcloud">
-      <Wordcloud
-        words={words}
-        width={width}
-        height={height}
-        fontSize={fontSizeSetter}
-        font={'Impact'}
-        padding={2}
-        spiral={spiralType}
-        rotate={withRotation ? getRotationDegree : 0}
-        random={fixedValueGenerator}
-      >
-        {(cloudWords) =>
-          cloudWords.map((w, i) => (
-            <Text
-              key={w.text}
-              fill={colors[i % colors.length]}
-              textAnchor={'middle'}
-              transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
-              fontSize={w.size}
-              fontFamily={w.font}
-            >
-              {w.text}
-            </Text>
-          ))
-        }
-      </Wordcloud>
-      {showControls && (
-        <div>
-          <label>
-            Spiral type &nbsp;
-            <select
-              onChange={(e) => setSpiralType(e.target.value)}
-              value={spiralType}
-            >
-              <option key={'archimedean'} value={'archimedean'}>
-                archimedean
-              </option>
-              <option key={'rectangular'} value={'rectangular'}>
-                rectangular
-              </option>
-            </select>
-          </label>
-          <label>
-            With rotation &nbsp;
-            <input
-              type="checkbox"
-              checked={withRotation}
-              onChange={() => setWithRotation(!withRotation)}
-            />
-          </label>
-          <br />
-        </div>
-      )}
-      <style jsx>{`
-        .wordcloud {
-          display: flex;
-          flex-direction: column;
-          user-select: none;
-        }
-        .wordcloud svg {
-          margin: 1rem 0;
-          cursor: pointer;
-        }
-
-        .wordcloud label {
-          display: inline-flex;
-          align-items: center;
-          font-size: 14px;
-          margin-right: 8px;
-        }
-        .wordcloud textarea {
-          min-height: 100px;
-        }
-      `}</style>
-    </div>
-  );
-}
 // ----------------------------------------------------------------------
 
 
@@ -474,162 +298,127 @@ export default function GeneralAnalyticsPage() {
           
 
 
-        <Grid item xs={12} md={6} lg={6}>
-            <AnalyticsConversionRates
-              title="Palavras com maior dificuldade de pronúncia"
-              // subheader="Dados Everylang"
-              chart={{
-                series: [
-                  { label: 'World', value: 1380 },
-                  { label: 'Money', value: 1200 },
-                  { label: 'Mouth', value: 1100 },
-                  { label: 'That', value: 690 },
-                  { label: 'It', value: 580 },
-                  { label: 'Manegement', value: 540 },
-                  { label: 'Travel', value: 470 },
-                  { label: 'Go', value: 448 },
-                  { label: 'Want', value: 430 },
-                  { label: 'Eat', value: 400 },
-                ],
-              }}
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={3} sm={6}>
+            <AppWidgetSummary
+              title="Pontuação de Pronúncia"
+              // percent={2.6}
+              total={97}
+              chartColor={theme.palette.primary.main}
+              chartData={[90, 70, 65]}
+            />
+          </Grid> 
+
+          <Grid item xs={12} md={3} sm={6}>
+          <HomeOptions
+              title="Exercícios de pronúncia"
+              total={22}
+              color="info"
+              py={3}
+              // icon={<VoiceChatIcon />}
+            />
+          </Grid> 
+
+          <Grid item xs={12} md={3} sm={6}>
+            <AppWidgetSummary
+              title="Pontuação de gramática"
+              // percent={88}
+              total={80}
+              chartColor={theme.palette.primary.main}
+              chartData={[100, 60, 90]}
+            />
+          </Grid> 
+
+          <Grid item xs={12} md={3} sm={6}>
+          <HomeOptions
+              title="Exercícios de gramática"
+              total={12}
+              color="warning"
+              py={3}
+              // icon={<VoiceChatIcon />}
             />
           </Grid>
 
-
-            <Grid item xs={12} md={6} lg={6}>
-            <AnalyticsCurrentVisits
-              title="Erros mais comuns de gramática"
-              chart={{
-                // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
-                series: [
-                  { label: 'Verb tense', value: 4344 },
-                  { label: 'Present perfect', value: 5435 },
-                  { label: 'Spelling', value: 1443 },
-                  { label: 'Feature', value: 4443 },
-                ],
-                colors: [
-                  theme.palette.primary.main,
-                  theme.palette.info.main,
-                  theme.palette.error.main,
-                  theme.palette.warning.main,
-                ],
-              }}
+          <Grid item xs={12} md={6} lg={6}>
+              <AnalyticsConversionRates
+                title="Palavras com maior dificuldade de pronúncia"
+                // subheader="Dados Everylang"
+                chart={{
+                  series: [
+                    { label: 'World', value: 1380 },
+                    { label: 'Money', value: 1200 },
+                    { label: 'Mouth', value: 1100 },
+                    { label: 'That', value: 690 },
+                    { label: 'It', value: 580 },
+                    { label: 'Manegement', value: 540 },
+                    { label: 'Travel', value: 470 },
+                    { label: 'Go', value: 448 },
+                    { label: 'Want', value: 430 },
+                    { label: 'Eat', value: 400 },
+                  ],
+                }}
+              />
+            </Grid>
+  
+  
+              <Grid item xs={12} md={6} lg={6}>
+              {/* <AnalyticsCurrentVisits
+                title="Erros mais comuns de gramática"
+                chart={{
+                  // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+                  series: [
+                    { label: '', value: 4344 },
+                    { label: '', value: 5435 },
+                    { label: '', value: 1443 },
+                    { label: '', value: 4443 },
+                  ],
+                  colors: [
+                    theme.palette.primary.main,
+                    theme.palette.info.main,
+                    theme.palette.error.main,
+                    theme.palette.warning.main,
+                  ],
+                }}
+              /> */}
+              <AnalyticsConversionRates
+                title="Erros mais frequênte de gramática"
+                // subheader="Dados Everylang"
+                chart={{
+                  series: [
+                    { label: 'Verb tense', value: 1380 },
+                    { label: 'Present perfect', value: 1200 },
+                    { label: 'Spelling', value: 1100 },
+                    { label: 'Feature', value: 690 }
+                  ],
+                }}
+              />
+            </Grid>
+  
+            <Grid item xs={12}>
+            <BookingDetails
+              title="Alunos"
+              tableData={_bookings}
+              tableLabels={[
+                { id: 'booker', label: 'Booker' },
+                { id: 'checkIn', label: 'Check In' },
+                { id: 'checkOut', label: 'Check Out' },
+                { id: 'status', label: 'Status' },
+                { id: 'phone', label: 'Phone' },
+                { id: 'roomType', label: 'Room Type' },
+                { id: '' },
+              ]}
             />
+          </Grid>
           </Grid>
 
           
         </Grid>
 
-{/* <Box>
-  <Card>
-    <CardHeader title='Palavras com maior dificuldade' />
-    <CardContent>
-
-  <WordcloudPronunciation width={600} height={300} showControls={true} />
-    </CardContent>
-  </Card>
-</Box> */}
         {/* <FetchController /> */}
 
-        <Box mb={4}>
-        <Typography variant='h5' sx={{ mb: 2 }}>Gerencie lições com inteligência artificial</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Box
-            onClick={() => push(PATH_DASHBOARD.lessonPronunciation.list)}
-            >
-            <HomeOptions
-              title="Pronúncia"
-              // total={2}
-              color="info"
-              icon={<VoiceChatIcon />}
-            />
-            </Box>
-          </Grid>
+        
 
-          <Grid item xs={12} sm={6} md={3}>
-          <Box
-            onClick={() => push(PATH_DASHBOARD.googleAds.new)}
-            >
-            <HomeOptions
-              title="Gramática"
-              // total={2}
-              color="warning"
-              icon={<TextSnippetIcon />}
-            />
-          </Box>
-          </Grid>
-
-          {/* <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary
-              title="Item Orders"
-              total={1723315}
-              color="warning"
-              icon="ant-design:windows-filled"
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary
-              title="Bug Reports"
-              total={234}
-              color="error"
-              icon="ant-design:bug-filled"
-            />
-          </Grid> */}
-
-        </Grid>
-        </Box>
-
-       <Box mb={4}>
-       <Typography variant='h5' sx={{ mb: 2 }}>Sua página web</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-          <Box
-            onClick={() => push(PATH_DASHBOARD.mypage.main)}
-            >
-            <HomeOptions
-              title="Editar página"
-              // total={2}
-              // color="info"
-              icon={<WebIcon />}
-            />
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-          <Box
-            onClick={() => push(PATH_DASHBOARD.general.analytics)}
-            >
-            <HomeOptions
-              title="Analisar métricas"
-              // total={2}
-              color="error"
-              icon={<LeaderboardIcon />}
-            />
-            </Box>
-          </Grid>
-
-          {/* <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary
-              title="Item Orders"
-              total={1723315}
-              color="warning"
-              icon="ant-design:windows-filled"
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWidgetSummary
-              title="Bug Reports"
-              total={234}
-              color="error"
-              icon="ant-design:bug-filled"
-            />
-          </Grid> */}
-
-        </Grid>
-       </Box>
+       
       </Container>
     </>
   );

@@ -38,7 +38,7 @@ export default function NavDocs() {
         </Typography>
       </div>
 
-      <Button fullWidth size='large' href='https://wa.me/5511975966675' target="_blank" rel="noopener" variant="contained">
+      <Button fullWidth size='large' href='https://wa.me/5511975966675' target="_blank" rel="noopener" variant="contained" sx={{ backgroundColor: '#128c7e' }}>
         Chamar no WhatsApp
       </Button>
     </Stack>

@@ -905,9 +905,9 @@ const toggleDrawer = (open) => (event) => {
     
           console.log('response.data', response.data)
           setNewAdsGenerated(response.data) 
-          // if (!response.data.ad) setDataError({ ...dataError, loadingError: 'Anúncio não encontrado. Tente novamente!' })
+          // if (!response.data.ad) setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
         } catch (error) {
-          setDataError({ ...dataError, loadingError: 'Anúncio não encontrado. Tente novamente!' })
+          setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
           console.error(error);
         }
       }

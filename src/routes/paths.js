@@ -76,6 +76,14 @@ export const PATH_DASHBOARD = {
     edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
     demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
+  student: {
+    root: path(ROOTS_DASHBOARD, '/student'),
+    new: path(ROOTS_DASHBOARD, '/student/new'),
+    list: path(ROOTS_DASHBOARD, '/student/list'),
+    insight: (insightId) => path(ROOTS_DASHBOARD, `/student/insight/${insightId}`),
+    content: (lessonId) => path(ROOTS_DASHBOARD, `/student/gen/${lessonId}`),
+    edit: (lessonId) => path(ROOTS_DASHBOARD, `/student/${lessonId}/edit`),
+  },
   lessonPronunciation: {
     root: path(ROOTS_DASHBOARD, '/pronunciation'),
     new: path(ROOTS_DASHBOARD, '/pronunciation/new'),
