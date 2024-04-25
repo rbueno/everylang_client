@@ -47,6 +47,11 @@ const navConfig = [
       { title: 'Dashboard', path: PATH_DASHBOARD.root, icon: ICONS.dashboard },
     ],
   },
+  {
+    items: [
+      { title: 'Alunos', path: PATH_DASHBOARD.student.list, icon: ICONS.user },
+    ],
+  },
   // {
   //   subheader: 'Benchmark',
   //   items: [

@@ -31,7 +31,7 @@ export default function HomeOptions({
   return (
     <Card
       sx={{
-        py: 5,
+        py: other.py || 5,
         boxShadow: 0,
         textAlign: 'center',
         color: theme.palette[color].darker,
@@ -40,7 +40,9 @@ export default function HomeOptions({
       }}
       {...other}
     >
-      <Box mb={2}>
+      {
+        icon && <>
+        <Box mb={2}>
       <IconButton
       sx={{
         // mb: 3,
@@ -58,6 +60,9 @@ export default function HomeOptions({
       >{icon}
       </IconButton>
       </Box>
+        </>
+      }
+      
 
       <Typography variant="h3">{fShortenNumber(total)}</Typography>
 
