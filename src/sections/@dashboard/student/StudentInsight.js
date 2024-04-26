@@ -153,7 +153,7 @@ export default function BusinessEdit({ studentId }) {
                 }}
               /> */}
               <AnalyticsConversionRates
-                title="Erros mais frequênte de gramática"
+                title="Erros frequêntes de gramática"
                 // subheader="Dados Everylang"
                 chart={{
                   series: [

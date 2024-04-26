@@ -381,7 +381,7 @@ export default function GeneralAnalyticsPage() {
                 }}
               /> */}
               <AnalyticsConversionRates
-                title="Erros mais frequênte de gramática"
+                title="Erros frequêntes de gramática"
                 // subheader="Dados Everylang"
                 chart={{
                   series: [
