@@ -90,7 +90,12 @@ export default function UserListPage() {
   const { themeStretch } = useSettingsContext();
   const { user, workspaces, currentWorkspace } = useAuthContext()
 
-  const [tableData, setTableData] = useState([{ fullName: 'Rafael Bueno', phoneNumber: '351929345306', lessonId: [1, 2, 3]  }]);
+  const [tableData, setTableData] = useState([
+    { _id: '123asd', fullName: 'Rafael Bueno', phoneNumber: '351929345306', lessonId: [1, 2, 3]  },
+    { _id: '123asd', fullName: 'Alexandre Andreoni', phoneNumber: '5511981294375', lessonId: [1, 2, 3, 4, 5, 1, 1, 1]  },
+    { _id: '123asd', fullName: 'Glauci Oliveira', phoneNumber: '5511949486465', lessonId: [1, 2, 3, 1, 1, 1, 1, 1, 1, 1]  },
+    { _id: '123asd', fullName: 'Juliana Soprani', phoneNumber: '351929345307', lessonId: [1, 2, 3, 1, 1, 1, 1]  }
+  ]);
 
   const { push } = useRouter();
 

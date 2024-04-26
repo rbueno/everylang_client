@@ -78,10 +78,10 @@ UserTableRow.propTypes = {
 function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { 
     sentence,
+    totalTries,
     status,
     score,
     speedy,
-    tries,
     createdAt
   } = row;
 
@@ -107,16 +107,14 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 
   return (
     <>
-      <TableRow hover selected={selected} onClick={() => {
-            onEditRow()
-          }}>
+      <TableRow hover selected={selected} onClick={() => status === 'done' ? onEditRow() : function(){} }>
         <TableCell>
           <Stack direction="column" alignItems="left" spacing={2}>
             
           </Stack>
           <Box maxWidth={600}>
           <Typography variant="body1">
-            Excuse me, where is the nearest bus stop?
+            {sentence}
             </Typography>
           </Box>
         </TableCell>
@@ -128,9 +126,9 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
             // color='success'
             sx={{ color: '#7635dc'}}
           >
-            3
+            {totalTries || '---'}
           </Label>
-          <Button variant='contained'>Ouvir</Button>
+          <Button variant='contained' disabled={status !== 'done'}>Ouvir</Button>
             </Stack>
          </TableCell>
 
@@ -138,10 +136,10 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
         <TableCell align="left">
           <Label
             variant="soft"
-            color='success'
-            sx={{ backgroundColor: '#7635dc', color: 'white'}}
+            color={status === 'done' ? 'success' : 'error'}
+            // sx={{ backgroundColor: `status === 'done' ? ${#7635dc} : 'error'`, color: 'white'}}
           >
-            status
+            {status}
           </Label></TableCell>
         
         
@@ -150,22 +148,22 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
             variant="soft"
             color='warning'
           >
-            80
+            {score || '---'}
           </Label></TableCell>
         
         
         <TableCell align="left">
           <Label
             variant="soft"
-            color='error'
+            color='warning'
           >
-            90
+            {speedy || '---'}
           </Label></TableCell>
 
           
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-        {format(new Date(createdAt), 'dd/MM/yy')}
+        {createdAt ? format(new Date(createdAt), 'dd/MM/yy') : '---'}
         {/* {fDate(createdAt)} */}
         
         </TableCell>
@@ -279,6 +277,25 @@ export default function StudentLessonList() {
 
   const [tableData, setTableData] = useState([
     { 
+      id: 1,
+      sentence: 'Excuse me, where is the nearest bus stop?',
+      // totalTries: 3,
+      status: 'pending',
+      // score: 80,
+      // speedy: 90,
+      // createdAt: '2024-10-10',
+      // tries: [
+      //     {
+      //       audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
+      //       score: 80,
+      //       speedy: 90,
+      //       sentenceScored: 'Excuse me, where is the nearest bus stop?',
+      //       wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
+      //     }
+      //   ]
+    },
+    { 
+      id: 2,
       sentence: 'Excuse me, where is the nearest bus stop?',
       totalTries: 3,
       status: 'done',
@@ -294,7 +311,25 @@ export default function StudentLessonList() {
             wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
           }
         ]
-    }
+    },
+    { 
+      id: 3,
+      sentence: 'Excuse me, where is the nearest bus stop?',
+      totalTries: 3,
+      status: 'done',
+      score: 80,
+      speedy: 90,
+      createdAt: '2024-10-10',
+      tries: [
+          {
+            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
+            score: 80,
+            speedy: 90,
+            sentenceScored: 'Excuse me, where is the nearest bus stop?',
+            wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
+          }
+        ]
+    },
   ]);
 
   const [openDrawer, setOpenDrawer] = useState(false)
@@ -312,8 +347,8 @@ const handleOpenDrawer = (drawerForm) => {
 
   if (drawerForm === 'pronunciationTries') {
     setDrawerContent(<PronunciationTries
-      sentence={tableData[0].sentence}
-      tries={tableData[0].tries}
+      sentence={tableData[1].sentence}
+      tries={tableData[1].tries}
       />)
   }
 
