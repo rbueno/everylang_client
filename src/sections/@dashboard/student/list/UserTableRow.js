@@ -90,13 +90,27 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           </TableCell>
        
        
-        <TableCell align="left">
+        {/* <TableCell align="left">
           <Label
             variant="soft"
             color='success'
           >
+            
+          </Label></TableCell> */}
+
+
+          <TableCell align="left">
+        <Stack direction="row" alignItems="center" spacing={2}>
+        <Label
+            variant="outlined"
+            // color='success'
+            sx={{ color: '#7635dc'}}
+          >
             {lessonId.length}
-          </Label></TableCell>
+          </Label>
+          <Button variant='contained' onClick={() => onEditRow()}>Abrir</Button>
+            </Stack>
+         </TableCell>
 
         {/* <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
         {format(new Date(createdAt), 'dd/MM/yy')}

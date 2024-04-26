@@ -36,7 +36,7 @@ BusinessEdit.propTypes = {
   isEdit: PropTypes.bool,
 };
 
-export default function BusinessEdit({ studentId }) {
+export default function BusinessEdit({ lessonId }) {
   const { push } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const { copy } = useCopyToClipboard();
@@ -74,104 +74,50 @@ export default function BusinessEdit({ studentId }) {
         
          <Grid container spacing={3}>
 
-         <Grid item xs={12} md={6} lg={8}>
-            <EcommerceYearlySales
-              title="Atividade"
-              height={200}
-              // subheader="(+43%) than last year"
-              chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-                series: [
-                  {
-                    // year: '2019',
-                    data: [
-                      { name: 'Total de alunos', data: [10, 41, 35, 151, 49, 62, 69, 91, 48] },
-                      // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
-                    ],
-                  },
-                  // {
-                  //   year: '2020',
-                  //   data: [
-                  //     { name: 'Total Income', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                  //     // { name: 'Total Expenses', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
-                  //   ],
-                  // },
-                ],
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            {/* <EcommerceSaleByGender
-              title="Sale By Gender"
-              total={2324}
-              chart={{
-                series: [
-                  { label: 'Mens', value: 44 },
-                  { label: 'Womens', value: 75 },
-                ],
-              }}
-            /> */}
-            <AnalyticsCurrentVisits
-                title="Exercícios"
-                chart={{
-                  // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
-                  series: [
-                    { label: 'Pronúncia', value: 70 },
-                    { label: 'Gramática', value: 30 }
-                  ],
-                  colors: [
-                    theme.palette.primary.main,
-                    theme.palette.info.main,
-                    theme.palette.error.main,
-                    theme.palette.warning.main,
-                  ],
-                }}
-              />
-          </Grid>
+         
 
 
-          <Grid item xs={12} md={3} sm={6}>
-            <AppWidgetSummary
-              title="Pontuação de Pronúncia"
-              // percent={2.6}
-              total={97}
-              chartColor={theme.palette.primary.main}
-              chartData={[90, 70, 65]}
-            />
-          </Grid> 
-
-          <Grid item xs={12} md={3} sm={6}>
+          <Grid item xs={12} md={6} sm={6}>
           <HomeOptions
-              title="Exercícios de pronúncia"
-              total={22}
-              color="info"
+              title="Pontuação geral"
+              total={97}
+              color="success"
               py={3}
               // icon={<VoiceChatIcon />}
             />
           </Grid> 
 
-          <Grid item xs={12} md={3} sm={6}>
-            <AppWidgetSummary
-              title="Pontuação de gramática"
-              // percent={88}
+          <Grid item xs={12} md={6} sm={6}>
+          <HomeOptions
+              title="Pontuação do speedy"
               total={80}
-              chartColor={theme.palette.primary.main}
-              chartData={[100, 60, 90]}
+              color="warning"
+              py={3}
+              // icon={<VoiceChatIcon />}
             />
           </Grid> 
 
-          <Grid item xs={12} md={3} sm={6}>
-          <HomeOptions
-              title="Exercícios de gramática"
+          {/* <Grid item xs={12} md={3} sm={6}>
+            <HomeOptions
+              title="Pontuação geral"
               total={12}
               color="warning"
               py={3}
               // icon={<VoiceChatIcon />}
             />
-          </Grid>
+          </Grid>  */}
 
-          <Grid item xs={12} md={6} lg={6}>
+          {/* <Grid item xs={12} md={3} sm={6}>
+          <HomeOptions
+              title="Pontuação geral"
+              total={12}
+              color="warning"
+              py={3}
+              // icon={<VoiceChatIcon />}
+            />
+          </Grid> */}
+
+          <Grid item xs={12} md={12} lg={12}>
               <AnalyticsConversionRates
                 title="Palavras com maior dificuldade de pronúncia"
                 // subheader="Dados Everylang"
@@ -212,18 +158,6 @@ export default function BusinessEdit({ studentId }) {
                   ],
                 }}
               /> */}
-              <AnalyticsConversionRates
-                title="Erros frequêntes de gramática"
-                // subheader="Dados Everylang"
-                chart={{
-                  series: [
-                    { label: 'Verb tense', value: 1380 },
-                    { label: 'Present perfect', value: 1200 },
-                    { label: 'Spelling', value: 1100 },
-                    { label: 'Feature', value: 690 }
-                  ],
-                }}
-              />
             </Grid>
   
             <Grid item xs={12}>

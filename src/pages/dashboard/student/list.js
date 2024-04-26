@@ -90,7 +90,7 @@ export default function UserListPage() {
   const { themeStretch } = useSettingsContext();
   const { user, workspaces, currentWorkspace } = useAuthContext()
 
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState([{ fullName: 'Rafael Bueno', phoneNumber: '351929345306', lessonId: [1, 2, 3]  }]);
 
   const { push } = useRouter();
 
@@ -105,9 +105,9 @@ export default function UserListPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`v1/everylang/student`)
-        console.log('response students', response.data.students)
-        setTableData(response.data.students)
+        // const response = await api.get(`v1/everylang/student`)
+        // console.log('response students', response.data.students)
+        // setTableData(response.data.students)
       } catch (error) {
         console.log(error)
       }
