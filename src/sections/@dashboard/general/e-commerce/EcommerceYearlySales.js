@@ -12,6 +12,7 @@ EcommerceYearlySales.propTypes = {
   chart: PropTypes.object,
   title: PropTypes.string,
   subheader: PropTypes.string,
+  height: PropTypes.number,
 };
 
 export default function EcommerceYearlySales({ title, subheader, chart, ...other }) {
@@ -33,7 +34,9 @@ export default function EcommerceYearlySales({ title, subheader, chart, ...other
 
   return (
     <Card {...other}>
-      <CardHeader
+      {
+        series && series.length && series[0].year ? <>
+          <CardHeader
         title={title}
         subheader={subheader}
         action={
@@ -49,14 +52,27 @@ export default function EcommerceYearlySales({ title, subheader, chart, ...other
           </CustomSmallSelect>
         }
       />
+        </> : <>
+        <CardHeader
+        title={title}
+        subheader={subheader}
+      />
+        </>
+      }
+      
 
-      {series.map((item) => (
+      {  series && series.length && series[0].year && series.map((item) => (
         <Box key={item.year} sx={{ mt: 3, mx: 3 }} dir="ltr">
           {item.year === seriesData && (
-            <Chart type="area" series={item.data} options={chartOptions} height={364} />
+            <Chart type="area" series={item.data} options={chartOptions} height={other.height || 364} />
           )}
         </Box>
       ))}
+      {  series && series.length && !series[0].year && <>
+        <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
+          <Chart type="area" series={series[0].data} options={chartOptions} height={other.height || 364} />
+        </Box>
+      </>}
     </Card>
   );
 }

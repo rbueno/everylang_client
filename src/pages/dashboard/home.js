@@ -28,6 +28,7 @@ import { useSettingsContext } from '../../components/settings';
 // import { useAuthContext } from '../../auth/useAuthContext';
 import { PATH_DASHBOARD } from '../../routes/paths'
 
+import { EcommerceSaleByGender, EcommerceYearlySales } from '../../sections/@dashboard/general/e-commerce'
 import { BookingDetails } from '../../sections/@dashboard/general/booking'
 import { AppWidgetSummary } from '../../sections/@dashboard/general/app'
 
@@ -289,7 +290,7 @@ export default function GeneralAnalyticsPage() {
         <title> Dashboard | Everylang</title>
       </Head>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Everylang
         </Typography>
@@ -299,6 +300,64 @@ export default function GeneralAnalyticsPage() {
 
 
         <Grid container spacing={3}>
+
+
+        <Grid item xs={12} md={6} lg={8}>
+            <EcommerceYearlySales
+              title="Alunos engajados"
+              height={200}
+              // subheader="(+43%) than last year"
+              chart={{
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                series: [
+                  {
+                    // year: '2019',
+                    data: [
+                      { name: 'Total de alunos', data: [10, 41, 35, 151, 49, 62, 69, 91, 48] },
+                      // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
+                    ],
+                  },
+                  // {
+                  //   year: '2020',
+                  //   data: [
+                  //     { name: 'Total Income', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
+                  //     // { name: 'Total Expenses', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
+                  //   ],
+                  // },
+                ],
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={4}>
+            {/* <EcommerceSaleByGender
+              title="Sale By Gender"
+              total={2324}
+              chart={{
+                series: [
+                  { label: 'Mens', value: 44 },
+                  { label: 'Womens', value: 75 },
+                ],
+              }}
+            /> */}
+            <AnalyticsCurrentVisits
+                title="Atividades"
+                chart={{
+                  // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+                  series: [
+                    { label: 'Pronúncia', value: 70 },
+                    { label: 'Gramática', value: 30 }
+                  ],
+                  colors: [
+                    theme.palette.primary.main,
+                    theme.palette.info.main,
+                    theme.palette.error.main,
+                    theme.palette.warning.main,
+                  ],
+                }}
+              />
+          </Grid>
+
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
               title="Pontuação de Pronúncia"
@@ -338,6 +397,9 @@ export default function GeneralAnalyticsPage() {
               // icon={<VoiceChatIcon />}
             />
           </Grid>
+
+         
+
 
           <Grid item xs={12} md={6} lg={6}>
               <AnalyticsConversionRates
@@ -394,7 +456,9 @@ export default function GeneralAnalyticsPage() {
               />
             </Grid>
   
-            <Grid item xs={12}>
+            
+          
+            {/* <Grid item xs={12}>
             <BookingDetails
               title="Alunos"
               tableData={_bookings}
@@ -408,7 +472,7 @@ export default function GeneralAnalyticsPage() {
                 { id: '' },
               ]}
             />
-          </Grid>
+          </Grid> */}
           </Grid>
 
           

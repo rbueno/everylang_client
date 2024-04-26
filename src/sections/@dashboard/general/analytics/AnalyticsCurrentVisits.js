@@ -9,13 +9,13 @@ import Chart, { useChart } from '../../../../components/chart';
 
 // ----------------------------------------------------------------------
 
-const CHART_HEIGHT = 400;
+const CHART_HEIGHT = 224;
 
-const LEGEND_HEIGHT = 72;
+const LEGEND_HEIGHT = 150;
 
 const StyledChart = styled('div')(({ theme }) => ({
   height: CHART_HEIGHT,
-  marginTop: theme.spacing(5),
+  marginTop: theme.spacing(2),
   '& .apexcharts-canvas svg': {
     height: CHART_HEIGHT,
   },
@@ -23,7 +23,7 @@ const StyledChart = styled('div')(({ theme }) => ({
     overflow: 'visible',
   },
   '& .apexcharts-legend': {
-    height: LEGEND_HEIGHT,
+    height: CHART_HEIGHT,
     alignContent: 'center',
     position: 'relative !important',
     borderTop: `solid 1px ${theme.palette.divider}`,
@@ -85,7 +85,7 @@ export default function AnalyticsCurrentVisits({ title, subheader, chart, ...oth
       <CardHeader title={title} subheader={subheader} />
 
       <StyledChart dir="ltr">
-        <Chart type="pie" series={chartSeries} options={chartOptions} height={280} />
+        <Chart type="pie" series={chartSeries} options={chartOptions} height={200} />
       </StyledChart>
     </Card>
   );
