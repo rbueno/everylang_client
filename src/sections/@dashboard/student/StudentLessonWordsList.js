@@ -64,7 +64,6 @@ import { format } from 'date-fns'
 import Label from '../../../components/label';
 import MenuPopover from '../../../components/menu-popover';
 import { fDate } from '../../../utils/formatTime';
-import StudentLessonWordsList from './StudentLessonWordsList'
 
 // ----------------------------------------------------------------------
 
@@ -78,12 +77,9 @@ UserTableRow.propTypes = {
 
 function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { 
-    sentence,
-    totalTries,
-    status,
+    word,
     score,
-    speedy,
-    createdAt
+    speedy
   } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -108,40 +104,19 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 
   return (
     <>
-      <TableRow hover selected={selected} onClick={() => status === 'done' ? onEditRow() : function(){} }>
+      <TableRow>
         <TableCell>
           <Stack direction="column" alignItems="left" spacing={2}>
             
           </Stack>
           <Box maxWidth={600}>
           <Typography variant="body1">
-            {sentence}
+            {word}
             </Typography>
           </Box>
         </TableCell>
 
-        <TableCell align="left">
-        <Stack direction="row" alignItems="center" spacing={2}>
-        <Label
-            variant="outlined"
-            // color='success'
-            sx={{ color: '#7635dc'}}
-          >
-            {totalTries || '---'}
-          </Label>
-          <Button variant='contained' disabled={status !== 'done'}>Ouvir</Button>
-            </Stack>
-         </TableCell>
-
         
-        <TableCell align="left">
-          <Label
-            variant="soft"
-            color={status === 'done' ? 'success' : 'error'}
-            // sx={{ backgroundColor: `status === 'done' ? ${#7635dc} : 'error'`, color: 'white'}}
-          >
-            {status}
-          </Label></TableCell>
         
         
         <TableCell align="left">
@@ -160,14 +135,6 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           >
             {speedy || '---'}
           </Label></TableCell>
-
-          
-
-        <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-        {createdAt ? format(new Date(createdAt), 'dd/MM/yy') : '---'}
-        {/* {fDate(createdAt)} */}
-        
-        </TableCell>
 
         {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
@@ -202,55 +169,11 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'sentence', label: 'Frases', align: 'left' },
-  { id: 'tries', label: 'Tentativas', align: 'left' },
-  { id: 'status', label: 'Status', align: 'left' },
+  { id: 'words', label: 'Palavras', align: 'left' },
   { id: 'score', label: 'Pontuação geral', align: 'left' },
   { id: 'speedy', label: 'Pontuação de speedy', align: 'left' },
-  { id: 'createdAt', label: 'Criado em', align: 'left' },
-  // { id: 'role', label: 'Permissão', align: 'left' },
-  // { id: 'company', label: 'Negócio', align: 'left' },
-  // { id: 'isVerified', label: 'Verified', align: 'center' },
-  // { id: 'status', label: 'Status', align: 'left' },
-  // { id: '' },
 ];
 
-const PronunciationTries = (props) => {
-  const { sentence, tries } = props
-
-  // audioURL: 'asd',
-  //           score: 80,
-  //           speedy: 90,
-  //           sentenceScored: 'asd',
-  //           wordsScore: [{ word: 'hi', score: 90}, { word: 'hi', score: 90}]
-  return (
-    <Box sx={{ width: 600 }}>
-    <Box m={4}>
-      
-      <Typography variant='h5'>Frase</Typography>
-      <Typography variant='subtitle1'>{sentence}</Typography>
-    </Box>
-    <Box marginLeft={4}>
-      <Typography variant='h5'>Tentativas</Typography>
-    </Box>
-
-    {
-      tries.map(item => (<Box key={item.id} m={4}>
-           <AudioPlayer
-                              defaultDuration=''
-                              showJumpControls={false}
-                              autoPlayAfterSrcChange={false}
-                              showDownloadProgress={false}
-                              showFilledProgress={false}
-                              src={item.audioURL}
-                              onPlay={e => console.log(`onPlay`)}
-                            />
-        <StudentLessonWordsList words={item.words}/>
-      </Box>))
-    }
-    </Box>
-  )
-}
 
 // ----------------------------------------------------------------------
 
@@ -258,7 +181,9 @@ StudentLessonList.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout
 
 // ----------------------------------------------------------------------
 
-export default function StudentLessonList() {
+export default function StudentLessonList(props) {
+  const {words} = props
+  console.log('words', words)
   const {
     dense,
     page,
@@ -281,107 +206,7 @@ export default function StudentLessonList() {
   const { themeStretch } = useSettingsContext();
   const { user, workspaces, currentWorkspace } = useAuthContext()
 
-  const [tableData, setTableData] = useState([
-    { 
-      id: 1,
-      sentence: 'Excuse me, where is the nearest bus stop?',
-      // totalTries: 3,
-      status: 'pending',
-      // score: 80,
-      // speedy: 90,
-      // createdAt: '2024-10-10',
-      // tries: [
-      //     {
-      //       audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
-      //       score: 80,
-      //       speedy: 90,
-      //       sentenceScored: 'Excuse me, where is the nearest bus stop?',
-      //       wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
-      //     }
-      //   ]
-    },
-    { 
-      id: 2,
-      sentence: 'Excuse me, where is the nearest bus stop?',
-      totalTries: 3,
-      status: 'done',
-      score: 80,
-      speedy: 90,
-      createdAt: '2024-10-10',
-      tries: [
-          {
-            id: 1,
-            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
-            score: 80,
-            speedy: 90,
-            sentenceScored: 'Excuse me, where is the nearest bus stop?',
-            words: [{ word: 'Excuse', score: 90, speedy: 70}, { word: 'me', score: 90, speedy: 70}, { word: 'where', score: 90, speedy: 70}, { word: 'is', score: 90, speedy: 70}, { word: 'the', score: 90, speedy: 70}, { word: 'nearest', score: 90, speedy: 70}, { word: 'bus', score: 90, speedy: 70}, { word: 'stop', score: 90, speedy: 70}]
-          },
-          {
-            id: 2,
-            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
-            score: 80,
-            speedy: 90,
-            sentenceScored: 'Excuse me, where is the nearest bus stop?',
-            words: [{ word: 'Excuse', score: 90, speedy: 70}, { word: 'me', score: 90, speedy: 70}, { word: 'where', score: 90, speedy: 70}, { word: 'is', score: 90, speedy: 70}, { word: 'the', score: 90, speedy: 70}, { word: 'nearest', score: 90, speedy: 70}, { word: 'bus', score: 90, speedy: 70}, { word: 'stop', score: 90, speedy: 70}]
-          },
-          {
-            id: 3,
-            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
-            score: 80,
-            speedy: 90,
-            sentenceScored: 'Excuse me, where is the nearest bus stop?',
-            words: [{ word: 'Excuse', score: 90, speedy: 70}, { word: 'me', score: 90, speedy: 70}, { word: 'where', score: 90, speedy: 70}, { word: 'is', score: 90, speedy: 70}, { word: 'the', score: 90, speedy: 70}, { word: 'nearest', score: 90, speedy: 70}, { word: 'bus', score: 90, speedy: 70}, { word: 'stop', score: 90, speedy: 70}]
-          }
-        ]
-    },
-    { 
-      id: 3,
-      sentence: 'Excuse me, where is the nearest bus stop?',
-      totalTries: 3,
-      status: 'done',
-      score: 80,
-      speedy: 90,
-      createdAt: '2024-10-10',
-      tries: [
-          {
-            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
-            score: 80,
-            speedy: 90,
-            sentenceScored: 'Excuse me, where is the nearest bus stop?',
-            wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
-          }
-        ]
-    },
-  ]);
-
-  const [openDrawer, setOpenDrawer] = useState(false)
-  const [drawerContent, setDrawerContent] = useState(null)
-
-const toggleDrawer = (open) => (event) => {
-  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    return;
-  }
-
-  setOpenDrawer(open)
-};
-
-const handleOpenDrawer = (drawerForm) => {
-
-  if (drawerForm === 'pronunciationTries') {
-    setDrawerContent(<PronunciationTries
-      sentence={tableData[1].sentence}
-      tries={tableData[1].tries}
-      />)
-  }
-
-  
-  setOpenDrawer(true)
-}
-
-  
-
-  const { push } = useRouter();
+  const [tableData, setTableData] = useState(words);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -411,7 +236,7 @@ const handleOpenDrawer = (drawerForm) => {
 
   const handleEditRow = (adId) => {
     // push(PATH_DASHBOARD.lessonPronunciation.content(adId));
-    handleOpenDrawer('pronunciationTries')
+    // handleOpenDrawer('pronunciationTries')
   };
 
   return (
@@ -419,9 +244,6 @@ const handleOpenDrawer = (drawerForm) => {
       
         
 
-        <Card>
-
-        <CardHeader title='Lições' subheader='Pronúncia e gramática' sx={{ mb: 3 }} />
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
             
@@ -444,7 +266,8 @@ const handleOpenDrawer = (drawerForm) => {
                 />
 
                 <TableBody>
-                  {dataFiltered.map((row) => (
+                  {console.log('dataFiltered', dataFiltered)}
+                  {words.map((row) => (
                     <UserTableRow
                     key={row._id}
                     row={row}
@@ -462,14 +285,8 @@ const handleOpenDrawer = (drawerForm) => {
               </Table>
             </Scrollbar>
           </TableContainer>
-        </Card>
-        <Drawer
-            anchor='right'
-            open={openDrawer}
-            onClose={toggleDrawer(false)}
-          >
-            {drawerContent}
-          </Drawer>
+  
+       
     </>
   );
 }
