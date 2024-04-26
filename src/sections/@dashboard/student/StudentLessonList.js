@@ -224,13 +224,17 @@ const PronunciationTries = (props) => {
   //           wordsScore: [{ word: 'hi', score: 90}, { word: 'hi', score: 90}]
   return (
     <Box sx={{ width: 600 }}>
-    <Box>
-      <Typography>Tentativas</Typography>
-      <Typography>{sentence}</Typography>
+    <Box m={4}>
+      
+      <Typography variant='h5'>Frase</Typography>
+      <Typography variant='subtitle1'>{sentence}</Typography>
+    </Box>
+    <Box marginLeft={4}>
+      <Typography variant='h5'>Tentativas</Typography>
     </Box>
 
     {
-      tries.map(item => (<Box key={item.sentence}>
+      tries.map(item => (<Box key={item.sentence} m={4}>
            <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
@@ -303,6 +307,20 @@ export default function StudentLessonList() {
       speedy: 90,
       createdAt: '2024-10-10',
       tries: [
+          {
+            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
+            score: 80,
+            speedy: 90,
+            sentenceScored: 'Excuse me, where is the nearest bus stop?',
+            wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
+          },
+          {
+            audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
+            score: 80,
+            speedy: 90,
+            sentenceScored: 'Excuse me, where is the nearest bus stop?',
+            wordsScore: [{ word: 'Excuse', score: 90}, { word: 'me', score: 90}, { word: 'where', score: 90}, { word: 'is', score: 90}, { word: 'the', score: 90}, { word: 'nearest', score: 90}, { word: 'bus', score: 90}, { word: 'stop', score: 90}]
+          },
           {
             audioURL: 'https://everylang.s3.us-east-1.amazonaws.com/pronunciation-demo/TravessadoDrBarros3mp3_dafe26acea.mp3',
             score: 80,
