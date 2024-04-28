@@ -761,14 +761,28 @@ const handleOpenDrawer = (drawerForm) => {
 }
   return (
       <Container
-      disableGutters
-      maxWidth='lg'
+      // disableGutters
+      maxWidth='xl'
       >
-        <Box maxWidth='200px'>
+        <Box >
+     
+
+                    <Box mb={2} display='flex' alignItems='center'>
+                      <Typography variant="h4">Lição de pronúncia</Typography>
+                        <IconButton  sx={{ marginLeft: 2, color: '#7635dc'}} onClick={() => handleOpenDrawer('lessonInternalForm')}><EditIcon fontSize='small'/></IconButton>
+                          {/* <Tooltip enterTouchDelay={0} title='Editar lição de pronúncia'>
+                          <IconButton><InfoIcon fontSize='small'/></IconButton>
+                        </Tooltip> */}
+                        
+                      
+                  </Box>     
+
+
                       <Box display='flex' flexDirection='row' alignItems='center'>
                           <Typography variant="subtitle2">- Título interno:</Typography>
                           <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.internalTitle}</Typography>
                         </Box>
+                        {/* <Divider /> */}
 
                         <Box display='flex' flexDirection='row' alignItems='center'>
                           <Typography variant="subtitle2">- Idioma:</Typography>
@@ -784,14 +798,16 @@ const handleOpenDrawer = (drawerForm) => {
                     
 
                  
-                    <Stack >
-   
-                       <Button variant='text' onClick={() => handleOpenDrawer('lessonInternalForm')}>Editar</Button>
-                    </Stack>
+                    
                      </Box>
+                     {/* <Box mb={4}>
 
+<Divider />
+</Box> */}
 
             </Box>
+
+
 
 
 

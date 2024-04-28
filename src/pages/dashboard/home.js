@@ -359,16 +359,6 @@ export default function GeneralAnalyticsPage() {
           </Grid>
 
           <Grid item xs={12} md={3} sm={6}>
-            <AppWidgetSummary
-              title="Pontuação de Pronúncia"
-              // percent={2.6}
-              total={97}
-              chartColor={theme.palette.primary.main}
-              chartData={[90, 70, 65]}
-            />
-          </Grid> 
-
-          <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Exercícios de pronúncia"
               total={22}
@@ -380,14 +370,15 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
-              title="Pontuação de gramática"
-              // percent={88}
-              total={80}
+              title="Pontuação de Pronúncia"
+              // percent={2.6}
+              total={97}
               chartColor={theme.palette.primary.main}
-              chartData={[100, 60, 90]}
+              chartData={[90, 70, 65]}
             />
           </Grid> 
 
+        
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Exercícios de gramática"
@@ -397,6 +388,18 @@ export default function GeneralAnalyticsPage() {
               // icon={<VoiceChatIcon />}
             />
           </Grid>
+          
+          <Grid item xs={12} md={3} sm={6}>
+            <AppWidgetSummary
+              title="Pontuação de gramática"
+              // percent={88}
+              total={80}
+              chartColor={theme.palette.primary.main}
+              chartData={[100, 60, 90]}
+            />
+          </Grid> 
+
+        
 
          
 
