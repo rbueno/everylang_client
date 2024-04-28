@@ -115,6 +115,24 @@ const ExerciseCopilotForm = (props) => {
 
     const onChangeSentenceQuantity = (event) => {
        setSentenceQuantity(event.target.value)
+
+       if(wordsAttributes === 'specificsWords') {
+
+        try {
+          setWordsToUseReviewError(null)
+          const words = wordsDistribute({ words: event.target.value.split(','), slots: sentenceQuantity })
+          const wordsResult = wordsCount({ words })
+          const phrasesToCreate = `Serão criadas:\n${wordsResult}`
+          console.log('phrasesToCreate', phrasesToCreate)
+          setWordsToUseReview(wordsResult)
+  
+        } catch (error) {
+          setWordsToUseReviewError(error.message)
+  
+        }
+    }
+      
+
      }
   
    const onChangeAttributes = (event) => {
