@@ -222,7 +222,7 @@ const ExerciseCopilotForm = (props) => {
                           <Box m={2}>
                             <Box display='flex' justifyContent='center'>
                                 <Box maxWidth='80%' display='flex' textAlign='center'>
-                                    <Typography variant='h6'>Gerar frases automaticamente com a nossa inteligência artificial.</Typography>
+                                    <Typography variant='h6'>Criar frases automaticamente com a nossa inteligência artificial.</Typography>
                                 </Box>
                             </Box>
                           <Box marginTop={6} > <Divider><Typography variant='subtitle1'>Quantidade de frases a serem geradas</Typography></Divider> </Box>
@@ -269,9 +269,9 @@ const ExerciseCopilotForm = (props) => {
                                       // error={level === '0'}
                                       onChange={(e) => setWordsAttributes(e.target.value)}
                                     >
-                                      <MenuItem value='noSpecification'>Gerar frases sem especficiações</MenuItem>
-                                      <MenuItem value='specificsWords'>Gerar frases utilizando determinadas palavras</MenuItem>
-                                      <MenuItem value='attributes'>Gerar frases utilizando atributos gerais</MenuItem>
+                                      <MenuItem value='noSpecification'>Criar frases sem especficiações</MenuItem>
+                                      <MenuItem value='specificsWords'>Criar frases utilizando determinadas palavras</MenuItem>
+                                      <MenuItem value='attributes'>Criar frases utilizando atributos gerais</MenuItem>
                                       
                                       
                                     </Select>
@@ -309,10 +309,15 @@ const ExerciseCopilotForm = (props) => {
                                       </CardContent>
                                     </Card>
                                     </> : <>
-                                    <Typography>Serão criadas:</Typography>
+                                    {
+                                      totalWords > 0 && <>
+                                      <Typography>Serão geradas:</Typography>
                                   <Markdown 
                                     children={wordsToUseReview}
                                   />
+                                      </>
+                                    }
+                                    
                                     </>
                                   }
                                   
