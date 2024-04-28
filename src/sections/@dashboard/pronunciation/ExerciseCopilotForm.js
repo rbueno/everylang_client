@@ -120,7 +120,7 @@ const ExerciseCopilotForm = (props) => {
 
         try {
           setWordsToUseReviewError(null)
-          const words = wordsDistribute({ words: event.target.value.split(','), slots: sentenceQuantity })
+          const words = wordsDistribute({ words: specification.split(','), slots: event.target.value })
           const wordsResult = wordsCount({ words })
           const phrasesToCreate = `Serão criadas:\n${wordsResult}`
           console.log('phrasesToCreate', phrasesToCreate)
