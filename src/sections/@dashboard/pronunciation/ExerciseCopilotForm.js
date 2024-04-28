@@ -7,14 +7,66 @@ import {
     Select,
     MenuItem,
     TextField,
-    Divider
+    Divider,
+    Card,
+    CardContent
 } from '@mui/material'
 
+import Label from '../../../components/label';
+import Markdown from '../../../components/markdown';
 import { LoadingButton } from '@mui/lab';
 
 import { useSnackbar } from 'notistack';
 
 import TagsInput from './TagsInput'
+
+export const wordsCount = ({ words }) => {
+  let contagem = {};
+
+  // Contando cada palavra no array
+  words.forEach(palavra => {
+      if (contagem[palavra]) {
+          contagem[palavra]++;
+      } else {
+          contagem[palavra] = 1;
+      }
+  });
+
+  // Transformando o objeto de contagem em um array de strings formatadas
+  let resultado = '';
+  for (let palavra in contagem) {
+      let indication = contagem[palavra] > 1 ? `- ${contagem[palavra]} frases utilizando a palavra: "${palavra}"` : `- ${contagem[palavra]} frase utilizando a palavra: "${palavra}"`;
+      resultado += `${indication}\n`
+  }
+
+  return resultado
+}
+
+export const wordsDistribute = ({ words, slots }) => {
+  console.log('words', words)
+  if (words.length > slots) {
+    throw new Error("O número de palavras não pode ser maior que o número de frases a ser geradas.");
+}
+
+  let resultado = new Array(slots);
+  let totalPalavras = words.length;
+  let posicao = 0;
+
+  
+
+  // Determinando quantas vezes cada palavra deve aparecer, tentando distribuir uniformemente
+  for (let i = 0; i < totalPalavras; i++) {
+      // Cálculo de quantas vezes essa palavra deve aparecer no array
+      let count = Math.floor(slots / totalPalavras) + (i < slots % totalPalavras ? 1 : 0);
+
+      // Preenchendo as posições do array com a palavra atual
+      for (let j = 0; j < count; j++) {
+          resultado[posicao++] = words[i].trim();
+      }
+  }
+
+  return resultado;
+}
 
 function InputFieldWithChip() {
   function handleSelecetedTags(items) {
@@ -53,6 +105,8 @@ const ExerciseCopilotForm = (props) => {
     const [submitting, setSubmitting] = useState(false);
     const [wordsAttributes, setWordsAttributes] = useState('noSpecification')
     const [totalWords, setTotalWords] = useState(0)
+    const [wordsToUseReview, setWordsToUseReview] = useState('')
+    const [wordsToUseReviewError, setWordsToUseReviewError] = useState(null)
   
 
     const onChangeContextType = (event) => {
@@ -117,10 +171,29 @@ const ExerciseCopilotForm = (props) => {
         const wordsSlot = value.split(',')
         if (!!wordsSlot[wordsSlot.length - 1].trim()) {
             setTotalWords(wordsSlot.length)
+      
+           
+
         } else {
             setTotalWords(wordsSlot.length - 1)
+           
         }
 
+       
+
+        try {
+          setWordsToUseReviewError(null)
+          const words = wordsDistribute({ words: wordsSlot, slots: sentenceQuantity })
+          const wordsResult = wordsCount({ words })
+          const phrasesToCreate = `Serão criadas:\n${wordsResult}`
+          console.log('phrasesToCreate', phrasesToCreate)
+          setWordsToUseReview(wordsResult)
+
+        } catch (error) {
+          setWordsToUseReviewError(error.message)
+
+        }
+       
     }
   
     return (<Box
@@ -202,12 +275,29 @@ const ExerciseCopilotForm = (props) => {
                                     value={specification}
                                     color="primary"
                                     placeholder="Ex.: Though, Tough, Thought, Clothes, Schedule, February, Beach, Entrepreneurship, Horror, Sixth, eighth..."
-                                    helperText={`Total de palavras: ${totalWords}`}
+                                    // helperText={`Total de palavras: ${totalWords}`}
                                     InputLabelProps={{
                                       shrink: true,
                                     }}
                                     onChange={(e) => handleSetWords(e.target.value)}
                                   />
+                                  {
+                                    wordsToUseReviewError ? <>
+                                    <Card  sx={{ marginTop: 1, border: 'solid 1px red'}}>
+                                      <CardContent>
+                                    <Label color='error'>ATENÇÃO</Label>
+                                    <Typography>{wordsToUseReviewError}</Typography>  
+
+                                      </CardContent>
+                                    </Card>
+                                    </> : <>
+                                    <Typography>Serão criadas:</Typography>
+                                  <Markdown 
+                                    children={wordsToUseReview}
+                                  />
+                                    </>
+                                  }
+                                  
                                   </Box>
                               </Box>
                       </>}
@@ -310,7 +400,7 @@ const ExerciseCopilotForm = (props) => {
                           </Box>
                           </Box>
                           <Box m={2} display='flex' flexDirection='column'>
-                                  <LoadingButton loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
+                                  <LoadingButton disabled={!!wordsToUseReviewError} loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
                         <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
   
                       </Box>

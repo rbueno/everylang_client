@@ -773,9 +773,7 @@ const handleOpenDrawer = (drawerForm) => {
                           {/* <Tooltip enterTouchDelay={0} title='Editar lição de pronúncia'>
                           <IconButton><InfoIcon fontSize='small'/></IconButton>
                         </Tooltip> */}
-                        
-                      
-                  </Box>     
+                    </Box>     
 
 
                       <Box display='flex' flexDirection='row' alignItems='center'>
