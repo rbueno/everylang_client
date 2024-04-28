@@ -45,7 +45,7 @@ export const wordsCount = ({ words }) => {
 export const wordsDistribute = ({ words, slots }) => {
   console.log('words', words)
   if (words.length > slots) {
-    throw new Error("O número de palavras não pode ser maior que o número de frases a ser geradas. Diminua a quantidade de palavras ou aumente a quantidade de frases a serem geradas.");
+    throw new Error("O número de palavras não pode ser maior que o número de frases a ser geradas. Reduza a quantidade de palavras ou aumente a quantidade de frases a serem geradas.");
 }
 
   let resultado = new Array(slots);
