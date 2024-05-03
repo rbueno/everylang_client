@@ -705,8 +705,8 @@ const userFullName = `${user?.firstName} ${user?.lastName}`
   const lessonTitle = newAdsGenerated?.lesson?.title ? `\n\nLição: ${newAdsGenerated?.lesson?.title}` : ''
   const lessonDetails = newAdsGenerated?.lesson?.description ? `\n\nDetalhes: ${newAdsGenerated?.lesson?.description}` : ''
 
-  const messagePreview = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}`
-  const messageShare = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}\n\nAcesse esta lição enviando o código "refl${newAdsGenerated?.lesson?.sharingId}" na conta de WhatsApp do Everylang.\n\nPara facilitar, clique no link para ser direcionado para a conta do Everylang já com o código na mensagem:\n\nhttps://wa.me/5511999284097?text=refl${newAdsGenerated?.lesson?.sharingId}`
+  const messagePreview = `EVERYLANG - Exercícios de pronúncia\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}`
+  const messageShare = `EVERYLANG - Exercícios de pronúncia\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}\n\nAcesse esta lição enviando o código "refl${newAdsGenerated?.lesson?.sharingId}" na conta de WhatsApp do Everylang.\n\nPara facilitar, clique no link para ser direcionado para a conta do Everylang já com o código na mensagem:\n\nhttps://wa.me/5511999284097?text=refl${newAdsGenerated?.lesson?.sharingId}`
 
   const handleUpdateLesson = async (payload) => {
 
