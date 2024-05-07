@@ -275,7 +275,31 @@ export default function GeneralAnalyticsPage() {
   const theme = useTheme();
   // const { currentWorkspace, updateWorkspaces } = useAuthContext()
   const { themeStretch } = useSettingsContext();
-  const [homeInsight, setHomeInsight] = useState({})
+  const [homeInsight, setHomeInsight] = useState({
+    "dailyExercises": {
+        "months": [],
+        "data": []
+    },
+    "exercisesPercent": {
+        "grammar": {
+            "totalExercises": 0,
+            "sumScore": 0,
+            "averageScore": 0,
+            "last": [],
+            "percent": 0
+        },
+        "pronunciation": {
+            "totalExercises": 0,
+            "sumScore": 0,
+            "averageScore": 0,
+            "last": [],
+            "percent": 0
+        },
+        "totalExercises": 0
+    },
+    "pronunciationToImprove": [],
+    "grammarToImprove": []
+})
   const { push } = useRouter()
 
   useEffect(() => {
