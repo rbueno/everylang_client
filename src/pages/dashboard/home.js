@@ -275,8 +275,66 @@ export default function GeneralAnalyticsPage() {
   const theme = useTheme();
   // const { currentWorkspace, updateWorkspaces } = useAuthContext()
   const { themeStretch } = useSettingsContext();
+  const [homeInsight, setHomeInsight] = useState({})
   const { push } = useRouter()
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const insightResponse = await api.get(`v1/everylang/insight`)
+        console.log('insightResponse', insightResponse.data)
+        setHomeInsight(insightResponse.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData()
+  },[])
+
+  const data = {
+    dailyExercises: {
+      months: homeInsight.dailyExercises?.months,
+      data: homeInsight.dailyExercises?.data
+    },
+    exercisesPercent: {
+      grammar: 30,
+      pronunciation: 70
+    },
+    totalExercises: {
+      grammar: {
+        total: 30,
+        score: {
+          average: 97,
+          last: [30, 50, 60]
+        }
+      },
+      pronunciation: {
+        total: 30,
+        score: {
+          average: 97,
+          last: [30, 50, 60]
+        }
+      }
+    },
+    pronunciationToImprove: [
+      { label: 'World', value: 70 },
+      { label: 'Money', value: 60 },
+      { label: 'Mouth', value: 55 },
+      { label: 'That', value: 50 },
+      { label: 'It', value: 45 },
+      { label: 'Manegement', value: 40 },
+      { label: 'Travel', value: 30 },
+      { label: 'Go', value: 20 },
+      { label: 'Want', value: 20 },
+      { label: 'Eat', value: 20 },
+    ],
+    grammarToImprove: [
+      { label: 'Verb tense', value: 70 },
+      { label: 'Present perfect', value: 70 },
+      { label: 'Spelling', value: 50 },
+      { label: 'Feature', value: 40 }
+    ]
+  }
   // const { push } = useRouter()
   // useEffect(() => {
   //   if (!currentWorkspace) push(PATH_DASHBOARD.business.new)
@@ -304,16 +362,16 @@ export default function GeneralAnalyticsPage() {
 
         <Grid item xs={12} md={6} lg={8}>
             <EcommerceYearlySales
-              title="Alunos engajados"
+              title="Total de exercícios diários"
               height={200}
               // subheader="(+43%) than last year"
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                categories: homeInsight.dailyExercises?.months,
                 series: [
                   {
                     // year: '2019',
                     data: [
-                      { name: 'Total de alunos', data: [10, 41, 35, 151, 49, 62, 69, 91, 48] },
+                      { name: 'Exercícios', data: homeInsight.dailyExercises?.data },
                       // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
                     ],
                   },
@@ -341,12 +399,12 @@ export default function GeneralAnalyticsPage() {
               }}
             /> */}
             <AnalyticsCurrentVisits
-                title="Atividades"
+                title="Exercícios"
                 chart={{
                   // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
                   series: [
-                    { label: 'Pronúncia', value: 70 },
-                    { label: 'Gramática', value: 30 }
+                    { label: 'Pronúncia', value: homeInsight.exercisesPercent?.pronunciation?.percent },
+                    { label: 'Gramática', value: homeInsight.exercisesPercent?.grammar?.percent }
                   ],
                   colors: [
                     theme.palette.primary.main,
@@ -361,7 +419,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Exercícios de pronúncia"
-              total={22}
+              total={homeInsight.exercisesPercent?.pronunciation?.totalExercises}
               color="info"
               py={3}
               // icon={<VoiceChatIcon />}
@@ -372,9 +430,9 @@ export default function GeneralAnalyticsPage() {
             <AppWidgetSummary
               title="Pontuação de Pronúncia"
               // percent={2.6}
-              total={97}
+              total={homeInsight.exercisesPercent?.pronunciation?.averageScore}
               chartColor={theme.palette.primary.main}
-              chartData={[90, 70, 65]}
+              chartData={homeInsight.exercisesPercent?.pronunciation?.last}
             />
           </Grid> 
 
@@ -382,7 +440,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Exercícios de gramática"
-              total={12}
+              total={homeInsight.exercisesPercent?.grammar?.totalExercises}
               color="warning"
               py={3}
               // icon={<VoiceChatIcon />}
@@ -393,9 +451,9 @@ export default function GeneralAnalyticsPage() {
             <AppWidgetSummary
               title="Pontuação de gramática"
               // percent={88}
-              total={80}
+              total={homeInsight.exercisesPercent?.grammar?.averageScore}
               chartColor={theme.palette.primary.main}
-              chartData={[100, 60, 90]}
+              chartData={homeInsight.exercisesPercent?.grammar?.last}
             />
           </Grid> 
 
@@ -409,18 +467,7 @@ export default function GeneralAnalyticsPage() {
                 title="Palavras com maior dificuldade de pronúncia"
                 // subheader="Dados Everylang"
                 chart={{
-                  series: [
-                    { label: 'World', value: 1380 },
-                    { label: 'Money', value: 1200 },
-                    { label: 'Mouth', value: 1100 },
-                    { label: 'That', value: 690 },
-                    { label: 'It', value: 580 },
-                    { label: 'Manegement', value: 540 },
-                    { label: 'Travel', value: 470 },
-                    { label: 'Go', value: 448 },
-                    { label: 'Want', value: 430 },
-                    { label: 'Eat', value: 400 },
-                  ],
+                  series: homeInsight.pronunciationToImprove,
                 }}
               />
             </Grid>
@@ -449,12 +496,7 @@ export default function GeneralAnalyticsPage() {
                 title="Erros frequêntes de gramática"
                 // subheader="Dados Everylang"
                 chart={{
-                  series: [
-                    { label: 'Verb tense', value: 1380 },
-                    { label: 'Present perfect', value: 1200 },
-                    { label: 'Spelling', value: 1100 },
-                    { label: 'Feature', value: 690 }
-                  ],
+                  series: homeInsight.grammarToImprove,
                 }}
               />
             </Grid>
