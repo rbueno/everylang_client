@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
-import { Card, CardHeader } from '@mui/material';
+import { Card, CardHeader, Box, Typography } from '@mui/material';
 // utils
 import { fNumber } from '../../../../utils/formatNumber';
 // components
@@ -9,9 +9,9 @@ import Chart, { useChart } from '../../../../components/chart';
 
 // ----------------------------------------------------------------------
 
-const CHART_HEIGHT = 224;
+const CHART_HEIGHT = 270;
 
-const LEGEND_HEIGHT = 150;
+const LEGEND_HEIGHT = 360;
 
 const StyledChart = styled('div')(({ theme }) => ({
   height: CHART_HEIGHT,
@@ -26,7 +26,7 @@ const StyledChart = styled('div')(({ theme }) => ({
     height: CHART_HEIGHT,
     alignContent: 'center',
     position: 'relative !important',
-    borderTop: `solid 1px ${theme.palette.divider}`,
+    // borderTop: `solid 1px ${theme.palette.divider}`,
     top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`,
   },
 }));
@@ -85,8 +85,18 @@ export default function AnalyticsCurrentVisits({ title, subheader, chart, ...oth
       <CardHeader title={title} subheader={subheader} />
 
       <StyledChart dir="ltr">
-        <Chart type="pie" series={chartSeries} options={chartOptions} height={200} />
+        <Chart type="pie" series={chartSeries} options={chartOptions} height={220} />
       </StyledChart>
+      {/* <Box  display='flex' justifyContent='center' marginBottom={2}>
+                  <Box display='flex' alignItems='center' marginRight={3}>
+                      <Box display='flex' alignItems='center' marginRight={1} sx={{ borderRadius: '50px', backgroundColor: theme.palette.info.main, color: theme.palette.info.main, width: '10px', height: '10px'}}>.</Box>
+                      <Typography>Gramática</Typography>
+                  </Box>
+                  <Box display='flex' alignItems='center'>
+                      <Box display='flex' alignItems='center' marginRight={1} sx={{ borderRadius: '50px', backgroundColor: theme.palette.primary.main, color: theme.palette.primary.main, width: '10px', height: '10px'}}>.</Box>
+                      <Typography>Pronúncia</Typography>
+                  </Box>
+        </Box> */}
     </Card>
   );
 }

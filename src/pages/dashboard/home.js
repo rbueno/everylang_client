@@ -315,57 +315,6 @@ export default function GeneralAnalyticsPage() {
     fetchData()
   },[])
 
-  const data = {
-    dailyExercises: {
-      months: homeInsight.dailyExercises?.months,
-      data: homeInsight.dailyExercises?.data
-    },
-    exercisesPercent: {
-      grammar: 30,
-      pronunciation: 70
-    },
-    totalExercises: {
-      grammar: {
-        total: 30,
-        score: {
-          average: 97,
-          last: [30, 50, 60]
-        }
-      },
-      pronunciation: {
-        total: 30,
-        score: {
-          average: 97,
-          last: [30, 50, 60]
-        }
-      }
-    },
-    pronunciationToImprove: [
-      { label: 'World', value: 70 },
-      { label: 'Money', value: 60 },
-      { label: 'Mouth', value: 55 },
-      { label: 'That', value: 50 },
-      { label: 'It', value: 45 },
-      { label: 'Manegement', value: 40 },
-      { label: 'Travel', value: 30 },
-      { label: 'Go', value: 20 },
-      { label: 'Want', value: 20 },
-      { label: 'Eat', value: 20 },
-    ],
-    grammarToImprove: [
-      { label: 'Verb tense', value: 70 },
-      { label: 'Present perfect', value: 70 },
-      { label: 'Spelling', value: 50 },
-      { label: 'Feature', value: 40 }
-    ]
-  }
-  // const { push } = useRouter()
-  // useEffect(() => {
-  //   if (!currentWorkspace) push(PATH_DASHBOARD.business.new)
-  // }, [currentWorkspace, push])
-
-  // const handleDashBoardOptionClick = ()
-
   return (
     <>
       <Head>
@@ -387,7 +336,7 @@ export default function GeneralAnalyticsPage() {
         <Grid item xs={12} md={6} lg={8}>
             <EcommerceYearlySales
               title="Total de exercícios diários"
-              height={200}
+              height={245}
               // subheader="(+43%) than last year"
               chart={{
                 categories: homeInsight.dailyExercises?.months,
@@ -399,29 +348,12 @@ export default function GeneralAnalyticsPage() {
                       // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
                     ],
                   },
-                  // {
-                  //   year: '2020',
-                  //   data: [
-                  //     { name: 'Total Income', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                  //     // { name: 'Total Expenses', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
-                  //   ],
-                  // },
                 ],
               }}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            {/* <EcommerceSaleByGender
-              title="Sale By Gender"
-              total={2324}
-              chart={{
-                series: [
-                  { label: 'Mens', value: 44 },
-                  { label: 'Womens', value: 75 },
-                ],
-              }}
-            /> */}
             <AnalyticsCurrentVisits
                 title="Exercícios"
                 chart={{
@@ -433,11 +365,12 @@ export default function GeneralAnalyticsPage() {
                   colors: [
                     theme.palette.primary.main,
                     theme.palette.info.main,
-                    theme.palette.error.main,
-                    theme.palette.warning.main,
+                    // theme.palette.error.main,
+                    // theme.palette.warning.main,
                   ],
                 }}
               />
+            
           </Grid>
 
           <Grid item xs={12} md={3} sm={6}>
@@ -498,24 +431,7 @@ export default function GeneralAnalyticsPage() {
   
   
               <Grid item xs={12} md={6} lg={6}>
-              {/* <AnalyticsCurrentVisits
-                title="Erros mais comuns de gramática"
-                chart={{
-                  // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
-                  series: [
-                    { label: '', value: 4344 },
-                    { label: '', value: 5435 },
-                    { label: '', value: 1443 },
-                    { label: '', value: 4443 },
-                  ],
-                  colors: [
-                    theme.palette.primary.main,
-                    theme.palette.info.main,
-                    theme.palette.error.main,
-                    theme.palette.warning.main,
-                  ],
-                }}
-              /> */}
+           
               <AnalyticsConversionRates
                 title="Erros frequêntes de gramática"
                 // subheader="Dados Everylang"
@@ -525,23 +441,7 @@ export default function GeneralAnalyticsPage() {
               />
             </Grid>
   
-            
-          
-            {/* <Grid item xs={12}>
-            <BookingDetails
-              title="Alunos"
-              tableData={_bookings}
-              tableLabels={[
-                { id: 'booker', label: 'Booker' },
-                { id: 'checkIn', label: 'Check In' },
-                { id: 'checkOut', label: 'Check Out' },
-                { id: 'status', label: 'Status' },
-                { id: 'phone', label: 'Phone' },
-                { id: 'roomType', label: 'Room Type' },
-                { id: '' },
-              ]}
-            />
-          </Grid> */}
+        
           </Grid>
 
           
