@@ -89,7 +89,7 @@ function NewLessonSimpleForm(props) {
                  label="Título da lição"
                  value={title}
                  color="primary"
-                 placeholder="Ex.: Domine a pronúncia de palavras com TH"
+                 placeholder={lessonType === 'grammar' ? 'Verbos irregulares' : "Ex.: Pronúncia de palavras com TH"}
                  // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
                  // error={newBusinessNameError !== null}
                  InputLabelProps={{

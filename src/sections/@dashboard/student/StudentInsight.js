@@ -141,7 +141,7 @@ export default function StudentInsight({ studentId }) {
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Lições de pronúncia"
-              total={homeInsight.exercisesPercent?.pronunciation?.totalExercises}
+              total={homeInsight.exercisesPercent?.pronunciation?.totalExercises || '---'}
               color="info"
               py={3}
               // icon={<VoiceChatIcon />}
@@ -162,7 +162,7 @@ export default function StudentInsight({ studentId }) {
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
               title="Lições de gramática"
-              total={homeInsight.exercisesPercent?.grammar?.totalExercises}
+              total={homeInsight.exercisesPercent?.grammar?.totalExercises || '---'}
               color="warning"
               py={3}
               // icon={<VoiceChatIcon />}

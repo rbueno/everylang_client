@@ -97,7 +97,7 @@ UserTableRow.propTypes = {
 
 function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { 
-    internalName,
+    internalTitle,
     languageLevel,
     learningLanguage,
     totalPhrases,
@@ -134,7 +134,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           </Stack>
           <Box maxWidth={600}>
           <Typography variant="body1">
-            {internalName || '---'}
+            {internalTitle || '---'}
             </Typography>
           </Box>
         </TableCell>
@@ -229,7 +229,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'internalName', label: 'Nome Interno', align: 'left' },
+  { id: 'internalTitle', label: 'Nome Interno', align: 'left' },
   { id: 'languageLevel', label: 'Nível', align: 'left' },
   { id: 'learningLanguage', label: 'Estudo', align: 'left' },
   { id: 'totalPhrases', label: 'Exercícios', align: 'left' },
