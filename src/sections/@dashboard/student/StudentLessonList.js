@@ -127,7 +127,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 
   return (
     <>
-      <TableRow hover selected={selected} onClick={() => status === 'done' ? onEditRow() : function(){} }>
+      <TableRow hover selected={selected} onClick={() => onEditRow() }>
         <TableCell>
           <Stack direction="column" alignItems="left" spacing={2}>
             
