@@ -30,13 +30,13 @@ import StudentLessonList from './StudentLessonList'
 import { _bookings, _bookingNew, _bookingsOverview, _bookingReview } from '../../../_mock/arrays';
 
 
-StudentInsight.propTypes = {
+BusinessEdit.propTypes = {
   editingWorkspace: PropTypes.object,
   lessonId: PropTypes.string,
   isEdit: PropTypes.bool,
 };
 
-export default function StudentInsight({ studentId }) {
+export default function BusinessEdit({ studentId }) {
   const { push } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const { copy } = useCopyToClipboard();
@@ -65,8 +65,6 @@ export default function StudentInsight({ studentId }) {
     },
     "pronunciationToImprove": [],
     "grammarToImprove": [],
-    pronunciationPracticeSession: [],
-    grammarExerciseSession: [],
     student: {}
 })
 
@@ -100,7 +98,7 @@ export default function StudentInsight({ studentId }) {
 
          <Grid item xs={12} md={6} lg={8}>
             <EcommerceYearlySales
-              title="Total de lições diárias"
+              title="Total de exercícios diários"
               height={245}
               // subheader="(+43%) than last year"
               chart={{
@@ -109,7 +107,7 @@ export default function StudentInsight({ studentId }) {
                   {
                     // year: '2019',
                     data: [
-                      { name: 'Lições', data: homeInsight.dailyExercises?.data },
+                      { name: 'Exercícios', data: homeInsight.dailyExercises?.data },
                       // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
                     ],
                   },
@@ -120,7 +118,7 @@ export default function StudentInsight({ studentId }) {
 
           <Grid item xs={12} md={6} lg={4}>
             <AnalyticsCurrentVisits
-                title="Lições"
+                title="Exercícios"
                 chart={{
                   // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
                   series: [
@@ -140,7 +138,7 @@ export default function StudentInsight({ studentId }) {
 
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
-              title="Lições de pronúncia"
+              title="Exercícios de pronúncia"
               total={homeInsight.exercisesPercent?.pronunciation?.totalExercises}
               color="info"
               py={3}
@@ -150,7 +148,7 @@ export default function StudentInsight({ studentId }) {
 
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
-              title="Pontuação média"
+              title="Pontuação de Pronúncia"
               // percent={2.6}
               total={homeInsight.exercisesPercent?.pronunciation?.averageScore}
               chartColor={theme.palette.primary.main}
@@ -161,7 +159,7 @@ export default function StudentInsight({ studentId }) {
         
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
-              title="Lições de gramática"
+              title="Exercícios de gramática"
               total={homeInsight.exercisesPercent?.grammar?.totalExercises}
               color="warning"
               py={3}
@@ -171,7 +169,7 @@ export default function StudentInsight({ studentId }) {
           
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
-              title="Pontuação média"
+              title="Pontuação de gramática"
               // percent={88}
               total={homeInsight.exercisesPercent?.grammar?.averageScore}
               chartColor={theme.palette.primary.main}

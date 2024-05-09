@@ -81,6 +81,7 @@ export const PATH_DASHBOARD = {
     new: path(ROOTS_DASHBOARD, '/student/new'),
     list: path(ROOTS_DASHBOARD, '/student/list'),
     insight: (insightId) => path(ROOTS_DASHBOARD, `/student/insight/${insightId}`),
+    lessonInsight: (insightId) => path(ROOTS_DASHBOARD, `/student/insight/lesson/${insightId}`),
     content: (lessonId) => path(ROOTS_DASHBOARD, `/student/gen/${lessonId}`),
     edit: (lessonId) => path(ROOTS_DASHBOARD, `/student/${lessonId}/edit`),
   },

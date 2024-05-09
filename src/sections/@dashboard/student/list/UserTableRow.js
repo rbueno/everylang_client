@@ -32,7 +32,7 @@ UserTableRow.propTypes = {
 };
 
 export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
-  const { fullName, phoneNumber, lessonId } = row;
+  const { fullName, phoneNumber, languageLevel, learningLanguage } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -100,14 +100,36 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
 
 
           <TableCell align="left">
-        <Stack direction="row" alignItems="center" spacing={2}>
+
         <Label
             variant="outlined"
             // color='success'
             sx={{ color: '#7635dc'}}
           >
-            {lessonId.length}
+            {languageLevel}
           </Label>
+         
+
+         </TableCell>
+
+
+
+          <TableCell align="left">
+        
+        <Label
+            variant="outlined"
+            // color='success'
+            sx={{ color: '#7635dc'}}
+          >
+            {learningLanguage}
+          </Label>
+        
+            
+         </TableCell>
+        
+        
+          <TableCell align="left">
+        <Stack direction="row" alignItems="center" spacing={2}>
           <Button variant='contained' onClick={() => onEditRow()}>Abrir</Button>
             </Stack>
          </TableCell>

@@ -11,7 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Select, FormControl, MenuItem, InputLabel, Box, Card, CardHeader, CardContent, Grid, Container, Stack, Switch, Typography, FormControlLabel, TextField, FormGroup, IconButton, Button } from '@mui/material';
+import { Divider, Box, Card, CardHeader, CardContent, Grid, Container, Stack, Switch, Typography, FormControlLabel, TextField, FormGroup, IconButton, Button } from '@mui/material';
 // utils
 
 // import { fData } from '../../../utils/formatNumber';
@@ -23,53 +23,42 @@ import { EcommerceSaleByGender, EcommerceYearlySales } from '../general/e-commer
 import { AnalyticsConversionRates, HomeOptions, AnalyticsCurrentVisits } from '../general/analytics'
 import { BookingDetails } from '../general/booking'
 import { AppWidgetSummary } from '../general/app'
-import StudentLessonList from './StudentLessonList'
+import StudentPronunciationLessonExercises from './StudentPronunciationLessonExercises'
+import Label from '../../../components/label'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { PATH_DASHBOARD } from '../../../routes/paths'
 // ----------------------------------------------------------------------
 
 
 import { _bookings, _bookingNew, _bookingsOverview, _bookingReview } from '../../../_mock/arrays';
 
+function StudentGrammarLessonInsight({ dataInsight }) {
+  return (<>Gramática</>)
+}
+function StudentPronunciationLessonInsight({ dataInsight }) {
+const { push } = useRouter()
 
-BusinessEdit.propTypes = {
-  editingWorkspace: PropTypes.object,
-  lessonId: PropTypes.string,
-  isEdit: PropTypes.bool,
-};
-
-export default function BusinessEdit({ lessonId }) {
-  const { push } = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
-  const { copy } = useCopyToClipboard();
-  const theme = useTheme()
-
-  useEffect(() => {
-    async function fetData() {
-      try {
-
-        // const { data } = await api.get(`v1/everylang/student?studentId=${studentId}`)
-        // console.log('get student', data)
-        
-    
-      
-      } catch (error) {
-        enqueueSnackbar(error.message && error.message, { variant: 'error' });
-        console.error(error);
-      }
-    }
-    fetData()
-  }, []);
-
-  
+  const handleBackToStudent = () => {
+  push(PATH_DASHBOARD.student.insight(dataInsight.student?._id));
+}
   return (
-
-      <Container
-      disableGutters
-      maxWidth='xl'
+  <>
+  <Box marginBottom={4}>
+  {/* <Button variant='outlined' startIcon={<ArrowBackIcon />}>Voltar</Button> */}
+  <IconButton
+        size="small"
+        // color="inherit"
+        onClick={() => handleBackToStudent()}
+        // sx={{ color: 'text.secondary' }}
       >
-        <Box marginBottom={4}>
-          <Typography variant='caption'>Aluno</Typography>
-          <Typography variant='h5'>Rafael Bueno</Typography>
+        <ArrowBackIcon />
+      </IconButton>
 
+  </Box>
+  <Box marginBottom={4}>
+          <Typography variant='caption'>Aluno</Typography>
+          <Typography variant='h5'>{dataInsight.student?.fullName || '---'}</Typography>
+          
         </Box>
         
          <Grid container spacing={3}>
@@ -77,24 +66,94 @@ export default function BusinessEdit({ lessonId }) {
          
 
 
-          <Grid item xs={12} md={6} sm={6}>
-          <HomeOptions
+          <Grid item xs={12} md={4} sm={4}>
+            <Card>
+              <CardHeader title='Lição de pronúncia' />
+              <CardContent>
+              <Box display='flex' flexDirection='row' alignItems='center' marginBottom={2}>
+                      {/* <Typography variant="subtitle2">Status</Typography> */}
+                      <Label sx={{ marginLeft: 1}} color='success'>status: {dataInsight.pronunciationPracticeSession[0].status}</Label>
+                      <Label sx={{ marginLeft: 1}} color='success'>Pontuação: {dataInsight.exercisesPercent?.pronunciation?.averageScore}</Label>
+                    </Box>
+
+                    <Divider sx={{ margin: 2 }} />
+              <Box marginBottom={2}>
+                      <Typography variant="h6">Informação interna</Typography>
+
+          </Box>
+          <Box display='flex' flexDirection='column'>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título interno:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.internalTitle}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Idioma:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.learningLanguage}</Typography>
+                    </Box>
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Proficiência:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.languageLevel}</Typography>
+                    </Box>
+                   
+                    <Divider sx={{ margin: 2 }} />
+
+                    <Box marginBottom={2}>
+                      <Typography variant="h6">Informação pública</Typography>
+
+                   </Box>
+
+                   <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Criado por:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.creator}</Typography>
+                    </Box>
+
+                    
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Título público:</Typography>
+
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.internalTitle || '---'}</Typography>
+                    </Box>
+                    
+                    <Box display='flex' flexDirection='row' alignItems='center'>
+                      <Typography variant="subtitle2">- Descrição:</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.description || '---'}</Typography>
+                    </Box>
+
+                   
+
+                   
+                  
+                    
+                   
+                 
+             
+                  </Box>
+              </CardContent>
+            </Card>
+          {/* <HomeOptions
               title="Pontuação geral"
-              total={97}
+              total={dataInsight.exercisesPercent?.pronunciation?.averageScore}
               color="success"
               py={3}
               // icon={<VoiceChatIcon />}
             />
-          </Grid> 
-
-          <Grid item xs={12} md={6} sm={6}>
-          <HomeOptions
+            <HomeOptions
               title="Pontuação do speedy"
               total={80}
               color="warning"
               py={3}
               // icon={<VoiceChatIcon />}
-            />
+            /> */}
+          </Grid> 
+
+          <Grid item xs={12} md={8} sm={8}>
+          <AnalyticsConversionRates
+                title="Palavras com maior dificuldade de pronúncia"
+                subheader="Essas são as principais palavras que o aluno apresentou dificuldade ao longo de todos os exercícios"
+                chart={{
+                  series: dataInsight.pronunciationToImprove,
+                }}
+              />
           </Grid> 
 
           {/* <Grid item xs={12} md={3} sm={6}>
@@ -117,66 +176,67 @@ export default function BusinessEdit({ lessonId }) {
             />
           </Grid> */}
 
-          <Grid item xs={12} md={12} lg={12}>
-              <AnalyticsConversionRates
-                title="Palavras com maior dificuldade de pronúncia"
-                // subheader="Dados Everylang"
-                chart={{
-                  series: [
-                    { label: 'World', value: 1380 },
-                    { label: 'Money', value: 1200 },
-                    { label: 'Mouth', value: 1100 },
-                    { label: 'That', value: 690 },
-                    { label: 'It', value: 580 },
-                    { label: 'Manegement', value: 540 },
-                    { label: 'Travel', value: 470 },
-                    { label: 'Go', value: 448 },
-                    { label: 'Want', value: 430 },
-                    { label: 'Eat', value: 400 },
-                  ],
-                }}
-              />
-            </Grid>
+        
   
   
-              <Grid item xs={12} md={6} lg={6}>
-              {/* <AnalyticsCurrentVisits
-                title="Erros mais comuns de gramática"
-                chart={{
-                  // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
-                  series: [
-                    { label: '', value: 4344 },
-                    { label: '', value: 5435 },
-                    { label: '', value: 1443 },
-                    { label: '', value: 4443 },
-                  ],
-                  colors: [
-                    theme.palette.primary.main,
-                    theme.palette.info.main,
-                    theme.palette.error.main,
-                    theme.palette.warning.main,
-                  ],
-                }}
-              /> */}
-            </Grid>
+              
   
             <Grid item xs={12}>
-            {/* <BookingDetails
-              title="Booking Details"
-              tableData={_bookings}
-              tableLabels={[
-                { id: 'booker', label: 'Booker' },
-                { id: 'checkIn', label: 'Check In' },
-                { id: 'checkOut', label: 'Check Out' },
-                { id: 'status', label: 'Status' },
-                { id: 'phone', label: 'Phone' },
-                { id: 'roomType', label: 'Room Type' },
-                { id: '' },
-              ]}
-            /> */}
-            <StudentLessonList />
+            <StudentPronunciationLessonExercises pronunciationExercises={dataInsight.pronunciationExercises} pronunciationAssessment={dataInsight.pronunciationAssessment}/>
           </Grid>
           </Grid>
+  </>
+)
+}
+StudentLessonInsight.propTypes = {
+  editingWorkspace: PropTypes.object,
+  lessonId: PropTypes.string,
+  isEdit: PropTypes.bool,
+};
+
+export default function StudentLessonInsight({ lessonId }) {
+  const { push } = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { copy } = useCopyToClipboard();
+  const theme = useTheme()
+  const [dataInsight, setDataInsight] = useState({ 
+    lessonType: 'loading', 
+    pronunciationExercises: [],
+    pronunciationAssessment: []
+  })
+
+  useEffect(() => {
+    async function fetData() {
+      try {
+
+        const { data } = await api.get(`v1/everylang/lesson-insight/${lessonId}`)
+        console.log('lesson-insight', data)
+        setDataInsight(data)
+    
+      } catch (error) {
+        enqueueSnackbar(error.message && error.message, { variant: 'error' });
+        console.error(error);
+      }
+    }
+    fetData()
+  }, []);
+
+  
+  return (
+
+      <Container
+      disableGutters
+      maxWidth='xl'
+      >
+        {
+          dataInsight.lessonType === 'loading' && <>Carregando</>
+        }
+        {
+          dataInsight.lessonType === 'pronunciation' && <StudentPronunciationLessonInsight dataInsight={dataInsight}/>
+        }
+        {
+          dataInsight.lessonType === 'grammar' && <StudentGrammarLessonInsight dataInsight={dataInsight}/>
+        }
         
       </Container>
   );

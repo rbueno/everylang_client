@@ -12,6 +12,7 @@ import {
   Tabs,
   Card,
   CardHeader,
+  CardContent,
   Table,
   Button,
   Tooltip,
@@ -66,26 +67,7 @@ import MenuPopover from '../../../components/menu-popover';
 import { fDate } from '../../../utils/formatTime';
 import StudentLessonWordsList from './StudentLessonWordsList'
 
-import VoiceChatIcon from '@mui/icons-material/VoiceChat';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-
 // ----------------------------------------------------------------------
-
-const SECTIONS = [
-  {
-    value: 'pronunciationSection',
-    label: 'Pronúncia',
-    icon:  <VoiceChatIcon />,
-    component: <Box>Exercícios de pronúncia</Box>,
-  },
-  {
-    value: 'grammarSection',
-    label: 'Gramática',
-    icon: <TextSnippetIcon />,
-    component: <Box>Exercícios de gramática</Box>,
-  },
-];
-
 
 UserTableRow.propTypes = {
   row: PropTypes.object,
@@ -97,12 +79,12 @@ UserTableRow.propTypes = {
 
 function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { 
-    internalName,
-    languageLevel,
-    learningLanguage,
-    totalPhrases,
+    scriptedPhrase,
+    tries,
     status,
-    createdAt
+    overallScore,
+    speed,
+    updatedAt
   } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -134,45 +116,14 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           </Stack>
           <Box maxWidth={600}>
           <Typography variant="body1">
-            {internalName || '---'}
+            {scriptedPhrase}
             </Typography>
           </Box>
         </TableCell>
 
-        <TableCell align="left">
+     
+
         
-        <Label
-            variant="outlined"
-            // color='success'
-            sx={{ color: '#7635dc'}}
-          >
-            {languageLevel}
-          </Label>
-         
-         
-         </TableCell>
-        <TableCell align="left">
-        
-        <Label
-            variant="outlined"
-            // color='success'
-            sx={{ color: '#7635dc'}}
-          >
-            {learningLanguage}
-          </Label>
-         
-         
-         </TableCell>
-
-         <TableCell align="left">
-          <Label
-            variant="soft"
-            color='warning'
-          >
-            {totalPhrases}
-          </Label></TableCell>
-
-
         <TableCell align="left">
           <Label
             variant="soft"
@@ -183,18 +134,43 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           </Label></TableCell>
         
         
-      
+        <TableCell align="left">
+          <Label
+            variant="soft"
+            color='warning'
+          >
+            {overallScore || '---'}
+          </Label></TableCell>
         
-        
-
+{/*         
+        <TableCell align="left">
+          <Label
+            variant="soft"
+            color='warning'
+          >
+            {speed || '---'}
+          </Label></TableCell> */}
 
           
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-        {createdAt ? format(new Date(createdAt), 'dd/MM/yy') : '---'}
+        {updatedAt ? format(new Date(updatedAt), 'dd/MM/yy') : '---'}
         {/* {fDate(createdAt)} */}
         
         </TableCell>
+
+        <TableCell align="left">
+        <Stack direction="row" alignItems="center" spacing={2}>
+        {/* <Label
+            variant="outlined"
+            // color='success'
+            sx={{ color: '#7635dc'}}
+          >
+            {tries || '---'}
+          </Label> */}
+          <Button variant='contained' disabled={status !== 'done'}>Ouvir</Button>
+            </Stack>
+         </TableCell>
 
         {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
@@ -229,12 +205,11 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'internalName', label: 'Nome Interno', align: 'left' },
-  { id: 'languageLevel', label: 'Nível', align: 'left' },
-  { id: 'learningLanguage', label: 'Estudo', align: 'left' },
-  { id: 'totalPhrases', label: 'Exercícios', align: 'left' },
+  { id: 'sentence', label: 'Frases', align: 'left' },
   { id: 'status', label: 'Status', align: 'left' },
-  { id: 'createdAt', label: 'Criado em', align: 'left' },
+  { id: 'score', label: 'Pontuação', align: 'left' },
+  { id: 'createdAt', label: 'Atualizado em', align: 'left' },
+  { id: 'tries', label: 'Ouvir', align: 'left' },
   // { id: 'role', label: 'Permissão', align: 'left' },
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
@@ -243,8 +218,9 @@ const TABLE_HEAD = [
 ];
 
 const PronunciationTries = (props) => {
-  const { sentence, tries } = props
-
+  const { sentence, tries = [] } = props
+console.log('sentence', sentence)
+console.log('tries', tries)
   // audioURL: 'asd',
   //           score: 80,
   //           speedy: 90,
@@ -254,38 +230,68 @@ const PronunciationTries = (props) => {
     <Box sx={{ width: 600 }}>
     <Box m={4}>
       
-      <Typography variant='h5'>Frase</Typography>
+      <Typography variant='h5'>Áudio da frase:</Typography>
       <Typography variant='subtitle1'>{sentence}</Typography>
     </Box>
-    <Box marginLeft={4}>
-      <Typography variant='h5'>Tentativas</Typography>
-    </Box>
 
-    {
-      tries.map(item => (<Box key={item.id} m={4}>
-           <AudioPlayer
+    <Box m={4}>
+    <Card>
+      <CardHeader title='Tentativa aprovada' />
+      <CardContent>
+      <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
                               showDownloadProgress={false}
                               showFilledProgress={false}
-                              src={item.audioURL}
+                              src={tries[0].audioURL}
                               onPlay={e => console.log(`onPlay`)}
                             />
-        <StudentLessonWordsList words={item.words}/>
-      </Box>))
+                            <StudentLessonWordsList words={tries[0].metadata.words.map(item => ({word: item.word, score: item.scores.overall }))}/>
+      </CardContent>
+    </Card>
+    </Box>
+    
+
+    {
+      tries.length > 1 && <>
+        <Box m={4}>
+    <Card>
+      <CardHeader title={`Outras Tentativas (${tries.slice(1).length})`} />
+      <CardContent>
+      {
+        tries.slice(1).map(item => (<Box key={item.id} >
+             <AudioPlayer
+                                defaultDuration=''
+                                showJumpControls={false}
+                                autoPlayAfterSrcChange={false}
+                                showDownloadProgress={false}
+                                showFilledProgress={false}
+                                src={item.audioURL}
+                                onPlay={e => console.log(`onPlay`)}
+                              />
+          <StudentLessonWordsList words={item.wordsToImprove}/>
+        </Box>))
+      }
+      </CardContent>
+    </Card>
+    </Box>
+
+          
+      </>
     }
+    
     </Box>
   )
 }
 
 // ----------------------------------------------------------------------
 
-StudentLessonList.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+StudentPronunciationLessonExercises.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function StudentLessonList({ tableData }) {
+export default function StudentPronunciationLessonExercises({ pronunciationExercises, pronunciationAssessment }) {
   const {
     dense,
     page,
@@ -307,59 +313,6 @@ export default function StudentLessonList({ tableData }) {
 
   const { themeStretch } = useSettingsContext();
   const { user, workspaces, currentWorkspace } = useAuthContext()
-  const [currentTab, setCurrentTab] = useState('pronunciationSection')
-  // const [tableData, setTableData] = useState({
-  //   pronunciationSection: [
-  //     { 
-  //       id: 1,
-  //       internalName: 'Exercício 2',
-  //       languageLevel: 'Avançado',
-  //       learningLanguage: 'Inglês',
-  //       totalExercises: 5,
-  //       status: 'inProgress',
-  //       createdAt: '2024-04-01'
-  //     },
-  //     { 
-  //       id: 1,
-  //       internalName: 'Exercício 1',
-  //       languageLevel: 'Avançado',
-  //       learningLanguage: 'Inglês',
-  //       totalExercises: 5,
-  //       status: 'done',
-  //       createdAt: '2024-04-01'
-  //     }, 
-  //   ],
-  //   grammarSection: [
-  //     { 
-  //       id: 1,
-  //       internalName: 'Gramática Exercício 2',
-  //       languageLevel: 'Avançado',
-  //       learningLanguage: 'Inglês',
-  //       totalExercises: 5,
-  //       status: 'inProgress',
-  //       createdAt: '2024-04-01'
-  //     },
-  //     { 
-  //       id: 1,
-  //       internalName: 'Gramática Exercício 1',
-  //       languageLevel: 'Avançado',
-  //       learningLanguage: 'Inglês',
-  //       totalExercises: 5,
-  //       status: 'done',
-  //       createdAt: '2024-04-01'
-  //     },
-  //     { 
-  //       id: 1,
-  //       internalName: 'Gramática Exercício 1',
-  //       languageLevel: 'Avançado',
-  //       learningLanguage: 'Inglês',
-  //       totalExercises: 5,
-  //       status: 'done',
-  //       createdAt: '2024-04-01'
-  //     },
-      
-  //   ]
-  // });
 
   const [openDrawer, setOpenDrawer] = useState(false)
   const [drawerContent, setDrawerContent] = useState(null)
@@ -372,12 +325,15 @@ const toggleDrawer = (open) => (event) => {
   setOpenDrawer(open)
 };
 
-const handleOpenDrawer = (drawerForm) => {
+const handleOpenDrawer = ({drawerForm, drawData }) => {
 
   if (drawerForm === 'pronunciationTries') {
+   
+
+
     setDrawerContent(<PronunciationTries
-      sentence={tableData[1].sentence}
-      tries={tableData[1].tries}
+      sentence={drawData.sentence}
+      tries={drawData.tries}
       />)
   }
 
@@ -412,12 +368,20 @@ const handleOpenDrawer = (drawerForm) => {
 
   const denseHeight = dense ? 52 : 72;
 
-  const isNotFound = !tableData[currentTab].length
+  const isNotFound = !pronunciationExercises.length
 
 
-  const handleEditRow = (adId) => {
-    push(PATH_DASHBOARD.student.lessonInsight(adId));
-    // handleOpenDrawer('pronunciationTries')
+  const handleEditRow = ({exerciseId, exerciseSentence }) => {
+    const tries = pronunciationAssessment.filter(item => item.referenceId === exerciseId)
+    console.log('exerciseId', exerciseId)
+    console.log('pronunciationAssessment', pronunciationAssessment)
+    console.log('tries pronunciationAssessment', tries)
+
+    const drawData = {
+      sentence: exerciseSentence,
+      tries: tries.reverse()
+    }
+    handleOpenDrawer({ drawerForm: 'pronunciationTries', drawData })
   };
 
   return (
@@ -427,15 +391,7 @@ const handleOpenDrawer = (drawerForm) => {
 
         <Card>
 
-        <CardHeader title='Lições' subheader='Pronúncia e gramática' sx={{ mb: 3 }} />
-
-        <Box>
-        <Tabs variant="fullWidth" value={currentTab} onChange={(event, newValue) => setCurrentTab(newValue)}>
-            {SECTIONS.map((tab) => (
-              <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
-            ))}
-          </Tabs>
-    </Box>
+        <CardHeader title='Exercícios' sx={{ mb: 3 }} />
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
             
@@ -446,7 +402,7 @@ const handleOpenDrawer = (drawerForm) => {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={tableData[currentTab].length}
+                  rowCount={pronunciationExercises.length}
                   numSelected={selected.length}
                   onSort={onSort}
                   // onSelectAllRows={(checked) =>
@@ -458,18 +414,18 @@ const handleOpenDrawer = (drawerForm) => {
                 />
 
                 <TableBody>
-                  {tableData[currentTab].map((row) => (
+                  {pronunciationExercises.map((row) => (
                     <UserTableRow
                     key={row._id}
                     row={row}
                     selected={selected.includes(row._id)}
                     onSelectRow={() => onSelectRow(row._id)}
                     // onDeleteRow={() => handleDeleteRow(row._id)}
-                    onEditRow={() => handleEditRow(row._id)}
+                    onEditRow={() => handleEditRow({exerciseId: row._id, exerciseSentence: row.scriptedPhrase})}
                   />
                   ))}
 
-                  <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, tableData[currentTab].length)} />
+                  <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, pronunciationExercises.length)} />
 
                   <TableNoData isNotFound={isNotFound} />
                 </TableBody>

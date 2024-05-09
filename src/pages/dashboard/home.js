@@ -10,7 +10,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Box, TextField, Stack, MenuItem, Card, CardHeader, CardContent } from '@mui/material';
+import { Divider, Grid, Container, Typography, Box, TextField, Stack, MenuItem, Card, CardHeader, CardContent } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
@@ -335,7 +335,7 @@ export default function GeneralAnalyticsPage() {
 
         <Grid item xs={12} md={6} lg={8}>
             <EcommerceYearlySales
-              title="Total de exercícios diários"
+              title="Total de lições diárias"
               height={245}
               // subheader="(+43%) than last year"
               chart={{
@@ -344,7 +344,7 @@ export default function GeneralAnalyticsPage() {
                   {
                     // year: '2019',
                     data: [
-                      { name: 'Exercícios', data: homeInsight.dailyExercises?.data },
+                      { name: 'Lições', data: homeInsight.dailyExercises?.data },
                       // { name: 'Total Expenses', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
                     ],
                   },
@@ -355,7 +355,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AnalyticsCurrentVisits
-                title="Exercícios"
+                title="Lições"
                 chart={{
                   // categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
                   series: [
@@ -375,7 +375,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
-              title="Exercícios de pronúncia"
+              title="lições de pronúncia"
               total={homeInsight.exercisesPercent?.pronunciation?.totalExercises}
               color="info"
               py={3}
@@ -385,7 +385,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
-              title="Pontuação de Pronúncia"
+              title="Pontuação média"
               // percent={2.6}
               total={homeInsight.exercisesPercent?.pronunciation?.averageScore}
               chartColor={theme.palette.primary.main}
@@ -396,7 +396,7 @@ export default function GeneralAnalyticsPage() {
         
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
-              title="Exercícios de gramática"
+              title="Lições de gramática"
               total={homeInsight.exercisesPercent?.grammar?.totalExercises}
               color="warning"
               py={3}
@@ -406,7 +406,7 @@ export default function GeneralAnalyticsPage() {
           
           <Grid item xs={12} md={3} sm={6}>
             <AppWidgetSummary
-              title="Pontuação de gramática"
+              title="Pontuação média"
               // percent={88}
               total={homeInsight.exercisesPercent?.grammar?.averageScore}
               chartColor={theme.palette.primary.main}

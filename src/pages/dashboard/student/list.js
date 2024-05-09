@@ -53,12 +53,15 @@ import api from '../../../utils/axios'
 const TABLE_HEAD = [
   { id: 'fullName', label: 'Nome completo', align: 'left' },
   { id: 'phoneNumber', label: 'Contato', align: 'left' },
-  { id: 'lessons', label: 'Lições', align: 'left' },
+  { id: 'languageLevel', label: 'Nível', align: 'left' },
+  { id: 'languageLearning', label: 'Estuda', align: 'left' },
+  // { id: 'lessons', label: 'Lições', align: 'left' },
+  // { id: 'Ativo', label: 'Contato', align: 'left' },
   // { id: 'role', label: 'Permissão', align: 'left' },
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
   // { id: 'status', label: 'Status', align: 'left' },
-  // { id: '' },
+  { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -90,12 +93,13 @@ export default function UserListPage() {
   const { themeStretch } = useSettingsContext();
   const { user, workspaces, currentWorkspace } = useAuthContext()
 
-  const [tableData, setTableData] = useState([
-    { _id: '123asd', fullName: 'Rafael Bueno', phoneNumber: '351929345306', lessonId: [1, 2, 3]  },
-    { _id: '123asd', fullName: 'Alexandre Andreoni', phoneNumber: '5511981294375', lessonId: [1, 2, 3, 4, 5, 1, 1, 1]  },
-    { _id: '123asd', fullName: 'Glauci Oliveira', phoneNumber: '5511949486465', lessonId: [1, 2, 3, 1, 1, 1, 1, 1, 1, 1]  },
-    { _id: '123asd', fullName: 'Juliana Soprani', phoneNumber: '351929345307', lessonId: [1, 2, 3, 1, 1, 1, 1]  }
-  ]);
+  const mock = [
+    { _id: '123asd', fullName: 'Rafael Bueno', phoneNumber: '351929345306', languageLevel: 'advanced', learningLanguage: 'english', active: true  },
+    { _id: '123asd', fullName: 'Alexandre Andreoni', phoneNumber: '5511981294375', languageLevel: 'advanced', learningLanguage: 'english', active: true   },
+    { _id: '123asd', fullName: 'Glauci Oliveira', phoneNumber: '5511949486465', languageLevel: 'advanced', learningLanguage: 'english', active: false },
+    { _id: '123asd', fullName: 'Juliana Soprani', phoneNumber: '351929345307', languageLevel: 'advanced', learningLanguage: 'english', active: true   }
+  ]
+  const [tableData, setTableData] = useState([]);
 
   const { push } = useRouter();
 
@@ -110,15 +114,15 @@ export default function UserListPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // const response = await api.get(`v1/everylang/student`)
-        // console.log('response students', response.data.students)
-        // setTableData(response.data.students)
+        const response = await api.get(`v1/everylang/professor-students`)
+        console.log('response students', response.data)
+        setTableData(response.data)
       } catch (error) {
         console.log(error)
       }
     }
     fetchData()
-  },[currentWorkspace])
+  },[])
 
   const denseHeight = dense ? 52 : 72;
 

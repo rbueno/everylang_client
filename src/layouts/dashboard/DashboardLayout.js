@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }) {
     if (isNavHorizontal) {
       return (
         <>
-          {/* <Header onOpenNav={handleOpen} /> */}
+          <Header onOpenNav={handleOpen} />
 
           {isDesktop ? <NavHorizontal /> : renderNavVertical}
 

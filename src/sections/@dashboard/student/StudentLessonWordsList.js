@@ -79,7 +79,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { 
     word,
     score,
-    speedy
+    // speedy
   } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -122,19 +122,19 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
         <TableCell align="left">
           <Label
             variant="soft"
-            color='warning'
+            color={ score > 79 ? 'success' : 'error'}
           >
             {score || '---'}
           </Label></TableCell>
         
         
-        <TableCell align="left">
+        {/* <TableCell align="left">
           <Label
             variant="soft"
             color='warning'
           >
             {speedy || '---'}
-          </Label></TableCell>
+          </Label></TableCell> */}
 
         {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
@@ -170,8 +170,8 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
 
 const TABLE_HEAD = [
   { id: 'words', label: 'Palavras', align: 'left' },
-  { id: 'score', label: 'Pontuação geral', align: 'left' },
-  { id: 'speedy', label: 'Pontuação de speedy', align: 'left' },
+  { id: 'score', label: 'Pontuação', align: 'left' },
+  // { id: 'speedy', label: 'Pontuação de speedy', align: 'left' },
 ];
 
 
@@ -231,7 +231,7 @@ export default function StudentLessonList(props) {
 
   const denseHeight = dense ? 52 : 72;
 
-  const isNotFound = !dataFiltered.length
+  const isNotFound = !words?.length
 
 
   const handleEditRow = (adId) => {
@@ -254,7 +254,7 @@ export default function StudentLessonList(props) {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={tableData.length}
+                  rowCount={words?.length}
                   numSelected={selected.length}
                   onSort={onSort}
                   // onSelectAllRows={(checked) =>
@@ -267,7 +267,7 @@ export default function StudentLessonList(props) {
 
                 <TableBody>
                   {console.log('dataFiltered', dataFiltered)}
-                  {words.map((row) => (
+                  {words?.map((row) => (
                     <UserTableRow
                     key={row._id}
                     row={row}
@@ -278,7 +278,7 @@ export default function StudentLessonList(props) {
                   />
                   ))}
 
-                  <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, tableData.length)} />
+                  <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, words?.length)} />
 
                   <TableNoData isNotFound={isNotFound} />
                 </TableBody>
