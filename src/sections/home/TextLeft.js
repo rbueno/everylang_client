@@ -1,4 +1,5 @@
 import { m } from 'framer-motion';
+import PropTypes from 'prop-types'
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Typography, Grid, Stack } from '@mui/material';
@@ -14,7 +15,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
-  padding: theme.spacing(2, 0),
+  padding: theme.spacing(5, 0),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(2, 0),
   },
@@ -22,11 +23,12 @@ const StyledRoot = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function HomeService01() {
+export default function TextLeft({ content }) {
+  const { headText, bodyText, imageURL } = content
   const isDesktop = useResponsive('up', 'md');
 
   return (
-    <StyledRoot>
+
       <Container component={MotionViewport}>
         <Grid
           container
@@ -34,15 +36,28 @@ export default function HomeService01() {
           justifyContent="space-between"
           spacing={{ xs: 5, md: 0 }}
         >
-          <Grid item xs={12} md={7}>
-          <Content />
-          </Grid>
+          {
+            isDesktop && <>
+              <Grid item xs={12} md={7}>
+                <Description headText={headText} bodyText={bodyText} customMaxWidth='450px'/>
+              </Grid>
 
-          <Grid item xs={12} md={4}>
-            
-            <Description />
-          </Grid>
+              <Grid item xs={12} md={4}>
+                <Content imageURL={imageURL} imgMaxWidth='350px'/>
+              </Grid>
+            </>
+          }
 
+          {
+            !isDesktop && <>
+              <Grid item xs={12} md={7}>
+                <Content imageURL={imageURL} imgMaxWidth='600px'/>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Description headText={headText} bodyText={bodyText} />
+              </Grid>
+            </>
+          }
           {/* {!isDesktop && (
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
               {VisitButton}
@@ -50,17 +65,22 @@ export default function HomeService01() {
           )} */}
         </Grid>
       </Container>
-    </StyledRoot>
+
   );
 }
 
 // ----------------------------------------------------------------------
-
-function Description() {
+Description.propTypes = {
+  customMaxWidth: PropTypes.string,
+  headText: PropTypes.string,
+  bodyText: PropTypes.string
+}
+function Description({ customMaxWidth, headText, bodyText }) {
   const isDesktop = useResponsive('up', 'md');
 
   return (
     <Stack
+    maxWidth={customMaxWidth}
       sx={{
         textAlign: {
           xs: 'center',
@@ -69,44 +89,21 @@ function Description() {
       }}
     >
       <m.div variants={varFade().inDown}>
-      <Typography variant="h2" sx={{ my: 3 }}>
-      Simular conversas reais
+      <Typography variant="h3" sx={{ my: 3 }}>
+        {headText}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
       <Typography
           sx={{
-            mb: 1,
-            color: 'text.secondary',
-          }}
-        >
-          Imersão é chave para fluência. Com Everylang, você se envolve em diálogos simulados que espelham situações cotidianas. Exemplos:
-        </Typography>
-      <Typography
-          sx={{
-            mb: 1,
-            color: 'text.secondary',
-          }}
-        >
-<strong>- Pedir comida:</strong> Interaja como se estivesse pedindo um prato em um restaurante movimentado.
-        </Typography>
-      <Typography
-          sx={{
-            mb: 1,
-            color: 'text.secondary',
-          }}
-        >
-<strong>- Pedir direção:</strong> Peça direções com confiança e receba orientações claras como se estivesse na rua.
-        </Typography>
-      <Typography
-          sx={{
             mb: 5,
             color: 'text.secondary',
           }}
         >
-<strong>- Realizar compras:</strong> Experimente comprar em um supermercado ou outros tipos de lojas em um idioma estrangeiro.
+          {bodyText}
         </Typography>
+    
       </m.div>
 
       {/* {isDesktop && <m.div variants={varFade().inDown}> {VisitButton} </m.div>} */}
@@ -116,10 +113,15 @@ function Description() {
 
 // ----------------------------------------------------------------------
 
-function Content() {
+// eslint-disable-next-line react/prop-types
+function Content({ imgMaxWidth, imageURL }) {
   return (
-    <Box component={m.div} variants={varFade().inUp}>
-      <Image disabledEffect alt="rocket" src='/assets/images/home/linkhaus_okahub_banner_01.png' />
+    <Box
+    // component={m.div}
+    // variants={varFade().inUp}
+    maxWidth={imgMaxWidth}
+    >
+      <Image disabledEffect alt="rocket" src={imageURL} />
     </Box>
   );
 }

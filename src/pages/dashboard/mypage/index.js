@@ -909,7 +909,7 @@ const EditParagraph = ({ currentItemState, saveItemEdition, isOpen, businessSlug
         fullWidth
         value={link}
         onChange={(e) => setLink(e.target.value)}
-        label="Exemplo: www.instagram.com/everylang.co"
+        label="Exemplo: www.instagram.com/everylang.ai"
         />
 
       </Box> */}
@@ -2063,7 +2063,7 @@ export default function MyPage() {
                       //  startIcon={<IosShareIcon />}
                       // target="_blank"
                       // rel="noopener"
-                      // href={`https://${currentWorkspace?.businessId?.slug}.everylang.co?ohlhv`}
+                      // href={`https://${currentWorkspace?.businessId?.slug}.everylang.ai?ohlhv`}
                        variant='contained'
                        onClick={handleOpenShareOptions}
                       >
@@ -2124,7 +2124,7 @@ export default function MyPage() {
                         // sx={{ minHeight: 0, minWidth: 0, padding: 0 }}
                         target="_blank"
                         rel="noopener"
-                        href={`https://${currentWorkspace?.businessId?.slug}.everylang.co?ohlhv`}
+                        href={`https://${currentWorkspace?.businessId?.slug}.everylang.ai?ohlhv`}
                         size="small"
                       >
                         Visualizar

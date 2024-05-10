@@ -89,7 +89,7 @@ export default function AboutPage() {
 
 <p>Caso o usuário tenha dúvidas ou preocupações relacionadas à privacidade e à proteção de dados pessoais, ou queira exercer seus direitos como usuário, ele pode entrar em contato com o Pulse chatbot pelos seguintes meios:</p>
 <ul>
-	<li>Endereço de e-mail: contact@everylang.co</li>
+	<li>Endereço de e-mail: contact@everylang.ai</li>
 </ul>
 
 <p>O Pulse chatbot se compromete a responder às solicitações dos usuários em relação à privacidade e à proteção de dados pessoais no prazo máximo de 15 dias úteis.</p>

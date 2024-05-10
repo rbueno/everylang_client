@@ -53,7 +53,7 @@ export default function UserEditPage() {
           ]}
         /> */}
       <Typography variant="h4" sx={{ mb: 5}}>Editar usuário</Typography>
-      <Typography variant="p" sx={{ mb: 5}}>Por motivos de segurança, para editar um usuário por favor solicite via email contato@everylang.co</Typography>
+      <Typography variant="p" sx={{ mb: 5}}>Por motivos de segurança, para editar um usuário por favor solicite via email contato@everylang.ai</Typography>
         {/* <UserNewEditForm isEdit currentUser={currentUser} /> */}
       </Container>
     </>

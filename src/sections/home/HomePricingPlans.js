@@ -144,7 +144,7 @@ function Content() {
               color="inherit"
               size="large"
               variant="contained"
-              href="mailto:support@everylang.co?subject=[Feedback] from Customer"
+              href="mailto:support@everylang.ai?subject=[Feedback] from Customer"
               sx={{
                 bgcolor: 'text.primary',
                 color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),

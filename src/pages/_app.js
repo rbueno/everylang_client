@@ -56,7 +56,7 @@ import { MotionLazyContainer } from '../components/animate';
 import { ThemeSettings, SettingsProvider } from '../components/settings';
 
 // Check our docs
-// https://docs.everylang.co/authentication/js-version
+// https://docs.everylang.ai/authentication/js-version
 
 import { AuthProvider } from '../auth/JwtContext';
 // import { AuthProvider } from '../auth/Auth0Context';

@@ -160,8 +160,8 @@ export const PATH_DASHBOARD = {
 };
 
 export const PATH_DOCS = {
-  root: 'https://docs.everylang.co',
-  changelog: 'https://docs.everylang.co/changelog',
+  root: 'https://docs.everylang.ai',
+  changelog: 'https://docs.everylang.ai/changelog',
 };
 
 export const PATH_ZONE_ON_STORE = 'https://mui.com/store/items/zone-landing-page/';

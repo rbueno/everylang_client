@@ -160,13 +160,19 @@ function Description() {
         </StyledGradientText>
       </m.div>
 
-
       <m.div variants={varFade().in}>
         <Typography variant="h3" sx={{ textAlign: 'center' }}>
-        Alcance a fluência no inglês com conversar diárias e dinâmicas via WhatsApp.
+        🇺🇸🇫🇷🇪🇸🇩🇪🇰🇷🇨🇳🇯🇵
           
         </Typography>
       </m.div>
+      <m.div variants={varFade().in}>
+        <Typography variant="h3" sx={{ textAlign: 'center' }}>
+        Estude pronúncia e gramática com conversação e exercícios via WhatsApp.
+          
+        </Typography>
+      </m.div>
+   
 
       
 
@@ -181,9 +187,9 @@ function Description() {
             target="_blank"
             rel="noopener"
             href='https://wa.me/5511999284097?text=oi'
-            sx={{ borderColor: 'text.primary', width:"190px" }}
+            sx={{ borderColor: 'text.primary', width:"210px" }}
           >
-            Conversar agora
+            Teste grátis agora
           </Button>
           </Stack>
 

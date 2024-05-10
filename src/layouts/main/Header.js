@@ -66,7 +66,7 @@ export default function Header() {
 
           {/* {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />} */}
 
-          {/* <Button variant="contained" target="_blank" rel="noopener" href='https://www.everylang.co/auth/register'>
+          {/* <Button variant="contained" target="_blank" rel="noopener" href='https://www.everylang.ai/auth/register'>
             Criar conta
           </Button> */}
 

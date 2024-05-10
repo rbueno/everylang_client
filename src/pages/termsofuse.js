@@ -118,7 +118,7 @@ export default function AboutPage() {
 
 <h2>7. Contato</h2>
 
-<p>Em caso de dúvidas, sugestões ou reclamações sobre o Pulse chatbot ou sobre este termo de uso, o usuário poderá entrar em contato com a empresa desenvolvedora pelo e-mail contact@everylang.co.</p>
+<p>Em caso de dúvidas, sugestões ou reclamações sobre o Pulse chatbot ou sobre este termo de uso, o usuário poderá entrar em contato com a empresa desenvolvedora pelo e-mail contact@everylang.ai.</p>
 
 <h2>Conclusão</h2>
 

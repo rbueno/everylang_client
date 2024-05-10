@@ -210,7 +210,7 @@ export default function UserNewEditForm({ isEdit = false, editingWorkspace }) {
                         {newBusinessName || 'meu-negocio'}
                       </Typography>
                     <Typography variant="body2" component="p">
-                        .everylang.co
+                        .everylang.ai
                       </Typography> */}
                     </Box>
                       <TextField

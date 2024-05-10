@@ -33,7 +33,7 @@ const LINKS = [
   {
     headline: 'Contact',
     children: [
-      { name: 'support@everylang.co', href: '#' },
+      { name: 'support@everylang.ai', href: '#' },
       { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
     ],
   },
@@ -72,7 +72,7 @@ export default function Footer(props) {
         >
           © All rights reserved
           <br /> made by &nbsp;
-          <Link href="https://www.everylang.co/"
+          <Link href="https://www.everylang.ai/"
           sx={{
             color: loadedTheme?.text?.paragraph?.color || '#191919'
           }}
