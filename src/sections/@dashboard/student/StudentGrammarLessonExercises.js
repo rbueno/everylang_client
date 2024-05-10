@@ -139,7 +139,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           </Stack>
           <Box maxWidth={600}>
           <Typography variant="body1">
-            {discussion[0].content}
+            {discussion.length > 0 && discussion[0].content}
             </Typography>
           </Box>
         </TableCell>

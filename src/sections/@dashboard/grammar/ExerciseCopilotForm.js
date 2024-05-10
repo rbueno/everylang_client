@@ -241,7 +241,7 @@ const ExerciseCopilotForm = (props) => {
 
     const [attributes, setAttributes] = useState('')
     const [specification, setSpecification] = useState('')
-    const [sentenceQuantity, setSentenceQuantity] = useState(5)
+    const [sentenceQuantity, setSentenceQuantity] = useState(4)
     const [contextType, setContextType] = useState('noContext')
     const [comprehensiveContext, setComprehensiveContext] = useState('')
     const [targetedContext, setTargetedContext] = useState('')
@@ -412,25 +412,30 @@ const ExerciseCopilotForm = (props) => {
               <>
               <Box m={2}>
               <Box m={2}>
-              <Typography variant='subtitle1'>Gere frases automaticamente com ajuda do Everylang Copilot criado com ChatGPT.</Typography>
+              
+              <Box display='flex' justifyContent='center'>
+                                <Box maxWidth='80%' display='flex' textAlign='center'>
+                                <Typography variant='subtitle1'>Criar questões automaticamente com a nossa inteligência artificial.</Typography>
+                                </Box>
+                            </Box>
               <Box marginTop={2}>
                       <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Quantidade de exercícios</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Quantidade de questões</InputLabel>
                         <Select
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           value={sentenceQuantity}
-                          label="Quantidade de exercícios"
+                          label="Quantidade de questões"
                           // error={level === '0'}
                           onChange={onChangeSentenceQuantity}
                         >
-                          <MenuItem value={5}>5</MenuItem>
+                          <MenuItem value={2}>2</MenuItem>
+                          <MenuItem value={4}>4</MenuItem>
+                          <MenuItem value={6}>6</MenuItem>
+                          <MenuItem value={8}>8</MenuItem>
                           <MenuItem value={10}>10</MenuItem>
-                          <MenuItem value={11}>11</MenuItem>
                           <MenuItem value={12}>12</MenuItem>
-                          <MenuItem value={13}>13</MenuItem>
                           <MenuItem value={14}>14</MenuItem>
-                          <MenuItem value={15}>15</MenuItem>
                           
                         </Select>
                       </FormControl>
@@ -543,7 +548,7 @@ const ExerciseCopilotForm = (props) => {
               }
               </Box>
               <Box m={2} display='flex' flexDirection='column'>
-                      <LoadingButton loading={submitting} variant='contained' onClick={() => generateSentence()}>Gerar exercícios</LoadingButton>
+                      <LoadingButton loading={submitting} variant='contained' onClick={() => generateSentence()}>Criar exercícios</LoadingButton>
 
           </Box>
               </>

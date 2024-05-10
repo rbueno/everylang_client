@@ -71,7 +71,7 @@ function StudentGrammarLessonInsight({ dataInsight }) {
               <Box display='flex' flexDirection='row' alignItems='center' marginBottom={2}>
                       {/* <Typography variant="subtitle2">Status</Typography> */}
                       <Label sx={{ marginLeft: 1}} color={dataInsight.grammarExerciseSession[0].status === 'done' ? 'success' : 'warning'}>status: {dataInsight.grammarExerciseSession[0].status}</Label>
-                      <Label sx={{ marginLeft: 1}} color='success'>Pontuação: {dataInsight.exercisesPercent?.pronunciation?.averageScore}</Label>
+                      <Label sx={{ marginLeft: 1}} color='success'>Pontuação: {dataInsight.grammarExerciseSession[0].status === 'done' ? dataInsight.exercisesPercent?.grammar?.averageScore : '---'}</Label>
                     </Box>
 
                     <Divider sx={{ margin: 2 }} />
@@ -112,8 +112,8 @@ function StudentGrammarLessonInsight({ dataInsight }) {
                       <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.internalTitle || '---'}</Typography>
                     </Box>
                     
-                    <Box display='flex' flexDirection='row' alignItems='center'>
-                      <Typography variant="subtitle2">- Descrição:</Typography>
+                    <Box display='flex' flexDirection='row' textAlign='start' alignItems='bottom'>
+                      <Typography variant="subtitle2">Descrição:</Typography>
                       <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.description || '---'}</Typography>
                     </Box>
 
@@ -220,7 +220,7 @@ const { push } = useRouter()
               <Box display='flex' flexDirection='row' alignItems='center' marginBottom={2}>
                       {/* <Typography variant="subtitle2">Status</Typography> */}
                       <Label sx={{ marginLeft: 1}} color={dataInsight.pronunciationPracticeSession[0].status === 'done' ? 'success' : 'warning'}>status: {dataInsight.pronunciationPracticeSession[0].status}</Label>
-                      <Label sx={{ marginLeft: 1}} color='success'>Pontuação: {dataInsight.exercisesPercent?.pronunciation?.averageScore}</Label>
+                      <Label sx={{ marginLeft: 1}} color='success'>Pontuação: {dataInsight.pronunciationPracticeSession[0].status === 'done' ? dataInsight.exercisesPercent?.pronunciation?.averageScore : '---'}</Label>
                     </Box>
 
                     <Divider sx={{ margin: 2 }} />
