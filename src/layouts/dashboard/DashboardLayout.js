@@ -61,7 +61,7 @@ export default function DashboardLayout({ children }) {
     if (isNavMini) {
       return (
         <>
-          {/* <Header onOpenNav={handleOpen} /> */}
+          <Header onOpenNav={handleOpen} />
 
           <Box
             sx={{
@@ -79,7 +79,7 @@ export default function DashboardLayout({ children }) {
 
     return (
       <>
-        {/* <Header onOpenNav={handleOpen} /> */}
+        <Header onOpenNav={handleOpen} />
 
         <Box
           sx={{
