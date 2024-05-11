@@ -22,6 +22,16 @@ import { LoadingButton } from '@mui/lab';
 
 import { useSnackbar } from 'notistack';
 
+import { styled } from '@mui/material/styles'
+const DrawerRootStyled = styled('div')(({theme}) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: 350
+  },
+  [theme.breakpoints.up('md')]: {
+    width: 600
+  }
+}))
+
 const grammarCategories = [
   { "category": "adjectiveAgreement", "english": "adjective agreement", "title": "concordância de adjetivos" },
   { "category": "adjectivesVsAdverb", "english": "adjectives vs adverb", "title": "adjetivos vs advérbio" },
@@ -330,9 +340,13 @@ const ExerciseManuallyForm = (props) => {
 
     }
       return (
-        <>
-                
-               
+        <DrawerRootStyled>
+                <Box marginTop={2}>
+                <Box display='flex' justifyContent='center'>
+                                <Box maxWidth='80%' display='flex' textAlign='center'>
+                                <Typography variant='subtitle1'>Criar questões automaticamente com a nossa inteligência artificial.</Typography>
+                                </Box>
+                            </Box>
                                  <Box m={2}>
                                       <FreeSoloCreateOptionDialog value={grammarExerciseCategory} setValue={setGrammarExerciseCategory} />
                                  </Box>
@@ -395,15 +409,15 @@ const ExerciseManuallyForm = (props) => {
                               />
                             </Box>
     
-    
               <Box m={2} display='flex' flexDirection='column'>
                           <LoadingButton loading={submitting} variant='contained' onClick={() => handleOnClick()}>{onClickActionTitle}</LoadingButton>
     
               </Box>
                                   </>
                           }
+                          </Box>
     
-      </>)
+      </DrawerRootStyled>)
   }
 
   export default ExerciseManuallyForm

@@ -68,6 +68,16 @@ import MenuPopover from '../../../components/menu-popover';
 import { fDate } from '../../../utils/formatTime';
 import StudentLessonWordsList from './StudentLessonWordsList'
 
+import { styled } from '@mui/material/styles'
+const DrawerRootStyled = styled('div')(({theme}) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: 350
+  },
+  [theme.breakpoints.up('md')]: {
+    width: 600
+  }
+}))
+
 // ----------------------------------------------------------------------
 
 UserTableRow.propTypes = {
@@ -252,7 +262,7 @@ console.log('GrammarExerciseDiscussion', discussion)
   //           sentenceScored: 'asd',
   //           wordsScore: [{ word: 'hi', score: 90}, { word: 'hi', score: 90}]
   return (
-    <Box sx={{ width: 600 }}>
+    <DrawerRootStyled>
     <Box m={4}>
       
       <Typography variant='h5'>Pergunta:</Typography>
@@ -298,7 +308,7 @@ console.log('GrammarExerciseDiscussion', discussion)
       </Box>))
     }
     
-    </Box>
+    </DrawerRootStyled>
   )
 }
 

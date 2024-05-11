@@ -252,7 +252,7 @@ export default function BusinessEdit({ editingWorkspace }) {
                 {' '}
                  segundos ...
                 </Typography>
-              <Typography variant='caption'>Isso pode demorar 60 segundas</Typography>
+              <Typography variant='caption'>Isso pode demorar 60 segundos</Typography>
               </Stack>
             }
               <LoadingButton onClick={() => handleAdGenerator()} variant="contained" loading={submitting}>

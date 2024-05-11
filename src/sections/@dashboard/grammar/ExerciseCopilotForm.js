@@ -23,6 +23,16 @@ import { useSnackbar } from 'notistack';
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
+import { styled } from '@mui/material/styles'
+const DrawerRootStyled = styled('div')(({theme}) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: 350
+  },
+  [theme.breakpoints.up('md')]: {
+    width: 600
+  }
+}))
+
 const grammarCategories = [
   { "category": "adjectiveAgreement", "english": "adjective agreement", "title": "concordância de adjetivos" },
   { "category": "adjectivesVsAdverb", "english": "adjectives vs adverb", "title": "adjetivos vs advérbio" },
@@ -404,20 +414,20 @@ const ExerciseCopilotForm = (props) => {
       setSubmitting(false)
     };
   
-    return (<Box
-      sx={{ width: 600 }}
+    return (<DrawerRootStyled
     >
     <>
 
-              <>
+
               <Box m={2}>
               <Box m={2}>
               
               <Box display='flex' justifyContent='center'>
                                 <Box maxWidth='80%' display='flex' textAlign='center'>
-                                <Typography variant='subtitle1'>Criar questões automaticamente com a nossa inteligência artificial.</Typography>
+                                <Typography variant='subtitle1'>Criar questões manualmente</Typography>
                                 </Box>
                             </Box>
+
               <Box marginTop={2}>
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Quantidade de questões</InputLabel>
@@ -543,7 +553,7 @@ const ExerciseCopilotForm = (props) => {
                 {' '}
                  segundos ...
                 </Typography>
-              <Typography variant='caption'>Isso pode demorar 60 segundas</Typography>
+              <Typography variant='caption'>Isso pode demorar 60 segundos</Typography>
               </Stack>
               }
               </Box>
@@ -552,8 +562,8 @@ const ExerciseCopilotForm = (props) => {
 
           </Box>
               </>
-    </>
-    </Box>)
+
+    </DrawerRootStyled>)
   }
 
   export default ExerciseCopilotForm

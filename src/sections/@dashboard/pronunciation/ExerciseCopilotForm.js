@@ -20,6 +20,16 @@ import { useSnackbar } from 'notistack';
 
 import TagsInput from './TagsInput'
 
+import { styled } from '@mui/material/styles'
+const DrawerRootStyled = styled('div')(({theme}) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: 350
+  },
+  [theme.breakpoints.up('md')]: {
+    width: 600
+  }
+}))
+
 export const wordsCount = ({ words }) => {
   let contagem = {};
 
@@ -214,8 +224,10 @@ const ExerciseCopilotForm = (props) => {
        
     }
   
-    return (<Box
-      sx={{ width: 600 }}
+    return (<DrawerRootStyled
+      // sx={{ width: 350 }}
+      // maxWidth='asdasd'
+      // fullWidth
     >
                     <>
                           <Box m={2}>
@@ -428,7 +440,7 @@ const ExerciseCopilotForm = (props) => {
   
                       </Box>
                           </>
-    </Box>)
+    </DrawerRootStyled>)
   }
 
   export default ExerciseCopilotForm

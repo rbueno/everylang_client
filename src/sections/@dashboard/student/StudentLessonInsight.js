@@ -32,6 +32,7 @@ import { PATH_DASHBOARD } from '../../../routes/paths'
 
 
 import { _bookings, _bookingNew, _bookingsOverview, _bookingReview } from '../../../_mock/arrays';
+import translate from 'src/utils/translate';
 
 function StudentGrammarLessonInsight({ dataInsight }) {
   const { push } = useRouter()
@@ -86,11 +87,11 @@ function StudentGrammarLessonInsight({ dataInsight }) {
                     </Box>
                     <Box display='flex' flexDirection='row' alignItems='center'>
                       <Typography variant="subtitle2">- Idioma:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.learningLanguage}</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{translate('learningLanguage', dataInsight.lesson?.learningLanguage)}</Typography>
                     </Box>
                     <Box display='flex' flexDirection='row' alignItems='center'>
                       <Typography variant="subtitle2">- Proficiência:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.languageLevel}</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{translate('languageLevel', dataInsight.lesson?.languageLevel)}</Typography>
                     </Box>
                    
                     <Divider sx={{ margin: 2 }} />
@@ -235,11 +236,11 @@ const { push } = useRouter()
                     </Box>
                     <Box display='flex' flexDirection='row' alignItems='center'>
                       <Typography variant="subtitle2">- Idioma:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.learningLanguage}</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{translate('learningLanguage', dataInsight.lesson?.learningLanguage)}</Typography>
                     </Box>
                     <Box display='flex' flexDirection='row' alignItems='center'>
                       <Typography variant="subtitle2">- Proficiência:</Typography>
-                      <Typography sx={{ marginLeft: 1}} variant="caption">{dataInsight.lesson?.languageLevel}</Typography>
+                      <Typography sx={{ marginLeft: 1}} variant="caption">{translate('languageLevel', dataInsight.lesson?.languageLevel)}</Typography>
                     </Box>
                    
                     <Divider sx={{ margin: 2 }} />

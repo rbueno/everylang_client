@@ -16,6 +16,16 @@ import { useSnackbar } from 'notistack';
 
 import TagsInput from './TagsInput'
 
+import { styled } from '@mui/material/styles'
+const DrawerRootStyled = styled('div')(({theme}) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: 350
+  },
+  [theme.breakpoints.up('md')]: {
+    width: 600
+  }
+}))
+
 const ExerciseManuallyForm = (props) => {
 
     const {
@@ -71,8 +81,7 @@ const ExerciseManuallyForm = (props) => {
 
     
   
-    return (<Box
-      sx={{ width: 600 }}
+    return (<DrawerRootStyled
     >
   
                   <>
@@ -154,7 +163,7 @@ const ExerciseManuallyForm = (props) => {
   
                     </Box>
                       </>  
-    </Box>   )
+    </DrawerRootStyled>   )
   }
 
   export default ExerciseManuallyForm
