@@ -20,6 +20,7 @@ import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
 import { fDate } from '../../../../utils/formatTime';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import translate from 'src/utils/translate';
 
 // ----------------------------------------------------------------------
 
@@ -106,7 +107,7 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             // color='success'
             sx={{ color: '#7635dc'}}
           >
-            {languageLevel}
+            {translate('languageLevel', languageLevel)}
           </Label>
          
 
@@ -121,7 +122,7 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             // color='success'
             sx={{ color: '#7635dc'}}
           >
-            {learningLanguage}
+            {translate('learningLanguage', learningLanguage)}
           </Label>
         
             

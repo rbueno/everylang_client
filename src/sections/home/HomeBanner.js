@@ -118,7 +118,7 @@ function Description() {
       
       <Box marginTop={5}>
       <Typography variant="h4" sx={{ textAlign: 'center' }}>
-          Alavanque seu Aprendizado de Idiomas usando o WhatsApp
+          Estude pronúncia e gramática com conversação e exercícios via WhatsApp
         </Typography>
       </Box>
 

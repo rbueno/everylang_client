@@ -78,6 +78,7 @@ import EditLesson from '../simpleForms/editLesson'
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { fontWeight } from '@mui/system';
+import translate from 'src/utils/translate';
 const SECTIONS = [
   // {
   //   value: 'lessonSection',
@@ -1181,19 +1182,17 @@ const handleOpenDrawer = (drawerForm) => {
 
                         <Box display='flex' flexDirection='row' alignItems='center'>
                           <Typography variant="subtitle2">- Idioma:</Typography>
-                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.learningLanguage}</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{translate('learningLanguage', newAdsGenerated?.lesson?.learningLanguage)}</Typography>
                         </Box>
 
                         <Box display='flex' flexDirection='row' alignItems='center'>
                           <Typography variant="subtitle2">- Proficiência:</Typography>
-                          <Typography sx={{ marginLeft: 1}} variant="caption">{newAdsGenerated?.lesson?.languageLevel}</Typography>
+                          <Typography sx={{ marginLeft: 1}} variant="caption">{translate('languageLevel', newAdsGenerated?.lesson?.languageLevel)}</Typography>
                         </Box>
 
                         <Box display='flex' flexDirection='column'>
                     
 
-                 
-                  
                      </Box>
 
 
