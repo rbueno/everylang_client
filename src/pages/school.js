@@ -21,7 +21,7 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title> Professores | Everylang</title>
+        <title>Everylang | professores e escola</title>
       </Head>
 
       <HomeBannerSchool />

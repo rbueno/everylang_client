@@ -118,7 +118,7 @@ function Description() {
       
       <Box marginTop={5}>
       <Typography variant="h4" sx={{ textAlign: 'center' }}>
-          Um meio eficiênte de seus alunos estudarem pronúncia e gramática após as aulas.
+          Crie exercícios personalizados para que seus alunos estudem pronúncia e gramática após as aulas.
         </Typography>
       </Box>
 

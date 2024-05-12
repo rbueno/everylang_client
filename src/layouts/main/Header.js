@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
+import { m, useScroll } from 'framer-motion';
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container, Link } from '@mui/material';
+import { useTheme, styled } from '@mui/material/styles';
+import { Box, Button, AppBar, Toolbar, Container, Link, Typography } from '@mui/material';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
-import { bgBlur } from '../../utils/cssStyles';
+import { bgBlur, textGradient } from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config-global';
 // routes
@@ -18,6 +19,32 @@ import Label from '../../components/label';
 import NavMobile from './nav/mobile';
 import navConfig from './nav/config-navigation';
 import NavDesktop from './nav/desktop';
+import { secondaryFont } from '../../theme/typography';
+
+
+// ----------------------------------------------------------------------
+
+const colorBSGray = '#8600b3'
+const colorBSGreen = '#0073e6'
+
+const StyledGradientText = styled(m.h1)(({ theme }) => ({
+  ...textGradient(
+    `300deg, ${colorBSGreen} 0%, ${colorBSGray} 25%, ${colorBSGreen} 50%, ${colorBSGray} 75%, ${colorBSGreen} 100%`
+  ),
+  backgroundSize: '400%',
+  fontFamily: secondaryFont.style.fontFamily,
+  fontSize: `${34 / 16}rem`,
+  textAlign: 'center',
+  lineHeight: 1,
+  padding: 0,
+  marginTop: 0,
+  marginBottom: 0,
+  letterSpacing: 4,
+  [theme.breakpoints.up('md')]: {
+    fontSize: `${46 / 16}rem`,
+  },
+}));
+
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +77,7 @@ export default function Header({ pathname }) {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <Logo />
+        <Logo />
 
           {/* <Link
             href={PATH_DOCS.changelog}
@@ -68,7 +95,7 @@ export default function Header({ pathname }) {
 
 {
   pathname === '/' && <>
-  <Button variant="contained" target="_blank" rel="noopener" href='https://www.everylang.ai/school'>
+  <Button variant="contained" rel="noopener" href='/school'>
             Sou professor
           </Button>
   </>

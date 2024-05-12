@@ -90,7 +90,7 @@ export default function AboutTeam() {
             color: 'text.secondary',
           }}
         >
-          Normalmente, explicar a pronúncia correta em sala de aula não garante que o aluno consiga praticar posteriormente. Com o Everylang, você pode criar exercícios de pronúncia personalizados com base nos erros dos seus alunos. A IA permite que eles pratiquem a pronúncia correta em frases reais, fora do ambiente da aula. Eles recebem feedback instantâneo e sugestões automáticas de melhoria, corrigindo erros comuns para aprimorar a fluência. Dessa forma, o aprendizado torna-se muito mais contínuo e personalizado, elevando o impacto das suas aulas.
+          Explicar a pronúncia correta em sala de aula não garante que o aluno consiga praticar posteriormente. Com a inteligência artificial do Everylang, você pode criar exercícios de pronúncia personalizados com base nos erros dos seus alunos. Ao receber o exercício, o aluno praticará a pronúncia fora do ambiente de aula, recebendo feedbacks intantâneos.
         </Typography>
     </Box>
     <Box mt={6}>
@@ -111,7 +111,7 @@ export default function AboutTeam() {
             color: 'text.secondary',
           }}
         >
-          O Everylang permite que você crie exercícios personalizados de gramática adaptados aos pontos fracos de cada aluno. Nossa IA identifica as regras gramaticais que eles têm mais dificuldade, seja o uso correto dos tempos verbais, a concordância ou as preposições. Ao realizar esses exercícios, os alunos recebem explicações detalhadas e feedback imediato, corrigindo seus erros em tempo real e reforçando o aprendizado. Isso permite que eles pratiquem fora das aulas, melhorando a precisão e a confiança na comunicação, enquanto você obtém insights valiosos sobre suas necessidades para planejar aulas mais eficazes.
+          Crie exercícios personalizados de gramática adaptados aos pontos fracos de cada aluno. Nossa IA identifica as regras gramaticais que eles têm mais dificuldade, seja o uso correto dos tempos verbais, a concordância ou as preposições. Ao realizar esses exercícios, os alunos recebem explicações detalhadas e feedback imediato, corrigindo seus erros em tempo real e reforçando o aprendizado. Isso permite que eles pratiquem fora das aulas, melhorando a precisão e a confiança na comunicação, enquanto você obtém insights valiosos sobre suas necessidades para planejar aulas mais eficazes.
         </Typography>
     </Box>
     <Box mt={6}>
@@ -157,27 +157,6 @@ export default function AboutTeam() {
         </Typography>
     </Box>
     
-    <Box mt={6}>
-    <Typography
-    variant='h4'
-          sx={{
-            mx: 'auto',
-            maxWidth: 640,
-            // color: 'text.secondary',
-          }}
-        >
-          Totalmente Grátis
-        </Typography>
-    <Typography
-          sx={{
-            mx: 'auto',
-            maxWidth: 640,
-            color: 'text.secondary',
-          }}
-        >
-          O Everylang é gratuito para professores e escolas. Aproveite todos os recursos e impulsione o aprendizado de seus alunos!
-        </Typography>
-    </Box>
     </Container>
    </Box>
   );
