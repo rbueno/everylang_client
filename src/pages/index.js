@@ -144,16 +144,14 @@ const homeContent = [
     <>
       <Head>
         <title>Estude pronúncia e gramática com conversação e exercícios via WhatsApp | Everylang</title>
-        <meta name="description" content="Estude pronúncia e gramática com conversação e exercícios via WhatsApp" />
+        <meta name="description" content="Estude pronúncia e gramática com conversação e exercícios usando o WhatsApp." />
         <link href="https://www.everylang.ai" rel="canonical" />
 
-        <meta property="og:title" content="Estude pronúncia e gramática com conversação e exercícios via WhatsApp." />
+        <meta property="og:title" content="Estude pronúncia e gramática com conversação e exercícios usando o WhatsApp." />
         <meta property="og:url" content="https://www.everylang.ai" />
         <meta property="og:description" content="Estude pronúncia e gramática com conversação e exercícios via WhatsApp" />
-        <meta property="og:image" content="https://www.everylang.ai/assets/images/home/linkhaus_okahub_01_captura_gestao_leads.jpg" />
+        <meta property="og:image" content="https://www.everylang.ai/assets/everylang_logo_purple_square.png" />
       </Head>
-
-      
 
       <HomeBanner />
 
