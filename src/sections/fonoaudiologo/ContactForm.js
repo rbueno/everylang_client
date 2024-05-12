@@ -19,7 +19,8 @@ export default function ContactForm() {
         </Typography>
       </m.div>
 
-      <Box>
+      <Stack>
+         <Box>
          <Button
             size="large"
             variant="contained"
@@ -29,7 +30,19 @@ export default function ContactForm() {
           >
             Criar conta grátis
           </Button>
-      </Box>
+         </Box>
+         <Box>
+         <Button
+            size="large"
+            // variant="o"
+            rel="noopener"
+            href='/auth/login/'
+            // sx={{ borderColor: 'white', color: 'white' }}
+          >
+            Já tenho uma conta
+          </Button>
+         </Box>
+      </Stack>
     </Stack>
   );
 }

@@ -33,23 +33,10 @@ const StyledContent = styled('div')(({ theme }) => ({
 export default function AboutHero() {
   return (
     <StyledRoot>
-      <Container component={MotionContainer}>
-        <StyledContent>
-        
-
-          <Stack spacing={2} display="inline-flex" direction="row" sx={{ color: 'primary.main' }}>
-            <TextAnimate text="Você" />
-            <TextAnimate text="é" />
-          </Stack>
-          <br />
-          <Stack spacing={2} display="inline-flex" direction="row" sx={{ color: 'common.white' }}>
-            <TextAnimate text="Professor(a)" />
-            <TextAnimate text="ou" />
-            <TextAnimate text="escola?" />
-          </Stack>
-
-          <m.div variants={varFade().inRight}>
-            <Typography
+    <Box p={4}>
+      <Typography variant='h2' sx={{ color: 'common.white'}}>Você é</Typography>
+      <Typography variant='h1' sx={{ color: 'common.white'}}>Professor(a) ou escola?</Typography>
+      <Typography
               variant="h4"
               sx={{
                 mt: 5,
@@ -57,12 +44,9 @@ export default function AboutHero() {
                 fontWeight: 'fontWeightMedium',
               }}
             >
-              Utilize a tecnologia Everylang com o seus alunos.
-              {/* <br /> Confira os benefícios */}
+              Utilize a tecnologia Everylang com seus alunos.
             </Typography>
-          </m.div>
-
-          <Box mt={6}>
+            <Box mt={2}>
           <Button
             size="large"
             variant="outlined"
@@ -73,10 +57,7 @@ export default function AboutHero() {
             Confira os benefícios
           </Button>
           </Box>
-          
-        
-        </StyledContent>
-      </Container>
+    </Box>
     </StyledRoot>
   );
 }

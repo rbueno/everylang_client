@@ -68,7 +68,7 @@ import { useSettingsContext } from '../components/settings/SettingsContext';
 
 // UserProfilePage.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-LandingPage.getLayout = (page) => <MainLayout> {page} </MainLayout>;
+
 // ----------------------------------------------------------------------
 
 
@@ -100,8 +100,9 @@ const eventEntry = ({ component, eventType, data }) => {
   })
 }
 
+Home.getLayout = (page) => <MainLayout> {page} </MainLayout>;
 
-export function LandingPage() {
+export default function Home() {
   const theme = useTheme();
 
   const { scrollYProgress } = useScroll();
@@ -192,95 +193,4 @@ const homeContent = [
   );
 }
 
-Home.propTypes = {
-  business: PropTypes.object,
-  client: PropTypes.string
-}
 
-export default function Home({ business, client }) {
-  // const { push } = useRouter()
-  // useEffect(() => {
-  //   push('/auth/login')
-  // })
-  if (business.pageSlug) return <MyPage business={business} />
-  if (business.iswww) return <LandingPage />
-  return <LandingPage />
-}
-
-export const getServerSideProps = async (prop) => {
-
-mongoose.connect(process.env.MONGODB_URI || '', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-const bioPageSchema = {
-    businessId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Business'
-    },
-    pageSlug: { type: String, require: true, index: { unique: true } },
-    address: { type: String },
-    description: { type: String },
-    name: { type: String },
-    themeColor: { type: String },
-    meta: { type: Object },
-    header: { type: Object },
-    sections: [Object],
-    active: { type: Boolean, default: true },
-    deletedAt: { type: Date, default: null },
-    s3BucketDir: { type: String },
-    avatarURL: { type: String }
-
-}
-
-let BioPage;
-
-const newSchema = new Schema(bioPageSchema, { timestamps: true })
-try {
-  // Trying to get the existing model to avoid OverwriteModelError
-  BioPage = mongoose.model("BioPage");
-} catch {
-    BioPage = mongoose.model("BioPage", newSchema);
-}
-  const client = prop.req.headers.host ? prop.req.headers.host.split('.')[0] : null
-  console.log('client ===========>', client)
-  if (client === 'www') {
-    return {
-      props: {
-        business:{ iswww: true },
-        client
-      },
-    }
-  }
-
- 
-
-const myPage = await BioPage.findOne({ pageSlug: client })
-if (!myPage) {
-  return {
-    props: {
-      business:{ iswww: true },
-      client
-    },
-  }
-}
-  
-  try {
-    
-  return {
-    props: {
-      business: JSON.parse(JSON.stringify(myPage)),
-      client
-    },
-  }
-  } catch (error) {
-    console.log('caiu no erro', error)
-    return {
-      props: {
-        business: { iswww: false },
-        client
-      },
-    }
-  }
-}

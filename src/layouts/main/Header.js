@@ -21,7 +21,7 @@ import NavDesktop from './nav/desktop';
 
 // ----------------------------------------------------------------------
 
-export default function Header() {
+export default function Header({ pathname }) {
   const theme = useTheme();
 
   const isDesktop = useResponsive('up', 'md');
@@ -52,7 +52,7 @@ export default function Header() {
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
           <Logo />
 
-          <Link
+          {/* <Link
             href={PATH_DOCS.changelog}
             target="_blank"
             rel="noopener"
@@ -60,15 +60,20 @@ export default function Header() {
             sx={{ ml: 1 }}
           >
             <Label color="info"> v1.0.0 </Label>
-          </Link>
+          </Link> */}
 
           <Box sx={{ flexGrow: 1 }} />
 
           {/* {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />} */}
 
-          {/* <Button variant="contained" target="_blank" rel="noopener" href='https://www.everylang.ai/auth/register'>
-            Criar conta
-          </Button> */}
+{
+  pathname === '/' && <>
+  <Button variant="contained" target="_blank" rel="noopener" href='https://www.everylang.ai/school'>
+            Sou professor
+          </Button>
+  </>
+}
+          
 
           {/* {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />} */}
         </Container>

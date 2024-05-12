@@ -7,6 +7,10 @@ import MainLayout from '../layouts/main';
 // sections
 import { AboutHero, AboutWhat, AboutTeam, AboutVision, AboutTestimonials, ContactForm } from '../sections/fonoaudiologo';
 
+import {
+  HomeBannerSchool,
+} from '../sections/home';
+
 // ----------------------------------------------------------------------
 
 AboutPage.getLayout = (page) => <MainLayout>{page}</MainLayout>;
@@ -20,7 +24,7 @@ export default function AboutPage() {
         <title> Professores | Everylang</title>
       </Head>
 
-      <AboutHero />
+      <HomeBannerSchool />
 
       {/* <AboutWhat /> */}
 

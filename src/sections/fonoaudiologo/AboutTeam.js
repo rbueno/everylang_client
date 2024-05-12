@@ -54,7 +54,7 @@ export default function AboutTeam() {
 
 <m.div variants={varFade().inUp}>
         <Typography variant="h2" sx={{ my: 3 }}>
-          Por que utilizar o Everylang
+          100% grátis
         </Typography>
       </m.div>
 
@@ -66,7 +66,7 @@ export default function AboutTeam() {
             color: 'text.secondary',
           }}
         >
-          Aumente a eficácia das suas aulas com a tecnologia Everylang
+          O Everylang é grátis para professores e escolas. Confira os benefícios abaixo.
         </Typography>
       </m.div>
      

@@ -1,5 +1,6 @@
 export { default as AboutHero } from './AboutHero';
 export { default as HomeBanner } from './HomeBanner';
+export { default as HomeBannerSchool } from './HomeBannerSchool';
 export { default as HomeHero } from './HomeHero';
 export { default as HomeMinimal } from './HomeMinimal';
 export { default as HomeDarkMode } from './HomeDarkMode';
