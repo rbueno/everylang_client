@@ -250,7 +250,7 @@ console.log('tries', tries)
     <Card>
       <CardHeader title='Tentativa aprovada' />
       <CardContent>
-        <Button onClick={() => playAudio(tries[0].audioURL)}>Ouvir</Button>
+        {/* <Button onClick={() => playAudio(tries[0].audioURL)}>Ouvir</Button> */}
       <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
