@@ -84,7 +84,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
       <Stack spacing={2.5}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="guestCode" label="Código de convite" />
+        <RHFTextField name="guestCode" label="Código do convite" />
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <RHFTextField name="firstName" label="Nome" />
           <RHFTextField name="lastName" label="Sobrenome" />
