@@ -64,7 +64,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
     const phone = data.phoneNumber || phoneNumberFromQuery
     try {
       if (register) {
-        await register(data.email, data.password, data.firstName, data.lastName, data.guestCode);
+        await register(data.email, data.password, data.firstName, data.lastName, null, null, null, data.guestCode);
         // fbq.event('CompleteRegistration')
       }
     } catch (error) {

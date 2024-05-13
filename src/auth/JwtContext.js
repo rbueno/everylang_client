@@ -173,7 +173,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   // REGISTER
-  const register = useCallback(async (email, password, firstName, lastName, phoneNumber, phoneNumberFromQuery, guestUser) => {
+  const register = useCallback(async (email, password, firstName, lastName, phoneNumber, phoneNumberFromQuery, guestUser, guestCode) => {
     const response = await axios.post('/v1/user', {
       email,
       password,
@@ -181,7 +181,8 @@ export function AuthProvider({ children }) {
       lastName,
       phoneNumber,
       phoneNumberFromQuery,
-      guestUser: false
+      guestUser: false,
+      guestCode
     });
     const { accessToken, workspaceSession } = response.data;
     console.log('register workspaceSession ==>', workspaceSession)
