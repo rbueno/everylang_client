@@ -62,7 +62,7 @@ const StyledGradientText = styled(m.h1)(({ theme }) => ({
   ),
   backgroundSize: '400%',
   fontFamily: secondaryFont.style.fontFamily,
-  fontSize: `${34 / 16}rem`,
+  fontSize: `${54 / 16}rem`,
   textAlign: 'center',
   lineHeight: 1,
   padding: 0,
@@ -70,7 +70,24 @@ const StyledGradientText = styled(m.h1)(({ theme }) => ({
   marginBottom: 0,
   letterSpacing: 4,
   [theme.breakpoints.up('md')]: {
-    fontSize: `${46 / 16}rem`,
+    fontSize: `${52 / 16}rem`,
+  },
+}));
+const StyledGradientSubhead = styled(m.h1)(({ theme }) => ({
+  ...textGradient(
+    `300deg, ${colorBSGreen} 0%, ${colorBSGray} 25%, ${colorBSGreen} 50%, ${colorBSGray} 75%, ${colorBSGreen} 100%`
+  ),
+  backgroundSize: '400%',
+  fontFamily: secondaryFont.style.fontFamily,
+  fontSize: `${26 / 16}rem`,
+  textAlign: 'center',
+  lineHeight: 1,
+  padding: 0,
+  marginTop: 0,
+  marginBottom: 0,
+  letterSpacing: 4,
+  [theme.breakpoints.up('md')]: {
+    fontSize: `${26 / 16}rem`,
   },
 }));
 
@@ -111,14 +128,25 @@ function Description() {
             repeat: Infinity,
           }}
         >
-           Para professores e escolas
+           Everylang
         </StyledGradientText>
+        <StyledGradientSubhead
+          animate={{ backgroundPosition: '200% center' }}
+          transition={{
+            repeatType: 'reverse',
+            ease: 'linear',
+            duration: 20,
+            repeat: Infinity,
+          }}
+        >
+           Para professores
+        </StyledGradientSubhead>
       </m.div>
 
       
       <Box marginTop={5}>
       <Typography variant="h4" sx={{ textAlign: 'center' }}>
-          Crie exercícios personalizados para que seus alunos estudem pronúncia e gramática após as aulas.
+          Uma forma eficiênte de seus alunos estudarem pronúncia e gramática após as aulas.
         </Typography>
       </Box>
 

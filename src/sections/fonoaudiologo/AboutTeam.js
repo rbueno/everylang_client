@@ -66,12 +66,12 @@ export default function AboutTeam() {
             color: 'text.secondary',
           }}
         >
-          O Everylang é grátis para professores e escolas. Confira os benefícios abaixo.
+          Permita que seus alunos estudem pronúncia e gramática fazendo o que eles já fazem todos os dias: usar o WhatsApp. O Everylang é grátis para professores e escolas. Confira os benefícios abaixo.
         </Typography>
       </m.div>
      
     </Container>
-    <Container component={MotionViewport} sx={{ pb: 10 }}>
+    {/* <Container component={MotionViewport} sx={{ pb: 10 }}>
     <Box mt={6}>
     <Typography
     variant='h4'
@@ -90,7 +90,7 @@ export default function AboutTeam() {
             color: 'text.secondary',
           }}
         >
-          Explicar a pronúncia correta em sala de aula não garante que o aluno consiga praticar posteriormente. Com a inteligência artificial do Everylang, você pode criar exercícios de pronúncia personalizados com base nos erros dos seus alunos. Ao receber o exercício, o aluno praticará a pronúncia fora do ambiente de aula, recebendo feedbacks intantâneos.
+          Explicar a pronúncia correta em sala de aula não garante que o aluno consiga praticar posteriormente. Com a Everylang, você cria exercícios de pronúncia personalizados com base nas palavras que o aluno tem mais dificuldade. Ao receber os exercícios, o aluno poderá praticar em seu rítmo após as aulas. Tanto o aluno quanto o professor, recebem um feedback detalhado da pronúncia.
         </Typography>
     </Box>
     <Box mt={6}>
@@ -157,7 +157,7 @@ export default function AboutTeam() {
         </Typography>
     </Box>
     
-    </Container>
+    </Container> */}
    </Box>
   );
 }
