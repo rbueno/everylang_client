@@ -32,7 +32,7 @@ const homeContent = [
   { 
     textPosition: 'left',
     headText: 'Desempenho dos alunos',
-    bodyText: 'Acompanhe a atividade e o engajamento dos alunos através de uma dashboard completa, obtendo insights valiosos para melhorar suas aulas.',
+    bodyText: 'Através de uma dashboard completa, você consegue acompanhar as atividades e o engajamento dos alunos. Confira atividades diárias, totais de atividades, lições em andamento e outras informações que com relatório do desempenho geral ou individual dos alunos.',
     imageURL: '/assets/images/school/everylang_students_performance.png'
   },
   { 
