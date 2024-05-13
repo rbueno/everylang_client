@@ -235,6 +235,9 @@ console.log('tries', tries)
   //           speedy: 90,
   //           sentenceScored: 'asd',
   //           wordsScore: [{ word: 'hi', score: 90}, { word: 'hi', score: 90}]
+  const playAudio = (audioURL) => {
+    new Audio(audioURL).play()
+  }
   return (
     <DrawerRootStyled>
     <Box m={4}>
@@ -247,6 +250,7 @@ console.log('tries', tries)
     <Card>
       <CardHeader title='Tentativa aprovada' />
       <CardContent>
+        <Button onClick={() => playAudio(tries[0].audioURL)}>Ouvir</Button>
       <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
