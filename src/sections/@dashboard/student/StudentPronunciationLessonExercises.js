@@ -254,11 +254,11 @@ console.log('tries', tries)
         {/* {console.log('tries[0].audioURL', tries[0].audioURL)} */}
         {/* <Button onClick={() => playAudio(tries[0].audioURL)}>Ouvir</Button> */}
         {/* <AudioController audioURL={tries[0].audioURL} /> */}
-        <ReactAudioPlayer
+        {/* <ReactAudioPlayer
           src={tries[0].audioURL}
           controls
-        />
-      {/* <AudioPlayer
+        /> */}
+      <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
@@ -266,7 +266,7 @@ console.log('tries', tries)
                               showFilledProgress={false}
                               src={tries[0].audioURL}
                               onPlay={e => console.log(`onPlay`)}
-                            /> */}
+                            />
                             <StudentLessonWordsList words={tries[0].metadata.words.map(item => ({word: item.word, score: item.scores.overall }))}/>
       </CardContent>
     </Card>
@@ -281,7 +281,7 @@ console.log('tries', tries)
       <CardContent>
       {
         tries.slice(1).map(item => (<Box key={item.id} >
-             {/* <AudioPlayer
+             <AudioPlayer
                                 defaultDuration=''
                                 showJumpControls={false}
                                 autoPlayAfterSrcChange={false}
@@ -289,11 +289,11 @@ console.log('tries', tries)
                                 showFilledProgress={false}
                                 src={item.audioURL}
                                 onPlay={e => console.log(`onPlay`)}
-                              /> */}
-              <ReactAudioPlayer
+                              />
+              {/* <ReactAudioPlayer
                 src={item.audioURL}
                 controls
-              />
+              /> */}
           <StudentLessonWordsList words={item.wordsToImprove}/>
         </Box>))
       }

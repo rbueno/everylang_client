@@ -873,7 +873,7 @@ const handleOpenDrawer = (drawerForm) => {
                         {console.log('content', !!content.audioURL, content)}
                           {
                             !!content.audioURL ? <Box><Typography variant="caption">Àudio demonstração</Typography>
-                            {/* <AudioPlayer
+                            <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
@@ -881,12 +881,12 @@ const handleOpenDrawer = (drawerForm) => {
                               showFilledProgress={false}
                               src={content.audioURL}
                               onPlay={e => console.log(`onPlay ${content.audioURL}`)}
-                            /> */}
+                            />
           
-                            <ReactAudioPlayer
+                            {/* <ReactAudioPlayer
                               src={content.audioURL}
                               controls
-                            />
+                            /> */}
                             <Box m={2}>
                               <ControlledRadioButtonsGroup audios={content.audiosIds} activeAudioId={content.activeAudioId} lessonExerciseId={content._id} isSwitchingAudioId={isSwitchingAudioId} switchActiveAudio={switchActiveAudio}/>
                             </Box>
