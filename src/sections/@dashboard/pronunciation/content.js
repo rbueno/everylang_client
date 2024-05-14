@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 
 // import AudioPlayer from 'material-ui-audio-player';
 import AudioPlayer from 'react-h5-audio-player';
+import ReactAudioPlayer from 'react-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
 // form
 import { useForm, Controller } from 'react-hook-form';
@@ -872,7 +873,7 @@ const handleOpenDrawer = (drawerForm) => {
                         {console.log('content', !!content.audioURL, content)}
                           {
                             !!content.audioURL ? <Box><Typography variant="caption">Àudio demonstração</Typography>
-                            <AudioPlayer
+                            {/* <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
@@ -880,6 +881,11 @@ const handleOpenDrawer = (drawerForm) => {
                               showFilledProgress={false}
                               src={content.audioURL}
                               onPlay={e => console.log(`onPlay ${content.audioURL}`)}
+                            /> */}
+          
+                            <ReactAudioPlayer
+                              src={content.audioURL}
+                              controls
                             />
                             <Box m={2}>
                               <ControlledRadioButtonsGroup audios={content.audiosIds} activeAudioId={content.activeAudioId} lessonExerciseId={content._id} isSwitchingAudioId={isSwitchingAudioId} switchActiveAudio={switchActiveAudio}/>

@@ -1,6 +1,7 @@
 import { paramCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
+import ReactAudioPlayer from 'react-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
 // next
 import Head from 'next/head';
@@ -226,6 +227,7 @@ const TABLE_HEAD = [
   // { id: '' },
 ];
 
+
 const PronunciationTries = (props) => {
   const { sentence, tries = [] } = props
 console.log('sentence', sentence)
@@ -235,9 +237,7 @@ console.log('tries', tries)
   //           speedy: 90,
   //           sentenceScored: 'asd',
   //           wordsScore: [{ word: 'hi', score: 90}, { word: 'hi', score: 90}]
-  const playAudio = (audioURL) => {
-    new Audio(audioURL).play()
-  }
+
   return (
     <DrawerRootStyled>
     <Box m={4}>
@@ -250,8 +250,15 @@ console.log('tries', tries)
     <Card>
       <CardHeader title='Tentativa aprovada' />
       <CardContent>
+        {/* <audio id="audio_tag" src='https://everylang.s3.amazonaws.com/audio1.mp3' controls/> */}
+        {/* {console.log('tries[0].audioURL', tries[0].audioURL)} */}
         {/* <Button onClick={() => playAudio(tries[0].audioURL)}>Ouvir</Button> */}
-      <AudioPlayer
+        {/* <AudioController audioURL={tries[0].audioURL} /> */}
+        <ReactAudioPlayer
+          src={tries[0].audioURL}
+          controls
+        />
+      {/* <AudioPlayer
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
@@ -259,7 +266,7 @@ console.log('tries', tries)
                               showFilledProgress={false}
                               src={tries[0].audioURL}
                               onPlay={e => console.log(`onPlay`)}
-                            />
+                            /> */}
                             <StudentLessonWordsList words={tries[0].metadata.words.map(item => ({word: item.word, score: item.scores.overall }))}/>
       </CardContent>
     </Card>
@@ -274,7 +281,7 @@ console.log('tries', tries)
       <CardContent>
       {
         tries.slice(1).map(item => (<Box key={item.id} >
-             <AudioPlayer
+             {/* <AudioPlayer
                                 defaultDuration=''
                                 showJumpControls={false}
                                 autoPlayAfterSrcChange={false}
@@ -282,7 +289,11 @@ console.log('tries', tries)
                                 showFilledProgress={false}
                                 src={item.audioURL}
                                 onPlay={e => console.log(`onPlay`)}
-                              />
+                              /> */}
+              <ReactAudioPlayer
+                src={item.audioURL}
+                controls
+              />
           <StudentLessonWordsList words={item.wordsToImprove}/>
         </Box>))
       }
