@@ -1095,7 +1095,7 @@ const toggleDrawer = (open) => (event) => {
   const lessonDetails = newAdsGenerated?.lesson?.description ? `\n\nDetalhes: ${newAdsGenerated?.lesson?.description}` : ''
 
   const messagePreview = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}`
-  const messageShare = `EVERYLANG - Exercícios de gramática\n\nCriado por: ${newAdsGenerated?.lesson?.creator || userFullName}${lessonTitle}${lessonDetails}\n\nAcesse esta lição enviando o código "refl${newAdsGenerated?.lesson?.sharingId}" na conta de WhatsApp do Everylang.\n\nPara facilitar, clique no link para ser direcionado para a conta do Everylang já com o código na mensagem:\n\nhttps://wa.me/5511999284097?text=refl${newAdsGenerated?.lesson?.sharingId}`
+  const messageShare = `https://www.everylang.ai/lesson-cover/${newAdsGenerated?.lesson?.sharingId}`
 
 const handleEditCurrentSentense = (content) => {
   setGrammarExerciseComponentInitialValue(content)
@@ -1403,10 +1403,10 @@ const handleOpenDrawer = (drawerForm) => {
 
           <Grid item xs={12} md={6}>
           <Card>
-                        <CardHeader 
-                        title='Como compartilhar esta lição com um estudante'
-                        subheader='Copie e envie a mensagem abaixo para um ou mais estudantes. Assim, bastará o estudante seguir a instrução da mensagem para iniciar esta lição.'
-                        />
+          <CardHeader 
+                title='Copiar o link dessa lição'
+                subheader='Para comparitlhar essa lição, copie o link abaixo e envie para um ou mais alunos.'
+                />
                       <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
                         <Markdown
                           children={messageShare}
@@ -1421,7 +1421,7 @@ const handleOpenDrawer = (drawerForm) => {
                             variant='contained'
                             startIcon={<ContentCopyIcon />}
                           >
-                            Copiar mensagem
+                            Copiar link
                           </Button>
                       </Stack>
                       </Card>
