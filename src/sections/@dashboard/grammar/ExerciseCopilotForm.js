@@ -424,7 +424,7 @@ const ExerciseCopilotForm = (props) => {
               
               <Box display='flex' justifyContent='center'>
                                 <Box maxWidth='80%' display='flex' textAlign='center'>
-                                <Typography variant='subtitle1'>Criar questões manualmente</Typography>
+                                <Typography variant='subtitle1'>Criar questões automaticamente com a nossa inteligência artificial</Typography>
                                 </Box>
                             </Box>
 

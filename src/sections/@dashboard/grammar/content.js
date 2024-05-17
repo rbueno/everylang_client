@@ -38,6 +38,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CreateIcon from '@mui/icons-material/Create';
 import HelpIcon from '@mui/icons-material/Help';
 import AssistantIcon from '@mui/icons-material/Assistant';
+import AddIcon from '@mui/icons-material/Add';
+import ShareIcon from '@mui/icons-material/Share';
+
 // utils
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 // import { fData } from '../../../utils/formatNumber';
@@ -60,6 +63,9 @@ import { FileNewFolderDialog } from '../file'
 // components
 import Iconify from '../../../components/iconify';
 import { Upload } from '../../../components/upload';
+import DrawerDefault from 'src/components/drawer-default';
+import MenuPopover from '../../../components/menu-popover';
+
 
 import Drawer from '@mui/material/Drawer';
 
@@ -79,26 +85,9 @@ import EditLesson from '../simpleForms/editLesson'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { fontWeight } from '@mui/system';
 import translate from 'src/utils/translate';
-const SECTIONS = [
-  // {
-  //   value: 'lessonSection',
-  //   label: 'Lição',
-  //   icon: <Iconify icon="ic:round-receipt" />,
-  //   component: <Box>Crie um texto livre com descrições e detalhes que enriqueçam seu conteúdo.</Box>,
-  // },
-  {
-    value: 'exerciseSection',
-    label: 'Exercícios',
-    icon: <Iconify icon="eva:share-fill" />,
-    component: <Box>Crie botões com links externos de, por exemplo, uma site de vendas ou redes sociais</Box>,
-  },
-  {
-    value: 'shareSection',
-    label: 'Compartilhar',
-    icon: <Iconify icon="ic:round-account-box" />,
-    component: <Box>Capture contatos e tenha uma lista de leads qualificados.</Box>,
-  },
-];
+
+import LessonShareStepper from '../lessonShareStepper'
+
 
 const filter = createFilterOptions();
 
@@ -848,11 +837,28 @@ export default function BusinessEdit({ adId }) {
   const [attributes, setAttributes] = useState('')
   const [contextType, setContextType] = useState('multipleChoice')
   
+  const [lesson, setLesson] = useState(null)
+
   const [comprehensiveContext, setComprehensiveContext] = useState('')
   const [targetedContext, setTargetedContext] = useState('')
 
   const [openDrawer, setOpenDrawer] = useState(false)
   const [drawerContent, setDrawerContent] = useState(null)
+  const [currentDrawerForm, setCurrentDrawerForm] = useState(null);
+  const [openPopover, setOpenPopover] = useState(null);
+
+  const handleOpenPopover = (event) => {
+    setOpenPopover(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setOpenPopover(null);
+  };
+
+  const handleChangeLang = (addType) => {
+    handleClosePopover();
+    handleOpenDrawer(addType)
+  };
 
 const toggleDrawer = (open) => (event) => {
   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -906,6 +912,7 @@ const toggleDrawer = (open) => (event) => {
     
           console.log('response.data', response.data)
           setNewAdsGenerated(response.data) 
+          setLesson(response.data.lesson)
           // if (!response.data.ad) setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
         } catch (error) {
           setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
@@ -1106,15 +1113,32 @@ const editLesson = (lessonId) => {
   push(PATH_DASHBOARD.lessonGrammar.edit(lessonId));
 }
 
-const handleUpdateLesson = async (payload) => {
-
-  const { data } = await api.put(`v1/everylang/lesson`, payload)
+const [updateShareStepper, setUpdateShareStepper] = useState(0)
+ 
+  const handleUpdateLesson = async (newLessonData) => {
+    console.log('newLessonData', newLessonData)
+    const payload = {
+      lessonId: newAdsGenerated.lesson._id,
+      languageLevel: newAdsGenerated.lesson.languageLevel,
+      learningLanguage: newAdsGenerated.lesson.learningLanguage,
+      lessonType: newAdsGenerated.lesson.type, 
+      internalLessonName: newAdsGenerated.lesson.internalTitle,
+      lessonName: newLessonData.title,
+      lessonDescription: newLessonData.description,
+      lessonCreator: newLessonData.creator
+    }
   
-
-  newAdsGenerated.lesson = data.lesson
-    setNewAdsGenerated(newAdsGenerated) 
-
-};
+    console.log('handleUpdateLesson payload', payload)
+    const { data } = await api.put(`v1/everylang/lesson`, payload)
+    
+  
+    newAdsGenerated.lesson = data.lesson
+      setNewAdsGenerated(newAdsGenerated) 
+      setLesson(data.lesson)
+      setUpdateShareStepper(updateShareStepper +1)
+     
+  
+  };
 
 const handleOpenDrawer = (drawerForm) => {
 
@@ -1156,10 +1180,18 @@ const handleOpenDrawer = (drawerForm) => {
     )
   }
 
+  if (drawerForm === 'exerciseSharing') {
+    setDrawerContent(<LessonShareStepper lesson={lesson} updateLesson={handleUpdateLesson} />)
+  }
   
+  // setCurrentDrawerForm(drawerForm)
   
   setOpenDrawer(true)
 }
+
+useEffect(() => {
+  setDrawerContent(<LessonShareStepper lesson={lesson} updateLesson={handleUpdateLesson} />)
+}, [updateShareStepper])
 
   return (
       <Container
@@ -1195,6 +1227,10 @@ const handleOpenDrawer = (drawerForm) => {
 
                      </Box>
 
+                     <Box mb={2} mt={2}>
+
+<Divider />
+</Box>
 
             </Box>
 
@@ -1208,41 +1244,19 @@ const handleOpenDrawer = (drawerForm) => {
           }
 
            </> : <>
-           <Box>
+           {/* <Box>
         <Tabs variant="fullWidth" value={currentTab} onChange={(event, newValue) => setCurrentTab(newValue)}>
             {SECTIONS.map((tab) => (
               <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
             ))}
           </Tabs>
-    </Box>
+    </Box> */}
 
 
 
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{
-      currentTab === 'exerciseSection' && <>
-      <Box textAlign='center'>
+{/* <Box textAlign='center'>
 
       <Card>
         <CardHeader title="Criar exercícios" subheader='Crie e gerencie os exercícios dessa lição' />
@@ -1252,15 +1266,73 @@ const handleOpenDrawer = (drawerForm) => {
           <Button variant='outlined' sx={{ marginLeft: 2 }} onClick={() => handleOpenDrawer('exerciseManually')} startIcon={<CreateIcon fontSize='small' />}>Criar manualmente</Button>
         </Box>
             </Card>
-      </Box>
+      </Box> */}
+
+<Box sx={{ mb: 5 }}>
+          <Stack direction="row" alignItems="center">
+            <Box sx={{ flexGrow: 1 }} marginTop={4}>
+            <Typography variant="h4" gutterBottom>
+                  Exercícios
+                </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+                  Total: {newAdsGenerated?.lessonExercises?.length}
+                </Typography>
+            </Box>
+
+            <Box sx={{ flexShrink: 0 }}> 
+                        <Box display='flex' flexDirection='column'>
+                          <Button
+                          onClick={() => handleOpenDrawer('exerciseSharing')}
+                                        variant="contained"
+                                        startIcon={<ShareIcon />}
+                                        sx={{ marginBottom: 1 }}
+                                      >
+                                        Compartilhar
+                                      </Button>
+
+                            <Button
+                                      variant="contained"
+                                      startIcon={<AddIcon />}
+                                      onClick={handleOpenPopover}
+                                      sx={{ ...(openPopover && {
+                                        bgcolor: 'action.selected',
+                                      })
+                                    }}
+                                    >
+                                      Adicionar
+                                    </Button>
+                                    <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 180 }}>
+                            <Stack spacing={0.75}>
+                            <MenuItem
+                                  onClick={() => handleChangeLang('exerciseCopilot')}
+                                >
+                                  <AssistantIcon fontSize='small' />
+                                  Criar com IA
+                                </MenuItem>
+
+                            <MenuItem
+                                  onClick={() => handleChangeLang('exerciseManually')}
+                                >
+                                  <CreateIcon fontSize='small' />
+
+                                  Criar manualmente
+                                </MenuItem>
+                            </Stack>
+                          </MenuPopover>
+
+                         
+                        </Box>
+            </Box>
+          </Stack>
+        </Box>
       
       
 
 
       <Box>    
-          <Box marginTop={4}>
+          {/* <Box marginTop={4}>
             {newAdsGenerated?.lessonExercises?.length > 0 && <Typography variant='h4'>Exercícios dessa lição</Typography>}
-          </Box>
+          </Box> */}
             {
           newAdsGenerated?.lessonExercises?.map((content, idx) => <Box key={content._id} mb={2}>
             <Card sx={{ p: 3 }}>
@@ -1319,13 +1391,6 @@ const handleOpenDrawer = (drawerForm) => {
         }
 
         </Box>
-
-
-
-
-
-      </>
-}
 
 
 
@@ -1499,13 +1564,21 @@ const handleOpenDrawer = (drawerForm) => {
         />
         {/* <UpdateSentenceTextDialog dialogContent={<EditTextField content={currentSentence} updateSentenceText={updateSentenceText} updatingSentence={updatingSentence}  />} open={openUpdateSentenceTextDialog} onClose={closeUpdateSentenceTextDialog} /> */}
       
-        <Drawer
+        {/* <Drawer
             anchor='right'
             open={openDrawer}
             onClose={toggleDrawer(false)}
           >
             {drawerContent}
-          </Drawer>
+          </Drawer> */}
+
+          <DrawerDefault
+              anchor='right'
+              open={openDrawer}
+              onClose={toggleDrawer(false)}
+              displayCloseOption='top'
+              drawerContent={drawerContent}
+          />
 
 
       </Container>

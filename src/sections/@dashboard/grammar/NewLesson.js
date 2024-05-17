@@ -119,16 +119,16 @@ export default function BusinessEdit({ editingWorkspace, lessonId, isEdit }) {
   const [submitting, setSubmitting] = useState(false);
   const [newAdsGenerated, setNewAdsGenerated] = useState(null)
   const [generatingTimer, setGeneratingTimer] = useState(0)
-  const [activeStep, setActiveStep] = useState(0);
-
+  
   const [seconds, setSeconds] = useState(0);
   const [secRunning, setSecRunning] = useState(false);
   const intervalRef = useRef(null);
   const [level, setLevel] = useState('0');
   const [language, setLanguage] = useState('0');
-
+  
   const steps = ['Informações internas', 'Informações públicas', 'Revisar']
-
+  
+  const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
