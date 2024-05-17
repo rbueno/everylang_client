@@ -52,7 +52,7 @@ export default function Header({ onOpenNav }) {
 
       {/* <Searchbar /> */}
 
-      <Stack
+      {/* <Stack
         flexGrow={1}
         direction="row"
         alignItems="center"
@@ -66,7 +66,7 @@ export default function Header({ onOpenNav }) {
         <ContactsPopover />
         <WorkspacePopover />
         <AccountPopover />
-      </Stack>
+      </Stack> */}
     </>
   );
 
