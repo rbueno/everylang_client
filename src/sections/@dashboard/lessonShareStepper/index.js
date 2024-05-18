@@ -52,9 +52,10 @@ useEffect(() => {
 
     return ( <Box
         >
-            <Box display='flex' justifyContent='center' marginBottom={2}>
+                            <Box display='flex' flexDirection='column' textAlign='center' marginBottom={4}>
                                 
-                                <Typography variant='subtitle1'>Compartilhar</Typography>
+                                <Typography variant='h4'>Compartilhar</Typography>
+                                <Typography variant='subtitle1'>Compartilhe com um ou mais alunos</Typography>
                                 
                             </Box>
             <Box>
