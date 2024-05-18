@@ -12,6 +12,7 @@ import {
   TableCell,
   IconButton,
   Typography,
+  Box
 } from '@mui/material';
 // components
 import Label from '../../../../components/label';
@@ -19,8 +20,10 @@ import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
 import { fDate } from '../../../../utils/formatTime';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import translate from 'src/utils/translate';
+
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // ----------------------------------------------------------------------
 
@@ -61,11 +64,13 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             onEditRow()
           }}>
         <TableCell>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Box>
             <Typography variant="subtitle2" noWrap>
             {fullName}
             </Typography>
-          </Stack>
+
+          <Button startIcon={<OpenInNewIcon />} variant='contained' size='small' onClick={() => onEditRow()}>Abrir</Button>
+          </Box>
         </TableCell>
 
         
@@ -128,12 +133,12 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             
          </TableCell>
         
-        
+{/*         
           <TableCell align="left">
         <Stack direction="row" alignItems="center" spacing={2}>
           <Button variant='contained' onClick={() => onEditRow()}>Abrir</Button>
             </Stack>
-         </TableCell>
+         </TableCell> */}
 
         {/* <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
         {format(new Date(createdAt), 'dd/MM/yy')}

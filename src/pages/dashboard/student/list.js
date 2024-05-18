@@ -61,7 +61,7 @@ const TABLE_HEAD = [
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
   // { id: 'status', label: 'Status', align: 'left' },
-  { id: '' },
+  // { id: '' },
 ];
 
 // ----------------------------------------------------------------------

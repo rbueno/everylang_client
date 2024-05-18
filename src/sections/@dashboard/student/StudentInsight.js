@@ -179,11 +179,6 @@ export default function StudentInsight({ studentId }) {
             />
           </Grid> 
 
-        
-
-         
-
-
           <Grid item xs={12} md={6} lg={6}>
               <AnalyticsConversionRates
                 title="Palavras com maior dificuldade de pronúncia"

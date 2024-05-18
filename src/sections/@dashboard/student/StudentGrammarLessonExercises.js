@@ -68,6 +68,8 @@ import MenuPopover from '../../../components/menu-popover';
 import { fDate } from '../../../utils/formatTime';
 import StudentLessonWordsList from './StudentLessonWordsList'
 
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+
 import { styled } from '@mui/material/styles'
 const DrawerRootStyled = styled('div')(({theme}) => ({
   [theme.breakpoints.up('xs')]: {
@@ -129,6 +131,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           <Typography variant="body1">
             {question.slice(0,30)}
             </Typography>
+            <Button startIcon={<TextSnippetIcon />} size='small' variant='contained' disabled={status !== 'done'}>Conferir</Button>
           </Box>
         </TableCell>
        
@@ -193,18 +196,11 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
         
         </TableCell>
 
-        <TableCell align="left">
+        {/* <TableCell align="left">
         <Stack direction="row" alignItems="center" spacing={2}>
-        {/* <Label
-            variant="outlined"
-            // color='success'
-            sx={{ color: '#7635dc'}}
-          >
-            {tries || '---'}
-          </Label> */}
           <Button variant='contained' disabled={status !== 'done'}>Abrir</Button>
             </Stack>
-         </TableCell>
+         </TableCell> */}
 
         {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
@@ -245,7 +241,7 @@ const GRAMMAR_TABLE_HEAD = [
   { id: 'status', label: 'Status', align: 'left' },
   { id: 'score', label: 'Pontuação', align: 'left' },
   { id: 'updatedAt', label: 'Atualizado em', align: 'left' },
-  { id: 'check', label: 'Conferir', align: 'left' },
+  // { id: 'check', label: 'Conferir', align: 'left' },
   // { id: 'role', label: 'Permissão', align: 'left' },
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
@@ -299,7 +295,7 @@ console.log('GrammarExerciseDiscussion', discussion)
       discussion.discussion.map((itemDiscussion) => (<Box key={itemDiscussion.content}>
          <Box m={4}>
           <Card>
-            <CardHeader title={itemDiscussion.role === 'user' ? 'Resposta aluno' : 'Feedback Olivia'} />
+            <CardHeader title={itemDiscussion.role === 'user' ? 'Resposta do aluno' : 'Feedback Olivia'} />
             <CardContent>
               <Typography>{itemDiscussion.content}</Typography>
             </CardContent>

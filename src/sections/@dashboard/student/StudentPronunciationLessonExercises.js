@@ -68,6 +68,8 @@ import MenuPopover from '../../../components/menu-popover';
 import { fDate } from '../../../utils/formatTime';
 import StudentLessonWordsList from './StudentLessonWordsList'
 
+import VoiceChatIcon from '@mui/icons-material/VoiceChat';
+
 import { styled } from '@mui/material/styles'
 const DrawerRootStyled = styled('div')(({theme}) => ({
   [theme.breakpoints.up('xs')]: {
@@ -128,6 +130,7 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
           <Typography variant="body1">
             {scriptedPhrase}
             </Typography>
+            <Button startIcon={<VoiceChatIcon />} size='small' variant='contained' disabled={status !== 'done'}>Ouvir</Button>
           </Box>
         </TableCell>
 
@@ -169,18 +172,12 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
         
         </TableCell>
 
-        <TableCell align="left">
+        {/* <TableCell align="left">
         <Stack direction="row" alignItems="center" spacing={2}>
-        {/* <Label
-            variant="outlined"
-            // color='success'
-            sx={{ color: '#7635dc'}}
-          >
-            {tries || '---'}
-          </Label> */}
+      
           <Button variant='contained' disabled={status !== 'done'}>Ouvir</Button>
             </Stack>
-         </TableCell>
+         </TableCell> */}
 
         {/* <TableCell>{format(new Date(row.checkIn), 'dd MMM yyyy')}</TableCell> */}
 
@@ -219,7 +216,7 @@ const TABLE_HEAD = [
   { id: 'status', label: 'Status', align: 'left' },
   { id: 'score', label: 'Pontuação', align: 'left' },
   { id: 'createdAt', label: 'Atualizado em', align: 'left' },
-  { id: 'tries', label: 'Ouvir', align: 'left' },
+  // { id: 'tries', label: 'Ouvir', align: 'left' },
   // { id: 'role', label: 'Permissão', align: 'left' },
   // { id: 'company', label: 'Negócio', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },

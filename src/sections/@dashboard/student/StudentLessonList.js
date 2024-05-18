@@ -68,6 +68,7 @@ import StudentLessonWordsList from './StudentLessonWordsList'
 
 import VoiceChatIcon from '@mui/icons-material/VoiceChat';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // ----------------------------------------------------------------------
 
@@ -129,13 +130,14 @@ function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
     <>
       <TableRow hover selected={selected} onClick={() => onEditRow() }>
         <TableCell>
-          <Stack direction="column" alignItems="left" spacing={2}>
-            
-          </Stack>
-          <Box maxWidth={600}>
-          <Typography variant="body1">
+          
+
+          <Box>
+            <Typography variant="subtitle2" noWrap>
             {internalTitle || '---'}
             </Typography>
+
+          <Button startIcon={<OpenInNewIcon />} variant='contained' size='small' onClick={() => onEditRow()}>Abrir</Button>
           </Box>
         </TableCell>
 
