@@ -31,6 +31,7 @@ import { Box, Card, Grid, Container, Stack, Switch, Typography, FormControlLabel
   Select, MenuItem, InputLabel,
   Divider,
 DialogContentText,
+Paper
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
@@ -1267,10 +1268,11 @@ useEffect(() => {
         </Box>
             </Card>
       </Box> */}
+{
 
-<Box sx={{ mb: 5 }}>
-          <Stack direction="row" alignItems="center">
-            <Box sx={{ flexGrow: 1 }} marginTop={4}>
+newAdsGenerated?.lessonExercises?.length > 0 && <Box sx={{ mb: 5 }}>
+          <Box display='flex' direction="row" >
+            <Box sx={{ flexGrow: 1 }} >
             <Typography variant="h4" gutterBottom>
                   Exercícios
                 </Typography>
@@ -1323,8 +1325,34 @@ useEffect(() => {
                          
                         </Box>
             </Box>
-          </Stack>
+          </Box>
         </Box>
+}
+
+
+{newAdsGenerated?.lessonExercises?.length === 0 && <Box textAlign='center'>
+
+            <Paper variant='outlined'>
+              {/* <CardHeader title="Você ainda não tem exercícios essa lição" subheader='Adicione novos exercícios com IA ou manualmente' /> */}
+      
+              <Box textAlign='center' m={4}>
+                <Box marginTop={3} marginBottom={3}>
+                <Typography variant='h4'>Esta lição não tem exercícios!</Typography>
+                
+
+                </Box>
+                <Box marginTop={3} marginBottom={3}>
+                
+                <Typography variant='h6'>Adicione novos exercícios utilizando uma das opções abaixo.</Typography>
+
+                </Box>
+
+                <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseCopilot')} startIcon={<AssistantIcon fontSize='small' />}>Adicionar com IA</Button>
+                <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseManually')} startIcon={<CreateIcon fontSize='small' />}>Adicionar manualmente</Button>
+              </Box>
+                  </Paper>
+            </Box>
+            }
       
       
 

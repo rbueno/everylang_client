@@ -45,7 +45,8 @@ import { Box,
   Select, 
   MenuItem, 
   InputLabel,
-  Divider
+  Divider,
+  Paper
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
@@ -886,68 +887,98 @@ useEffect(() => {
         </Box>
             </Card>
       </Box> */}
-          
-      <Box sx={{ mb: 5 }}>
-          <Stack direction="row" alignItems="center">
-            <Box sx={{ flexGrow: 1 }} marginTop={4}>
-            <Typography variant="h4" gutterBottom>
-                  Exercícios
-                </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-                  Total: {newAdsGenerated?.lessonExercises?.length}
-                </Typography>
-            </Box>
-
-            <Box sx={{ flexShrink: 0 }}> 
-                        <Box display='flex' flexDirection='column'>
-                          <Button
-                          onClick={() => handleOpenDrawer('exerciseSharing')}
-                                        variant="contained"
-                                        startIcon={<ShareIcon />}
-                                        sx={{ marginBottom: 1 }}
-                                      >
-                                        Compartilhar
-                                      </Button>
-
+          {
+            newAdsGenerated?.lessonExercises?.length > 0 && <Box sx={{ mb: 5 }}>
+            <Box display='flex' direction="row" >
+              <Box sx={{ flexGrow: 1 }} >
+              <Typography variant="h4" gutterBottom>
+                    Exercícios
+                  </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                    Total: {newAdsGenerated?.lessonExercises?.length}
+                  </Typography>
+              </Box>
+  
+              <Box sx={{ flexShrink: 0 }}> 
+                          <Box display='flex' flexDirection='column'>
                             <Button
-                                      variant="contained"
-                                      startIcon={<AddIcon />}
-                                      onClick={handleOpenPopover}
-                                      sx={{ ...(openPopover && {
-                                        bgcolor: 'action.selected',
-                                      })
-                                    }}
-                                    >
-                                      Adicionar
-                                    </Button>
-                                    <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 180 }}>
-                            <Stack spacing={0.75}>
-                            <MenuItem
-                                  onClick={() => handleChangeLang('exerciseCopilot')}
-                                >
-                                  <AssistantIcon fontSize='small' />
-                                  Criar com IA
-                                </MenuItem>
-
-                            <MenuItem
-                                  onClick={() => handleChangeLang('exerciseManually')}
-                                >
-                                  <CreateIcon fontSize='small' />
-
-                                  Criar manualmente
-                                </MenuItem>
-                            </Stack>
-                          </MenuPopover>
-
-                         
-                        </Box>
+                            disabled={newAdsGenerated?.lessonExercises?.length === 0 }
+                            onClick={() => handleOpenDrawer('exerciseSharing')}
+                                          variant="contained"
+                                          startIcon={<ShareIcon />}
+                                          sx={{ marginBottom: 1 }}
+                                        >
+                                          Compartilhar
+                                        </Button>
+  
+                              <Button
+                                        variant="contained"
+                                        startIcon={<AddIcon />}
+                                        onClick={handleOpenPopover}
+                                        sx={{ ...(openPopover && {
+                                          bgcolor: 'action.selected',
+                                        })
+                                      }}
+                                      >
+                                        Adicionar exercícios
+                                      </Button>
+                                      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 180 }}>
+                              <Stack spacing={0.75}>
+                              <MenuItem
+                                    onClick={() => handleChangeLang('exerciseCopilot')}
+                                  >
+                                    <AssistantIcon fontSize='small' />
+                                    Criar com IA
+                                  </MenuItem>
+  
+                              <MenuItem
+                                    onClick={() => handleChangeLang('exerciseManually')}
+                                  >
+                                    <CreateIcon fontSize='small' />
+  
+                                    Criar manualmente
+                                  </MenuItem>
+                              </Stack>
+                            </MenuPopover>
+  
+                           
+                          </Box>
+              </Box>
             </Box>
-          </Stack>
-        </Box>
+          </Box>
+          }
+      
 
-          {/* <Box marginTop={4}>
-            {newAdsGenerated?.lessonExercises?.length > 0 && <Typography variant='h4'>Exercícios dessa lição</Typography>}
-          </Box> */}
+          
+            {newAdsGenerated?.lessonExercises?.length === 0 && <Box textAlign='center'>
+
+            <Paper variant='outlined'>
+              {/* <CardHeader title="Você ainda não tem exercícios essa lição" subheader='Adicione novos exercícios com IA ou manualmente' /> */}
+      
+              <Box textAlign='center' m={4}>
+                <Box marginTop={3} marginBottom={3}>
+                <Typography variant='h4'>Esta lição não tem exercícios!</Typography>
+                
+
+                </Box>
+                <Box marginTop={3} marginBottom={3}>
+                
+                <Typography variant='h6'>Adicione novos exercícios utilizando uma das opções abaixo.</Typography>
+
+                </Box>
+
+                <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseCopilot')} startIcon={<AssistantIcon fontSize='small' />}>Adicionar com IA</Button>
+                <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseManually')} startIcon={<CreateIcon fontSize='small' />}>Adicionar manualmente</Button>
+              </Box>
+                  </Paper>
+            </Box>
+            }
+          
+
+{
+
+}
+          
             {
           newAdsGenerated?.lessonExercises?.map((content, idx) => <Box key={content._id} mb={2}>
             <Card sx={{ p: 3 }}>
@@ -961,7 +992,7 @@ useEffect(() => {
                       <Typography variant="h4">{content.sentence}</Typography>
                         <IconButton disabled={content.audiosIds.length} sx={{ marginLeft: 2, color: '#7635dc'}} onClick={() => handleEditCurrentSentense(content)}><EditIcon fontSize='small'/></IconButton>
                         {
-                          content.audiosIds.length > 0 && <Tooltip enterTouchDelay={0} title='Não é possível editar uma frase que já tenha áudio'>
+                          content.audiosIds.length > 0 && <Tooltip enterTouchDelay={0} title='Não é possível editar uma frase que já tenha áudio. Exclua essa frase e crie uma nova!'>
                           <IconButton><InfoIcon fontSize='small'/></IconButton>
                         </Tooltip>
                         }
