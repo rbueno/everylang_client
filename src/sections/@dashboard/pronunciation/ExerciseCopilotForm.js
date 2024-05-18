@@ -282,7 +282,7 @@ const ExerciseCopilotForm = (props) => {
                                       // error={level === '0'}
                                       onChange={(e) => setWordsAttributes(e.target.value)}
                                     >
-                                      <MenuItem value='noSpecification'>Criar frases sem especficiações</MenuItem>
+                                      <MenuItem value='noSpecification'>Sem especificação</MenuItem>
                                       <MenuItem value='specificsWords'>Criar frases utilizando determinadas palavras</MenuItem>
                                       <MenuItem value='attributes'>Criar frases utilizando atributos gerais</MenuItem>
                                       
