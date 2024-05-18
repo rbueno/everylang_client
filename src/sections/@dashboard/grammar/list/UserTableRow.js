@@ -12,6 +12,7 @@ import {
   TableCell,
   IconButton,
   Typography,
+  Box
 } from '@mui/material';
 // components
 import Label from '../../../../components/label';
@@ -19,6 +20,8 @@ import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
 import { fDate } from '../../../../utils/formatTime';
+
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // ----------------------------------------------------------------------
 
@@ -59,11 +62,12 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             onEditRow()
           }}>
         <TableCell>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Box>
             <Typography variant="subtitle2" noWrap>
             {internalTitle}
             </Typography>
-          </Stack>
+            <Button startIcon={<OpenInNewIcon />} variant='contained' size='small' onClick={() => onEditRow()}>Abrir</Button>
+          </Box>
         </TableCell>
 
         

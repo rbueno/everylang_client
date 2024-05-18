@@ -64,6 +64,7 @@ const ExerciseManuallyForm = (props) => {
         } catch (error) {
             enqueueSnackbar(error.message && error.message, { variant: 'error' });
             console.log('error', error)
+            setSubmitting(false)
         }
     }
 

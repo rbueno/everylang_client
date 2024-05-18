@@ -189,6 +189,7 @@ const ExerciseCopilotForm = (props) => {
 
         } catch (error) {
             enqueueSnackbar(error.message && error.message, { variant: 'error' });
+            setSubmitting(false)
             console.log('error', error)
         }
     }
