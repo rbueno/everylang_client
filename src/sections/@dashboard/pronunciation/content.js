@@ -48,6 +48,9 @@ import { Box,
   Divider,
   Paper
 } from '@mui/material';
+
+
+import Slider from '@mui/material/Slider';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -236,6 +239,7 @@ export function UpdateSentenceTextDialog({
     </Dialog>
   );
 }
+
 export function UploadAudioFileDialog({
   title = 'Carregar áudio',
   open,
@@ -387,6 +391,102 @@ export function UploadAudioFileDialog({
   );
 }
 
+function DiscreteSlider({ valuetext }) {
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Slider
+        aria-label="Temperature"
+        defaultValue={1}
+        getAriaValueText={valuetext}
+        valueLabelDisplay="auto"
+        shiftStep={1}
+        step={0.25}
+        marks
+        min={0.25}
+        max={1.75}
+      />
+    </Box>
+  );
+}
+
+function AudioSpeedModeControll({ audioSpeedMode, setAudioSpeedMode}) {
+  
+
+  return (
+    <FormControl>
+      {/* <FormLabel id="demo-controlled-radio-buttons-group">Escolha a velocidade da fala</FormLabel> */}
+      <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="controlled-radio-buttons-group"
+        value={audioSpeedMode}
+        onChange={(e) => setAudioSpeedMode(e.target.value)}
+      >
+        <Box m={1} display='flex' flexDirection='column'>
+          <FormControlLabel value="default" control={<Radio />} label="Padrão" />
+          <Typography variant='caption'>Áudio com fala regular</Typography>
+        </Box>
+
+        <Box m={1} display='flex' flexDirection='column'>
+          <FormControlLabel value="drawl" control={<Radio />} label="Falar pausadamente" />
+          <Typography variant='caption'>Áudio com um intervalo maior entre as palavras</Typography>
+        </Box>
+      </RadioGroup>
+    </FormControl>
+  );
+}
+
+export function GenerateAudioDialog({
+  open,
+  onClose,
+  dialogContent,
+  audioData,
+  action
+}) {
+
+  const [audioSpeedValue, setAudioSpeedValue] = useState(false)
+  const [isGeneratingAudio, setIsGeneratingAudio] = useState(false)
+  const [audioSpeedMode, setAudioSpeedMode] = useState('default')
+
+  function valuetext(value) {
+    console.log('valuetext =>', value)
+    setAudioSpeedValue(value)
+    return `${value}°C`;
+  }
+
+  const handleGenerate = async () => {
+    setIsGeneratingAudio(true)
+    await action({lessonExerciseId: audioData.lessonExerciseId, positionIdx: audioData.positionIdx, audioSpeedMode })
+    setIsGeneratingAudio(false)
+    onClose(false)
+  }
+
+  return (
+    <Dialog fullWidth maxWidth="sm" open={open} onClose={()=> onClose(false)}>
+      <DialogTitle sx={{ p: (theme) => theme.spacing(3, 3, 2, 3) }}>Escolha o ritmo da fala</DialogTitle>
+
+      <DialogContent sx={{ pt: 0, pb: 0, border: 'none' }}>
+      <Box >
+          <Box>
+                <AudioSpeedModeControll audioSpeedMode={audioSpeedMode} setAudioSpeedMode={setAudioSpeedMode} />
+          </Box>
+
+          <Box marginTop={2}>
+            <LoadingButton variant='contained' loading={isGeneratingAudio} onClick={() => handleGenerate()}>Gerar áudio</LoadingButton>
+          </Box>
+      </Box>
+      </DialogContent>
+
+      <DialogActions>
+          <Stack direction="row" justifyContent="flex-end" flexGrow={1}>
+            <Button variant="outlined" onClick={()=> onClose(false)}>
+              cancelar
+            </Button>
+          </Stack>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
 
 export function ControlledRadioButtonsGroup(props) {
   const { audios, activeAudioId, lessonExerciseId, switchActiveAudio, isSwitchingAudioId } = props
@@ -465,6 +565,7 @@ export default function BusinessEdit({ adId }) {
   const [updatingSentence, setUpdatingSentence] = useState(false)
   const [openUpdateSentenceTextDialog, setOpenUpdateSentenceTextDialog] = useState(false)
   const [currentTab, setCurrentTab] = useState('exerciseSection')
+  const [openGenerateAudioDialog, setOpenGenerateAudioDialog] = useState(false)
  
   const [openDrawer, setOpenDrawer] = useState(false)
   const [drawerContent, setDrawerContent] = useState(null)
@@ -580,11 +681,16 @@ const toggleDrawer = (open) => (event) => {
     setNewAdsGenerated(data) 
   };
 
+  const [generateAudioData, setGenerateAudioData] = useState({})
 
-  const generateAudio = async ({ lessonExerciseId, positionIdx }) => {
+
+  const generateAudio = async ({ lessonExerciseId, positionIdx, audioSpeedMode }) => {
+    
     setIsGeneratingAudioIdx(positionIdx)
+    
+    const payload = { lessonExerciseId, audioSpeedMode }
+    console.log('generateAudio payload', payload, positionIdx)
 
-    const payload = { lessonExerciseId }
     try {
 
       const responseProccesCreated = await api.post('v1/everylang/lesson-exercises/pronunciation/generate', payload)
@@ -614,6 +720,12 @@ const toggleDrawer = (open) => (event) => {
   
     setIsGeneratingAudioIdx(null)
   }
+
+  const handleGenerateAudio = ({ lessonExerciseId, positionIdx}) => {
+    setGenerateAudioData({ lessonExerciseId, positionIdx})
+    setOpenGenerateAudioDialog(true)
+  }
+
   const switchActiveAudio = async ({ lessonExerciseId, audioId }) => {
     setIsSwitchingAudioId(audioId)
 
@@ -1028,29 +1140,38 @@ useEffect(() => {
                             <Box mt={2}>
                         {/* <Typography variant="subtitle1">Substituir áudio</Typography> */}
                         {/* <Typography variant="caption">Isso ajudará o aluno a entender como deve ser a pronúncia desta frase</Typography> */}
-                        <Box mb={2}>
+                        <Box mb={2} display='flex' flexDirection='row'>
+                            <Box mb={2} >
+
                             <LoadingButton
                               loading={isGeneratingAudioIdx === idx}
                               variant='contained' sx={{ marginRight: 2}}
-                              onClick={() => generateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
+                              onClick={() => handleGenerateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
                               >
                                 Gerar novo áudio
                               </LoadingButton>
+                            </Box>
+
+                            <Box mb={2} >
                             <Button variant='contained' onClick={() => handleOpenUploadFile({ lessonExerciseId: content._id })}>Carregar outro áudio</Button>
+                            </Box>
                         </Box>
                       </Box>
                             </Box> : <Box>
                               <Box>
                         <Typography variant="subtitle1">Adicione um áudio demonstração</Typography>
                         <Typography variant="caption">Isso ajudará o aluno a entender como deve ser a pronúncia desta frase</Typography>
+                        <Box mb={2} display='flex' flexDirection='row'>
                         <Box mb={2}>
                             <LoadingButton
                               loading={isGeneratingAudioIdx === idx}
                               variant='contained' sx={{ marginRight: 2}}
-                              onClick={() => generateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
+                              onClick={() => handleGenerateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
                               >
                                 Gerar áudio
                               </LoadingButton>
+
+                        </Box>
                             <Button variant='contained' onClick={() => handleOpenUploadFile({ lessonExerciseId: content._id })}>Carregar áudio</Button>
                         </Box>
                       </Box>
@@ -1254,6 +1375,7 @@ useEffect(() => {
           open={openUploadFile} onClose={handleCloseUploadFile} updateLessonExercises={updateLessonExercises} lessonExerciseId={currentLessonExerciseId} />
         <DeleteSentenceDialog open={openDialog} onClose={handleCloseDialog} lessonExerciseId={currentLessonExerciseId} deleteExercise={deleteExercise} />
         <UpdateSentenceTextDialog dialogContent={<EditTextField content={currentSentence} updateSentenceText={updateSentenceText} updatingSentence={updatingSentence} closeDialog={closeUpdateSentenceTextDialog} />} open={openUpdateSentenceTextDialog} onClose={closeUpdateSentenceTextDialog} />
+        <GenerateAudioDialog open={openGenerateAudioDialog} onClose={setOpenGenerateAudioDialog} audioData={generateAudioData} action={generateAudio} />
         {/* <Drawer
             anchor='right'
             open={openDrawer}
