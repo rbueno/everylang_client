@@ -109,7 +109,7 @@ export default function MyApp(props) {
   return (
     <Fragment>
 
-{/* <CacheProvider value={emotionCache}> */}
+<CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
@@ -117,28 +117,28 @@ export default function MyApp(props) {
       <PostHogProvider client={posthog}>
       <AuthProvider>
         <ReduxProvider store={store}>
-          {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
-            {/* <SettingsProvider> */}
-              {/* <MotionLazyContainer> */}
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SettingsProvider>
+              <MotionLazyContainer>
                 <ThemeProvider>
-                  {/* <ThemeSettings> */}
-                    {/* <ThemeLocalization> */}
+                  <ThemeSettings>
+                    <ThemeLocalization>
                       <SnackbarProvider>
-                        {/* <StyledChart /> */}
+                        <StyledChart />
                         <ProgressBar />
                         {getLayout(<Component {...pageProps} />)}
                         {/* <Component {...pageProps} /> */}
                       </SnackbarProvider>
-                    {/* </ThemeLocalization> */}
-                  {/* </ThemeSettings> */}
+                    </ThemeLocalization>
+                  </ThemeSettings>
                 </ThemeProvider>
-              {/* </MotionLazyContainer> */}
-            {/* </SettingsProvider> */}
-          {/* </LocalizationProvider> */}
+              </MotionLazyContainer>
+            </SettingsProvider>
+          </LocalizationProvider>
         </ReduxProvider>
       </AuthProvider>
       </PostHogProvider>
-    {/* </CacheProvider> */}
+    </CacheProvider>
     </Fragment>
     
   );
