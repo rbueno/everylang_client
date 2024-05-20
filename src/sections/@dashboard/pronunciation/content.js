@@ -1170,9 +1170,11 @@ useEffect(() => {
                               >
                                 Gerar áudio
                               </LoadingButton>
-
                         </Box>
+
+                        <Box mb={2} >
                             <Button variant='contained' onClick={() => handleOpenUploadFile({ lessonExerciseId: content._id })}>Carregar áudio</Button>
+                            </Box>
                         </Box>
                       </Box>
                             </Box>
