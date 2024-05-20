@@ -109,28 +109,7 @@ export default function MyApp(props) {
   return (
     <Fragment>
 
-
-
-
-    <Script
-        id="fb-pixel"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', ${fbq.FB_PIXEL_ID});
-          `,
-        }}
-      />
-
-<CacheProvider value={emotionCache}>
+{/* <CacheProvider value={emotionCache}> */}
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
@@ -138,28 +117,28 @@ export default function MyApp(props) {
       <PostHogProvider client={posthog}>
       <AuthProvider>
         <ReduxProvider store={store}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SettingsProvider>
-              <MotionLazyContainer>
+          {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
+            {/* <SettingsProvider> */}
+              {/* <MotionLazyContainer> */}
                 <ThemeProvider>
-                  <ThemeSettings>
-                    <ThemeLocalization>
+                  {/* <ThemeSettings> */}
+                    {/* <ThemeLocalization> */}
                       <SnackbarProvider>
-                        <StyledChart />
+                        {/* <StyledChart /> */}
                         <ProgressBar />
                         {getLayout(<Component {...pageProps} />)}
                         {/* <Component {...pageProps} /> */}
                       </SnackbarProvider>
-                    </ThemeLocalization>
-                  </ThemeSettings>
+                    {/* </ThemeLocalization> */}
+                  {/* </ThemeSettings> */}
                 </ThemeProvider>
-              </MotionLazyContainer>
-            </SettingsProvider>
-          </LocalizationProvider>
+              {/* </MotionLazyContainer> */}
+            {/* </SettingsProvider> */}
+          {/* </LocalizationProvider> */}
         </ReduxProvider>
       </AuthProvider>
       </PostHogProvider>
-    </CacheProvider>
+    {/* </CacheProvider> */}
     </Fragment>
     
   );
