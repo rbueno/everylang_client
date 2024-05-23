@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect} from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head';
 
 import { useTheme, alpha } from '@mui/material/styles';
@@ -33,9 +33,7 @@ import { useAuthContext } from '../../auth/useAuthContext';
 import { CustomAvatar } from '../../components/custom-avatar'
 import Footer from '../../layouts/main/Footer';
 import useCopyToClipboard from '../../hooks/useCopyToClipboard'
-import { useSnackbar } from '../../components/snackbar';
-
-
+import NotificationBar from '../../components/notification-bar';
 
 // MyPage.getLayout = (page) => <> {page} </>;
 // MyPage.getLayout = (page) => <MainLayout>{page}</MainLayout>;
@@ -46,8 +44,13 @@ LessonCoverPage.propTypes = {
 
 export function LessonCoverPage({ lesson }) {
   const { copy } = useCopyToClipboard();
-  const { enqueueSnackbar } = useSnackbar();
 
+  // notification bar config
+  const [openNotificationBar, setOpenNotificationBar] = useState(false)
+  const [notificationBarText, setNotificationBarText] = useState('')
+  const [notificationBarType, setNotificationBarType] = useState('')
+
+  const [notificationBarConfig, setNotificationBarConfig] = useState({})
     // const lesson = {
     //   type: "Exercícios de Pronúncia",
     //   creator: "Alexandre",
@@ -59,10 +62,10 @@ export function LessonCoverPage({ lesson }) {
     const handleCopyLink = () => {
       const hasCopied = copy(`refl${lesson.sharingId}`)
       if (hasCopied) {
-        enqueueSnackbar('Código copiado')
+        setNotificationBarConfig({ text: 'Código copiado', severity: 'success' })
       }
       if (!hasCopied) {
-        enqueueSnackbar('Erro ao copiar código', { variant: 'error'})
+        setNotificationBarConfig({ text: 'Código copiado', severity: 'error' })
       }
     }
   
@@ -189,7 +192,11 @@ export function LessonCoverPage({ lesson }) {
           
           
   
-          
+
+          <NotificationBar
+            notificationBarConfig={notificationBarConfig}
+            handleCloseNotificationBar={setNotificationBarConfig}
+          />
         
         </Container>
         <Footer />

@@ -44,12 +44,12 @@ const ICONS = {
 const navConfig = [
   {
     items: [
-      { title: 'Dashboard', path: PATH_DASHBOARD.root, icon: ICONS.dashboard },
+      { title: 'Dashboard', path: PATH_DASHBOARD.general.home, icon: ICONS.dashboard },
     ],
   },
   {
     items: [
-      { title: 'Alunos', path: PATH_DASHBOARD.student.list, icon: ICONS.user },
+      { title: 'Alunos', path: PATH_DASHBOARD.student.root, icon: ICONS.user },
     ],
   },
   // {
