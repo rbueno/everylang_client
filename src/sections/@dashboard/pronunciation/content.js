@@ -838,10 +838,10 @@ const userFullName = `${user?.firstName} ${user?.lastName}`
     console.log('newLessonData', newLessonData)
     const payload = {
       lessonId: newAdsGenerated.lesson._id,
-      languageLevel: newAdsGenerated.lesson.languageLevel,
-      learningLanguage: newAdsGenerated.lesson.learningLanguage,
+      languageLevel: newLessonData.lesson.languageLevel,
+      learningLanguage: newLessonData.lesson.learningLanguage,
       lessonType: newAdsGenerated.lesson.type, 
-      internalLessonName: newAdsGenerated.lesson.internalTitle,
+      internalLessonName: newLessonData.lesson.internalTitle,
       lessonName: newLessonData.title,
       lessonDescription: newLessonData.description,
       lessonCreator: newLessonData.creator
