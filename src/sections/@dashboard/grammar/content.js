@@ -1120,13 +1120,13 @@ const [updateShareStepper, setUpdateShareStepper] = useState(0)
     console.log('newLessonData', newLessonData)
     const payload = {
       lessonId: newAdsGenerated.lesson._id,
-      languageLevel: newAdsGenerated.lesson.languageLevel,
-      learningLanguage: newAdsGenerated.lesson.learningLanguage,
       lessonType: newAdsGenerated.lesson.type, 
-      internalLessonName: newAdsGenerated.lesson.internalTitle,
-      lessonName: newLessonData.title,
-      lessonDescription: newLessonData.description,
-      lessonCreator: newLessonData.creator
+      languageLevel: newLessonData.languageLevel || newAdsGenerated.lesson.languageLevel,
+      learningLanguage: newLessonData.learningLanguage || newAdsGenerated.lesson.learningLanguage,
+      internalLessonName: newLessonData.internalLessonName || newAdsGenerated.lesson.internalTitle,
+      lessonName: newLessonData.title || newAdsGenerated.lesson.title,
+      lessonDescription: newLessonData.description || newAdsGenerated.lesson.description,
+      lessonCreator: newLessonData.creator || newAdsGenerated.lesson.creator
     }
   
     console.log('handleUpdateLesson payload', payload)

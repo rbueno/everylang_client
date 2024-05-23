@@ -838,13 +838,13 @@ const userFullName = `${user?.firstName} ${user?.lastName}`
     console.log('newLessonData', newLessonData)
     const payload = {
       lessonId: newAdsGenerated.lesson._id,
-      languageLevel: newLessonData.languageLevel,
-      learningLanguage: newLessonData.learningLanguage,
       lessonType: newAdsGenerated.lesson.type, 
-      internalLessonName: newLessonData.internalLessonName,
-      lessonName: newLessonData.title,
-      lessonDescription: newLessonData.description,
-      lessonCreator: newLessonData.creator
+      languageLevel: newLessonData.languageLevel || newAdsGenerated.lesson.languageLevel,
+      learningLanguage: newLessonData.learningLanguage || newAdsGenerated.lesson.learningLanguage,
+      internalLessonName: newLessonData.internalLessonName || newAdsGenerated.lesson.internalTitle,
+      lessonName: newLessonData.title || newAdsGenerated.lesson.title,
+      lessonDescription: newLessonData.description || newAdsGenerated.lesson.description,
+      lessonCreator: newLessonData.creator || newAdsGenerated.lesson.creator
     }
   
     console.log('handleUpdateLesson payload', payload)
