@@ -841,7 +841,7 @@ const userFullName = `${user?.firstName} ${user?.lastName}`
       languageLevel: newLessonData.languageLevel,
       learningLanguage: newLessonData.learningLanguage,
       lessonType: newAdsGenerated.lesson.type, 
-      internalLessonName: newLessonData.internalTitle,
+      internalLessonName: newLessonData.internalLessonName,
       lessonName: newLessonData.title,
       lessonDescription: newLessonData.description,
       lessonCreator: newLessonData.creator
