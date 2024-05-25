@@ -3,7 +3,7 @@ import { m } from 'framer-motion';
 import { useRef } from 'react';
 // @mui
 import { useTheme, alpha } from '@mui/material/styles';
-import { Box, Stack, Card, Button, Container, Typography, IconButton } from '@mui/material';
+import { Box, Stack, Card, Button, Container, Typography, IconButton, Divider } from '@mui/material';
 // _mock_
 import { _carouselsMembers, _socials } from '../../_mock/arrays';
 // components
@@ -52,32 +52,7 @@ export default function AboutTeam() {
    <Box>
      <Container component={MotionViewport} sx={{ textAlign: 'center' }}>
 
-<m.div variants={varFade().inUp}>
-        <Typography variant="h3" >
-          O que é o Everylang?
-        </Typography>
-      </m.div>
-
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/gJnMl3QwIfM?si=W3hI1MXBGgsJiU6V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
-<m.div variants={varFade().inUp}>
-        <Typography variant="h3" >
-          Grátis
-        </Typography>
-      </m.div>
-
-
-<m.div variants={varFade().inUp}>
-        <Typography
-          sx={{
-            mx: 'auto',
-            maxWidth: 640,
-            color: 'text.secondary',
-          }}
-        >
-          O Everylang é grátis para professores e escolas. Os alunos precisam ter uma assinatura para utilizar.
-        </Typography>
-      </m.div>
-      <Box marginTop={2}>
+     <Box marginTop={2}>
       <m.div variants={varFade().inUp}>
         <Typography variant="h3" >
         O que é o Everylang?
@@ -96,6 +71,32 @@ export default function AboutTeam() {
           O Everylang disponibiliza ferramentas com inteligência artificial para que o professor possa criar exercícios de pronúncia e gramática e permitir que seus alunos estudem fazendo o que eles já fazem todos os dias: usar o WhatsApp. Assim, incorporando o estudo em uma rotina que o aluno já tem.
         </Typography>
       </m.div>     
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gJnMl3QwIfM?si=W3hI1MXBGgsJiU6V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Box m={2}>
+      <Divider />
+
+</Box>
+<m.div variants={varFade().inUp}>
+        <Typography variant="h3" >
+          Grátis
+        </Typography>
+      </m.div>
+
+
+<m.div variants={varFade().inUp}>
+        <Typography
+          sx={{
+            mx: 'auto',
+            maxWidth: 640,
+            color: 'text.secondary',
+          }}
+        >
+          O Everylang é grátis para professores e escolas. Os alunos precisam ter uma assinatura para utilizar.
+        </Typography>
+      </m.div>
+     
       <m.div variants={varFade().inUp}>
         <Typography variant="h2" sx={{ my: 3 }}>
         Confira os benefícios
