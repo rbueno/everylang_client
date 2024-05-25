@@ -14,6 +14,7 @@ import { Divider, Grid, Container, Typography, Box, TextField, Stack, MenuItem, 
 import { LoadingButton } from '@mui/lab';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
+import Joyride from 'react-joyride'
 import { add } from 'date-fns'
 // layouts
 import { Text } from '@visx/text';
@@ -51,6 +52,16 @@ import api from '../../utils/axios'
 // ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
+const stepsAccessGuideHome = [
+  {
+    target: '.step1',
+    content: 'Criar lição de pronúncia',
+  },
+  {
+    target: '.step2',
+    content: 'Criar lição de gramática',
+  },
+];
 
 
 
@@ -321,10 +332,13 @@ export default function GeneralAnalyticsPage() {
         <title> Dashboard | Everylang</title>
       </Head>
 
+
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Everylang
         </Typography>
+    
+      
 
         <Box marginBottom={6}>
         <Typography variant='h5' sx={{ mb: 2 }}>Criar Atividade</Typography>
@@ -332,6 +346,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} sm={6} md={3}>
             <Box
             onClick={() => push(PATH_DASHBOARD.lessonPronunciation.new)}
+            className='step1'
             >
             <HomeOptions
               title="Criar lição de pronúncia"
@@ -345,6 +360,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} sm={6} md={3}>
           <Box
             onClick={() => push(PATH_DASHBOARD.lessonGrammar.new)}
+            className='step2'
             >
             <HomeOptions
               title="Criar lição de gramática"
@@ -477,6 +493,11 @@ export default function GeneralAnalyticsPage() {
 
        
       </Container>
+      <Joyride
+        steps={stepsAccessGuideHome}
+        continuous={true}
+        run={true}
+        />
     </>
   );
 }
