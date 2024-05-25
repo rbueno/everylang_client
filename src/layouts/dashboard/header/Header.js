@@ -20,6 +20,7 @@ import LanguagePopover from './LanguagePopover';
 import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
 import WorkspacePopover from './WorkspacePopover';
+import GlobalStepper from '../../../sections/@dashboard/globalStepper'
 
 // ----------------------------------------------------------------------
 
@@ -51,6 +52,7 @@ export default function Header({ onOpenNav }) {
       )}
 
       {/* <Searchbar /> */}
+      {/* <GlobalStepper /> */}
 
       {/* <Stack
         flexGrow={1}
@@ -58,15 +60,15 @@ export default function Header({ onOpenNav }) {
         alignItems="center"
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1.5 }}
-      >
-        <LanguagePopover />
+      > */}
+        {/* <LanguagePopover /> */}
 
-        <NotificationsPopover />
+        {/* <NotificationsPopover /> */}
 
-        <ContactsPopover />
-        <WorkspacePopover />
-        <AccountPopover />
-      </Stack> */}
+        {/* <ContactsPopover /> */}
+        {/* <WorkspacePopover /> */}
+        {/* <AccountPopover /> */}
+      {/* </Stack> */}
     </>
   );
 

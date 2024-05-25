@@ -54,6 +54,13 @@ export default function AboutTeam() {
 
 <m.div variants={varFade().inUp}>
         <Typography variant="h3" >
+          O que é o Everylang?
+        </Typography>
+      </m.div>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gJnMl3QwIfM?si=W3hI1MXBGgsJiU6V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+<m.div variants={varFade().inUp}>
+        <Typography variant="h3" >
           Grátis
         </Typography>
       </m.div>

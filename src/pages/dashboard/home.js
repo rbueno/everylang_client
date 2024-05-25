@@ -326,12 +326,47 @@ export default function GeneralAnalyticsPage() {
           Everylang
         </Typography>
 
+        <Box marginBottom={6}>
+        <Typography variant='h5' sx={{ mb: 2 }}>Criar Atividade</Typography>
         <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box
+            onClick={() => push(PATH_DASHBOARD.lessonPronunciation.new)}
+            >
+            <HomeOptions
+              title="Criar lição de pronúncia"
+              // total={2}
+              color="info"
+              icon={<VoiceChatIcon />}
+            />
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+          <Box
+            onClick={() => push(PATH_DASHBOARD.lessonGrammar.new)}
+            >
+            <HomeOptions
+              title="Criar lição de gramática"
+              // total={2}
+              color="warning"
+              icon={<TextSnippetIcon />}
+            />
+          </Box>
+          </Grid>
+
+        
+
+        </Grid>
+        </Box>
+
+     <Box marginBottom={6}>
+      <Divider />
+     </Box>
+
+        <Typography variant='h5' sx={{ mb: 2 }}>Métricas</Typography>
           
-
-
         <Grid container spacing={3}>
-
 
         <Grid item xs={12} md={6} lg={8}>
             <EcommerceYearlySales
@@ -392,7 +427,6 @@ export default function GeneralAnalyticsPage() {
               chartData={homeInsight.exercisesPercent?.pronunciation?.last}
             />
           </Grid> 
-
         
           <Grid item xs={12} md={3} sm={6}>
           <HomeOptions
@@ -414,11 +448,6 @@ export default function GeneralAnalyticsPage() {
             />
           </Grid> 
 
-        
-
-         
-
-
           <Grid item xs={12} md={6} lg={6}>
               <AnalyticsConversionRates
                 title="Palavras com maior dificuldade de pronúncia"
@@ -427,10 +456,9 @@ export default function GeneralAnalyticsPage() {
                   series: homeInsight.pronunciationToImprove,
                 }}
               />
-            </Grid>
+            </Grid>  
   
-  
-              <Grid item xs={12} md={6} lg={6}>
+          <Grid item xs={12} md={6} lg={6}>
            
               <AnalyticsConversionRates
                 title="Erros frequêntes de gramática"
@@ -440,11 +468,7 @@ export default function GeneralAnalyticsPage() {
                 }}
               />
             </Grid>
-  
-        
-          </Grid>
 
-          
         </Grid>
 
         {/* <FetchController /> */}
