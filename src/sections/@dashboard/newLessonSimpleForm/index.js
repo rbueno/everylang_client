@@ -183,23 +183,25 @@ function NewLessonSimpleForm(props) {
        <Card>
           <CardHeader className='lesson-step-2' title='Informações internas da lição' subheader='Estas informações são visíveis apenas para você. O aluno não terá acesso à esses dados'/>
           <CardContent className='lesson-step-3'>
-           {/* <Box mb={4} className='lesson-step-1'>
-           <TextField
-           fullWidth
-           required
-                 label="Título da lição"
-                 value={title}
-                 color="primary"
-                 placeholder={lessonType === 'grammar' ? 'Verbos irregulares' : "Ex.: Pronúncia de palavras com TH"}
-                 // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
-                 // error={newBusinessNameError !== null}
-                 InputLabelProps={{
-                   shrink: true,
-                 }}
-                 onChange={(e) => setTitle(e.target.value)}
-               />
-               <Button variant='contained' onClick={() => generateTitleAsCode()}>Gerar um código como título</Button>
-           </Box> */}
+            {
+              !displayOnboarding &&  <Box mb={4} className='lesson-step-1'>
+              <TextField
+              fullWidth
+                    label="Título da lição"
+                    value={title}
+                    color="primary"
+                    placeholder={lessonType === 'grammar' ? 'Verbos irregulares' : "Ex.: Pronúncia de palavras com TH"}
+                    // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
+                    // error={newBusinessNameError !== null}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <Button variant='contained' onClick={() => generateTitleAsCode()}>Gerar um código como título</Button>
+              </Box>
+            }
+          
           <Box >
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Nível (obrigatório)</InputLabel>
