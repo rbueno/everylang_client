@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import {
     Box,
     Typography,
@@ -19,6 +19,58 @@ import { LoadingButton } from '@mui/lab';
 import { useSnackbar } from 'notistack';
 
 import TagsInput from './TagsInput'
+
+
+import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS } from 'react-joyride'
+
+// ----------------------------------------------------------------------
+
+
+const stepsAccessGuideNewLesson = [
+  {
+    content: (
+      <div>
+      <h3>Forma mais comum de criar exercícios com IA.</h3>
+      <p>Existem diversas maneiras de utilizar nossa IA, aprenderemos aqui o maneira mais comum de criar exercícios.</p>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  {
+    target: '.lesson-exercise-add-step-1',
+    content: (
+      <div>
+      <h3>Insira uma palavra aqui</h3>
+      <p>Insira aqui uma palavra que normalmente seus alunos tem dificuldade em pronúnciar.</p>
+      <p>Após inserir a palavra, clique em "avançar"</p>
+      </div>
+    ),
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    // disableOverlay: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-add-step-2',
+    content: (
+      <div>
+      <h3>Clique em "criar frases"</h3>
+      <p>Nossa IA irá criar algumas frases utilizando a palavra que você informou.</p>
+      </div>
+    ),
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'top',
+    spotlightClicks: true,
+  }
+];
+
 
 import { styled } from '@mui/material/styles'
 const DrawerRootStyled = styled('div')(({theme}) => ({
@@ -108,7 +160,7 @@ const ExerciseCopilotForm = (props) => {
 
     const [attributes, setAttributes] = useState('')
     const [specification, setSpecification] = useState('')
-    const [sentenceQuantity, setSentenceQuantity] = useState(4)
+    const [sentenceQuantity, setSentenceQuantity] = useState(2)
     const [contextType, setContextType] = useState('noContext')
     const [comprehensiveContext, setComprehensiveContext] = useState('')
     const [targetedContext, setTargetedContext] = useState('')
@@ -117,6 +169,34 @@ const ExerciseCopilotForm = (props) => {
     const [totalWords, setTotalWords] = useState(0)
     const [wordsToUseReview, setWordsToUseReview] = useState('')
     const [wordsToUseReviewError, setWordsToUseReviewError] = useState(null)
+
+    const [run, setRun] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, origin, status, type } = data;
+
+    console.log('data ==>', data)
+
+    if (action === ACTIONS.CLOSE && origin === ORIGIN.KEYBOARD) {
+      // do something
+    }
+
+    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Update state to advance the tour
+      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      // You need to set our running state to false, so we can restart if we click start again.
+      setRun(false);
+    }
+
+    console.groupCollapsed(type);
+    console.log(data); //eslint-disable-line no-console
+    console.groupEnd();
+  };
+
+  useEffect(() => {
+    setRun(true)
+  }, [])
   
 
     const onChangeContextType = (event) => {
@@ -150,6 +230,7 @@ const ExerciseCopilotForm = (props) => {
     }
 
     const handleSubmitt = async () => {
+      setRun(false)
         let context = ''
 
         if(contextType === 'comprehensiveContext') {
@@ -224,6 +305,17 @@ const ExerciseCopilotForm = (props) => {
         }
        
     }
+
+    const [displayOnboarding, setDisplayOnboarding] = useState(false)
+useEffect(() => {
+  const onboardinStatus = window.localStorage.getItem('onboarding_status');
+  if(onboardinStatus !== 'done') {
+    window.localStorage.setItem('onboarding_status', 'pending');
+    setDisplayOnboarding(true)
+  } else {
+    setDisplayOnboarding(false)
+  }
+})
   
     return (<DrawerRootStyled
       // sx={{ width: 350 }}
@@ -293,7 +385,7 @@ const ExerciseCopilotForm = (props) => {
                       </Box>
                       {console.log('contextType', contextType)}
                       {wordsAttributes === 'specificsWords' && <>
-                      <Box marginTop={2}>
+                      <Box className='lesson-exercise-add-step-1' marginTop={2}>
                       <Typography variant='caption'>Informe as palavras que deseja incluir nas frases geradas pela inteligência artificial. Normalmente são utilzadas palavras que os alunos tem mais dificuldade na pronúncia.</Typography>
                                   <Box marginTop={2}>
 
@@ -436,10 +528,34 @@ const ExerciseCopilotForm = (props) => {
                           </Box>
                           </Box>
                           <Box m={2} display='flex' flexDirection='column'>
-                                  <LoadingButton disabled={!!wordsToUseReviewError} loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
+                                  <LoadingButton className='lesson-exercise-add-step-2' disabled={!!wordsToUseReviewError} loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
                         <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
   
                       </Box>
+                      {
+                        displayOnboarding && <Joyride
+                        steps={stepsAccessGuideNewLesson}
+                        continuous={true}
+                        // locale={{ next: 'Avançar'}}
+                        callback={handleJoyrideCallback}
+                        run={run}
+                        stepIndex={stepIndex}
+                        locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+                        scrollToFirstStep
+                        showProgress
+                        disableCloseOnEsc
+                        disableOverlayClose
+                        hideCloseButton
+                        styles={{
+                          // overlay: { height: '100vh' },
+                          options: {
+                            zIndex: 10000,
+                            // overlay: { height: '100vh' },
+                          },
+                        }}
+                        />
+                      }
+                      
                           </>
     </DrawerRootStyled>)
   }

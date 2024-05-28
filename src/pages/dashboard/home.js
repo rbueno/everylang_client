@@ -10,11 +10,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Divider, Grid, Container, Typography, Box, TextField, Stack, MenuItem, Card, CardHeader, CardContent } from '@mui/material';
+import { Divider, Grid, Container, Typography, Box, TextField, Stack, MenuItem, Card, CardHeader, CardContent, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
-import Joyride from 'react-joyride'
+import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS } from 'react-joyride'
 import { add } from 'date-fns'
 // layouts
 import { Text } from '@visx/text';
@@ -54,13 +54,81 @@ import api from '../../utils/axios'
 // ----------------------------------------------------------------------
 const stepsAccessGuideHome = [
   {
-    target: '.step1',
-    content: 'Criar lição de pronúncia',
+    content: (
+      <div>
+      <h3>Como utilizar o Everylang!</h3>
+      <p>Confira um passo a passo super rápido para aprender a utilização.</p>
+      <p>Clique em "avançar"</p>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
   },
   {
-    target: '.step2',
-    content: 'Criar lição de gramática',
+    target: '.home-step1',
+    content: (
+      <div>
+      <h3>Menu para criar lição de pronúncia</h3>
+      </div>
+    ),
   },
+  {
+    target: '.home-step2',
+    content: (
+      <div>
+      <h3>Menu para criar lição de gramática</h3>
+      </div>
+    ),
+  },
+  {
+    target: '.home-step3',
+    content: (
+      <div>
+      <h3>Métricas</h3>
+      <p>Aqui ficarão as métricas de atividades e lições realizadas por seus alunos.</p>
+      <p>Mas primeiro, é preciso criar uma lição.</p>
+      </div>
+    ),
+    placement: 'bottom',
+  },
+  {
+    target: '.home-step1',
+    // content: (
+    //   <div>
+    //   <h3>Vamos criar uma lição</h3>
+    //   <p>Clique aqui para entender como crair uma lição de pronúncia</p>
+    //   <Stack m={2}>
+    //   <Button variant='contained' onClick={() => handleNextCreatePronunciaionLesson()}>Criar lição de pronúncia</Button>
+
+    //   </Stack>
+    //   </div>
+    // ),
+    content: (
+      <div>
+      <h3>Vamos criar a sua primeira lição</h3>
+      <p>Clique aqui para conferir um passo a passo</p>
+      {/* <Stack m={2}>
+      <Button variant='contained' onClick={() => handleNextCreatePronunciaionLesson()}>Criar lição de pronúncia</Button>
+
+      </Stack> */}
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  },
+  // {
+  //   target: '.home-step-4',
+  //   content: (
+  //     <div>
+  //     <h3>Gráfico</h3>
+  //     <p>Clique aqui para entender como crair uma lição de pronúncia</p>
+  //     </div>
+  //   ),
+  // },
 ];
 
 
@@ -286,6 +354,37 @@ export default function GeneralAnalyticsPage() {
   const theme = useTheme();
   // const { currentWorkspace, updateWorkspaces } = useAuthContext()
   const { themeStretch } = useSettingsContext();
+  const [runHomeOnbording, setRunHomeOnbording] = useState(false)
+  const [displayOnboarding, setDisplayOnboarding] = useState(false)
+
+  const [run, setRun] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, origin, status, type } = data;
+
+    console.log('data ==>', data)
+
+    if (action === ACTIONS.CLOSE && origin === ORIGIN.KEYBOARD) {
+      // do something
+    }
+
+    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Update state to advance the tour
+      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      // You need to set our running state to false, so we can restart if we click start again.
+      setRun(false);
+    }
+
+    console.groupCollapsed(type);
+    console.log(data); //eslint-disable-line no-console
+    console.groupEnd();
+  };
+
+  const handleClickStart = () => {
+    setRun(true);
+  };
+
   const [homeInsight, setHomeInsight] = useState({
     "dailyExercises": {
         "months": [],
@@ -319,12 +418,29 @@ export default function GeneralAnalyticsPage() {
         const insightResponse = await api.get(`v1/everylang/insight`)
         console.log('insightResponse', insightResponse.data)
         setHomeInsight(insightResponse.data)
+        setRun(true)
+        // setRunHomeOnbording(true)
       } catch (error) {
         console.log(error)
       }
     }
     fetchData()
   },[])
+
+  const handleNextCreatePronunciaionLesson = () => {
+    setRunHomeOnbording(false)
+    push(PATH_DASHBOARD.lessonPronunciation.new)
+  }
+
+   useEffect(() => {
+    const onboardinStatus = window.localStorage.getItem('onboarding_status');
+    if(onboardinStatus !== 'done') {
+      window.localStorage.setItem('onboarding_status', 'pending');
+      setDisplayOnboarding(true)
+    } else {
+      setDisplayOnboarding(false)
+    }
+  })
 
   return (
     <>
@@ -338,7 +454,38 @@ export default function GeneralAnalyticsPage() {
           Everylang
         </Typography>
     
-      
+    { displayOnboarding && <Joyride
+          steps={stepsAccessGuideHome}
+          continuous={true}
+          // locale={{ next: 'Avançar'}}
+          callback={handleJoyrideCallback}
+          run={run}
+          stepIndex={stepIndex}
+          locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+          scrollToFirstStep
+          showProgress
+          disableCloseOnEsc
+          disableOverlayClose
+          hideCloseButton
+          styles={{
+            // overlay: { height: '100vh' },
+            options: {
+              zIndex: 10000,
+              // overlay: { height: '100vh' },
+            },
+          }}
+          />}
+        
+      {/* <Button onClick={handleClickStart}>Start</Button> */}
+
+{/* <Button onClick={() => setRunHomeOnbording(true)}>Iniciar</Button> */}
+
+      {/* <Joyride
+        steps={stepsAccessGuideHome({ handleNextCreatePronunciaionLesson })}
+        continuous={true}
+        run={runHomeOnbording}
+        locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+        /> */}
 
         <Box marginBottom={6}>
         <Typography variant='h5' sx={{ mb: 2 }}>Criar Atividade</Typography>
@@ -346,7 +493,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} sm={6} md={3}>
             <Box
             onClick={() => push(PATH_DASHBOARD.lessonPronunciation.new)}
-            className='step1'
+            className='home-step1'
             >
             <HomeOptions
               title="Criar lição de pronúncia"
@@ -360,7 +507,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} sm={6} md={3}>
           <Box
             onClick={() => push(PATH_DASHBOARD.lessonGrammar.new)}
-            className='step2'
+            className='home-step2'
             >
             <HomeOptions
               title="Criar lição de gramática"
@@ -380,7 +527,7 @@ export default function GeneralAnalyticsPage() {
       <Divider />
      </Box>
 
-        <Typography variant='h5' sx={{ mb: 2 }}>Métricas</Typography>
+        <Typography className='home-step3' variant='h5' sx={{ mb: 2 }}>Métricas</Typography>
           
         <Grid container spacing={3}>
 
@@ -464,7 +611,7 @@ export default function GeneralAnalyticsPage() {
             />
           </Grid> 
 
-          <Grid item xs={12} md={6} lg={6}>
+          <Grid className='home-step-4' item xs={12} md={6} lg={6}>
               <AnalyticsConversionRates
                 title="Palavras com maior dificuldade de pronúncia"
                 // subheader="Dados Everylang"
@@ -493,11 +640,6 @@ export default function GeneralAnalyticsPage() {
 
        
       </Container>
-      <Joyride
-        steps={stepsAccessGuideHome}
-        continuous={true}
-        run={true}
-        />
     </>
   );
 }

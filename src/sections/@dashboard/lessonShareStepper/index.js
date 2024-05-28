@@ -10,13 +10,86 @@ import LessonSharing from "./lessonSharing";
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-const LessonShareStepper = ({ lesson, updateLesson }) => {
+import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS } from 'react-joyride'
+
+// ----------------------------------------------------------------------
+
+
+const stepsSharingLesson = [
+  {
+    content: (
+      <div>
+      <h3>Agora, aprenda como compartilhar com seus alunos</h3>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  {
+    target: '.lesson-exercise-sharing-step-1',
+    content: 'Este é o link que o aluno deve ter para encontra a sua lição.',
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    // disableOverlay: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-sharing-step-2',
+    content: (
+      <div>
+      <h3>Parabés, passo a passo concluído.</h3>
+      <p>Clique aqui para copiar o link e envie para um ou mais alunos.</p>
+      </div>
+    ),
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    locale: { last: 'Concluir e copiar link' },
+    placement: 'top',
+    // spotlightClicks: true,
+  }
+]
+
+
+const LessonShareStepper = ({ lesson, updateLesson, initialStep = 0 }) => {
     const [updatingLesson, setUpdatingLesson] = useState()
     const { enqueueSnackbar } = useSnackbar();
 
+    const [run, setRun] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, origin, status, type } = data;
+
+    console.log('data ==>', data)
+
+    if (action === ACTIONS.CLOSE && origin === ORIGIN.KEYBOARD) {
+      // do something
+    }
+
+    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Update state to advance the tour
+      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      // You need to set our running state to false, so we can restart if we click start again.
+      setRun(false);
+    }
+
+    console.groupCollapsed(type);
+    console.log(data); //eslint-disable-line no-console
+    console.groupEnd();
+  };
+
+  useEffect(() => {
+    setRun(true)
+  }, [])
+
     const steps = ['Sobre a lição', 'Revisar', 'Copia link']
   
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(initialStep);
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -49,6 +122,17 @@ console.log('call update')
 useEffect(() => {
     console.log('useEffect stepper lesson', lesson) 
 }, [lesson])
+
+const [displayOnboarding, setDisplayOnboarding] = useState(false)
+useEffect(() => {
+  const onboardinStatus = window.localStorage.getItem('onboarding_status');
+  if(onboardinStatus !== 'done') {
+    window.localStorage.setItem('onboarding_status', 'pending');
+    setDisplayOnboarding(true)
+  } else {
+    setDisplayOnboarding(false)
+  }
+})
 
     return ( <Box
         >
@@ -134,6 +218,30 @@ useEffect(() => {
                 </Stack>
           </Box>
         }
+{
+  displayOnboarding && <Joyride
+  steps={stepsSharingLesson}
+  continuous={true}
+  // locale={{ next: 'Avançar'}}
+  callback={handleJoyrideCallback}
+  run={run}
+  stepIndex={stepIndex}
+  locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+  scrollToFirstStep
+  showProgress
+  disableCloseOnEsc
+  disableOverlayClose
+  hideCloseButton
+  styles={{
+    // overlay: { height: '100vh' },
+    options: {
+      zIndex: 10000,
+      // overlay: { height: '100vh' },
+    },
+  }}
+  />
+}
+
     </Box>
     )
 }

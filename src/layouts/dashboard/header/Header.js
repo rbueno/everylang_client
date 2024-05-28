@@ -74,6 +74,7 @@ export default function Header({ onOpenNav }) {
 
   return (
     <AppBar
+    position='absolute'
       sx={{
         boxShadow: 'none',
         height: HEADER.H_MOBILE,

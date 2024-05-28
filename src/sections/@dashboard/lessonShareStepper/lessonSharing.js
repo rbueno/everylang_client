@@ -25,6 +25,8 @@ const LessonSharing = ({ lesson, mainAction }) => {
     const sharingLink = `https://www.everylang.ai/lesson-cover/${lesson?.sharingId}`
 
     const handleCopyLink = (adString) => {
+      window.localStorage.setItem('onboarding_status', 'done');
+      
       const hasCopied = copy(adString)
       if (hasCopied) {
         enqueueSnackbar('Link copiado')
@@ -45,11 +47,12 @@ const LessonSharing = ({ lesson, mainAction }) => {
                 <CardContent>
 
                 
-              <Box m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
+              <Box className='lesson-exercise-sharing-step-1' m={2} sx={{ backgroundColor: '#fff4f1', p: 2}} >
                 {sharingLink}
               </Box>        
                 <Stack m={2}>
                   <Button
+                    className='lesson-exercise-sharing-step-2'
                     onClick={() => handleCopyLink(sharingLink)}
                     variant='contained'
                     startIcon={<ContentCopyIcon />}
