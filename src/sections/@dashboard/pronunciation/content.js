@@ -114,6 +114,253 @@ import { IconButtonAnimate } from '../../../components/animate';
 import MenuPopover from '../../../components/menu-popover';
 import DrawerDefault from 'src/components/drawer-default';
 
+import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS } from 'react-joyride'
+
+// ----------------------------------------------------------------------
+
+
+const stepsAccessGuideNewLesson = [
+  {
+    content: (
+      <div>
+      <h3>Lição criada!</h3>
+      <p>Agora vamos adicionar os exercícios nessa lição de pronúncia</p>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  // {
+  //   target: '.lesson-step-1',
+  //   content: 'Preencha um título para a lição ou clique no botão apra gerar um código aleatório',
+  //   disableBeacon: true,
+  //   disableOverlayClose: true,
+  //   hideCloseButton: true,
+  //   // hideFooter: true,
+  //   placement: 'bottom',
+  //   spotlightClicks: true,
+  // },
+  {
+    target: '.lesson-exercise-step-1',
+    content: 'Você poderá criar os exercícios nossa IA ou manualmente',
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    // disableOverlay: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-step-2',
+    content: (
+      <div>
+      <h3>Vamos criar utilizando IA</h3>
+      <p>Clique aqui para aprender como criar os exercícios com IA</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  }
+];
+
+const stepsAccessGuideExercisesCreated = [
+  {
+    content: (
+      <div>
+      <h3>Exercícios criados e adicionados</h3>
+      <p>Agora, vamos aprender a adicionar os áudios</p>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  {
+    target: '.lesson-exercise-created-step-1',
+    content: 'Aqui, você confere o total de exercícios já criados',
+    disableBeacon: true,
+    // disableOverlayClose: true,
+    // disableOverlay: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-step-2',
+    content: 'Aqui você poderá adicionar mais exercícios a qualquer momento',
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-step-3-index-0',
+    content:  (
+      <div>
+      <h3>Aqui fica a lista de exercícios</h3>
+      <p>O primeiro exercício é sempre apenas a palavra que você inseriu.</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-step-3-index-1',
+    content: 'Os demais exercícios são as frases geradas pela IA',
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-step-3-generate-button-index-1',
+    content:  (
+      <div>
+      <h3>Vamos gerar o áudio</h3>
+      <p>Clique aqui para gerar o áudio demonstração para o aluno</p>
+      </div>
+    ),
+    // disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  }
+];
+
+const stepsGenerateAudioDialog = [
+  {
+    content: (
+      <div>
+      <h3>Agora vamos definir como queremos o áudio</h3>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  {
+    target: '.lesson-exercise-created-audio-dialog-step-1',
+    content: (
+      <div>
+      <h3>Padrão</h3>
+      <p>Essa é a forma mais comum de gerar o áudio</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-audio-dialog-step-2',
+    content: (
+      <div>
+      <h3>Pausado</h3>
+      <p>Essa é a forma adiciona pausas entre as palavras. Ideal para aluno iniciante</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-audio-dialog-step-3',
+    content: 'Clique aqui pra gerar o áudio',
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  },
+]
+const stepsCheckAudios = [
+  {
+    content: (
+      <div>
+      <h3>Audio gerado, vamos ouvir como ficou?</h3>
+      </div>
+    ),
+    placement: 'center',
+    target: 'body',
+  },
+  {
+    target: '.lesson-exercise-created-audio-check-step-1-index-1',
+    content: (
+      <div>
+      <h3>Clique play para ouvir</h3>
+      <p>Aqui você pode ouvir como ficou o áudio.</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-audio-check-step-2-index-1',
+    content: 'Caso seja preciso, você poderá gerar novos áudios aqui',
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-audio-check-step-3-index-1',
+    content: (
+      <div>
+      <h3>Escolha entre os áudios gerados</h3>
+      <p>Caso gere mais de um áudio, poderá escolher aqui qual irá utilizar como demonstração</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    // hideFooter: true,
+    placement: 'bottom',
+    // spotlightClicks: true,
+  },
+  {
+    target: '.lesson-exercise-created-audio-check-step-3',
+    content: (
+      <div>
+      <h3>Enviar exercícios para os alunos</h3>
+      <p>Após gerar os áudios de todos os exercícios, você poderá compartilhar esta lição.</p>
+      <p>Clique aqui para aprender a compartilhar</p>
+      </div>
+    ),
+    disableBeacon: true,
+    disableOverlayClose: true,
+    hideCloseButton: true,
+    hideFooter: true,
+    placement: 'bottom',
+    spotlightClicks: true,
+  },
+]
+
 // ----------------------------------------------------------------------
 
 
@@ -411,7 +658,6 @@ function DiscreteSlider({ valuetext }) {
 
 function AudioSpeedModeControll({ audioSpeedMode, setAudioSpeedMode}) {
   
-
   return (
     <FormControl>
       {/* <FormLabel id="demo-controlled-radio-buttons-group">Escolha a velocidade da fala</FormLabel> */}
@@ -421,12 +667,12 @@ function AudioSpeedModeControll({ audioSpeedMode, setAudioSpeedMode}) {
         value={audioSpeedMode}
         onChange={(e) => setAudioSpeedMode(e.target.value)}
       >
-        <Box m={1} display='flex' flexDirection='column'>
+        <Box className='lesson-exercise-created-audio-dialog-step-1' m={1} display='flex' flexDirection='column'>
           <FormControlLabel value="default" control={<Radio />} label="Padrão" />
           <Typography variant='caption'>Áudio com fala regular</Typography>
         </Box>
 
-        <Box m={1} display='flex' flexDirection='column'>
+        <Box className='lesson-exercise-created-audio-dialog-step-2' m={1} display='flex' flexDirection='column'>
           <FormControlLabel value="drawl" control={<Radio />} label="Falar pausadamente" />
           <Typography variant='caption'>Áudio com um intervalo maior entre as palavras</Typography>
         </Box>
@@ -440,12 +686,37 @@ export function GenerateAudioDialog({
   onClose,
   dialogContent,
   audioData,
-  action
+  action,
+  displayOnboarding
 }) {
 
   const [audioSpeedValue, setAudioSpeedValue] = useState(false)
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false)
   const [audioSpeedMode, setAudioSpeedMode] = useState('default')
+  const [run, setRun] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, origin, status, type } = data;
+
+    console.log('data ==> GenerateAudioDialog', data)
+
+    if (action === ACTIONS.CLOSE && origin === ORIGIN.KEYBOARD) {
+      // do something
+    }
+
+    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Update state to advance the tour
+      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      // You need to set our running state to false, so we can restart if we click start again.
+      setRun(false);
+      setStepIndex(0)
+    }
+
+    console.groupCollapsed(type);
+    console.log(data); //eslint-disable-line no-console
+    console.groupEnd();
+  };
 
   function valuetext(value) {
     console.log('valuetext =>', value)
@@ -454,11 +725,19 @@ export function GenerateAudioDialog({
   }
 
   const handleGenerate = async () => {
+    setRun(false)
+    setStepIndex(0)
     setIsGeneratingAudio(true)
     await action({lessonExerciseId: audioData.lessonExerciseId, positionIdx: audioData.positionIdx, audioSpeedMode })
     setIsGeneratingAudio(false)
     onClose(false)
   }
+
+  useEffect(() => {
+    console.log('effect GenerateAudioDialog')
+    setStepIndex(0)
+  setRun(true)
+      },[])
 
   return (
     <Dialog fullWidth maxWidth="sm" open={open} onClose={()=> onClose(false)}>
@@ -471,7 +750,7 @@ export function GenerateAudioDialog({
           </Box>
 
           <Box marginTop={2}>
-            <LoadingButton variant='contained' loading={isGeneratingAudio} onClick={() => handleGenerate()}>Gerar áudio</LoadingButton>
+            <LoadingButton className='lesson-exercise-created-audio-dialog-step-3' variant='contained' loading={isGeneratingAudio} onClick={() => handleGenerate()}>Gerar áudio</LoadingButton>
           </Box>
       </Box>
       </DialogContent>
@@ -483,6 +762,32 @@ export function GenerateAudioDialog({
             </Button>
           </Stack>
       </DialogActions>
+
+{
+  displayOnboarding && <Joyride
+  steps={stepsGenerateAudioDialog}
+  continuous={true}
+  // locale={{ next: 'Avançar'}}
+  callback={handleJoyrideCallback}
+  run={run}
+  stepIndex={stepIndex}
+  locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+  scrollToFirstStep
+  showProgress
+  disableCloseOnEsc
+  disableOverlayClose
+  hideCloseButton
+  styles={{
+    // overlay: { height: '100vh' },
+    options: {
+      zIndex: 10000,
+      // overlay: { height: '100vh' },
+    },
+  }}
+  />
+}
+      
+
     </Dialog>
   );
 }
@@ -515,7 +820,9 @@ export function ControlledRadioButtonsGroup(props) {
       audios?.length > 0 && audios.map((audio, idx) => <Box key={audio._id}>
         <Box>
           {/* {console.log('audio', audio)} */}
-        <FormControlLabel value={audio._id} control={<Radio />} label={`${audio.creator === 'everylang' ? 'Gerado por Everylang' : 'Enviado pelo usuário'} - ${audio.createdAt && format(new Date(audio.createdAt), 'dd/MM/yyyy HH:mm:ss')}`} />
+        <FormControlLabel
+        className={`lesson-exercise-created-audio-check-step-3-index-${idx + 1}`}
+         value={audio._id} control={<Radio />} label={`${audio.creator === 'everylang' ? 'Gerado por Everylang' : 'Enviado pelo usuário'} - ${audio.createdAt && format(new Date(audio.createdAt), 'dd/MM/yyyy HH:mm:ss')}`} />
         {isSwitchingAudioId === audio._id && <Box sx={{ width: '100%' }}>
       <LinearProgress />
     </Box>}
@@ -567,10 +874,43 @@ export default function BusinessEdit({ adId }) {
   const [currentTab, setCurrentTab] = useState('exerciseSection')
   const [openGenerateAudioDialog, setOpenGenerateAudioDialog] = useState(false)
  
+  const [displayStepsCheckAudios, setDisplayStepsCheckAudios] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false)
   const [drawerContent, setDrawerContent] = useState(null)
   const [openPopover, setOpenPopover] = useState(null);
   const [currentDrawerForm, setCurrentDrawerForm] = useState(null);
+  const [joyrideSteps, setJoyrideSteps] = useState([])
+
+  const [run, setRun] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, origin, status, type } = data;
+
+    console.log('data ==>', data)
+
+    if (action === ACTIONS.CLOSE && origin === ORIGIN.KEYBOARD) {
+      // do something
+    }
+
+    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Update state to advance the tour
+      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      // You need to set our running state to false, so we can restart if we click start again.
+      setStepIndex(0)
+      setRun(false);
+    }
+
+    console.groupCollapsed(type);
+    console.log(data); //eslint-disable-line no-console
+    console.groupEnd();
+  };
+
+  // useEffect(() => {
+  //   setJoyrideSteps()
+  //   setStepIndex(0)
+  //   setRun(true)
+  // }, [])
 
   const handleOpenPopover = (event) => {
     setOpenPopover(event.currentTarget);
@@ -642,10 +982,12 @@ const toggleDrawer = (open) => (event) => {
           // updateWorkspaces(workspaceSession)
           // updateWorkspaces(workspaceSession)
     
-          console.log('response.data', response.data)
+          // console.log('response.data', response.data.lessonExercises.filter((item, idx) => idx !== 1))
+
           setNewAdsGenerated(response.data) 
           setLesson(response.data.lesson)
           if (!response.data.ad) setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
+
         } catch (error) {
           setDataError({ ...dataError, loadingError: 'Lição não encontrada. Tente novamente!' })
           console.error(error);
@@ -679,6 +1021,7 @@ const toggleDrawer = (open) => (event) => {
     payload.lessonId = newAdsGenerated.lesson._id
     const { data } = await api.post('v1/everylang/lesson-exercises/generate-pronunciation', payload)
     setNewAdsGenerated(data) 
+    
   };
 
   const [generateAudioData, setGenerateAudioData] = useState({})
@@ -694,7 +1037,7 @@ const toggleDrawer = (open) => (event) => {
     try {
 
       const responseProccesCreated = await api.post('v1/everylang/lesson-exercises/pronunciation/generate', payload)
-      console.log('responseProccesCreated', responseProccesCreated)
+      // console.log('responseProccesCreated', responseProccesCreated)
       
       const lessonExercisesUpdated = newAdsGenerated.lessonExercises.map((item, idx) => {
         if (idx === positionIdx) {
@@ -709,6 +1052,7 @@ const toggleDrawer = (open) => (event) => {
       // eslint-disable-next-line consistent-return
       enqueueSnackbar(`Áudio gerado`);
       setIsGeneratingAudioIdx(null)
+      setDisplayStepsCheckAudios(true)
       // redirect
 
     
@@ -722,6 +1066,9 @@ const toggleDrawer = (open) => (event) => {
   }
 
   const handleGenerateAudio = ({ lessonExerciseId, positionIdx}) => {
+    console.log('entrou aqui handleGenerateAudio')
+    setStepIndex(0)
+    setRun(false)
     setGenerateAudioData({ lessonExerciseId, positionIdx})
     setOpenGenerateAudioDialog(true)
   }
@@ -859,10 +1206,23 @@ const userFullName = `${user?.firstName} ${user?.lastName}`
   
   };
 
+  const [displayOnboarding, setDisplayOnboarding] = useState(false)
+useEffect(() => {
+  const onboardinStatus = window.localStorage.getItem('onboarding_status');
+  if(onboardinStatus !== 'done') {
+    window.localStorage.setItem('onboarding_status', 'pending');
+    setDisplayOnboarding(true)
+  } else {
+    setDisplayOnboarding(false)
+  }
+})
+
 const handleOpenDrawer = (drawerForm) => {
 
   
   if (drawerForm === 'exerciseCopilot') {
+    setRun(false)
+    setStepIndex(0)
     setDrawerContent(<ExerciseCopilotForm
       mainAction={generateSentence}
       toggleDrawer={setOpenDrawer}
@@ -898,7 +1258,9 @@ const handleOpenDrawer = (drawerForm) => {
     )
   }
   if (drawerForm === 'exerciseSharing') {
-    setDrawerContent(<LessonShareStepper lesson={lesson} updateLesson={handleUpdateLesson} />)
+    setRun(false)
+    setStepIndex(0)
+    setDrawerContent(<LessonShareStepper initialStep={displayOnboarding ? 2 : 0} lesson={lesson} updateLesson={handleUpdateLesson} />)
   }
   
   // setCurrentDrawerForm(drawerForm)
@@ -914,6 +1276,14 @@ const handleOpenDrawer = (drawerForm) => {
 useEffect(() => {
   setDrawerContent(<LessonShareStepper lesson={lesson} updateLesson={handleUpdateLesson} />)
 }, [updateShareStepper])
+
+useEffect(() => {
+  setStepIndex(0)
+          setRun(true)
+},[newAdsGenerated, displayStepsCheckAudios])
+
+
+
   return (
       <Container
       // disableGutters
@@ -999,10 +1369,12 @@ useEffect(() => {
         </Box>
             </Card>
       </Box> */}
+
+
           {
             newAdsGenerated?.lessonExercises?.length > 0 && <Box sx={{ mb: 5 }}>
             <Box display='flex' direction="row" >
-              <Box sx={{ flexGrow: 1 }} >
+              <Box className='lesson-exercise-created-step-1' sx={{ flexGrow: 1 }} >
               <Typography variant="h4" gutterBottom>
                     Exercícios
                   </Typography>
@@ -1010,10 +1382,12 @@ useEffect(() => {
                     Total: {newAdsGenerated?.lessonExercises?.length}
                   </Typography>
               </Box>
-  
+
+ 
               <Box sx={{ flexShrink: 0 }}> 
                           <Box display='flex' flexDirection='column'>
                             <Button
+                            className='lesson-exercise-created-audio-check-step-3'
                             disabled={newAdsGenerated?.lessonExercises?.length === 0 }
                             onClick={() => handleOpenDrawer('exerciseSharing')}
                                           variant="contained"
@@ -1024,6 +1398,7 @@ useEffect(() => {
                                         </Button>
   
                               <Button
+                                className='lesson-exercise-created-step-2'
                                         variant="contained"
                                         startIcon={<AddIcon />}
                                         onClick={handleOpenPopover}
@@ -1067,7 +1442,7 @@ useEffect(() => {
             <Paper variant='outlined'>
               {/* <CardHeader title="Você ainda não tem exercícios essa lição" subheader='Adicione novos exercícios com IA ou manualmente' /> */}
       
-              <Box textAlign='center' m={4}>
+              <Box className='lesson-exercise-step-1' textAlign='center' m={4}>
                 <Box marginTop={3} marginBottom={3}>
                 <Typography variant='h4'>Esta lição não tem exercícios!</Typography>
                 
@@ -1079,7 +1454,7 @@ useEffect(() => {
 
                 </Box>
 
-                <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseCopilot')} startIcon={<AssistantIcon fontSize='small' />}>Adicionar com IA</Button>
+                <Button className='lesson-exercise-step-2' variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseCopilot')} startIcon={<AssistantIcon fontSize='small' />}>Adicionar com IA</Button>
                 <Button variant='outlined' sx={{ margin: 1 }} onClick={() => handleOpenDrawer('exerciseManually')} startIcon={<CreateIcon fontSize='small' />}>Adicionar manualmente</Button>
               </Box>
                   </Paper>
@@ -1090,10 +1465,12 @@ useEffect(() => {
 {
 
 }
-          
+
+
+
             {
           newAdsGenerated?.lessonExercises?.map((content, idx) => <Box key={content._id} mb={2}>
-            <Card sx={{ p: 3 }}>
+            <Card className={`lesson-exercise-created-step-3-index-${idx}`} sx={{ p: 3 }}>
                 <Box>
                   <Box display='flex' justifyContent='flex-end'>
                     <Tooltip enterTouchDelay={0} title="Excluir">
@@ -1111,10 +1488,14 @@ useEffect(() => {
                       
                   </Box>     
                       <Box>
-                        {console.log('content', !!content.audioURL, content)}
+    
+
+ 
+
                           {
                             !!content.audioURL ? <Box><Typography variant="caption">Àudio demonstração</Typography>
                             <AudioPlayer
+                              className={`lesson-exercise-created-audio-check-step-1-index-${idx}`}
                               defaultDuration=''
                               showJumpControls={false}
                               autoPlayAfterSrcChange={false}
@@ -1128,7 +1509,7 @@ useEffect(() => {
                               src={content.audioURL}
                               controls
                             /> */}
-                            <Box m={2}>
+                            <Box  m={2}>
                               <ControlledRadioButtonsGroup audios={content.audiosIds} activeAudioId={content.activeAudioId} lessonExerciseId={content._id} isSwitchingAudioId={isSwitchingAudioId} switchActiveAudio={switchActiveAudio}/>
                             </Box>
 
@@ -1144,11 +1525,12 @@ useEffect(() => {
                             <Box mb={2} >
 
                             <LoadingButton
+                              className={`lesson-exercise-created-audio-check-step-2-index-${idx}`}
                               loading={isGeneratingAudioIdx === idx}
                               variant='contained' sx={{ marginRight: 2}}
                               onClick={() => handleGenerateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
                               >
-                                Gerar novo áudio
+                                Gerar outro áudio
                               </LoadingButton>
                             </Box>
 
@@ -1164,6 +1546,7 @@ useEffect(() => {
                         <Box mb={2} display='flex' flexDirection='row'>
                         <Box mb={2}>
                             <LoadingButton
+                            className={`lesson-exercise-created-step-3-generate-button-index-${idx}`}
                               loading={isGeneratingAudioIdx === idx}
                               variant='contained' sx={{ marginRight: 2}}
                               onClick={() => handleGenerateAudio({ lessonExerciseId: content._id, positionIdx: idx })}
@@ -1377,7 +1760,7 @@ useEffect(() => {
           open={openUploadFile} onClose={handleCloseUploadFile} updateLessonExercises={updateLessonExercises} lessonExerciseId={currentLessonExerciseId} />
         <DeleteSentenceDialog open={openDialog} onClose={handleCloseDialog} lessonExerciseId={currentLessonExerciseId} deleteExercise={deleteExercise} />
         <UpdateSentenceTextDialog dialogContent={<EditTextField content={currentSentence} updateSentenceText={updateSentenceText} updatingSentence={updatingSentence} closeDialog={closeUpdateSentenceTextDialog} />} open={openUpdateSentenceTextDialog} onClose={closeUpdateSentenceTextDialog} />
-        <GenerateAudioDialog open={openGenerateAudioDialog} onClose={setOpenGenerateAudioDialog} audioData={generateAudioData} action={generateAudio} />
+        <GenerateAudioDialog displayOnboarding={displayOnboarding} open={openGenerateAudioDialog} onClose={setOpenGenerateAudioDialog} audioData={generateAudioData} action={generateAudio} />
         {/* <Drawer
             anchor='right'
             open={openDrawer}
@@ -1393,6 +1776,81 @@ useEffect(() => {
               displayCloseOption='top'
               drawerContent={drawerContent}
           />
+
+
+{
+  displayOnboarding && newAdsGenerated?.lessonExercises?.length === 0 && <Joyride
+  steps={stepsAccessGuideNewLesson}
+  continuous={true}
+  // locale={{ next: 'Avançar'}}
+  callback={handleJoyrideCallback}
+  run={run}
+  stepIndex={stepIndex}
+  locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+  scrollToFirstStep
+  showProgress
+  disableCloseOnEsc
+  disableOverlayClose
+  hideCloseButton
+  styles={{
+    // overlay: { height: '100vh' },
+    options: {
+      zIndex: 10000,
+      // overlay: { height: '100vh' },
+    },
+  }}
+  />
+}
+
+{
+  displayOnboarding && newAdsGenerated?.lessonExercises?.length > 0 && newAdsGenerated?.lessonExercises[1].audiosIds?.length === 0 && <Joyride
+  steps={stepsAccessGuideExercisesCreated}
+  continuous={true}
+  // locale={{ next: 'Avançar'}}
+  callback={handleJoyrideCallback}
+  run={run}
+  stepIndex={stepIndex}
+  locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+  scrollToFirstStep
+  showProgress
+  disableCloseOnEsc
+  disableOverlayClose
+  hideCloseButton
+  styles={{
+    // overlay: { height: '100vh' },
+    options: {
+      zIndex: 10000,
+      // overlay: { height: '100vh' },
+    },
+  }}
+  />
+}
+
+{
+  displayOnboarding && newAdsGenerated?.lessonExercises?.length > 0 && newAdsGenerated?.lessonExercises[1].audiosIds?.length > 0 && <Joyride
+  steps={stepsCheckAudios}
+  continuous={true}
+  // locale={{ next: 'Avançar'}}
+  callback={handleJoyrideCallback}
+  run={run}
+  stepIndex={stepIndex}
+  locale={{ next: 'Avançar', back: 'voltar', 'last': 'fechar'}}
+  scrollToFirstStep
+  showProgress
+  disableCloseOnEsc
+  disableOverlayClose
+  hideCloseButton
+  styles={{
+    // overlay: { height: '100vh' },
+    options: {
+      zIndex: 10000,
+      // overlay: { height: '100vh' },
+    },
+  }}
+  />
+}
+
+
       </Container>
   );
 }
