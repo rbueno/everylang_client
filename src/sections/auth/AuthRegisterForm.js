@@ -27,7 +27,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
   const [guestCode, setGuestCode] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
-    guestCode: Yup.string().required('Código de convite é obrigatório'),
+    // guestCode: Yup.string().required('Código de convite é obrigatório'),
     firstName: Yup.string().required('Nome é obrigatório'),
     lastName: Yup.string().required('Sobrenome é obrigatório'),
     email: Yup.string().email('Email must be a valid email address').required('Email é obrigatório'),
@@ -45,7 +45,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
     // phoneNumber: phoneNumberFromQuery || '',
     password: '',
     passwordConfirm: '',
-    guestCode: ''
+    // guestCode: ''
   };
 
   const methods = useForm({
@@ -84,7 +84,7 @@ export default function AuthRegisterForm({ phoneNumberFromQuery }) {
       <Stack spacing={2.5}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="guestCode" label="Código do convite" />
+        {/* <RHFTextField name="guestCode" label="Código do convite" /> */}
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <RHFTextField name="firstName" label="Nome" />
           <RHFTextField name="lastName" label="Sobrenome" />
