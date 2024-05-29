@@ -222,32 +222,32 @@ const navConfig = [
       // },
     ],
   },
-  {
-    subheader: 'Sua página Web',
-    items: [
-      { title: 'Métricas de acesso', path: PATH_DASHBOARD.general.analytics, icon: <LeaderboardIcon /> },
-      { title: 'Editar página', path: PATH_DASHBOARD.mypage.main, icon: <WebIcon /> },
-      // {
-      //   title: 'Página do Negócio',
-      //   path: PATH_DASHBOARD.business.contextEdit,
-      //   icon: ICONS.banking,
-      //   children: [
-      //     { title: 'Métricas', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
-      //     { title: 'Editar', path: PATH_DASHBOARD.mypage.main, icon: ICONS.dashboard },
-      //   ],
-      // },
-      // {
-      //   title: 'usuários',
-      //   path: PATH_DASHBOARD.user.root,
-      //   icon: ICONS.user,
-      //   children: [
-      //     { title: 'todos', path: PATH_DASHBOARD.user.list },
-      //     { title: 'adicionar', path: PATH_DASHBOARD.user.new },
-      //     { title: 'minha conta', path: PATH_DASHBOARD.user.account },
-      //   ],
-      // },
-    ],
-  },
+  // {
+  //   subheader: 'Sua página Web',
+  //   items: [
+  //     { title: 'Métricas de acesso', path: PATH_DASHBOARD.general.analytics, icon: <LeaderboardIcon /> },
+  //     { title: 'Editar página', path: PATH_DASHBOARD.mypage.main, icon: <WebIcon /> },
+  //     // {
+  //     //   title: 'Página do Negócio',
+  //     //   path: PATH_DASHBOARD.business.contextEdit,
+  //     //   icon: ICONS.banking,
+  //     //   children: [
+  //     //     { title: 'Métricas', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
+  //     //     { title: 'Editar', path: PATH_DASHBOARD.mypage.main, icon: ICONS.dashboard },
+  //     //   ],
+  //     // },
+  //     // {
+  //     //   title: 'usuários',
+  //     //   path: PATH_DASHBOARD.user.root,
+  //     //   icon: ICONS.user,
+  //     //   children: [
+  //     //     { title: 'todos', path: PATH_DASHBOARD.user.list },
+  //     //     { title: 'adicionar', path: PATH_DASHBOARD.user.new },
+  //     //     { title: 'minha conta', path: PATH_DASHBOARD.user.account },
+  //     //   ],
+  //     // },
+  //   ],
+  // },
   // {
   //   subheader: 'Gerenciar acesso',
   //   items: [
