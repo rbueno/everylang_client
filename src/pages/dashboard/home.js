@@ -106,11 +106,14 @@ const stepsAccessGuideHome = [
     content: (
       <div>
       <h3>Vamos criar a sua primeira lição</h3>
-      <p>Clique aqui para conferir um passo a passo</p>
-      {/* <Stack m={2}>
-      <Button variant='contained' onClick={() => handleNextCreatePronunciaionLesson()}>Criar lição de pronúncia</Button>
+      <p>Clique aqui para conferir um passo a passo de como criar uma lição. Para esse passo a passo, criaremos uma lição de pronúncia.</p>
+      <Stack m={2}>
+      {/* <Button variant='contained' onClick={() => handleNextCreatePronunciaionLesson()}>Criar lição de pronúncia</Button> */}
+      <Button fullWidth size='large' href={PATH_DASHBOARD.lessonPronunciation.new} rel="noopener" variant="contained">
+      Criar lição de pronúncia
+      </Button>
 
-      </Stack> */}
+      </Stack>
       </div>
     ),
     disableBeacon: true,
