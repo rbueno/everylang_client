@@ -31,7 +31,8 @@ const ExerciseManuallyForm = (props) => {
 
     const {
         toggleDrawer,
-        mainAction
+        mainAction,
+        lessonData
     } = props
   
     const { enqueueSnackbar } = useSnackbar();
