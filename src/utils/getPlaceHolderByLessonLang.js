@@ -5,7 +5,7 @@ export default function getPlaceHolderByLessonLang(language = 'english', placeho
             createPhrasesByAttributes: 'Ex.: palavras com TH; consoantes silenciosas; trava-línguas...'
         },
         french: {
-            createPhrasesByWords: 'Ex.: Though, Tough, Thought, Clothes, Schedule, February, Beach, Entrepreneurship, Horror, Sixth, eighth...',
+            createPhrasesByWords: 'Ex.: Serrurerie, Ecureuil, Bouilloire, Feuille, Grenouille, Chauffeur, Royaume, Hippopotame...',
             createPhrasesByAttributes: 'Ex.: palavras com TH; consoantes silenciosas; trava-línguas...'
         },
     }
