@@ -2,11 +2,13 @@ export default function getPlaceHolderByLessonLang(language = 'english', placeho
     const text = {
         english: {
             createPhrasesByWords: 'Ex.: Though, Tough, Thought, Clothes, Schedule, February, Beach, Entrepreneurship, Horror, Sixth, eighth...',
-            createPhrasesByAttributes: 'Ex.: palavras com TH; consoantes silenciosas; trava-línguas...'
+            createPhrasesByAttributes: 'Ex.: palavras com TH; consoantes silenciosas; trava-línguas...',
+            phraseExample: 'Ex.: Who Let the Dogs Out'
         },
         french: {
             createPhrasesByWords: 'Ex.: Serrurerie, Ecureuil, Bouilloire, Feuille, Grenouille, Chauffeur, Royaume, Hippopotame...',
-            createPhrasesByAttributes: 'Ex.: palavras com TH; consoantes silenciosas; trava-línguas...'
+            createPhrasesByAttributes: 'Ex.: Palavras com "eu" e combinações de vogais; trava-línguas...',
+            phraseExample: 'Ex.: La souris est sous la table'
         },
     }
 

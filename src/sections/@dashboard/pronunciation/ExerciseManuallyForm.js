@@ -17,6 +17,7 @@ import { useSnackbar } from 'notistack';
 import TagsInput from './TagsInput'
 
 import { styled } from '@mui/material/styles'
+import getPlaceHolderByLessonLang from 'src/utils/getPlaceHolderByLessonLang';
 const DrawerRootStyled = styled('div')(({theme}) => ({
   [theme.breakpoints.up('xs')]: {
     width: 350
@@ -123,7 +124,7 @@ const ExerciseManuallyForm = (props) => {
                                   label="Digite a frase aqui"
                                   value={sentence}
                                   color="primary"
-                                  placeholder="Ex.: Who Let the Dogs Out"
+                                  placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'phraseExample')}
                                   // helperText="Esta é a frase que o aluno irá ler para assim praticar a pronúncia"
                                   InputLabelProps={{
                                     shrink: true,
@@ -145,7 +146,7 @@ const ExerciseManuallyForm = (props) => {
                                     label="Palavras separadas por virgula"
                                     value={words}
                                     color="primary"
-                                    placeholder="Ex.: Though, Tough, Thought, Clothes, Schedule, February, Beach, Entrepreneurship, Horror, Sixth, eighth..."
+                                    placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'createPhrasesByWords')}
                                     helperText={`Total de palavras: ${totalWords}`}
                                     InputLabelProps={{
                                       shrink: true,
