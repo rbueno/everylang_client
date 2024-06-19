@@ -73,6 +73,7 @@ const stepsAccessGuideNewLesson = [
 
 
 import { styled } from '@mui/material/styles'
+import getPlaceHolderByLessonLang from 'src/utils/getPlaceHolderByLessonLang';
 const DrawerRootStyled = styled('div')(({theme}) => ({
   [theme.breakpoints.up('xs')]: {
     width: 350
@@ -152,8 +153,9 @@ function InputFieldWithChip() {
 const ExerciseCopilotForm = (props) => {
 
     const {
-        toggleDrawer,
-      mainAction
+      toggleDrawer,
+      mainAction,
+      lessonData
     } = props
   
     const { enqueueSnackbar } = useSnackbar();
@@ -397,7 +399,7 @@ useEffect(() => {
                                     label="Palavras separadas por virgula"
                                     value={specification}
                                     color="primary"
-                                    placeholder="Ex.: Though, Tough, Thought, Clothes, Schedule, February, Beach, Entrepreneurship, Horror, Sixth, eighth..."
+                                    placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'createPhrasesByWords')}
                                     // helperText={`Total de palavras: ${totalWords}`}
                                     InputLabelProps={{
                                       shrink: true,
@@ -437,7 +439,7 @@ useEffect(() => {
                                     label="Atributos (separe por vírgula)"
                                     value={attributes}
                                     color="primary"
-                                    placeholder="Ex.: palavras com TH; consoantes silenciosas; trava-línguas..."
+                                    placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'createPhrasesByAttributes')}
                                     // helperText="Seja específico. Insira apenas o nome do seu produto ou serviço."
                                     // error={newBusinessNameError !== null}
                                     InputLabelProps={{

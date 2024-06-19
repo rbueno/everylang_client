@@ -1226,6 +1226,7 @@ const handleOpenDrawer = (drawerForm) => {
     setDrawerContent(<ExerciseCopilotForm
       mainAction={generateSentence}
       toggleDrawer={setOpenDrawer}
+      lessonData={{learningLanguage: newAdsGenerated?.lesson?.learningLanguage}}
       />)
   }
 
@@ -1233,6 +1234,7 @@ const handleOpenDrawer = (drawerForm) => {
     setDrawerContent(<ExerciseManuallyForm
       mainAction={addSentence}
       toggleDrawer={setOpenDrawer}
+      lessonData={{learningLanguage: newAdsGenerated?.lesson?.learningLanguage}}
       />
     )
   }
