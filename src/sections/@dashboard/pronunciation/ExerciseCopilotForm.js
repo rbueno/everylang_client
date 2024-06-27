@@ -530,14 +530,7 @@ useEffect(() => {
                           </Box>
                           </Box>
 
-                          <DialogActions style={{ position: 'sticky', bottom: 0, backgroundColor: '#fff', zIndex: 1000 }}>
-                          <Button onClick={onClose} color="primary">
-                            Close
-                          </Button>
-                          <Button onClick={() => alert('Action')} color="primary">
-                            Action
-                          </Button>
-                        </DialogActions>
+                         
 
                           <Box m={2} display='flex' flexDirection='column' style={{ position: 'sticky', bottom: 0, backgroundColor: '#fff', zIndex: 1000 }}>
                                   <LoadingButton className='lesson-exercise-add-step-2' disabled={!!wordsToUseReviewError} loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
