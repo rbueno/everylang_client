@@ -418,15 +418,15 @@ useEffect(() => {
                                     </> : <>
                                     {
                                       totalWords > 0 && <>
-                                      <Typography>Serão geradas:</Typography>
+                                      {/* <Typography>Serão geradas:</Typography> */}
                                   {/* <Markdown 
                                     children={wordsToUseReview}
                                   /> */}
                                   <TextField
                                   fullWidth
                                   required
-                                  // multiline
-                                  // rows={3}
+                                  multiline
+                                  rows={3}
                                     label="Serão geradas:"
                                     value={wordsToUseReview}
                                     color="primary"
