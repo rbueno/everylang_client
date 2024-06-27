@@ -394,8 +394,8 @@ useEffect(() => {
                                   <TextField
                                   fullWidth
                                   required
-                                  multiline
-                                  rows={3}
+                                  // multiline
+                                  // rows={3}
                                     label="Palavras separadas por virgula"
                                     value={specification}
                                     color="primary"
@@ -419,8 +419,23 @@ useEffect(() => {
                                     {
                                       totalWords > 0 && <>
                                       <Typography>Serão geradas:</Typography>
-                                  <Markdown 
+                                  {/* <Markdown 
                                     children={wordsToUseReview}
+                                  /> */}
+                                  <TextField
+                                  fullWidth
+                                  required
+                                  // multiline
+                                  // rows={3}
+                                    label="Serão geradas:"
+                                    value={wordsToUseReview}
+                                    color="primary"
+                                    // placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'createPhrasesByWords')}
+                                    // helperText={`Total de palavras: ${totalWords}`}
+                                    InputLabelProps={{
+                                      shrink: true,
+                                    }}
+                                    // onChange={(e) => handleSetWords(e.target.value)}
                                   />
                                       </>
                                     }
