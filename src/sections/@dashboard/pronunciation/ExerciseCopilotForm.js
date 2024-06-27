@@ -394,8 +394,8 @@ useEffect(() => {
                                   <TextField
                                   fullWidth
                                   required
-                                  // multiline
-                                  // rows={3}
+                                  multiline
+                                  rows={3}
                                     label="Palavras separadas por virgula"
                                     value={specification}
                                     color="primary"
@@ -418,24 +418,9 @@ useEffect(() => {
                                     </> : <>
                                     {
                                       totalWords > 0 && <>
-                                      {/* <Typography>Serão geradas:</Typography> */}
-                                  {/* <Markdown 
+                                      <Typography>Serão geradas:</Typography>
+                                  <Markdown 
                                     children={wordsToUseReview}
-                                  /> */}
-                                  <TextField
-                                  fullWidth
-                                  required
-                                  multiline
-                                  rows={3}
-                                    label="Serão geradas:"
-                                    value={wordsToUseReview}
-                                    color="primary"
-                                    // placeholder={getPlaceHolderByLessonLang(lessonData.learningLanguage, 'createPhrasesByWords')}
-                                    // helperText={`Total de palavras: ${totalWords}`}
-                                    InputLabelProps={{
-                                      shrink: true,
-                                    }}
-                                    // onChange={(e) => handleSetWords(e.target.value)}
                                   />
                                       </>
                                     }
@@ -544,7 +529,17 @@ useEffect(() => {
                               
                           </Box>
                           </Box>
-                          <Box m={2} display='flex' flexDirection='column'>
+
+                          <DialogActions style={{ position: 'sticky', bottom: 0, backgroundColor: '#fff', zIndex: 1000 }}>
+                          <Button onClick={onClose} color="primary">
+                            Close
+                          </Button>
+                          <Button onClick={() => alert('Action')} color="primary">
+                            Action
+                          </Button>
+                        </DialogActions>
+
+                          <Box m={2} display='flex' flexDirection='column' style={{ position: 'sticky', bottom: 0, backgroundColor: '#fff', zIndex: 1000 }}>
                                   <LoadingButton className='lesson-exercise-add-step-2' disabled={!!wordsToUseReviewError} loading={submitting} variant='contained' onClick={() => handleSubmitt()}>Criar frases</LoadingButton>
                         <Typography variant="caption">Após criar, você poderá enviar o áudio demonstração da frase</Typography>
   
